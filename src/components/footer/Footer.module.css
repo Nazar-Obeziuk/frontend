@@ -59,9 +59,6 @@
   height: 100%;
 }
 
-.footer__info_work {
-}
-
 .footer__work_text {
   font-family: "Fixel-Display";
   font-weight: 400;
@@ -118,9 +115,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.footer__list_item {
 }
 
 .footer__link_item {

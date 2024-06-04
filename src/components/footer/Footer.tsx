@@ -77,34 +77,34 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>ПРО PROSTOPOO</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Про нас
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Контакти
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Виготовлення
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Гарантії та обмін
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Політика конфідеційності
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Договір публічної оферти
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -112,29 +112,29 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>Клієнтам</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Індивідуальні ортопедичні устілки
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Ортопедичні устілки
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Подарунковий сертифікат
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Кому потрібні індивідуальні <br /> ортопедичні устілки
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Рекомендації до застосування
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -142,19 +142,19 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>Як замовити</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Як зробити <br /> замовлення
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Оплата
-                  </a>
+                  </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <a href="#" className={styles.footer__link_item}>
+                  <NavLink to={""} className={styles.footer__link_item}>
                     Доставка
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>

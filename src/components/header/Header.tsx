@@ -143,8 +143,6 @@ const Header = () => {
                       >
                         Оплата
                       </NavLink>
-                      {/* <a href="#" className={styles.header__link_item}>
-                      </a> */}
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
@@ -153,8 +151,6 @@ const Header = () => {
                       >
                         Доставка
                       </NavLink>
-                      {/* <a href="#" className={styles.header__link_item}>
-                      </a> */}
                     </li>
                   </ul>
                 </li>
