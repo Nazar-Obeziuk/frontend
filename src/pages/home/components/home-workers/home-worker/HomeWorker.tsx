@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styles from "./HomeWorker.module.css";
 import { Worker } from "../../../../../services/workers/worker.interface";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
@@ -45,7 +45,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
               </p>
             </div>
             <div className={styles.home__info_galery}>
-              {/* <div className="home__galery_content">
+              <div className="home__galery_content">
                 <Swiper
                   spaceBetween={32}
                   slidesPerView={3}
@@ -111,9 +111,9 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     </div>
                   </SwiperSlide>
                 </Swiper>
-              </div> */}
+              </div>
 
-              {/* <span
+              <span
                 onClick={() => swiper && swiper.slidePrev()}
                 style={{
                   position: "absolute",
@@ -164,7 +164,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     stroke-width="4"
                   />
                 </svg>
-              </span> */}
+              </span>
             </div>
           </div>
         </div>

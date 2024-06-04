@@ -1,23 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./InsolesAdvantages.module.css";
-import { getAllOrthpedicAdvantagesInsoles } from "../../../../../services/orthopedic-insoles/orthopedic-insoles-advantages/orthopedic-insoles-advantagesService";
 
 const InsolesAdvantages: React.FC = () => {
-  // const [orthopedicAdvantages, setOrthopedicAdvantages] = useState([]);
-
-  // const getAllOrthopedicAdvantages = async () => {
-  //   try {
-  //     const data = await getAllOrthpedicAdvantagesInsoles();
-  //     setOrthopedicAdvantages(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllOrthopedicAdvantages();
-  // }, []);
-
   return (
     <div className={styles.home__insoles_inner}>
       <h2 className={styles.home__inner_title}>

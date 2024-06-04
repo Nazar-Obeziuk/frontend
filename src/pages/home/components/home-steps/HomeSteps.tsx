@@ -26,7 +26,10 @@ const HomeSteps: React.FC = () => {
                 <h3 className={styles.home__info_title}>КРОК 1</h3>
                 <p className={styles.home__info_text}>
                   Оформіть замовлення{" "}
-                  <a href="#" className={styles.home__text_primary}>
+                  <a
+                    href="https://google.com"
+                    className={styles.home__text_primary}
+                  >
                     тут
                   </a>{" "}
                   та отримайте пінобокс

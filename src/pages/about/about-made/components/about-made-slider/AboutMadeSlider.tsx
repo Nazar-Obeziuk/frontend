@@ -135,7 +135,10 @@ const AboutMadeSlider: React.FC = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <a href="#" className={styles.about__galery_slider}>
+            <a
+              href="https://google.com"
+              className={styles.about__galery_slider}
+            >
               <img
                 src="../../images/about-made-video.jpg"
                 className={styles.about__slider_image}

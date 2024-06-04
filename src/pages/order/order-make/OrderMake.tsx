@@ -97,7 +97,10 @@ const OrderMake: React.FC = () => {
                   <p className={styles.order__point_primary}>
                     Відеоінструкція:
                   </p>
-                  <a href="#" className={styles.order__instruction_link}>
+                  <a
+                    href="https://google.com"
+                    className={styles.order__instruction_link}
+                  >
                     <span className={styles.order__link_circle}>
                       <img
                         src="../../images/button-play-video.svg"
