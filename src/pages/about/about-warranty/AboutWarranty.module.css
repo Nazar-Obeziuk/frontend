@@ -1,0 +1,285 @@
+@import "../../../../src/utils/styles/fonts/_fonts.css";
+@import "../../../../src/utils/styles/_variables.css";
+
+.about__warranty_section {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0 15px 0;
+}
+.about__warranty_first {
+  background-image: url("../../../../public/images/about-made-bg.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-size: contain;
+}
+.about__section_second {
+  padding: 0 0 240px 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about__warranty_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.about__warranty_route {
+  margin-bottom: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.about__router_name {
+  font-family: "Fixel-Display";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--white);
+  margin-top: 4px;
+}
+.about__router_active {
+  color: var(--primary);
+}
+.about__name_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.about__warranty_header {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.about__header_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.about__warranty_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.about__text_bold {
+  font-weight: 600;
+  color: var(--white);
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  line-height: 22px;
+}
+.about__header_link {
+  font-family: "Fixel-Display";
+  color: var(--primary);
+  text-decoration: underline;
+}
+.about__header_term {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.about__primary_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--primary);
+}
+.about__warranty_main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.about__main_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.about__main_info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.about__warranty_list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 12px;
+}
+.about__list_item {
+  list-style-type: disc;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+
+.about__list_item::marker {
+  height: 5px;
+  width: 5px;
+  color: var(--primary);
+}
+
+.about__wrapper_exchange {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.about__exchange_list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.about__list_numeric {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+  display: flex;
+  gap: 10px;
+}
+.about__wrapper_important {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.about__wrapper_consumers {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.about__consumers_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.about__consumers_main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.about__wrapper_position {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.about__position_title {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--primary);
+}
+.about__item_sublist {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+  display: flex;
+  gap: 10px;
+  padding-left: 40px;
+}
+.about__text_hidden {
+  opacity: 0;
+}
+.about__position_main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about__position_list {
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about__position_protect {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.about__wrapper_second {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.about__second_main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.about__position_five {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (max-width: 1200px) {
+  .about__warranty_section {
+    padding: 20px 28px 15px 28px;
+  }
+
+  .about__section_second {
+    padding: 0 28px 200px 28px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .about__section_second {
+    padding: 0 28px 160px 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about__warranty_first {
+    background-image: none;
+  }
+
+  .about__warranty_route {
+    display: none;
+  }
+
+  .about__warranty_wrapper {
+    gap: 30px;
+  }
+
+  .about__position_list,
+  .about__item_sublist {
+    padding-left: 0;
+  }
+
+  .about__item_sublist,
+  .about__position_title,
+  .about__list_numeric,
+  .about__list_item,
+  .about__warranty_text,
+  .about__primary_text,
+  .about__text_bold {
+    font-size: 15px;
+  }
+
+  .about__consumers_title,
+  .about__main_title,
+  .about__header_title,
+  .about__name_title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+}

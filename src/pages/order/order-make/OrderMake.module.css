@@ -1,0 +1,218 @@
+@import "../../../../src/utils/styles/fonts/_fonts.css";
+@import "../../../../src/utils/styles/_variables.css";
+
+.order__first_section {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../public/images/order-make-foots.png");
+  background-repeat: no-repeat;
+  background-position-y: 50px;
+  background-size: contain;
+  padding: 20px 0 30px 0;
+}
+.order__make_section {
+  width: 100%;
+  height: 100%;
+  padding: 0 0 200px 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.order__make_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.order__make_route {
+  margin-bottom: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.order__router_name {
+  font-family: "Fixel-Display";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--white);
+  margin-top: 4px;
+}
+.order__router_active {
+  color: var(--primary);
+}
+.order__main_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.order__make_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.order__main_point {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.order__point_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--white);
+}
+.order__title_count {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--white);
+}
+.order__point_block {
+  display: flex;
+  gap: 60px;
+}
+.order__block_website {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.order__block_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.order__block_phone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.order__point_list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 40px;
+}
+.order__list_item {
+  list-style-type: disc;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.order__list_item::marker {
+  width: 5px;
+  height: 5px;
+  color: var(--primary);
+}
+.order__point_instruction {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.order__point_primary {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--primary);
+}
+.order__instruction_link {
+  display: block;
+  width: 620px;
+  height: 400px;
+  background-image: url("../../../../public/images/order-video-preview.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 12px;
+  position: relative;
+}
+.order__link_circle {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.order__circle_play {
+  margin-left: 3px;
+  margin-top: 2px;
+}
+
+@media (max-width: 1200px) {
+  .order__make_section {
+    padding: 0 28px 200px 28px;
+  }
+  .order__first_section {
+    padding: 20px 28px 30px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order__main_title,
+  .order__point_title,
+  .order__title_count {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .order__instruction_link {
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .order__make_section {
+    padding: 0 28px 140px 28px;
+  }
+
+  .order__make_wrapper {
+    gap: 50px;
+  }
+
+  .order__first_section {
+    background-image: none;
+  }
+
+  .order__make_route {
+    display: none;
+  }
+
+  .order__main_title,
+  .order__point_title,
+  .order__title_count {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .order__list_item,
+  .order__block_text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 440px) {
+  .order__point_block {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

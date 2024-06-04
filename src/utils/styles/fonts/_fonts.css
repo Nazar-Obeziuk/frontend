@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 100;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-ExtraLight.woff2)
+    format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 200;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-Light.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-Regular.woff2)
+    format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 400;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-Medium.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 500;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-Bold.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 600;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-SemiBold.woff2)
+    format("truetype");
+}
+@font-face {
+  font-family: "Fixel-Display";
+  font-weight: 700;
+  src: url(./FixelAll/FixelDisplay/FixelDisplay-ExtraBold.woff2)
+    format("truetype");
+}
+@font-face {
+  font-family: "Osnova-Pro";
+  font-weight: 700;
+  src: url(./Osnova/OsnovaPro-Bold.woff2) format("truetype");
+}
+@font-face {
+  font-family: "Euclid";
+  font-weight: 300;
+  src: url(./Euclid/Euclid\ Circular\ A\ Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Euclid";
+  font-weight: 400;
+  src: url(./Euclid/Euclid\ Circular\ A\ Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "VAG";
+  font-weight: 700;
+  src: url(./Vag/Vag\ Bold/Vag\ Bold.ttf) format("truetype");
+}

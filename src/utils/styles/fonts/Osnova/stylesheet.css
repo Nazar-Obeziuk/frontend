@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProHeavy.eot');
+    src: local('Osnova Pro Heavy'), local('OsnovaProHeavy'),
+        url('OsnovaProHeavy.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProHeavy.woff2') format('woff2'),
+        url('OsnovaProHeavy.woff') format('woff'),
+        url('OsnovaProHeavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaPro-Bold.eot');
+    src: local('Osnova Pro Bold'), local('OsnovaPro-Bold'),
+        url('OsnovaPro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaPro-Bold.woff2') format('woff2'),
+        url('OsnovaPro-Bold.woff') format('woff'),
+        url('OsnovaPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProHeavy-Italic.eot');
+    src: local('Osnova Pro Heavy Italic'), local('OsnovaProHeavy-Italic'),
+        url('OsnovaProHeavy-Italic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProHeavy-Italic.woff2') format('woff2'),
+        url('OsnovaProHeavy-Italic.woff') format('woff'),
+        url('OsnovaProHeavy-Italic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProMedium-Italic.eot');
+    src: local('Osnova Pro Medium Italic'), local('OsnovaProMedium-Italic'),
+        url('OsnovaProMedium-Italic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProMedium-Italic.woff2') format('woff2'),
+        url('OsnovaProMedium-Italic.woff') format('woff'),
+        url('OsnovaProMedium-Italic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaPro-Italic.eot');
+    src: local('Osnova Pro Italic'), local('OsnovaPro-Italic'),
+        url('OsnovaPro-Italic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaPro-Italic.woff2') format('woff2'),
+        url('OsnovaPro-Italic.woff') format('woff'),
+        url('OsnovaPro-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaPro.eot');
+    src: local('Osnova Pro'), local('OsnovaPro'),
+        url('OsnovaPro.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaPro.woff2') format('woff2'),
+        url('OsnovaPro.woff') format('woff'),
+        url('OsnovaPro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProLight.eot');
+    src: local('Osnova Pro Light'), local('OsnovaProLight'),
+        url('OsnovaProLight.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProLight.woff2') format('woff2'),
+        url('OsnovaProLight.woff') format('woff'),
+        url('OsnovaProLight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProLight-Italic.eot');
+    src: local('Osnova Pro Light Italic'), local('OsnovaProLight-Italic'),
+        url('OsnovaProLight-Italic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProLight-Italic.woff2') format('woff2'),
+        url('OsnovaProLight-Italic.woff') format('woff'),
+        url('OsnovaProLight-Italic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProThin.eot');
+    src: local('Osnova Pro Thin'), local('OsnovaProThin'),
+        url('OsnovaProThin.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProThin.woff2') format('woff2'),
+        url('OsnovaProThin.woff') format('woff'),
+        url('OsnovaProThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProMedium.eot');
+    src: local('Osnova Pro Medium'), local('OsnovaProMedium'),
+        url('OsnovaProMedium.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProMedium.woff2') format('woff2'),
+        url('OsnovaProMedium.woff') format('woff'),
+        url('OsnovaProMedium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaPro-BoldItalic.eot');
+    src: local('Osnova Pro Bold Italic'), local('OsnovaPro-BoldItalic'),
+        url('OsnovaPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaPro-BoldItalic.woff2') format('woff2'),
+        url('OsnovaPro-BoldItalic.woff') format('woff'),
+        url('OsnovaPro-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Osnova Pro';
+    src: url('OsnovaProThin-Italic.eot');
+    src: local('Osnova Pro Thin Italic'), local('OsnovaProThin-Italic'),
+        url('OsnovaProThin-Italic.eot?#iefix') format('embedded-opentype'),
+        url('OsnovaProThin-Italic.woff2') format('woff2'),
+        url('OsnovaProThin-Italic.woff') format('woff'),
+        url('OsnovaProThin-Italic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+

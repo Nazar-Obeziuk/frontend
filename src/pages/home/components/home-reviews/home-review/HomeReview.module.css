@@ -1,0 +1,138 @@
+@import "../../../../../utils/styles/fonts/_fonts.css";
+@import "../../../../../utils/styles/_variables.css";
+
+:root {
+  --swiper-theme-color: var(--primary);
+}
+
+.home__reviews_item {
+  border-radius: 12px;
+  background: var(--dark-gray);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.home__reviews_header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.home__reviews_stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.home__star_icon {
+}
+.home__reviews_title {
+  font-family: "Fixel-Display";
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
+  color: var(--white);
+}
+.home__reviews_main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.home__reviews_experience {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.home__reviews_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--primary) !important;
+}
+
+.home__reviews_content {
+  padding: 0 40px;
+}
+
+.home__reviews_content > div {
+  border-radius: 12px;
+  cursor: grab;
+}
+
+.arrow__slide_left {
+  position: absolute;
+  top: 50%;
+  z-index: 1001;
+  transform: translate(0, -50%);
+  left: -6px;
+  cursor: pointer;
+}
+
+.arrow__slide_right {
+  position: absolute;
+  top: 50%;
+  z-index: 1001;
+  transform: translate(0, -50%);
+  right: -6px;
+  cursor: pointer;
+}
+
+@media (max-width: 1230px) and (min-width: 1200px) {
+  .arrow__slide_right {
+    right: 0;
+  }
+
+  .arrow__slide_left {
+    left: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .arrow__slide_right {
+    right: -6px;
+  }
+
+  .arrow__slide_left {
+    left: -6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home__reviews_item {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .home__reviews_title {
+    font-size: 16px;
+  }
+
+  .home__reviews_text,
+  .home__reviews_experience {
+    font-size: 15px;
+  }
+
+  .home__reviews_content {
+    padding: 0;
+  }
+
+  .arrow__slide_right {
+    right: -20px !important;
+  }
+
+  .arrow__slide_left {
+    left: -20px !important;
+  }
+
+  .arrow__slide_right svg,
+  .arrow__slide_left svg {
+    width: 12px;
+  }
+}

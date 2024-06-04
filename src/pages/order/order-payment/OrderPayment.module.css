@@ -1,0 +1,166 @@
+@import "../../../../src/utils/styles/fonts/_fonts.css";
+@import "../../../../src/utils/styles/_variables.css";
+
+.order__payment_section {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../public/images/about-made-bg.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-size: contain;
+  padding: 20px 0 0 0;
+  margin-bottom: 200px;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.order__payment_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.order__payment_route {
+  margin-bottom: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.order__router_name {
+  font-family: "Fixel-Display";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--white);
+  margin-top: 4px;
+}
+.order__router_active {
+  color: var(--primary);
+}
+.order__main_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.order__payment_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.order__main_block {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.order__second_block {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+.order__block_image {
+}
+.order__block_info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.order__info_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.order__title_link {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+  text-decoration: underline;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.order__main_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.order__main_payments {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.order__main_info {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+
+@media (max-width: 1200px) {
+  .order__payment_section {
+    padding: 20px 28px 0 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .order__payment_section {
+    padding: 20px 28px 0 28px;
+    background-image: none;
+    margin-bottom: 140px;
+  }
+
+  .order__payment_route {
+    display: none;
+  }
+
+  .order__main_title,
+  .order__info_title,
+  .order__title_link {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .order__main_text {
+    font-size: 15px;
+  }
+
+  .order__payment_wrapper {
+    gap: 50px;
+  }
+
+  .order__second_block {
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-gray);
+  }
+
+  .order__payment_main {
+    gap: 50px;
+  }
+
+  .order__main_block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order__main_payments {
+    width: 100%;
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 400px) {
+  .order__payments_icon {
+    max-width: 100px;
+    height: 28px;
+  }
+}

@@ -1,0 +1,165 @@
+@import "../../../../../utils/styles/fonts/_fonts.css";
+@import "../../../../../utils/styles/_variables.css";
+
+.home__insoles_inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+}
+.home__inner_title {
+  text-align: center;
+  font-family: "Osnova-Pro";
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.home__title_primary {
+  color: var(--primary);
+}
+.home__inner_main {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.home__inner_details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  cursor: pointer;
+  user-select: none;
+}
+.home__details_text {
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary);
+}
+.home__details_icon {
+}
+.home__inner_more {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 14px;
+}
+.home__more_block {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.home__more_title {
+  font-family: "Fixel-Display";
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--primary);
+}
+.home__more_text {
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--white);
+  user-select: none;
+}
+
+.home__insole_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.home__item_image {
+  height: 84px;
+}
+.home__item_text {
+  max-width: 200px;
+  text-align: center;
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--white);
+}
+
+.home__details_icon.active {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1000px) {
+  .home__inner_main {
+    row-gap: 40px;
+    justify-content: start;
+  }
+
+  .home__inner_title {
+    font-size: 28px;
+  }
+  .home__insole_item {
+    width: 33%;
+  }
+}
+
+@media (max-width: 920px) {
+  .home__inner_more {
+    row-gap: 20px;
+  }
+
+  .home__more_block {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home__inner_title {
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .home__insoles_inner {
+    gap: 30px;
+  }
+
+  .home__details_text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home__insole_item {
+    width: 50%;
+  }
+
+  .home__item_image {
+    height: 66px;
+  }
+
+  .home__item_text {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .home__more_text,
+  .home__more_title {
+    font-size: 15px;
+  }
+
+  .home__details_text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 560px) {
+  .home__inner_title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}

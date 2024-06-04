@@ -1,0 +1,142 @@
+@import "../../../../../../src/utils/styles/fonts/_fonts.css";
+@import "../../../../../../src/utils/styles/_variables.css";
+
+.about__technologies_section {
+  width: 100%;
+  height: 100%;
+  padding: 40px 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about__technologies_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.about__wrapper_banner {
+  width: 50%;
+}
+.about__banner_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+.about__wrapper_info {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.about__info_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--primary);
+}
+.about__info_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.about__main_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.about__text_primary {
+  font-weight: 400;
+  color: var(--primary);
+}
+.about__main_for {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.about__main_list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 12px;
+}
+.about__list_item {
+  list-style-type: disc;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.about__list_item::marker {
+  width: 5px;
+  height: 5px;
+  color: var(--primary);
+}
+.about__item_bold {
+  font-weight: 500;
+}
+
+.about__inner_details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  cursor: pointer;
+  user-select: none;
+}
+.about__details_text {
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--primary);
+}
+.about__details_icon.active {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1200px) {
+  .about__technologies_section {
+    padding: 40px 28px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .about__technologies_wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .about__wrapper_banner,
+  .about__wrapper_info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about__technologies_wrapper {
+    gap: 15px;
+  }
+
+  .about__info_main,
+  .about__main_for {
+    gap: 15px;
+  }
+
+  .about__info_title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .about__main_text,
+  .about__list_item {
+    font-size: 15px;
+  }
+}
