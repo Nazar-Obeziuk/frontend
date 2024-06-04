@@ -70,7 +70,7 @@ const HeaderMobile = () => {
           <ul className={styles.header__nav_list}>
             <li className={styles.header__list_item}>
               <a
-                href="#"
+                href="https://google.com"
                 className={`${styles.header__item_link} ${styles.header__link_about}`}
               >
                 ПРО PROSTOPOO
@@ -79,32 +79,50 @@ const HeaderMobile = () => {
                 className={`${styles.header__item_list} ${styles.header__item_about}`}
               >
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Про нас
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Контакти
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Виготовлення
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Гарантії та обмін
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Політика конфідеційності
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Договір публічної оферти
                   </a>
                 </li>
@@ -112,7 +130,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <a
-                href="#"
+                href="https://google.com"
                 className={`${styles.header__item_link} ${styles.header__link_client}`}
               >
                 Клієнтам
@@ -121,12 +139,18 @@ const HeaderMobile = () => {
                 className={`${styles.header__item_list} ${styles.header__item_client}`}
               >
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Кому потрібні індивідуальні ортопедичні устілки
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Рекомендації до застосування
                   </a>
                 </li>
@@ -134,7 +158,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <a
-                href="#"
+                href="https://google.com"
                 className={`${styles.header__item_link} ${styles.header__link_order}`}
               >
                 Як замовити
@@ -143,17 +167,26 @@ const HeaderMobile = () => {
                 className={`${styles.header__item_list} ${styles.header__item_order}`}
               >
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Як зробити замовлення
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Оплата
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Доставка
                   </a>
                 </li>
@@ -161,7 +194,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <a
-                href="#"
+                href="https://google.com"
                 className={`${styles.header__item_link} ${styles.header__link_catalog}`}
               >
                 Каталог
@@ -170,17 +203,26 @@ const HeaderMobile = () => {
                 className={`${styles.header__item_list} ${styles.header__item_catalog}`}
               >
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Індивідуальні <br /> ортопедичні устілки
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Ортопедичні устілки
                   </a>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a href="#" className={styles.header__link_item}>
+                  <a
+                    href="https://google.com"
+                    className={styles.header__link_item}
+                  >
                     Подарунковий сертифікат
                   </a>
                 </li>

@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./InsolesNeeds.module.css";
-// import { getAllOrthpedicNeedsInsoles } from "../../../../../services/orthopedic-insoles/orthopedic-insoles-needs/orthopedic-insoles-needsService";
-// import { OrthopedicInsoles } from "../../../../../services/orthopedic-insoles/orthopedic-insoles.interface";
-// import InsoleItem from "../insole-item/InsoleItem";
 
 const InsolesNeeds: React.FC = () => {
   const [isOpenDetailsBlock, setIsOpenDetailsBlock] = useState(false);
-  // const [orthopedicNeeds, setOrthopedicNeeds] = useState([]);
 
   const handleInfoBlock = () => {
     setIsOpenDetailsBlock((prevState) => !prevState);
   };
-
-  // const getAllOrthopedicNeeds = async () => {
-  //   try {
-  //     const data = await getAllOrthpedicNeedsInsoles();
-  //     setOrthopedicNeeds(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllOrthopedicNeeds();
-  // }, []);
 
   return (
     <div className={styles.home__insoles_inner}>

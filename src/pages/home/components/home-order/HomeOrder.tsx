@@ -41,7 +41,7 @@ const HomeOrder: React.FC = () => {
               </div>
             </div>
             <div className={styles.home__order_video}>
-              <a href="#" className={styles.home__video_link}>
+              <a href="https://google.com" className={styles.home__video_link}>
                 <span className={styles.home__link_circle}>
                   <img
                     src="./images/button-play-video.svg"
