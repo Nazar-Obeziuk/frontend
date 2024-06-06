@@ -30,7 +30,7 @@ const AboutSolutions: React.FC = () => {
           </div>
           <div className={styles.about__wrapper_banner}>
             <img
-              src="../images/about-solutions-banner.jpg"
+              src="../../images/about-solutions-banner.jpg"
               alt="about solutions banner"
               className={styles.about__banner_image}
             />

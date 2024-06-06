@@ -34,21 +34,21 @@ const AboutHistory: React.FC = () => {
             <div className={styles.about__inner_galery}>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../images/about-foot-1.svg"
+                  src="../../images/about-foot-1.svg"
                   alt="about foot 1"
                   className={styles.about__item_image}
                 />
               </div>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../images/about-foot-2.svg"
+                  src="../../images/about-foot-2.svg"
                   alt="about foot 2"
                   className={styles.about__item_image}
                 />
               </div>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../images/about-foot-3.svg"
+                  src="../../images/about-foot-3.svg"
                   alt="about foot 3"
                   className={styles.about__item_image}
                 />
@@ -58,7 +58,7 @@ const AboutHistory: React.FC = () => {
           <div className={styles.about__history_banner}>
             <div className={styles.about__banner_block}>
               <img
-                src="../images/about-history-banner.jpg"
+                src="../../images/about-history-banner.jpg"
                 alt="home history banner"
                 className={styles.about__block_image}
               />

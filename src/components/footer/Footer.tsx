@@ -78,7 +78,7 @@ const Footer = () => {
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
                   <NavLink
-                    to={"/home/prostopoo"}
+                    to={"/home/prostopoo/about"}
                     className={styles.footer__link_item}
                   >
                     Про нас

@@ -14,12 +14,12 @@ const AboutProstopoo: React.FC = () => {
           <div className={styles.about__prostopoo_wrapper}>
             <div className={styles.about__wrapper_router}>
               <img
-                src="../images/home-icon.svg"
+                src="../../images/home-icon.svg"
                 alt="home icon"
                 className={styles.about__router_icon}
               />
               <img
-                src="../images/navigation-arrow.svg"
+                src="../../images/navigation-arrow.svg"
                 alt="router arrow"
                 className="about__router_arrow"
               />

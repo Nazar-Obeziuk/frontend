@@ -6,6 +6,10 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
 
+  const activeHeaderItem = {
+    color: "#FFED00",
+  };
+
   const handleSearchInput = () => {
     setIsSearchInputOpen((prevState) => !prevState);
   };
@@ -29,7 +33,10 @@ const Header = () => {
               <ul className={styles.header__nav_list}>
                 <li className={styles.header__list_item}>
                   <NavLink
-                    to={"/home/prostopoo"}
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    to={"/home/prostopoo/about"}
                     className={`${styles.header__item_link} ${styles.header__link_about}`}
                   >
                     ПРО PROSTOPOO
@@ -39,7 +46,10 @@ const Header = () => {
                   >
                     <li className={styles.header__list_item}>
                       <NavLink
-                        to={"/home/prostopoo"}
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
+                        to={"/home/prostopoo/about"}
                         className={styles.header__link_item}
                       >
                         Про нас
@@ -47,6 +57,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/prostopoo/contacts"}
                         className={styles.header__link_item}
                       >
@@ -55,6 +68,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/prostopoo/made"}
                         className={styles.header__link_item}
                       >
@@ -63,6 +79,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/prostopoo/warranty-and-exchange"}
                         className={styles.header__link_item}
                       >
@@ -71,6 +90,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/prostopoo/privacy-policy"}
                         className={styles.header__link_item}
                       >
@@ -79,6 +101,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/prostopoo/public-offer-agreement"}
                         className={styles.header__link_item}
                       >
@@ -89,6 +114,9 @@ const Header = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
                     to={"/home/client/who-need-individual-orthopedic-insoles"}
                     className={`${styles.header__item_link} ${styles.header__link_client}`}
                   >
@@ -99,6 +127,9 @@ const Header = () => {
                   >
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={
                           "/home/client/who-need-individual-orthopedic-insoles"
                         }
@@ -109,6 +140,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/client/recommendations"}
                         className={styles.header__link_item}
                       >
@@ -119,6 +153,9 @@ const Header = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
                     to={"/home/order/how-to-make-a-order"}
                     className={`${styles.header__item_link} ${styles.header__link_order}`}
                   >
@@ -129,6 +166,9 @@ const Header = () => {
                   >
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/order/how-to-make-a-order"}
                         className={styles.header__link_item}
                       >
@@ -137,6 +177,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/order/payment"}
                         className={styles.header__link_item}
                       >
@@ -145,6 +188,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/order/delivery"}
                         className={styles.header__link_item}
                       >
@@ -155,6 +201,9 @@ const Header = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
                     to={"/home/catalog/individual-orthopedic-insoles"}
                     className={`${styles.header__item_link} ${styles.header__link_catalog}`}
                   >
@@ -165,6 +214,9 @@ const Header = () => {
                   >
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/catalog/individual-orthopedic-insoles"}
                         className={styles.header__link_item}
                       >
@@ -173,6 +225,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/catalog/orthopedic-insoles"}
                         className={styles.header__link_item}
                       >
@@ -181,6 +236,9 @@ const Header = () => {
                     </li>
                     <li className={styles.header__list_item}>
                       <NavLink
+                        style={({ isActive }) =>
+                          isActive ? activeHeaderItem : undefined
+                        }
                         to={"/home/catalog/gift-certificate-prostopoo"}
                         className={styles.header__link_item}
                       >

@@ -271,6 +271,7 @@
 .header__mobile_menu {
   display: block;
   position: fixed;
+  z-index: 1000001;
   top: 58px;
   left: -100%;
   right: 0;

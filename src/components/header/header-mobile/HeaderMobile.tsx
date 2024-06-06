@@ -5,6 +5,10 @@ import { NavLink } from "react-router-dom";
 const HeaderMobile = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const activeHeaderItem = {
+    color: "#FFED00",
+  };
+
   const handleBurgerMenu = () => {
     setIsMobileMenuOpen((prevState) => !prevState);
   };
@@ -72,6 +76,7 @@ const HeaderMobile = () => {
             <li className={styles.header__list_item}>
               <NavLink
                 to={"/home/prostopoo"}
+                onClick={handleBurgerMenu}
                 className={`${styles.header__item_link} ${styles.header__link_about}`}
               >
                 ПРО PROSTOPOO
@@ -81,7 +86,11 @@ const HeaderMobile = () => {
               >
                 <li className={styles.header__list_item}>
                   <NavLink
-                    to={"/home/prostopoo"}
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
+                    to={"/home/prostopoo/about"}
                     className={styles.header__link_item}
                   >
                     Про нас
@@ -89,6 +98,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/prostopoo/contacts"}
                     className={styles.header__link_item}
                   >
@@ -97,6 +110,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/prostopoo/made"}
                     className={styles.header__link_item}
                   >
@@ -105,6 +122,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/prostopoo/warranty-and-exchange"}
                     className={styles.header__link_item}
                   >
@@ -113,6 +134,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/prostopoo/privacy-policy"}
                     className={styles.header__link_item}
                   >
@@ -121,6 +146,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/prostopoo/public-offer-agreement"}
                     className={styles.header__link_item}
                   >
@@ -131,6 +160,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <NavLink
+                onClick={handleBurgerMenu}
                 to={"/home/client/who-need-individual-orthopedic-insoles"}
                 className={`${styles.header__item_link} ${styles.header__link_client}`}
               >
@@ -141,6 +171,10 @@ const HeaderMobile = () => {
               >
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/client/who-need-individual-orthopedic-insoles"}
                     className={styles.header__link_item}
                   >
@@ -149,6 +183,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/client/recommendations"}
                     className={styles.header__link_item}
                   >
@@ -159,6 +197,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <NavLink
+                onClick={handleBurgerMenu}
                 to={"/home/order/how-to-make-a-order"}
                 className={`${styles.header__item_link} ${styles.header__link_order}`}
               >
@@ -169,6 +208,10 @@ const HeaderMobile = () => {
               >
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/order/how-to-make-a-order"}
                     className={styles.header__link_item}
                   >
@@ -177,6 +220,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/order/payment"}
                     className={styles.header__link_item}
                   >
@@ -185,6 +232,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/order/delivery"}
                     className={styles.header__link_item}
                   >
@@ -195,6 +246,7 @@ const HeaderMobile = () => {
             </li>
             <li className={styles.header__list_item}>
               <NavLink
+                onClick={handleBurgerMenu}
                 to={"/home/catalog/individual-orthopedic-insoles"}
                 className={`${styles.header__item_link} ${styles.header__link_catalog}`}
               >
@@ -205,6 +257,10 @@ const HeaderMobile = () => {
               >
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/catalog/individual-orthopedic-insoles"}
                     className={styles.header__link_item}
                   >
@@ -213,6 +269,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/catalog/orthopedic-insoles"}
                     className={styles.header__link_item}
                   >
@@ -221,6 +281,10 @@ const HeaderMobile = () => {
                 </li>
                 <li className={styles.header__list_item}>
                   <NavLink
+                    style={({ isActive }) =>
+                      isActive ? activeHeaderItem : undefined
+                    }
+                    onClick={handleBurgerMenu}
                     to={"/home/catalog/gift-certificate-prostopoo"}
                     className={styles.header__link_item}
                   >

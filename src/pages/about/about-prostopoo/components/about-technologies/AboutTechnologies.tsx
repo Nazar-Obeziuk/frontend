@@ -14,7 +14,7 @@ const AboutTechnologies: React.FC = () => {
         <div className={styles.about__technologies_wrapper}>
           <div className={styles.about__wrapper_banner}>
             <img
-              src="../images/about-technologies-banner.jpg"
+              src="../../images/about-technologies-banner.jpg"
               alt="about technologies banner"
               className={styles.about__banner_image}
             />

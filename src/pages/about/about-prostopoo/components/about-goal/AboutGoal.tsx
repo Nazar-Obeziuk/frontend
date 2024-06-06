@@ -27,7 +27,7 @@ const AboutGoal: React.FC = () => {
           </div>
           <div className={styles.about__wrapper_banner}>
             <img
-              src="../images/about-goal-banner.jpg"
+              src="../../images/about-goal-banner.jpg"
               alt="about goal banner"
               className={styles.about__banner_image}
             />
