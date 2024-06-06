@@ -35,12 +35,6 @@ const clientNeedsIndividualData = [
     insole_description_ua: "При плоскостопості",
     insole_description_en: "In case of flat feet",
   },
-  //   {
-  //     id: 7,
-  //     image_url: "../../images/corns-icon.svg",
-  //     insole_description_ua: "При натоптнях та мозолях",
-  //     insole_description_en: "In case of corns and calluses",
-  //   },
   {
     id: 7,
     image_url: "../../images/foot-hole-icon.svg",
@@ -89,18 +83,6 @@ const clientNeedsIndividualData = [
     insole_description_ua: "При діабетичній стопі",
     insole_description_en: "If you have diabetic foot",
   },
-  //   {
-  //     id: 16,
-  //     image_url: "../../images/varikoz-icon.svg",
-  //     insole_description_ua: "При набряках та варикозі",
-  //     insole_description_en: "For edema and varicose veins",
-  //   },
-  //   {
-  //     id: 17,
-  //     image_url: "../../images/halus-icon.svg",
-  //     insole_description_ua: "При халюс вальгусі",
-  //     insole_description_en: "In case of hallux valgus",
-  //   },
   {
     id: 15,
     image_url: "../../images/diffirent-icon.svg",
@@ -140,12 +122,6 @@ const clientNeedsOrthopedicData = [
     insole_description_ua: "Розподілу навантаження на опорно-руховий апарат",
     insole_description_en: "Load distribution of the musculoskeletal system",
   },
-  //   {
-  //     id: 6,
-  //     image_url: "../../images/circulation-icon.svg",
-  //     insole_description_ua: "Покращення кровообігу",
-  //     insole_description_en: "Improvement of blood circulation",
-  //   },
 ];
 
 export { clientNeedsIndividualData, clientNeedsOrthopedicData };

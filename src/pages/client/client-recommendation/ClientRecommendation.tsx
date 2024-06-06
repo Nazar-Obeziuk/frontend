@@ -84,6 +84,7 @@ const ClientRecommendation: React.FC = () => {
                       Дістаньте стару устілку
                     </p>
                   </div>
+                  <div className={styles.client__galery_line}></div>
                   <div className={styles.client__galery_item}>
                     <img
                       src="../../images/recommendation-2.svg"
@@ -98,11 +99,12 @@ const ClientRecommendation: React.FC = () => {
                       </span>
                     </p>
                   </div>
+                  <div className={styles.client__galery_line}></div>
                   <div className={styles.client__galery_item}>
                     <img
                       src="../../images/recommendation-3.svg"
                       alt="recommendation icon"
-                      className={styles.client__banners_item}
+                      className={`${styles.client__banners_item} ${styles.client__banners_third}`}
                     />
                     <span className={styles.client__count_item}>3</span>
                     <p className={styles.client__info_text}>

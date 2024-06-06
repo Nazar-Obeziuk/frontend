@@ -14,6 +14,9 @@ import ClientRecommendation from "./pages/client/client-recommendation/ClientRec
 import OrderMake from "./pages/order/order-make/OrderMake";
 import OrderPayment from "./pages/order/order-payment/OrderPayment";
 import OrderDelivery from "./pages/order/order-delivery/OrderDelivery";
+import CatalogIndividual from "./pages/catalog/catalog-individual/CatalogIndividual";
+import CatalogOrthopedic from "./pages/catalog/catalog-orthopedic/CatalogOrthopedic";
+import CatalogCertificate from "./pages/catalog/catalog-certificate/CatalogCertificate";
 
 function App() {
   return (
@@ -52,6 +55,18 @@ function App() {
         ></Route>
         <Route path="/home/order/payment" element={<OrderPayment />}></Route>
         <Route path="/home/order/delivery" element={<OrderDelivery />}></Route>
+        <Route
+          path="/home/catalog/individual-orthopedic-insoles"
+          element={<CatalogIndividual />}
+        ></Route>
+        <Route
+          path="/home/catalog/orthopedic-insoles"
+          element={<CatalogOrthopedic />}
+        ></Route>
+        <Route
+          path="/home/catalog/gift-certificate-prostopoo"
+          element={<CatalogCertificate />}
+        ></Route>
       </Routes>
     </Layout>
   );

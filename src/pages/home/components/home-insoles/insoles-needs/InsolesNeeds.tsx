@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./InsolesNeeds.module.css";
+import { homeInsolesNeeds } from "../../../../../utils/data/HomeInsoles.data";
+import InsoleItem from "../../../../../components/insole-item/InsoleItem";
 
 const InsolesNeeds: React.FC = () => {
   const [isOpenDetailsBlock, setIsOpenDetailsBlock] = useState(false);
@@ -16,54 +18,9 @@ const InsolesNeeds: React.FC = () => {
         ОРТОПЕДИЧНІ устілки?
       </h2>
       <div className={styles.home__inner_main}>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/sportman-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Спортсменам</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/soldier-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Військовим</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/pregnant-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Вагітним</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/children-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Дітям</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/old-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Людям похилого віку</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/everyone-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Кожному з нас</p>
-        </div>
+        {homeInsolesNeeds.map((insoleItem) => (
+          <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
+        ))}
       </div>
       <div onClick={handleInfoBlock} className={styles.home__inner_details}>
         <p className={styles.home__details_text}>

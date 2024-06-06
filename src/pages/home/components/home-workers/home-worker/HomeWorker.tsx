@@ -28,34 +28,65 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
           </div>
           <div className={styles.home__worker_info}>
             <div className={styles.home__info_header}>
-              <h3 className={styles.home__info_title}>{worker.worker_title}</h3>
+              <h3 className={styles.home__info_title}>
+                {worker.worker_title_ua}
+              </h3>
               <span className={styles.home__info_subtitle}>
-                {worker.worker_subtitle}
+                {worker.worker_subtitle_ua}
               </span>
             </div>
             <div className={styles.home__info_about}>
               <p className={styles.home__about_text}>
-                {worker.worker_first_text}
+                {worker.worker_first_text_ua}
               </p>
               <p className={styles.home__about_text}>
-                {worker.worker_second_text}
+                {worker.worker_second_text_ua}
               </p>
               <p className={styles.home__about_text}>
-                {worker.worker_third_text}
+                {worker.worker_third_text_ua}
               </p>
             </div>
             <div className={styles.home__info_galery}>
-              <div className="home__galery_content">
+              <div className={styles.home__galery_content}>
                 <Swiper
                   spaceBetween={32}
                   slidesPerView={3}
                   navigation={{
-                    nextEl: ".arrow-right",
-                    prevEl: ".arrow-left",
+                    nextEl: `.arrow-right-workers-${worker.id}`,
+                    prevEl: `.arrow-left-workers-${worker.id}`,
                   }}
                   modules={[Navigation]}
-                  className="mySwiper"
+                  className={`workerSwiper-${worker.id}`}
                 >
+                  {worker.worker_slider_images.map((workerSlideImage) => (
+                    <SwiperSlide>
+                      <div className={styles.home__slider_card}>
+                        <img
+                          className={styles.home__slider_image}
+                          src={workerSlideImage}
+                          alt="worker slide icon"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                  {/* <SwiperSlide>
+                    <div className={styles.home__slider_card}>
+                      <img
+                        className={styles.home__slider_image}
+                        src="./images/yan-certificate-2.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className={styles.home__slider_card}>
+                      <img
+                        className={styles.home__slider_image}
+                        src="./images/yan-certificate-3.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </SwiperSlide>
                   <SwiperSlide>
                     <div className={styles.home__slider_card}>
                       <img
@@ -82,48 +113,13 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                         alt=""
                       />
                     </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={styles.home__slider_card}>
-                      <img
-                        className={styles.home__slider_image}
-                        src="./images/yan-certificate-1.jpg"
-                        alt=""
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={styles.home__slider_card}>
-                      <img
-                        className={styles.home__slider_image}
-                        src="./images/yan-certificate-2.jpg"
-                        alt=""
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={styles.home__slider_card}>
-                      <img
-                        className={styles.home__slider_image}
-                        src="./images/yan-certificate-3.jpg"
-                        alt=""
-                      />
-                    </div>
-                  </SwiperSlide>
+                  </SwiperSlide> */}
                 </Swiper>
               </div>
 
               <span
                 onClick={() => swiper && swiper.slidePrev()}
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  zIndex: 1001,
-                  transform: "translate(0, -50%)",
-                  left: "-52px",
-                  cursor: "pointer",
-                }}
-                className="arrow-left arrow"
+                className={`arrow-left-workers-${worker.id} ${styles.arrow__slide_left} arrow-workers`}
               >
                 <svg
                   width="22"
@@ -135,21 +131,13 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                   <path
                     d="M19.4434 33L3.88725 17.4434L19.4434 1.8873"
                     stroke="#FFED00"
-                    stroke-width="4"
+                    strokeWidth="4"
                   />
                 </svg>
               </span>
               <span
                 onClick={() => swiper && swiper.slideNext()}
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  zIndex: 1001,
-                  transform: "translate(0, -50%)",
-                  right: "-52px",
-                  cursor: "pointer",
-                }}
-                className="arrow-right arrow"
+                className={`arrow-right-workers-${worker.id} ${styles.arrow__slide_right} arrow-workers`}
               >
                 <svg
                   width="20"
@@ -161,7 +149,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                   <path
                     d="M1.55615 2L17.1123 17.5566L1.55615 33.1127"
                     stroke="#FFED00"
-                    stroke-width="4"
+                    strokeWidth="4"
                   />
                 </svg>
               </span>

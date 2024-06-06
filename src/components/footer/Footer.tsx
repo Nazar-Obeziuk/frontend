@@ -77,32 +77,50 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>ПРО PROSTOPOO</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo"}
+                    className={styles.footer__link_item}
+                  >
                     Про нас
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo/contacts"}
+                    className={styles.footer__link_item}
+                  >
                     Контакти
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo/made"}
+                    className={styles.footer__link_item}
+                  >
                     Виготовлення
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo/warranty-and-exchange"}
+                    className={styles.footer__link_item}
+                  >
                     Гарантії та обмін
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo/privacy-policy"}
+                    className={styles.footer__link_item}
+                  >
                     Політика конфідеційності
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/prostopoo/public-offer-agreement"}
+                    className={styles.footer__link_item}
+                  >
                     Договір публічної оферти
                   </NavLink>
                 </li>
@@ -112,27 +130,42 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>Клієнтам</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/catalog/individual-orthopedic-insoles"}
+                    className={styles.footer__link_item}
+                  >
                     Індивідуальні ортопедичні устілки
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/catalog/orthopedic-insoles"}
+                    className={styles.footer__link_item}
+                  >
                     Ортопедичні устілки
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/catalog/gift-certificate-prostopoo"}
+                    className={styles.footer__link_item}
+                  >
                     Подарунковий сертифікат
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/client/who-need-individual-orthopedic-insoles"}
+                    className={styles.footer__link_item}
+                  >
                     Кому потрібні індивідуальні <br /> ортопедичні устілки
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/client/recommendations"}
+                    className={styles.footer__link_item}
+                  >
                     Рекомендації до застосування
                   </NavLink>
                 </li>
@@ -142,17 +175,26 @@ const Footer = () => {
               <p className={styles.footer__menu_title}>Як замовити</p>
               <ul className={styles.footer__menu_list}>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/order/how-to-make-a-order"}
+                    className={styles.footer__link_item}
+                  >
                     Як зробити <br /> замовлення
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/order/payment"}
+                    className={styles.footer__link_item}
+                  >
                     Оплата
                   </NavLink>
                 </li>
                 <li className={styles.footer__list_item}>
-                  <NavLink to={""} className={styles.footer__link_item}>
+                  <NavLink
+                    to={"/home/order/delivery"}
+                    className={styles.footer__link_item}
+                  >
                     Доставка
                   </NavLink>
                 </li>

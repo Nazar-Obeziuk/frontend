@@ -88,12 +88,12 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a
-                    href="https://google.com"
+                  <NavLink
+                    to={"/home/client/who-need-individual-orthopedic-insoles"}
                     className={`${styles.header__item_link} ${styles.header__link_client}`}
                   >
                     Клієнтам
-                  </a>
+                  </NavLink>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_client}`}
                   >
@@ -118,12 +118,12 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a
-                    href="https://google.com"
+                  <NavLink
+                    to={"/home/order/how-to-make-a-order"}
                     className={`${styles.header__item_link} ${styles.header__link_order}`}
                   >
                     Як замовити
-                  </a>
+                  </NavLink>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_order}`}
                   >
@@ -154,38 +154,38 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <a
-                    href="https://google.com"
+                  <NavLink
+                    to={"/home/catalog/individual-orthopedic-insoles"}
                     className={`${styles.header__item_link} ${styles.header__link_catalog}`}
                   >
                     Каталог
-                  </a>
+                  </NavLink>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_catalog}`}
                   >
                     <li className={styles.header__list_item}>
-                      <a
-                        href="https://google.com"
+                      <NavLink
+                        to={"/home/catalog/individual-orthopedic-insoles"}
                         className={styles.header__link_item}
                       >
                         Індивідуальні <br /> ортопедичні устілки
-                      </a>
+                      </NavLink>
                     </li>
                     <li className={styles.header__list_item}>
-                      <a
-                        href="https://google.com"
+                      <NavLink
+                        to={"/home/catalog/orthopedic-insoles"}
                         className={styles.header__link_item}
                       >
                         Ортопедичні устілки
-                      </a>
+                      </NavLink>
                     </li>
                     <li className={styles.header__list_item}>
-                      <a
-                        href="https://google.com"
+                      <NavLink
+                        to={"/home/catalog/gift-certificate-prostopoo"}
                         className={styles.header__link_item}
                       >
                         Подарунковий сертифікат
-                      </a>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>

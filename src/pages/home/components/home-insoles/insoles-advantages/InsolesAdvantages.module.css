@@ -93,6 +93,10 @@
   transform: rotate(180deg);
 }
 
+.home__inner_main > div {
+  width: 20%;
+}
+
 @media (max-width: 1000px) {
   .home__inner_main {
     row-gap: 40px;
@@ -102,7 +106,7 @@
   .home__inner_title {
     font-size: 28px;
   }
-  .home__insole_item {
+  .home__inner_main > div {
     width: 33%;
   }
 }
@@ -133,7 +137,7 @@
 }
 
 @media (max-width: 640px) {
-  .home__insole_item {
+  .home__inner_main > div {
     width: 50%;
   }
 

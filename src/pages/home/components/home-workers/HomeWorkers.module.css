@@ -6,6 +6,13 @@
   height: 100%;
   padding: 0 0 60px 0;
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.home__workers_wrapper {
+  width: 100%;
+}
 .home__workers_box {
   width: 100%;
   height: 100%;
@@ -13,13 +20,6 @@
   display: flex;
   flex-direction: column;
   gap: 70px;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.home__workers_wrapper {
-  width: 100%;
 }
 .home__workers_title {
   text-align: center;

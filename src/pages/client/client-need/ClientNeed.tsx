@@ -40,11 +40,8 @@ const ClientNeed: React.FC = () => {
                 Індивідуальні ортопедичні устілки потрібні:
               </h2>
               <div className={styles.client__main_insoles}>
-                {clientNeedsIndividualData.map((clientInsole) => (
-                  <InsoleItem
-                    clientInsole={clientInsole}
-                    key={clientInsole.id}
-                  />
+                {clientNeedsIndividualData.map((insoleItem) => (
+                  <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
                 ))}
               </div>
             </div>
@@ -58,8 +55,8 @@ const ClientNeed: React.FC = () => {
               Ортопедичні устілки необхідні для:
             </h2>
             <div className={styles.client__main_insoles}>
-              {clientNeedsOrthopedicData.map((clientInsole) => (
-                <InsoleItem clientInsole={clientInsole} key={clientInsole.id} />
+              {clientNeedsOrthopedicData.map((insoleItem) => (
+                <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
               ))}
             </div>
           </div>

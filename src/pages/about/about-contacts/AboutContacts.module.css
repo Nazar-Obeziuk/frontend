@@ -122,13 +122,10 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .about__contacts_section {
     background-image: none;
   }
-}
-
-@media (max-width: 600px) {
   .about__main_title,
   .about__title_upper,
   .about__name_title {

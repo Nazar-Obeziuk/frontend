@@ -3,19 +3,19 @@ import { OrthopedicInsoles } from "../../services/orthopedic-insoles/orthopedic-
 import styles from "./InsoleItem.module.css";
 
 interface InsoleItemProps {
-  clientInsole: OrthopedicInsoles;
+  insoleItem: OrthopedicInsoles;
 }
 
-const InsoleItem: React.FC<InsoleItemProps> = ({ clientInsole }) => {
+const InsoleItem: React.FC<InsoleItemProps> = ({ insoleItem }) => {
   return (
     <div className={styles.home__insole_item}>
       <img
-        src={clientInsole.image_url}
+        src={insoleItem.image_url}
         alt="insole item icon"
         className={styles.home__item_image}
       />
       <p className={styles.home__item_text}>
-        {clientInsole.insole_description_ua}
+        {insoleItem.insole_description_ua}
       </p>
     </div>
   );

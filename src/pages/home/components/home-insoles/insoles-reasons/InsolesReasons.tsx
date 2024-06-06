@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./InsoleReasons.module.css";
+import { homeInsolesReasons } from "../../../../../utils/data/HomeInsoles.data";
+import InsoleItem from "../../../../../components/insole-item/InsoleItem";
 
 const InsolesReasons: React.FC = () => {
   const [isOpenDetailsBlock, setIsOpenDetailsBlock] = useState(false);
@@ -16,88 +18,9 @@ const InsolesReasons: React.FC = () => {
         ОРТОПЕДИЧНІ устілки?
       </h2>
       <div className={styles.home__inner_main}>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/pain-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Біль у суглобах і хребті</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/varikoz-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Набряки і варикоз</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/flat-foot-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Плоскостопість</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/work-on-foot-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Робота на ногах</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/overweight-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Надлишкова вага</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/diabet-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Діабетична стопа</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/diffirent-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Різна довжина кінцівок</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/varusna-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>
-            Варусна/Вальгустна деформація
-          </p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/foot-hole-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>П’яткова шпора</p>
-        </div>
-        <div className={styles.home__insole_item}>
-          <img
-            src="../../images/amputation-icon.svg"
-            alt="insole item icon"
-            className={styles.home__item_image}
-          />
-          <p className={styles.home__item_text}>Часткова ампутація</p>
-        </div>
+        {homeInsolesReasons.map((insoleItem) => (
+          <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
+        ))}
       </div>
       <div onClick={handleInfoBlock} className={styles.home__inner_details}>
         <p className={styles.home__details_text}>
