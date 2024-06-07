@@ -1,0 +1,118 @@
+.catalog__info_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.catalog__main_about {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.catalog__info_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.catalog__info_primary {
+  color: var(--primary);
+}
+.catalog__main_steps {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.catalog__steps_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.catalog__steps_item {
+  display: flex;
+  gap: 20px;
+}
+.catalog__steps_block {
+  min-width: 80px;
+  background: var(--primary);
+  border-radius: 8px;
+  padding: 10px 0 7px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Osnova-Pro";
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 15px;
+  color: var(--black);
+}
+.catalog__steps_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.catalog__info_bold {
+  font-weight: 500;
+  color: var(--white);
+}
+.catalog__main_rules {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.catalog__info_primaryBold {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--primary);
+}
+.catalog__main_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.catalog__list_item {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+}
+.catalog__item_count {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .catalog__info_main {
+    gap: 30px;
+  }
+
+  .catalog__info_text,
+  .catalog__steps_text,
+  .catalog__info_primary,
+  .catalog__info_bold,
+  .catalog__info_primaryBold {
+    font-size: 15px;
+  }
+
+  .catalog__steps_item {
+    gap: 10px;
+  }
+
+  .catalog__steps_block {
+    width: 66px;
+    height: 100%;
+    font-size: 12px;
+  }
+}
