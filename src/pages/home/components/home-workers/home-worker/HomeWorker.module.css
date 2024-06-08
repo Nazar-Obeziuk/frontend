@@ -35,6 +35,10 @@
 }
 .home__worker_banner {
   width: 50%;
+  background-image: url("../../../../../../public/images/mask.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .home__worker_image {
   width: 100%;

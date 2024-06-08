@@ -1,7 +1,7 @@
 const workersData = [
   {
     id: 1,
-    worker_image_path: "./images/worker-test-1.svg",
+    worker_image_path: "../../images/yan-worker.png",
     worker_title_ua: "Ян Степаненко",
     worker_subtitle_ua: "фізичний терапевт / ерготерапевт",
     worker_first_text_ua: "Працює фізичним терапевтом із 2019 року.",
@@ -27,7 +27,7 @@ const workersData = [
   },
   {
     id: 2,
-    worker_image_path: "./images/worker-2.png",
+    worker_image_path: "../../images/ihor-worker.png",
     worker_title_ua: "Ігор Фалько",
     worker_subtitle_ua: "Майстер з виготовлення ортопедичних устілок",
     worker_first_text_ua:
