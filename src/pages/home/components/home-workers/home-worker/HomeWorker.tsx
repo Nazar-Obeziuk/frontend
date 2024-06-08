@@ -25,6 +25,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
               alt="worker banner"
               className={styles.home__worker_image}
             />
+            <div className={styles.home__worker_mask}></div>
           </div>
           <div className={styles.home__worker_info}>
             <div className={styles.home__info_header}>

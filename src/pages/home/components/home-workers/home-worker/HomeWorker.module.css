@@ -35,9 +35,18 @@
 }
 .home__worker_banner {
   width: 50%;
+  position: relative;
+}
+.home__worker_mask {
+  width: 140%;
+  height: 100%;
+  top: 60px;
+  left: -140px;
+  z-index: -1;
+  position: absolute;
   background-image: url("../../../../../../public/images/mask.png");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
 }
 .home__worker_image {
