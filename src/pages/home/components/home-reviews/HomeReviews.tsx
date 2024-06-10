@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeReview from "./home-review/HomeReview";
 import styles from "./HomeReviews.module.css";
+import { getAllReviews } from "../../../../services/reviews/reviewsService";
 
 const HomeReviews: React.FC = () => {
   return (

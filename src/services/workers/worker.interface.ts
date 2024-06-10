@@ -1,4 +1,4 @@
-export interface Worker {
+export interface IWorker {
   id: number;
   worker_image_path: string;
   worker_title_ua: string;

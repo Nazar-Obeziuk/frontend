@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
 import styles from "./HomeReview.module.css";
 import "swiper/css";
 import "swiper/css/navigation";
+import { getAllReviews } from "../../../../../services/reviews/reviewsService";
+import { IReview } from "../../../../../services/reviews/review.interface";
 
 const HomeReview: React.FC = () => {
+  const [reviews, setReviews] = useState([]);
   const swiper = useSwiper();
+
+  const getAll = async () => {
+    const reviewsData = await getAllReviews();
+    setReviews(reviewsData);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
 
   return (
     <>
@@ -36,186 +48,42 @@ const HomeReview: React.FC = () => {
           modules={[Navigation]}
           className="reviewsSwiper"
         >
-          <SwiperSlide>
-            <div className={styles.home__reviews_item}>
-              <div className={styles.home__reviews_header}>
-                <span className={styles.home__reviews_stars}>
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                </span>
-                <h3 className={styles.home__reviews_title}>Коваль Дмитро</h3>
-              </div>
-              <div className={styles.home__reviews_main}>
-                <span className={styles.home__reviews_experience}>
-                  Досвід використання:
-                </span>
-                <p className={styles.home__reviews_text}>
-                  Нещодавно я не зміг потрапити до ортопеда на прийом і
-                  звернувся до салону Рідні медтехніки, де є послуга
-                  виготовлення устілок. Великою перевагою стало, що діагностують
-                  тут по технології CAD/CAM.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.home__reviews_item}>
-              <div className={styles.home__reviews_header}>
-                <span className={styles.home__reviews_stars}>
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                </span>
-                <h3 className={styles.home__reviews_title}>Коваль Дмитро</h3>
-              </div>
-              <div className={styles.home__reviews_main}>
-                <span className={styles.home__reviews_experience}>
-                  Досвід використання:
-                </span>
-                <p className={styles.home__reviews_text}>
-                  Нещодавно я не зміг потрапити до ортопеда на прийом і
-                  звернувся до салону Рідні медтехніки, де є послуга
-                  виготовлення устілок. Великою перевагою стало, що діагностують
-                  тут по технології CAD/CAM.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.home__reviews_item}>
-              <div className={styles.home__reviews_header}>
-                <span className={styles.home__reviews_stars}>
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                </span>
-                <h3 className={styles.home__reviews_title}>Коваль Дмитро</h3>
-              </div>
-              <div className={styles.home__reviews_main}>
-                <span className={styles.home__reviews_experience}>
-                  Досвід використання:
-                </span>
-                <p className={styles.home__reviews_text}>
-                  Нещодавно я не зміг потрапити до ортопеда на прийом і
-                  звернувся до салону Рідні медтехніки, де є послуга
-                  виготовлення устілок. Великою перевагою стало, що діагностують
-                  тут по технології CAD/CAM.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={styles.home__reviews_item}>
-              <div className={styles.home__reviews_header}>
-                <span className={styles.home__reviews_stars}>
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                  <img
-                    src="./images/review-star.svg"
-                    alt="review star"
-                    className={styles.home__star_icon}
-                  />
-                </span>
-                <h3 className={styles.home__reviews_title}>Коваль Дмитро</h3>
-              </div>
-              <div className={styles.home__reviews_main}>
-                <span className={styles.home__reviews_experience}>
-                  Досвід використання:
-                </span>
-                <p className={styles.home__reviews_text}>
-                  Нещодавно я не зміг потрапити до ортопеда на прийом і
-                  звернувся до салону Рідні медтехніки, де є послуга
-                  виготовлення устілок. Великою перевагою стало, що діагностують
-                  тут по технології CAD/CAM.
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
+          {reviews.map((review: IReview) => {
+            const reviewStars = [];
+
+            for (let i = 1; i <= review.stars; i++) {
+              reviewStars.push(i);
+            }
+
+            return (
+              <SwiperSlide>
+                <div className={styles.home__reviews_item}>
+                  <div className={styles.home__reviews_header}>
+                    <span className={styles.home__reviews_stars}>
+                      {reviewStars.map(() => (
+                        <img
+                          src="./images/review-star.svg"
+                          alt="review star"
+                          className={styles.home__star_icon}
+                        />
+                      ))}
+                    </span>
+                    <h3 className={styles.home__reviews_title}>
+                      {review.name_ua}
+                    </h3>
+                  </div>
+                  <div className={styles.home__reviews_main}>
+                    <span className={styles.home__reviews_experience}>
+                      Досвід використання:
+                    </span>
+                    <p className={styles.home__reviews_text}>
+                      {review.description_ua}
+                    </p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 

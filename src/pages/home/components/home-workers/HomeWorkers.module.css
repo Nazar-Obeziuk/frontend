@@ -48,6 +48,13 @@
     font-size: 28px;
     line-height: 34px;
   }
+
+  .home__workers_section {
+    padding: 0;
+  }
+  .home__workers_box {
+    padding: 0;
+  }
 }
 
 @media (max-width: 768px) {

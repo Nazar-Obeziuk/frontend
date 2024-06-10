@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CatalogCertificateGift.module.css";
 
 const CatalogCertificateGift: React.FC = () => {
+  const [countOfCertificate, setCountOfCertificate] = useState(1);
+
+  const handleCountOfCertificate = (operation: "increment" | "decrement") => {
+    setCountOfCertificate((prevCount) => {
+      if (operation === "increment") {
+        return prevCount + 1;
+      } else if (operation === "decrement" && prevCount > 1) {
+        return prevCount - 1;
+      }
+      return prevCount;
+    });
+  };
+
   return (
     <div className={styles.catalog__main_gift}>
       <div className={styles.catalog__gift_banners}>
@@ -39,15 +52,21 @@ const CatalogCertificateGift: React.FC = () => {
         <div className={styles.catalog__info_main}>
           <h2 className={styles.catalog__main_price}>1499 грн</h2>
           <div className={styles.catalog__main_count}>
-            <span className={styles.catalog__count_button}>
+            <span
+              onClick={() => handleCountOfCertificate("decrement")}
+              className={styles.catalog__count_button}
+            >
               <img
                 src="../../images/minus-icon.svg"
                 alt="certificate action icon"
                 className={styles.catalog__button_action}
               />
             </span>
-            <p className={styles.catalog__count_text}>1</p>
-            <span className={styles.catalog__count_button}>
+            <p className={styles.catalog__count_text}>{countOfCertificate}</p>
+            <span
+              onClick={() => handleCountOfCertificate("increment")}
+              className={styles.catalog__count_button}
+            >
               <img
                 src="../../images/plus-icon.svg"
                 alt="certificate action icon"

@@ -49,6 +49,12 @@
   }
 }
 
+@media (max-width: 1000px) {
+  .home__reviews_section {
+    margin-top: 140px;
+  }
+}
+
 @media (max-width: 768px) {
   .home__reviews_section {
     padding: 0 28px 180px 28px;
@@ -65,6 +71,10 @@
 }
 
 @media (max-width: 600px) {
+  .home__reviews_section {
+    margin-top: 70px;
+  }
+
   .home__reviews_button {
     width: 100%;
     padding: 18px 0;

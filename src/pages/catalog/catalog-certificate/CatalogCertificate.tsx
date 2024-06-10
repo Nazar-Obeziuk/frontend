@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CatalogCertificate.module.css";
 import CatalogCertificateGift from "./components/catalog-certificate-gift/CatalogCertificateGift";
 import CatalogCertificateAbout from "./components/catalog-certificate-about/CatalogCertificateAbout";
 
 const CatalogCertificate: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<"about" | "reviews">("about");
+
   return (
     <section className={styles.catalog__certificate_section}>
       <div className={styles.container}>
@@ -36,13 +38,24 @@ const CatalogCertificate: React.FC = () => {
             <div className={styles.catalog__main_info}>
               <div className={styles.catalog__info_tabs}>
                 <span
-                  className={`${styles.catalog__tabs_item} ${styles.active}`}
+                  className={`${styles.catalog__tabs_item} ${
+                    activeTab === "about" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveTab("about")}
                 >
                   Про товар
                 </span>
-                <span className={styles.catalog__tabs_item}>Відгуки (0)</span>
+                <span
+                  className={`${styles.catalog__tabs_item} ${
+                    activeTab === "reviews" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveTab("reviews")}
+                >
+                  Відгуки (0)
+                </span>
               </div>
-              <CatalogCertificateAbout />
+              {activeTab === "about" && <CatalogCertificateAbout />}
+              {activeTab === "reviews" && <CatalogCertificateAbout />}
             </div>
           </div>
         </div>

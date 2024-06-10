@@ -1,0 +1,23 @@
+.catalog__info_about {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.catalog__about_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+.catalog__text_primary {
+  color: var(--primary);
+}
+
+@media (max-width: 600px) {
+  .catalog__about_text {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
