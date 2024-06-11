@@ -76,11 +76,11 @@
 
 @media (max-width: 1200px) {
   .client__individual_section {
-    padding: 20px 28px 70px 28px;
+    padding: 20px 15px 70px 15px;
   }
 
   .client__orthopedic_section {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
 }
 
@@ -107,11 +107,11 @@
 
 @media (max-width: 600px) {
   .client__individual_section {
-    padding: 40px 28px 70px 28px;
+    padding: 40px 15px 70px 15px;
   }
 
   .client__orthopedic_section {
-    padding: 0 28px 140px 28px;
+    padding: 0 15px 140px 15px;
   }
 
   .client__individual_section {

@@ -120,15 +120,15 @@
   }
 
   .home__reviews_content {
-    padding: 0;
+    padding: 0 18px;
   }
 
   .arrow__slide_right {
-    right: -20px !important;
+    right: -4px !important;
   }
 
   .arrow__slide_left {
-    left: -20px !important;
+    left: -4px !important;
   }
 
   .arrow__slide_right svg,

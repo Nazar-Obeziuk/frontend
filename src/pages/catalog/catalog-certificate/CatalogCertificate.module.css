@@ -73,7 +73,7 @@
 
 @media (max-width: 1200px) {
   .catalog__certificate_section {
-    padding: 20px 28px 240px 28px;
+    padding: 20px 15px 240px 15px;
   }
 }
 
@@ -97,7 +97,7 @@
 
   .catalog__certificate_section {
     background-image: none;
-    padding: 20px 28px 200px 28px;
+    padding: 20px 15px 200px 15px;
   }
 
   .catalog__wrapper_route {
@@ -105,7 +105,7 @@
   }
 
   .catalog__tabs_item {
-    padding-right: 20px;
+    padding-right: 0;
     padding-bottom: 10px;
     font-size: 15px;
   }

@@ -36,10 +36,10 @@
 
 @media (max-width: 1200px) {
   .home__workers_section {
-    padding: 0 28px 60px 28px;
+    padding: 0 15px 60px 15px;
   }
   .home__workers_box {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
 }
 
@@ -50,7 +50,7 @@
   }
 
   .home__workers_section {
-    padding: 0 28px 60px 28px;
+    padding: 0 15px 60px 15px;
   }
   .home__workers_box {
     padding: 0;
@@ -59,7 +59,7 @@
 
 @media (max-width: 768px) {
   .home__workers_section {
-    padding: 0 28px 30px 28px;
+    padding: 0 15px 30px 15px;
   }
 
   .home__workers_title {
@@ -73,12 +73,6 @@
     gap: 30px;
   }
 }
-
-/* @media (max-width: 600px) and (min-width: 500px) {
-  .home__workers_box {
-    gap: 120px;
-  }
-} */
 
 @media (max-width: 560px) {
   .home__workers_title {

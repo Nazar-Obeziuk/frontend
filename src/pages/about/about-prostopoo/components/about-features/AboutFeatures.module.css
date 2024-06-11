@@ -68,7 +68,7 @@
 
 @media (max-width: 1200px) {
   .about__features_section {
-    padding: 0 28px 20px 28px;
+    padding: 0 15px 20px 15px;
   }
 }
 
@@ -90,7 +90,7 @@
   }
 
   .about__features_section {
-    padding: 0 28px;
+    padding: 0 15px;
   }
 
   .about__item_text {

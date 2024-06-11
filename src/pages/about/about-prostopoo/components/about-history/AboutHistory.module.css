@@ -114,7 +114,7 @@
 
 @media (max-width: 1200px) {
   .about__history_section {
-    padding: 140px 28px 0 28px;
+    padding: 140px 15px 0 15px;
     margin-bottom: 240px;
   }
 }
@@ -162,7 +162,7 @@
 @media (max-width: 600px) {
   .about__history_section {
     background-position-y: 0;
-    padding: 40px 28px 0 28px;
+    padding: 40px 15px 0 15px;
     margin-bottom: 70px;
   }
 

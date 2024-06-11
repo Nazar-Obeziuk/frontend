@@ -159,10 +159,10 @@
 
 @media (max-width: 1200px) {
   .order__make_section {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
   .order__first_section {
-    padding: 20px 28px 30px 28px;
+    padding: 20px 15px 30px 15px;
   }
 }
 

@@ -94,12 +94,6 @@
   grid-column-start: 3;
   grid-column-end: 4;
 }
-.home__steps_fourth {
-}
-.home__steps_fifth {
-}
-.home__steps_sixth {
-}
 .home__steps_actions {
   width: 100%;
   display: flex;
@@ -146,7 +140,7 @@
 
 @media (max-width: 1200px) {
   .home__steps_section {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
 
   .home__info_text {

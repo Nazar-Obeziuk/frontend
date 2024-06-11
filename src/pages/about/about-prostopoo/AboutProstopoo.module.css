@@ -62,17 +62,17 @@
 
 @media (max-width: 1200px) {
   .about__prostopoo_section {
-    padding: 20px 28px;
+    padding: 20px 15px;
   }
 
   .about__prostopoo_footer {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
 }
 
 @media (max-width: 768px) {
   .about__prostopoo_footer {
-    padding: 0 28px 160px 28px;
+    padding: 0 15px 160px 15px;
   }
 
   .about__footer_title {

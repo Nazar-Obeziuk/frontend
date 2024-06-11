@@ -45,7 +45,7 @@
 
 @media (max-width: 1200px) {
   .home__reviews_section {
-    padding: 0 28px 220px 28px;
+    padding: 0 15px 220px 15px;
   }
 }
 
@@ -57,7 +57,7 @@
 
 @media (max-width: 768px) {
   .home__reviews_section {
-    padding: 0 28px 180px 28px;
+    padding: 0 15px 180px 15px;
   }
 
   .home__reviews_button {

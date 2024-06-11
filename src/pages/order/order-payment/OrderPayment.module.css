@@ -61,8 +61,6 @@
   align-items: center;
   gap: 34px;
 }
-.order__block_image {
-}
 .order__block_info {
   display: flex;
   flex-direction: column;
@@ -107,13 +105,13 @@
 
 @media (max-width: 1200px) {
   .order__payment_section {
-    padding: 20px 28px 0 28px;
+    padding: 20px 15px 0 15px;
   }
 }
 
 @media (max-width: 600px) {
   .order__payment_section {
-    padding: 20px 28px 0 28px;
+    padding: 20px 15px 0 15px;
     background-image: none;
     margin-bottom: 140px;
   }

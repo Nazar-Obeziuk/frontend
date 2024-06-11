@@ -207,11 +207,11 @@
 
 @media (max-width: 1200px) {
   .client__recommendation_section {
-    padding: 20px 28px;
+    padding: 20px 15px;
   }
 
   .client__main_section {
-    padding: 20px 28px 200px 28px;
+    padding: 20px 15px 200px 15px;
   }
 }
 
@@ -230,6 +230,10 @@
 @media (max-width: 600px) {
   .client__recommendation_wrapper {
     gap: 50px;
+  }
+
+  .client__banners_item {
+    max-width: 80px;
   }
 
   .client__recommendation_route {

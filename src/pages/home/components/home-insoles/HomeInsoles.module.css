@@ -16,18 +16,18 @@
 
 @media (max-width: 1200px) {
   .home__insoles_section {
-    padding: 0 28px 240px 28px;
+    padding: 0 15px 240px 15px;
   }
 }
 
 @media (max-width: 1000px) {
   .home__insoles_section {
-    padding: 0 28px 200px 28px;
+    padding: 0 15px 200px 15px;
   }
 }
 
 @media (max-width: 768px) {
   .home__insoles_section {
-    padding: 0 28px 70px 28px;
+    padding: 0 15px 70px 15px;
   }
 }

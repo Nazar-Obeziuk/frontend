@@ -56,13 +56,13 @@
 
 @media (max-width: 1200px) {
   .about__goal_section {
-    padding: 200px 28px;
+    padding: 200px 15px;
   }
 }
 
 @media (max-width: 1000px) {
   .about__goal_section {
-    padding: 140px 28px;
+    padding: 140px 15px;
     background-image: none;
   }
 
@@ -78,13 +78,13 @@
 
 @media (max-width: 768px) {
   .about__goal_section {
-    padding: 100px 28px;
+    padding: 100px 15px;
   }
 }
 
 @media (max-width: 600px) {
   .about__goal_section {
-    padding: 70px 28px;
+    padding: 70px 15px;
   }
 
   .about__goal_wrapper {

@@ -123,7 +123,7 @@
 
 @media (max-width: 1280px) {
   .home__made_section {
-    padding: 100px 28px 200px 28px;
+    padding: 100px 15px 200px 15px;
   }
 }
 
@@ -161,7 +161,7 @@
   }
 
   .home__made_section {
-    padding: 100px 28px 140px 28px;
+    padding: 100px 15px 140px 15px;
   }
 
   .home__info_title {
@@ -179,7 +179,7 @@
 
 @media (max-width: 768px) {
   .home__made_section {
-    padding: 40px 28px 70px 28px;
+    padding: 40px 15px 70px 15px;
     background-image: none;
   }
 
@@ -189,7 +189,7 @@
   }
 
   .home__insoles_banner {
-    height: 360px;
+    width: 100%;
   }
 
   .home__info_title {
@@ -206,6 +206,7 @@
   }
 
   .home__made_insoles {
+    width: 100%;
     background-image: url("../../../../../public/images/home-made-bg.png");
     background-repeat: no-repeat;
     background-position: center center;

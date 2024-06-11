@@ -81,8 +81,6 @@
   font-weight: 600;
   color: var(--white);
 }
-.order__main_text {
-}
 .order__text_link {
   font-family: "Fixel-Display";
   font-size: 18px;
@@ -108,13 +106,13 @@
 
 @media (max-width: 1200px) {
   .order__delivery_section {
-    padding: 20px 28px 0 28px;
+    padding: 20px 15px 0 15px;
   }
 }
 
 @media (max-width: 600px) {
   .order__delivery_section {
-    padding: 20px 28px 0 28px;
+    padding: 20px 15px 0 15px;
     background-image: none;
     margin-bottom: 140px;
   }
