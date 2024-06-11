@@ -26,7 +26,7 @@ const clientNeedsIndividualData = [
   {
     id: 5,
     image_url: "../../images/old-icon.svg",
-    insole_description_ua: "Для людей похилого віку",
+    insole_description_ua: "Для людей літнього віку",
     insole_description_en: "By the elderly",
   },
   {

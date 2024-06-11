@@ -161,14 +161,19 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                 <div className={styles.home__content_mobile}>
                   <Swiper
                     direction={"vertical"}
-                    spaceBetween={32}
+                    spaceBetween={10}
                     slidesPerView={3}
+                    breakpoints={{
+                      768: {
+                        spaceBetween: 32,
+                      },
+                    }}
                     navigation={{
                       nextEl: `.arrow-right-workers-${worker.id}`,
                       prevEl: `.arrow-left-workers-${worker.id}`,
                     }}
                     modules={[Navigation]}
-                    className={`workerSwiper-${worker.id}`}
+                    className={`worker-slider workerSwiper-${worker.id}`}
                   >
                     {worker.worker_slider_images.map((workerSlideImage) => (
                       <SwiperSlide>
@@ -183,6 +188,43 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     ))}
                   </Swiper>
                 </div>
+
+                <span
+                  onClick={() => swiper && swiper.slidePrev()}
+                  className={`arrow-left-workers-${worker.id} ${styles.arrow__slide_left} arrow-workers`}
+                >
+                  <svg
+                    width="22"
+                    height="35"
+                    viewBox="0 0 22 35"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19.4434 33L3.88725 17.4434L19.4434 1.8873"
+                      stroke="#FFED00"
+                      strokeWidth="4"
+                    />
+                  </svg>
+                </span>
+                <span
+                  onClick={() => swiper && swiper.slideNext()}
+                  className={`arrow-right-workers-${worker.id} ${styles.arrow__slide_right} arrow-workers`}
+                >
+                  <svg
+                    width="20"
+                    height="35"
+                    viewBox="0 0 20 35"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1.55615 2L17.1123 17.5566L1.55615 33.1127"
+                      stroke="#FFED00"
+                      strokeWidth="4"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
           </div>

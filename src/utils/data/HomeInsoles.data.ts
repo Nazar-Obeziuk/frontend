@@ -26,7 +26,7 @@ const homeInsolesNeeds = [
   {
     id: 5,
     image_url: "../../images/old-icon.svg",
-    insole_description_ua: "Людям похилого віку",
+    insole_description_ua: "Людям літнього віку",
     insole_description_en: "Elderly people",
   },
   {

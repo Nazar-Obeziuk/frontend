@@ -50,7 +50,7 @@
   }
 
   .home__workers_section {
-    padding: 0;
+    padding: 0 28px 60px 28px;
   }
   .home__workers_box {
     padding: 0;
@@ -68,8 +68,17 @@
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 600px) {
+  .home__workers_box {
+    gap: 30px;
+  }
 }
+
+/* @media (max-width: 600px) and (min-width: 500px) {
+  .home__workers_box {
+    gap: 120px;
+  }
+} */
 
 @media (max-width: 560px) {
   .home__workers_title {
