@@ -24,6 +24,12 @@
   align-items: center;
   gap: 10px;
 }
+.about__router_icon:hover {
+  cursor: pointer;
+}
+.about__router_icon:hover path {
+  stroke: var(--primary);
+}
 .about__router_name {
   font-family: "Fixel-Display";
   font-size: 12px;
@@ -31,6 +37,10 @@
   line-height: 12px;
   color: var(--primary);
   margin-top: 4px;
+  cursor: pointer;
+}
+.about__router_name:hover {
+  color: var(--primary);
 }
 .about__wrapper_title {
   font-family: "Fixel-Display";

@@ -1,0 +1,91 @@
+.review__list_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.review__list_item:last-child {
+  border-bottom: none;
+}
+.review__item_header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.review__header_stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.review__header_info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review__info_name {
+  font-family: "Fixel-Display";
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--white);
+}
+.review__info_date {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.review__item_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.review__item_inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.review__inner_title {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.review__inner_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .review__block_item,
+  .review__item_main {
+    gap: 15px;
+  }
+
+  .review__item_inner {
+    gap: 5px;
+  }
+
+  .review__inner_title,
+  .review__inner_text,
+  .review__info_name,
+  .review__info_date {
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .review__inner_text {
+    line-height: 20px;
+  }
+}

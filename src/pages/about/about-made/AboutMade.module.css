@@ -26,9 +26,11 @@
   align-items: center;
   gap: 10px;
 }
-.about__router_icon {
+.about__router_icon:hover {
+  cursor: pointer;
 }
-.about__router_arrow {
+.about__router_icon:hover path {
+  stroke: var(--primary);
 }
 .about__router_name {
   font-family: "Fixel-Display";
@@ -36,7 +38,11 @@
   font-weight: 400;
   line-height: 12px;
   color: var(--white);
-  margin-top: 4px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.about__router_name:hover {
+  color: var(--primary);
 }
 .about__router_active {
   color: var(--primary);

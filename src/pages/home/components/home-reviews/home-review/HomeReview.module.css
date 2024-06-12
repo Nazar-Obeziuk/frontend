@@ -4,7 +4,6 @@
 :root {
   --swiper-theme-color: var(--primary);
 }
-
 .home__reviews_item {
   border-radius: 12px;
   background: var(--dark-gray);
@@ -22,8 +21,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-}
-.home__star_icon {
 }
 .home__reviews_title {
   font-family: "Fixel-Display";

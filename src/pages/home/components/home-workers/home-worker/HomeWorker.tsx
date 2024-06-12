@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
+import { workerData } from "worker_threads";
 
 interface WorkerProps {
   worker: IWorker;
@@ -51,6 +52,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
               <div className={styles.home__info_galery}>
                 <div className={styles.home__galery_content}>
                   <Swiper
+                    key={"uniq1"}
                     spaceBetween={32}
                     slidesPerView={3}
                     navigation={{
@@ -61,7 +63,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     className={`workerSwiper-${worker.id}`}
                   >
                     {worker.worker_slider_images.map((workerSlideImage) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={workerSlideImage}>
                         <div className={styles.home__slider_card}>
                           <img
                             className={styles.home__slider_image}
@@ -160,6 +162,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
               <div className={styles.home__galery_mobile}>
                 <div className={styles.home__content_mobile}>
                   <Swiper
+                    key={"uniq2"}
                     direction={"vertical"}
                     spaceBetween={10}
                     slidesPerView={3}
@@ -176,7 +179,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     className={`worker-slider workerSwiper-${worker.id}`}
                   >
                     {worker.worker_slider_images.map((workerSlideImage) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={workerSlideImage}>
                         <div className={styles.home__card_mobile}>
                           <img
                             className={styles.home__image_mobile}

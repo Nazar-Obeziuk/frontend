@@ -32,15 +32,11 @@ const Header = () => {
             <nav className={styles.header__wrapper_nav}>
               <ul className={styles.header__nav_list}>
                 <li className={styles.header__list_item}>
-                  <NavLink
-                    style={({ isActive }) =>
-                      isActive ? activeHeaderItem : undefined
-                    }
-                    to={"/home/prostopoo/about"}
+                  <p
                     className={`${styles.header__item_link} ${styles.header__link_about}`}
                   >
                     ПРО PROSTOPOO
-                  </NavLink>
+                  </p>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_about}`}
                   >
@@ -113,15 +109,11 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <NavLink
-                    style={({ isActive }) =>
-                      isActive ? activeHeaderItem : undefined
-                    }
-                    to={"/home/client/who-need-individual-orthopedic-insoles"}
+                  <p
                     className={`${styles.header__item_link} ${styles.header__link_client}`}
                   >
                     Клієнтам
-                  </NavLink>
+                  </p>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_client}`}
                   >
@@ -152,15 +144,11 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <NavLink
-                    style={({ isActive }) =>
-                      isActive ? activeHeaderItem : undefined
-                    }
-                    to={"/home/order/how-to-make-a-order"}
+                  <p
                     className={`${styles.header__item_link} ${styles.header__link_order}`}
                   >
                     Як замовити
-                  </NavLink>
+                  </p>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_order}`}
                   >
@@ -200,15 +188,11 @@ const Header = () => {
                   </ul>
                 </li>
                 <li className={styles.header__list_item}>
-                  <NavLink
-                    style={({ isActive }) =>
-                      isActive ? activeHeaderItem : undefined
-                    }
-                    to={"/home/catalog/individual-orthopedic-insoles"}
+                  <p
                     className={`${styles.header__item_link} ${styles.header__link_catalog}`}
                   >
                     Каталог
-                  </NavLink>
+                  </p>
                   <ul
                     className={`${styles.header__item_list} ${styles.header__item_catalog}`}
                   >

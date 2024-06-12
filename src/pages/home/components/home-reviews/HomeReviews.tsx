@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HomeReview from "./home-review/HomeReview";
 import styles from "./HomeReviews.module.css";
-import { getAllReviews } from "../../../../services/reviews/reviewsService";
 
 const HomeReviews: React.FC = () => {
   return (
@@ -9,7 +8,7 @@ const HomeReviews: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.home__reviews_wrapper}>
           <div className={styles.home__reviews_main}>
-            <HomeReview />
+            <HomeReview key={"uniq1"} />
           </div>
           <button className={styles.home__reviews_button} type="button">
             ЗАМОВИТИ ІНДИВІДУАЛЬНІ УСТІЛКИ

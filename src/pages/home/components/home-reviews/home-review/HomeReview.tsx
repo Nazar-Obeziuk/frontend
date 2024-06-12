@@ -25,6 +25,7 @@ const HomeReview: React.FC = () => {
     <>
       <div className={styles.home__reviews_content}>
         <Swiper
+          key={"uniq1"}
           slidesPerView={1}
           spaceBetween={20}
           navigation={{
@@ -56,12 +57,13 @@ const HomeReview: React.FC = () => {
             }
 
             return (
-              <SwiperSlide>
+              <SwiperSlide key={review.id}>
                 <div className={styles.home__reviews_item}>
                   <div className={styles.home__reviews_header}>
                     <span className={styles.home__reviews_stars}>
-                      {reviewStars.map(() => (
+                      {reviewStars.map((reviewStar) => (
                         <img
+                          key={reviewStar}
                           src="./images/review-star.svg"
                           alt="review star"
                           className={styles.home__star_icon}

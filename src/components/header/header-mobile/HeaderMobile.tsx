@@ -74,13 +74,11 @@ const HeaderMobile = () => {
         <nav className={styles.header__mobile_nav}>
           <ul className={styles.header__nav_list}>
             <li className={styles.header__list_item}>
-              <NavLink
-                to={"/home/prostopoo"}
-                onClick={handleBurgerMenu}
+              <p
                 className={`${styles.header__item_link} ${styles.header__link_about}`}
               >
                 ПРО PROSTOPOO
-              </NavLink>
+              </p>
               <ul
                 className={`${styles.header__item_list} ${styles.header__item_about}`}
               >
@@ -159,13 +157,11 @@ const HeaderMobile = () => {
               </ul>
             </li>
             <li className={styles.header__list_item}>
-              <NavLink
-                onClick={handleBurgerMenu}
-                to={"/home/client/who-need-individual-orthopedic-insoles"}
+              <p
                 className={`${styles.header__item_link} ${styles.header__link_client}`}
               >
                 Клієнтам
-              </NavLink>
+              </p>
               <ul
                 className={`${styles.header__item_list} ${styles.header__item_client}`}
               >
@@ -196,13 +192,11 @@ const HeaderMobile = () => {
               </ul>
             </li>
             <li className={styles.header__list_item}>
-              <NavLink
-                onClick={handleBurgerMenu}
-                to={"/home/order/how-to-make-a-order"}
+              <p
                 className={`${styles.header__item_link} ${styles.header__link_order}`}
               >
                 Як замовити
-              </NavLink>
+              </p>
               <ul
                 className={`${styles.header__item_list} ${styles.header__item_order}`}
               >
@@ -245,13 +239,11 @@ const HeaderMobile = () => {
               </ul>
             </li>
             <li className={styles.header__list_item}>
-              <NavLink
-                onClick={handleBurgerMenu}
-                to={"/home/catalog/individual-orthopedic-insoles"}
+              <p
                 className={`${styles.header__item_link} ${styles.header__link_catalog}`}
               >
                 Каталог
-              </NavLink>
+              </p>
               <ul
                 className={`${styles.header__item_list} ${styles.header__item_catalog}`}
               >

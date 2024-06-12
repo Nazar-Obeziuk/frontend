@@ -32,13 +32,23 @@
   gap: 10px;
   margin-bottom: 10px;
 }
+.client__router_icon:hover {
+  cursor: pointer;
+}
+.client__router_icon:hover path {
+  stroke: var(--primary);
+}
 .client__router_name {
   font-family: "Fixel-Display";
   font-size: 12px;
   font-weight: 400;
   line-height: 12px;
   color: var(--white);
-  margin-top: 4px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+.client__router_name:hover {
+  color: var(--primary);
 }
 .client__router_active {
   color: var(--primary);

@@ -170,7 +170,7 @@ const AboutMadeSlider: React.FC = () => {
           <path
             d="M19.4434 33L3.88725 17.4434L19.4434 1.8873"
             stroke="#FFED00"
-            stroke-width="4"
+            strokeWidth="4"
           />
         </svg>
       </span>
@@ -188,7 +188,7 @@ const AboutMadeSlider: React.FC = () => {
           <path
             d="M1.55615 2L17.1123 17.5566L1.55615 33.1127"
             stroke="#FFED00"
-            stroke-width="4"
+            strokeWidth="4"
           />
         </svg>
       </span>

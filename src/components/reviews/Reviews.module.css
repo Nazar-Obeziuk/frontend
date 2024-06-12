@@ -1,0 +1,96 @@
+.catalog__main_reviews {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.catalog__reviews_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.catalog__reviews_empty {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.catalog__empty_info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.catalog__info_icon {
+  width: 40px;
+  height: 40px;
+}
+.catalog__info_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.catalog__empty_button {
+  width: 304px;
+  background: transparent;
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  outline: none;
+  cursor: pointer;
+  padding: 16px 0;
+  font-size: 20px;
+  font-family: "Euclid";
+  font-weight: 400;
+  color: var(--primary);
+  transition: 0.4s;
+}
+.catalog__empty_button:hover {
+  background: var(--primary);
+  color: var(--black);
+}
+.catalog__full_button {
+  width: 304px;
+  background: transparent;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  cursor: pointer;
+  padding: 16px 0;
+  font-size: 20px;
+  font-family: "Euclid";
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  transition: 0.4s;
+}
+
+@media (max-width: 1000px) {
+  .catalog__reviews_empty {
+    width: 55%;
+  }
+}
+
+@media (max-width: 767px) {
+  .catalog__reviews_empty {
+    width: 65%;
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog__reviews_empty {
+    width: 100%;
+  }
+  .catalog__empty_button,
+  .catalog__full_button {
+    width: 100%;
+    padding: 12px;
+    font-weight: 300;
+    border-radius: 8px;
+  }
+
+  .catalog__info_text {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
