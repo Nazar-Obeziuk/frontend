@@ -155,7 +155,7 @@
   }
 
   .popup__review_wrapper {
-    padding: 20px;
+    padding: 22px 20px 20px 20px;
   }
 
   .popup__wrapper_close {
@@ -191,5 +191,10 @@
     padding: 0;
     margin-top: 30px;
     gap: 15px;
+  }
+
+  .popup__wrapper_close {
+    top: 26px;
+    right: 20px;
   }
 }
