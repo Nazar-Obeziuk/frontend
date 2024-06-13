@@ -1,12 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ReviewPopup.module.css";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 interface ReviewPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface FormValues {
+  name: string;
+  review: string;
+  pluses: string;
+  minuses: string;
+}
+
 const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    const formattedData = {
+      ...data,
+      review: data.review === "" ? null : data.review,
+      pluses: data.pluses === "" ? null : data.pluses,
+      minuses: data.minuses === "" ? null : data.minuses,
+    };
+
+    console.log(formattedData);
+    reset();
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -52,30 +91,46 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
               />
             </div>
           </div>
-          <div className={styles.popup__wrapper_form}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className={styles.popup__wrapper_form}
+          >
             <div className={styles.popup__form_fields}>
-              <input
-                type="text"
-                className={styles.popup__fields_input}
-                placeholder="Ваше ім’я"
-              />
+              <div className={styles.popup__fields_control}>
+                <input
+                  type="text"
+                  className={`${styles.popup__fields_input} ${
+                    errors.name ? styles.inputError : ""
+                  }`}
+                  placeholder="Ваше ім’я"
+                  {...register("name", { required: "Це поле обов'язкове" })}
+                />
+                {errors.name && (
+                  <p className={styles.popup__input_error}>
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
               <textarea
                 placeholder="Ваш відгук"
                 className={styles.popup__fields_textarea}
+                {...register("review")}
               ></textarea>
               <textarea
                 placeholder="Плюси"
                 className={styles.popup__fields_textarea}
+                {...register("pluses")}
               ></textarea>
               <textarea
                 placeholder="Мінуси"
                 className={styles.popup__fields_textarea}
+                {...register("minuses")}
               ></textarea>
             </div>
-            <button className={styles.popup__form_button} type="button">
+            <button className={styles.popup__form_button} type="submit">
               Залишити відгук
             </button>
-          </div>
+          </form>
           <p className={styles.popup__wrapper_info}>
             Відправляючи коментар / відгук на сайті ви погоджуєтеся з правилами
             модерації коментарів і відгуків

@@ -32,8 +32,19 @@
 .home__worker_section:nth-child(odd) .home__worker_wrapper {
   flex-direction: row;
 }
-
 .home__worker_section:nth-child(even) .home__worker_wrapper {
+  flex-direction: row-reverse;
+}
+.home__mobile_section:nth-child(odd) {
+  background-position: center left;
+}
+.home__mobile_section:nth-child(even) {
+  background-position: center right;
+}
+.home__mobile_section:nth-child(odd) .home__banners_mobile {
+  flex-direction: row;
+}
+.home__mobile_section:nth-child(even) .home__banners_mobile {
   flex-direction: row-reverse;
 }
 .home__worker_banner {
@@ -196,6 +207,7 @@
     width: 200px;
     display: flex;
     align-items: flex-end;
+    cursor: grab;
   }
 
   .arrow__slide_left {

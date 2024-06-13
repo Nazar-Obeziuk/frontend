@@ -32,11 +32,20 @@ const HomeMade: React.FC = () => {
             </button>
           </div>
           <div className={styles.home__made_insoles}>
-            <img
-              src="../images/home-insoles.png"
-              alt="home made banner"
+            <video
+              autoPlay={true}
+              muted={true}
+              loop={false}
+              playsInline={true}
+              controls={false}
               className={styles.home__insoles_banner}
-            />
+            >
+              <source
+                src="../../images/home-animation.webm"
+                type="video/webm"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
           <button className={styles.home__mobile_button} type="button">
             ЗАМОВИТИ УСТІЛКИ
