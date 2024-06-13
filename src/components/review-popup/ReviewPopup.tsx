@@ -1,15 +1,22 @@
 import React from "react";
 import styles from "./ReviewPopup.module.css";
 
-const ReviewPopup: React.FC = () => {
+interface ReviewPopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
   return (
     <>
-      <div className={styles.review__overlay}></div>
+      <div onClick={onClose} className={styles.review__overlay}></div>
       <div className={styles.popup__review}>
         <div className={styles.popup__review_wrapper}>
-          <span className={styles.popup__wrapper_close}>
+          <span onClick={onClose} className={styles.popup__wrapper_close}>
             <img
-              src=""
+              src="../../images/close-icon.svg"
               alt="popup close icon"
               className={styles.popup__close_icon}
             />
@@ -19,7 +26,27 @@ const ReviewPopup: React.FC = () => {
             <p className={styles.popup__rating_text}>Поставте оцінку</p>
             <div className={styles.popup__rating_stars}>
               <img
-                src=""
+                src="../../images/popup-star.svg"
+                alt="rating star"
+                className={styles.popup__stars_item}
+              />
+              <img
+                src="../../images/popup-star.svg"
+                alt="rating star"
+                className={styles.popup__stars_item}
+              />
+              <img
+                src="../../images/popup-star.svg"
+                alt="rating star"
+                className={styles.popup__stars_item}
+              />
+              <img
+                src="../../images/popup-star.svg"
+                alt="rating star"
+                className={styles.popup__stars_item}
+              />
+              <img
+                src="../../images/popup-star.svg"
                 alt="rating star"
                 className={styles.popup__stars_item}
               />

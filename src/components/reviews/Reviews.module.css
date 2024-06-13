@@ -50,20 +50,6 @@
   background: var(--primary);
   color: var(--black);
 }
-.catalog__full_button {
-  width: 304px;
-  background: transparent;
-  border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  outline: none;
-  cursor: pointer;
-  padding: 16px 0;
-  font-size: 20px;
-  font-family: "Euclid";
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  transition: 0.4s;
-}
 
 @media (max-width: 1000px) {
   .catalog__reviews_empty {

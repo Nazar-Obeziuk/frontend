@@ -4,13 +4,12 @@ import ReviewItem from "./review-item/ReviewItem";
 import styles from "./Reviews.module.css";
 import { catalogCertificateReviews } from "../../utils/data/Reviews.data";
 
-const Reviews: React.FC = () => {
-  const [reviews, setReviews] = useState(catalogCertificateReviews);
+interface ReviewsProps {
+  onOpenReviewPopup: () => void;
+}
 
-  //   const getCatalogReviews = () => {
-  //       const reviewsData = catalogCertificateReviews;
-  //       setReviews(reviewsData);
-  //   }
+const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
+  const [reviews, setReviews] = useState(catalogCertificateReviews);
 
   return (
     <div className={styles.catalog__main_reviews}>
@@ -26,14 +25,22 @@ const Reviews: React.FC = () => {
               Відгуків про даний товар поки що немає. Залиште відгук першими.
             </p>
           </div>
-          <button className={styles.catalog__empty_button} type="button">
+          <button
+            onClick={onOpenReviewPopup}
+            className={styles.catalog__empty_button}
+            type="button"
+          >
             Залишити відгук
           </button>
         </div>
       )}
       {reviews.length !== 0 && (
         <>
-          <button className={styles.catalog__full_button} type="button">
+          <button
+            onClick={onOpenReviewPopup}
+            className={styles.catalog__empty_button}
+            type="button"
+          >
             Залишити відгук
           </button>
           <ul className={styles.catalog__reviews_list}>
