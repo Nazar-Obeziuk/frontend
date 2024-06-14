@@ -17,6 +17,10 @@ import OrderDelivery from "./pages/order/order-delivery/OrderDelivery";
 import CatalogIndividual from "./pages/catalog/catalog-individual/CatalogIndividual";
 import CatalogOrthopedic from "./pages/catalog/catalog-orthopedic/CatalogOrthopedic";
 import CatalogCertificate from "./pages/catalog/catalog-certificate/CatalogCertificate";
+import CatalogProduct from "./pages/catalog/catalog-product/CatalogProduct";
+import CartAbout from "./pages/cart/cart-about/CartAbout";
+import CartDelivery from "./pages/cart/cart-delivery/CartDelivery";
+import CartPayment from "./pages/cart/cart-payment/CartPayment";
 
 function App() {
   return (
@@ -67,8 +71,21 @@ function App() {
           element={<CatalogOrthopedic />}
         ></Route>
         <Route
+          path="/home/catalog/orthopedic-insoles/:id"
+          element={<CatalogProduct />}
+        ></Route>
+        <Route
           path="/home/catalog/gift-certificate-prostopoo"
           element={<CatalogCertificate />}
+        ></Route>
+        <Route path="/home/cart" element={<CartAbout />}></Route>
+        <Route
+          path="/home/cart/contacts-and-delivery"
+          element={<CartDelivery />}
+        ></Route>
+        <Route
+          path="/home/cart/contacts-and-delivery/payment"
+          element={<CartPayment />}
         ></Route>
       </Routes>
     </Layout>

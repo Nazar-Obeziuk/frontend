@@ -44,7 +44,7 @@
   padding: 0 26px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin-top: 40px;
 }
 .popup__rating_text {

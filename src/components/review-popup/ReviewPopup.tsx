@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ReviewPopup.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 
 interface ReviewPopupProps {
   isOpen: boolean;
@@ -15,6 +17,9 @@ interface FormValues {
 }
 
 const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
+  const defaultRatingValue = 4.5;
+  const [rating, setRating] = useState<number | null>(defaultRatingValue);
+
   const {
     register,
     handleSubmit,
@@ -28,10 +33,17 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
       review: data.review === "" ? null : data.review,
       pluses: data.pluses === "" ? null : data.pluses,
       minuses: data.minuses === "" ? null : data.minuses,
+      rating: rating,
     };
 
     console.log(formattedData);
+    resetForm();
+  };
+
+  const resetForm = () => {
     reset();
+    setRating(defaultRatingValue);
+    onClose();
   };
 
   useEffect(() => {
@@ -64,31 +76,17 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
           <div className={styles.popup__wrapper_rating}>
             <p className={styles.popup__rating_text}>Поставте оцінку</p>
             <div className={styles.popup__rating_stars}>
-              <img
-                src="../../images/popup-star.svg"
-                alt="rating star"
-                className={styles.popup__stars_item}
-              />
-              <img
-                src="../../images/popup-star.svg"
-                alt="rating star"
-                className={styles.popup__stars_item}
-              />
-              <img
-                src="../../images/popup-star.svg"
-                alt="rating star"
-                className={styles.popup__stars_item}
-              />
-              <img
-                src="../../images/popup-star.svg"
-                alt="rating star"
-                className={styles.popup__stars_item}
-              />
-              <img
-                src="../../images/popup-star.svg"
-                alt="rating star"
-                className={styles.popup__stars_item}
-              />
+              <Stack spacing={1}>
+                <Rating
+                  onChange={(event, newValue) => {
+                    setRating(newValue);
+                  }}
+                  name="user-rating"
+                  value={rating}
+                  defaultValue={defaultRatingValue}
+                  precision={0.5}
+                />
+              </Stack>
             </div>
           </div>
           <form

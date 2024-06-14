@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./ReviewItem.module.css";
-import { CertificateReview } from "../../../services/certificate-reviews/certificateReviews.interface";
+import { ICertificateReview } from "../../../services/certificate-reviews/certificateReviews.interface";
 
 interface IProps {
-  review: CertificateReview;
+  review: ICertificateReview;
 }
 
 const ReviewItem: React.FC<IProps> = ({ review }) => {

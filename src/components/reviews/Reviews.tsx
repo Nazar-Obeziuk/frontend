@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CertificateReview } from "../../services/certificate-reviews/certificateReviews.interface";
+import { ICertificateReview } from "../../services/certificate-reviews/certificateReviews.interface";
 import ReviewItem from "./review-item/ReviewItem";
 import styles from "./Reviews.module.css";
 import { catalogCertificateReviews } from "../../utils/data/Reviews.data";
@@ -44,7 +44,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
             Залишити відгук
           </button>
           <ul className={styles.catalog__reviews_list}>
-            {reviews.map((review: CertificateReview) => (
+            {reviews.map((review: ICertificateReview) => (
               <ReviewItem key={review.id} review={review} />
             ))}
           </ul>

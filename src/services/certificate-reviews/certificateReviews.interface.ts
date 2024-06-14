@@ -1,4 +1,4 @@
-export interface CertificateReview {
+export interface ICertificateReview {
   id: number;
   stars: number;
   author: string;

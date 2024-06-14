@@ -1,9 +1,9 @@
 import React from "react";
-import { OrthopedicInsoles } from "../../services/orthopedic-insoles/orthopedic-insoles.interface";
+import { IOrthopedicInsoles } from "../../services/orthopedic-insoles/orthopedic-insoles.interface";
 import styles from "./InsoleItem.module.css";
 
 interface InsoleItemProps {
-  insoleItem: OrthopedicInsoles;
+  insoleItem: IOrthopedicInsoles;
 }
 
 const InsoleItem: React.FC<InsoleItemProps> = ({ insoleItem }) => {

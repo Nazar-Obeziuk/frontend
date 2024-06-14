@@ -27,7 +27,7 @@ const HeaderMobile = () => {
   return (
     <React.Fragment>
       <div className={styles.header__wrapper_mobile}>
-        <span className={styles.header__actions_basket}>
+        <NavLink to={"/home/cart"} className={styles.header__actions_basket}>
           <svg
             width="23"
             height="20"
@@ -53,7 +53,7 @@ const HeaderMobile = () => {
               fill="#fff"
             />
           </svg>
-        </span>
+        </NavLink>
         <div
           onClick={handleBurgerMenu}
           className={`${styles.header__mobile_burger} ${

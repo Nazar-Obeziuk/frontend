@@ -268,7 +268,10 @@ const Header = () => {
                     />
                   </svg>
                 </span>
-                <span className={styles.header__actions_basket}>
+                <NavLink
+                  to={"/home/cart"}
+                  className={styles.header__actions_basket}
+                >
                   <svg
                     width="23"
                     height="20"
@@ -294,7 +297,7 @@ const Header = () => {
                       fill="#fff"
                     />
                   </svg>
-                </span>
+                </NavLink>
               </div>
               <div className={styles.header__info_languages}>
                 <span

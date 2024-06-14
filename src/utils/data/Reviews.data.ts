@@ -1,6 +1,6 @@
-import { CertificateReview } from "../../services/certificate-reviews/certificateReviews.interface";
+import { ICertificateReview } from "../../services/certificate-reviews/certificateReviews.interface";
 
-const catalogCertificateReviews: CertificateReview[] = [
+const catalogCertificateReviews: ICertificateReview[] = [
   {
     id: 1,
     stars: 5,

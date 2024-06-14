@@ -7,3 +7,12 @@
   height: 100%;
   width: 100%;
 }
+
+.css-1qqgbpl-MuiRating-root {
+  color: var(--primary) !important;
+  font-size: 2rem !important;
+}
+
+.css-1c99szj-MuiRating-icon {
+  color: var(--primary) !important;
+}

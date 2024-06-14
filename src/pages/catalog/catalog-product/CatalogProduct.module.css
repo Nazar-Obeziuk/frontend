@@ -1,0 +1,122 @@
+.catalog__product_section {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../public/images/catalog-orthopedic-bg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  padding: 20px 0 280px 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.catalog__product_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.catalog__wrapper_route {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.catalog__router_icon:hover {
+  cursor: pointer;
+}
+.catalog__router_icon:hover path {
+  stroke: var(--primary);
+}
+.catalog__router_name {
+  font-family: "Fixel-Display";
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--white);
+  margin-top: 2px;
+  cursor: pointer;
+}
+.catalog__router_name:hover {
+  color: var(--primary);
+}
+.catalog__router_active {
+  color: var(--primary);
+}
+.catalog__product_main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+.catalog__main_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.catalog__info_tabs {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+.catalog__tabs_item {
+  padding-right: 30px;
+  padding-bottom: 10px;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.catalog__tabs_item:nth-child(1) {
+  padding-left: 0;
+}
+.catalog__tabs_item.active {
+  color: var(--primary);
+  border-bottom-color: var(--white);
+}
+
+@media (max-width: 1200px) {
+  .catalog__product_section {
+    padding: 20px 15px 240px 15px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .catalog__info_tabs {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog__info_tabs {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog__info_tabs {
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .catalog__product_section {
+    background-image: none;
+    padding: 20px 15px 200px 15px;
+  }
+
+  .catalog__wrapper_route {
+    display: none;
+  }
+
+  .catalog__tabs_item {
+    padding-right: 0;
+    padding-bottom: 10px;
+    font-size: 15px;
+  }
+}
