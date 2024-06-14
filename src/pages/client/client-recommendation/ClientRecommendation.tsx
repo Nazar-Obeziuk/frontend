@@ -118,18 +118,6 @@ const ClientRecommendation: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                {/* <div className={styles.client__galery_count}>
-                  <div className={styles.client__count_line}></div>
-                  
-                  <div className={styles.client__count_line}></div>
-                </div>
-                <div className={styles.client__galery_info}>
-                  
-                  <p className={styles.client__info_text}>
-                    Розмістіть устілку
-                    <span className={styles.client__text_bold}>Prostopoo</span>
-                  </p>
-                </div> */}
               </div>
             </div>
             <div className={styles.client__wrapper_main}>
