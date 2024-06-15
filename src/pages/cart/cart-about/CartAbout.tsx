@@ -1,9 +1,15 @@
 import React from "react";
 import styles from "./CartAbout.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CartProductItem from "./components/cart-product-item/CartProductItem";
 
 const CartAbout: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleCartNextStep = () => {
+    navigate("/home/cart/contacts-and-delivery");
+  };
+
   return (
     <section className={styles.cart__section}>
       <div className={styles.container}>
@@ -85,7 +91,11 @@ const CartAbout: React.FC = () => {
                 <p className={styles.cart__continue_text}>Загальна сума: </p>
                 <span className={styles.cart__continue_price}>1998 грн</span>
               </div>
-              <button className={styles.cart__continue_button} type="button">
+              <button
+                onClick={handleCartNextStep}
+                className={styles.cart__continue_button}
+                type="button"
+              >
                 ПРОДОВЖИТИ
               </button>
             </div>

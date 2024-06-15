@@ -186,12 +186,15 @@
 
   .popup__form_button {
     width: 100%;
+    padding: 10px 0;
   }
 }
 
 @media (max-width: 600px) {
   .popup__review {
-    width: calc(100% - 30px);
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
   }
 
   .popup__wrapper_title {
@@ -209,5 +212,9 @@
   .popup__wrapper_close {
     top: 26px;
     right: 20px;
+  }
+
+  .popup__fields_textarea {
+    height: 80px;
   }
 }

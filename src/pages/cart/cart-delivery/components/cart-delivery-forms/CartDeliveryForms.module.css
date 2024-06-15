@@ -1,0 +1,122 @@
+.cart__main_forms {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+.cart__forms_block {
+  width: 50%;
+  background: var(--dark-gray);
+  border-radius: 12px;
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.cart__forms_title {
+  padding-left: 26px;
+  font-family: "Fixel-Display";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--white);
+}
+.cart__form_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cart__item_control {
+  position: relative;
+}
+.cart__control_star {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--primary);
+}
+.cart__forms_field {
+  width: 100%;
+  border: 1px solid var(--white);
+  border-radius: 12px;
+  padding: 16px 26px 14px 26px;
+  background: transparent;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+.cart__forms_field::placeholder {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.cart__item_textarea {
+  width: 100%;
+  height: 52px;
+  border: 1px solid var(--white);
+  border-radius: 12px;
+  padding: 15px 26px;
+  background: transparent;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+  outline: none;
+  resize: none;
+}
+.cart__item_textarea::placeholder {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .cart__main_forms {
+    flex-direction: column;
+  }
+
+  .cart__forms_block {
+    width: 100%;
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart__forms_field,
+  .cart__forms_field::placeholder,
+  .cart__item_textarea,
+  .cart__item_textarea::placeholder,
+  .cart__control_star {
+    font-size: 15px;
+  }
+
+  .cart__control_star {
+    top: 14px;
+  }
+
+  .cart__forms_title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .cart__forms_block {
+    gap: 26px;
+  }
+
+  .cart__form_item {
+    gap: 25px;
+  }
+}
