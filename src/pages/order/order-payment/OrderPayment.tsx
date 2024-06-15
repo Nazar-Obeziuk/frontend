@@ -56,17 +56,17 @@ const OrderPayment: React.FC = () => {
                 </p>
                 <div className={styles.order__main_payments}>
                   <img
-                    src="../../images/order-p-24-icon.svg"
+                    src="../../images/privat-24-icon.svg"
                     alt="payment icon"
                     className={styles.order__payments_icon}
                   />
                   <img
-                    src="../../images/order-apple-pay-icon.svg"
+                    src="../../images/apple-pay-icon.svg"
                     alt="payment icon"
                     className={styles.order__payments_icon}
                   />
                   <img
-                    src="../../images/order-mono-pay-icon.svg"
+                    src="../../images/mono-pay-icon.svg"
                     alt="payment icon"
                     className={styles.order__payments_icon}
                   />

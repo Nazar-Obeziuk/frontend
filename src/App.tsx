@@ -83,10 +83,7 @@ function App() {
           path="/home/cart/contacts-and-delivery"
           element={<CartDelivery />}
         ></Route>
-        <Route
-          path="/home/cart/contacts-and-delivery/payment"
-          element={<CartPayment />}
-        ></Route>
+        <Route path="/home/cart/payment" element={<CartPayment />}></Route>
       </Routes>
     </Layout>
   );

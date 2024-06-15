@@ -7,7 +7,7 @@ const CartDelivery: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCartNextStep = () => {
-    navigate("/home/cart/contacts-and-delivery");
+    navigate("/home/cart/payment");
   };
 
   return (

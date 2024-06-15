@@ -1,0 +1,164 @@
+.cart__main_way {
+  width: calc(40% - 15px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cart__way_block {
+  width: 100%;
+  background: var(--dark-gray);
+  border-radius: 12px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.cart__block_payments {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+.cart__payments_title {
+  padding-left: 22px;
+  font-family: "Fixel-Display";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--white);
+}
+.cart__payments_banks {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 30px;
+  column-gap: 30px;
+}
+.cart__banks_item {
+  width: calc(50% - 15px);
+  height: 96px;
+  border: 1px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.cart__banks_item.active {
+  border-color: var(--primary);
+}
+.cart__block_info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.cart__info_title {
+  font-family: "Fixel-Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--primary);
+}
+.cart__info_text {
+  font-family: "Fixel-Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--white);
+}
+.cart__text_gray {
+  color: rgba(255, 255, 255, 0.7);
+}
+.cart__way_pib {
+  padding: 0 30px;
+}
+.cart__pib_text {
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--primary);
+}
+
+@media (max-width: 1100px) {
+  .cart__main_way {
+    width: calc(50% - 15px);
+  }
+}
+
+@media (max-width: 900px) {
+  .cart__main_way {
+    width: 100%;
+  }
+
+  .cart__banks_item {
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart__banks_item {
+    height: 96px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cart__banks_item {
+    height: 82px;
+  }
+
+  .cart__payments_banks {
+    row-gap: 14px;
+    column-gap: 14px;
+  }
+
+  .cart__banks_item {
+    width: calc(50% - 7px);
+    padding: 18px 20px;
+  }
+
+  .cart__item_icon {
+    max-width: 92px;
+  }
+
+  .cart__main_way {
+    gap: 15px;
+  }
+
+  .cart__block_payments {
+    gap: 25px;
+  }
+
+  .cart__block_info {
+    gap: 10px;
+  }
+
+  .cart__payments_title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .cart__info_title {
+    font-size: 15px;
+  }
+
+  .cart__info_text,
+  .cart__text_gray {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .cart__way_block {
+    padding: 30px 15px 15px 15px;
+    gap: 15px;
+  }
+
+  .cart__way_pib {
+    padding: 0 0 0 15px;
+  }
+
+  .cart__pib_text {
+    font-size: 15px;
+    line-height: 18px;
+  }
+}
