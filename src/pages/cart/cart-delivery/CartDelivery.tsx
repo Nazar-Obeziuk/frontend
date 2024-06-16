@@ -94,7 +94,10 @@ const CartDelivery: React.FC = () => {
                 Поля із <span className={styles.cart__text_primary}>*</span>{" "}
                 обов’язкові для заповнення
               </p>
-              <CartDeliveryForms key={"uniq1"} />
+              <CartDeliveryForms
+                onSubmitFormsData={handleCartNextStep}
+                key={"uniq1"}
+              />
             </div>
             <div className={styles.cart__main_footer}>
               <div className={styles.cart__footer_required}>

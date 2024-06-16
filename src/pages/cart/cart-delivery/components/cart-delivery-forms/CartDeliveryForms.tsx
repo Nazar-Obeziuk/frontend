@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import styles from "./CartDeliveryForms.module.css";
-import { useMask } from "@react-input/mask";
+import { InputMask, useMask } from "@react-input/mask";
+import { useForm } from "react-hook-form";
 
-const CartDeliveryForms: React.FC = () => {
+interface Props {
+  onSubmitFormsData: () => void;
+}
+
+interface FormValues {
+  fullName: string;
+  phone: string;
+  city: string;
+  department: string;
+}
+
+const CartDeliveryForms: React.FC<Props> = ({ onSubmitFormsData }) => {
   const [inputValue, setInputValue] = useState("");
-  const inputRef = useMask({
-    mask: "+38 (0__) ___-__-__",
-    replacement: { _: /\d/ },
-  });
+  // const inputRef = useMask({
+  //   mask: "+38 (0__) ___-__-__",
+  //   replacement: { _: /\d/ },
+  // });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  // const onSubmitFormsData = () => {}
 
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
@@ -24,14 +44,17 @@ const CartDeliveryForms: React.FC = () => {
               type="text"
               className={styles.cart__forms_field}
               placeholder="Прізвище та ім’я"
+              {...register("fullName", { required: "Це поле обов'язкове" })}
             />
           </div>
           <div className={styles.cart__item_control}>
             <span className={styles.cart__control_star}>*</span>
-            <input
-              ref={inputRef}
+            <InputMask
+              mask="+38 (0__) ___-__-__"
+              replacement="{ _: /\d/ }"
               className={styles.cart__forms_field}
               placeholder="+38 (0__) ___-__-__"
+              {...register("phone", { required: "Це поле обов'язкове" })}
             />
           </div>
           <input
@@ -62,6 +85,7 @@ const CartDeliveryForms: React.FC = () => {
               type="text"
               className={styles.cart__forms_field}
               placeholder="Відділення / поштомат"
+              {...register("department", { required: "Це поле обов'язкове" })}
             />
           </div>
           <textarea
