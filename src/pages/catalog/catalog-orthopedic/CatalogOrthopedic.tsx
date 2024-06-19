@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogOrthopedic.module.css";
 import { NavLink } from "react-router-dom";
 import CatalogProductItem from "../../../components/catalog-product-item/CatalogProductItem";
-import { catalogProducts } from "../../../utils/data/CatalogProducts.data";
 import { ICatalogProductItem } from "../../../services/catalog-products/catalog-products.interface";
+import { getAllProducts } from "../../../services/catalog-products/catalogProductsService";
 
 const CatalogOrthopedic: React.FC = () => {
-  const [products, setProducts] = useState(catalogProducts);
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    const productsData = await getAllProducts();
+    setProducts(productsData);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   return (
     <section className={styles.catalog__orthopedic_section}>
@@ -42,7 +51,7 @@ const CatalogOrthopedic: React.FC = () => {
           </div>
           <div className={styles.catalog__wrapper_main}>
             {products.map((product: ICatalogProductItem) => (
-              <CatalogProductItem product={product} key={product.id} />
+              <CatalogProductItem product={product} key={product.product_id} />
             ))}
           </div>
         </div>

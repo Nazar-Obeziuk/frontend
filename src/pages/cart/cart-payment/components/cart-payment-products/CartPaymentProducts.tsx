@@ -8,7 +8,6 @@ const CartPaymentProducts: React.FC = () => {
       <div className={styles.cart__products_main}>
         <ul className={styles.cart__main_list}>
           <CartPaymentProductsItem key={"uniq1"} />
-          <CartPaymentProductsItem key={"uniq1"} />
         </ul>
       </div>
       <div className={styles.cart__products_price}>

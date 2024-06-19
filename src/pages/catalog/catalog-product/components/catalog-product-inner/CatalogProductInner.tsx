@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogProductInner.module.css";
+import {
+  IProductItemDetails,
+  IProductItemSizes,
+} from "../../../../../services/catalog-products/catalog-products.interface";
 
-const CatalogProductInner: React.FC = () => {
-  const [countOfCertificate, setCountOfCertificate] = useState<number>(1);
+interface Props {
+  catalogProduct: IProductItemDetails;
+}
+
+const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
+  const [countOfProduct, setCountOfProduct] = useState<number>(1);
+  const [currentProductSize, setCurrentProductSize] = useState<
+    IProductItemSizes | undefined
+  >(catalogProduct.product_variations.sizes[0]);
 
   const handleCountOfCertificate = (operation: "increment" | "decrement") => {
-    setCountOfCertificate((prevCount) => {
+    setCountOfProduct((prevCount) => {
       if (operation === "increment") {
         return prevCount + 1;
       } else if (operation === "decrement" && prevCount > 1) {
@@ -15,11 +26,21 @@ const CatalogProductInner: React.FC = () => {
     });
   };
 
+  const handleProductSize = (productSize: IProductItemSizes) => {
+    setCurrentProductSize(productSize);
+  };
+
+  useEffect(() => {
+    if (!catalogProduct.product_variations.sizes) return;
+    const res = JSON.parse(catalogProduct.product_image_url);
+  });
+
   return (
     <div className={styles.catalog__main_product}>
       <div className={styles.catalog__product_banners}>
+        {/* {res.product_image_url.ma} */}
         <img
-          src="../../images/individual-product-1.jpg"
+          src={catalogProduct.product_image_url}
           alt="certificate gift banner"
           className={styles.catalog__banners_item}
         />
@@ -42,7 +63,7 @@ const CatalogProductInner: React.FC = () => {
       <div className={styles.catalog__product_info}>
         <div className={styles.catalog__info_header}>
           <h3 className={styles.catalog__header_title}>
-            Індивідуальні ортопедичні устілки
+            {catalogProduct.product_name_en}
           </h3>
           <div className={styles.catalog__header_info}>
             <div className={styles.catalog__header_reviews}>
@@ -55,12 +76,16 @@ const CatalogProductInner: React.FC = () => {
             <p className={styles.catalog__header_left}>Залишити відгук</p>
             <p className={styles.catalog__header_code}>
               Код товару:{" "}
-              <span className={styles.catalog__code_item}>PROSTO-3</span>
+              <span className={styles.catalog__code_item}>
+                {currentProductSize?.article}
+              </span>
             </p>
           </div>
         </div>
         <div className={styles.catalog__info_main}>
-          <h2 className={styles.catalog__main_price}>1499 грн</h2>
+          <h2 className={styles.catalog__main_price}>
+            {catalogProduct.product_base_price} грн
+          </h2>
           <div className={styles.catalog__main_count}>
             <span
               onClick={() => handleCountOfCertificate("decrement")}
@@ -72,7 +97,7 @@ const CatalogProductInner: React.FC = () => {
                 className={styles.catalog__button_action}
               />
             </span>
-            <p className={styles.catalog__count_text}>{countOfCertificate}</p>
+            <p className={styles.catalog__count_text}>{countOfProduct}</p>
             <span
               onClick={() => handleCountOfCertificate("increment")}
               className={styles.catalog__count_button}
@@ -90,33 +115,28 @@ const CatalogProductInner: React.FC = () => {
             <p className={styles.catalog__sizes_title}>
               Оберіть розмір:{" "}
               <span className={styles.catalog__sizes_types}>
-                21 розмір (13,7 см)
+                {currentProductSize?.description_en}
               </span>
             </p>
             <div className={styles.catalog__sizes_main}>
               <div className={styles.catalog__block_items}>
-                <span className={styles.catalog__block_circle}>21</span>
-                <span className={styles.catalog__block_circle}>22</span>
-                <span className={styles.catalog__block_circle}>23</span>
-                <span className={styles.catalog__block_circle}>24</span>
-                <span className={styles.catalog__block_circle}>25</span>
-                <span className={styles.catalog__block_circle}>26</span>
-                <span className={styles.catalog__block_circle}>27</span>
-                <span className={styles.catalog__block_circle}>28</span>
-                <span className={styles.catalog__block_circle}>29</span>
-                <span className={styles.catalog__block_circle}>30</span>
+                {catalogProduct.product_variations.sizes.map(
+                  (productSize: IProductItemSizes, index) => (
+                    <span
+                      onClick={() => handleProductSize(productSize)}
+                      key={index}
+                      className={styles.catalog__block_circle}
+                    >
+                      {productSize.value}
+                    </span>
+                  )
+                )}
               </div>
             </div>
           </div>
           <div className={styles.catalog__footer_info}>
             <p className={styles.catalog__info_text}>
-              Дитячі ортопедичні устілки призначено для корекції плоскостопості.
-            </p>
-            <p className={styles.catalog__info_text}>
-              Головною особливістю таких ортопедичних устілок є спеціальний
-              пружний каркас, який підтримує склепіння стоп у правильному
-              положенні. Високий бортик підтримує стопу від завалювання
-              (гіперпронаціі) під час ходьби та бігу.
+              {catalogProduct.product_description_ua}
             </p>
           </div>
           <button className={styles.catalog__info_order} type="button">

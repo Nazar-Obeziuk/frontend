@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./CartDelivery.module.css";
 import CartDeliveryForms from "./components/cart-delivery-forms/CartDeliveryForms";
 
 const CartDelivery: React.FC = () => {
   const navigate = useNavigate();
+  const formRef = useRef<any>(null);
 
-  const handleCartNextStep = () => {
+  const handleCartNextStep = (data: any) => {
+    console.log(data);
     navigate("/home/cart/payment");
+  };
+
+  const handleContinueClick = () => {
+    if (formRef.current) {
+      formRef.current.submitForm();
+    }
   };
 
   return (
@@ -95,8 +103,8 @@ const CartDelivery: React.FC = () => {
                 обов’язкові для заповнення
               </p>
               <CartDeliveryForms
+                ref={formRef}
                 onSubmitFormsData={handleCartNextStep}
-                key={"uniq1"}
               />
             </div>
             <div className={styles.cart__main_footer}>
@@ -112,7 +120,7 @@ const CartDelivery: React.FC = () => {
                   <span className={styles.cart__continue_price}>1998 грн</span>
                 </div>
                 <button
-                  onClick={handleCartNextStep}
+                  onClick={handleContinueClick}
                   className={styles.cart__continue_button}
                   type="button"
                 >

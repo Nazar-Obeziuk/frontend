@@ -26,7 +26,13 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .home__item_text {
+    max-width: 80% !important;
+  }
+}
+
+@media (max-width: 600px) {
   .home__insole_item {
     width: 50%;
   }

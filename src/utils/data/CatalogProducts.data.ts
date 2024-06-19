@@ -1,6 +1,6 @@
 import { ICatalogProductItem } from "../../services/catalog-products/catalog-products.interface";
 
-const catalogProducts: ICatalogProductItem[] = [
+const catalogProducts = [
   {
     id: "1",
     main_image: "../../images/catalog-product-1.jpg",

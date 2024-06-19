@@ -90,6 +90,7 @@
   font-family: "Fixel-Display";
   color: var(--primary);
   text-decoration: underline;
+  cursor: pointer;
 }
 .about__header_term {
   display: flex;

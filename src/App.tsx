@@ -21,6 +21,8 @@ import CatalogProduct from "./pages/catalog/catalog-product/CatalogProduct";
 import CartAbout from "./pages/cart/cart-about/CartAbout";
 import CartDelivery from "./pages/cart/cart-delivery/CartDelivery";
 import CartPayment from "./pages/cart/cart-payment/CartPayment";
+import Admin from "./pages/admin/Admin";
+import AdminLogin from "./pages/admin/admin-login/AdminLogin";
 
 function App() {
   return (
@@ -71,7 +73,7 @@ function App() {
           element={<CatalogOrthopedic />}
         ></Route>
         <Route
-          path="/home/catalog/orthopedic-insoles/:id"
+          path="/catalog/orthopedic-insoles/:id"
           element={<CatalogProduct />}
         ></Route>
         <Route
@@ -84,6 +86,8 @@ function App() {
           element={<CartDelivery />}
         ></Route>
         <Route path="/home/cart/payment" element={<CartPayment />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/admin/login" element={<AdminLogin />}></Route>
       </Routes>
     </Layout>
   );

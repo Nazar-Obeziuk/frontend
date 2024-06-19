@@ -1,0 +1,10 @@
+.admin__content_main {
+  width: 80%;
+  background: var(--dark-gray);
+  border-radius: 0 12px 12px 0;
+}
+
+.admin__wrapper_content {
+  width: 100%;
+  display: flex;
+}

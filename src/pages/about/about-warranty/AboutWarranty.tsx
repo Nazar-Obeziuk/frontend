@@ -54,7 +54,13 @@ const AboutWarranty: React.FC = () => {
               <p className={styles.about__warranty_text}>
                 Устілки{" "}
                 <span className={styles.about__text_bold}>PROSTOPOO</span>{" "}
-                <span className={styles.about__header_link}>сертифіковано</span>{" "}
+                <a
+                  href="../../images/declaration-1.pdf"
+                  target="_blank"
+                  className={styles.about__header_link}
+                >
+                  сертифіковано
+                </a>{" "}
                 та забезпечено фірмовою гарантією, строк якої встановлено
                 фірмою-виробником.
               </p>

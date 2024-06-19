@@ -1,4 +1,6 @@
-const workersData = [
+import { IWorker } from "../../services/workers/worker.interface";
+
+const workersData: IWorker[] = [
   {
     id: 1,
     worker_image_path: "../../images/yan-worker.png",

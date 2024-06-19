@@ -62,9 +62,14 @@ const OrderDelivery: React.FC = () => {
                 Після відправки замовлення ви отримаєте SMS-повідомлення з
                 номером експрес-накладної. Уточнити дату отримання вашого
                 замовлення ви можете на{" "}
-                <span className={styles.order__text_link}>
+                <a
+                  href="https://novaposhta.ua/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.order__text_link}
+                >
                   сайті компанії «Нова пошта»
-                </span>{" "}
+                </a>{" "}
                 або в особистому додатку.
               </p>
             </div>
@@ -79,9 +84,13 @@ const OrderDelivery: React.FC = () => {
               <p className={styles.order__main_text}>
                 Міжнародну доставку здійснюємо за допомогою оператора Нова
                 Глобал. Вартість доставки за{" "}
-                <span className={styles.order__text_link}>
+                <a
+                  href="../../images/delivery-global.pdf"
+                  target="_blank"
+                  className={styles.order__text_link}
+                >
                   тарифами перевізника
-                </span>
+                </a>
                 .
               </p>
             </div>
