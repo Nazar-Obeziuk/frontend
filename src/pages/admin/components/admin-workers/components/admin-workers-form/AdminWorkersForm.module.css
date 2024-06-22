@@ -42,6 +42,8 @@
   width: 100%;
   display: flex;
   gap: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 .admin__actions_button {
   width: calc(50% - 15px);
@@ -63,4 +65,46 @@
 .admin__actions_button:hover {
   background: transparent;
   color: var(--primary);
+}
+.admin__button_slider {
+  width: 100% !important;
+}
+
+.error_message {
+  font-size: 13px;
+  color: #eb001b;
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  line-height: 16px;
+}
+
+@media (max-width: 768px) {
+  .admin__form_block {
+    flex-direction: column;
+  }
+
+  .admin__block_control {
+    width: 100%;
+  }
+
+  .admin__block_actions {
+    gap: 20px;
+  }
+
+  .admin__actions_button {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .admin__block_actions {
+    flex-direction: column;
+  }
+
+  .admin__actions_button {
+    width: 100%;
+    padding: 12px 48px;
+    font-size: 16px;
+    border-width: 1px;
+  }
 }

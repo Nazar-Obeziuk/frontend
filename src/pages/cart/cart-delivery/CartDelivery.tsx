@@ -4,19 +4,19 @@ import styles from "./CartDelivery.module.css";
 import CartDeliveryForms from "./components/cart-delivery-forms/CartDeliveryForms";
 
 const CartDelivery: React.FC = () => {
-  const navigate = useNavigate();
-  const formRef = useRef<any>(null);
+  // const navigate = useNavigate();
+  // // const formRef = useRef<any>(null);
 
-  const handleCartNextStep = (data: any) => {
-    console.log(data);
-    navigate("/home/cart/payment");
-  };
+  // const handleCartNextStep = (data: any) => {
+  //   console.log(data);
+  //   navigate("/home/cart/payment");
+  // };
 
-  const handleContinueClick = () => {
-    if (formRef.current) {
-      formRef.current.submitForm();
-    }
-  };
+  // const handleContinueClick = () => {
+  //   // if (formRef.current) {
+  //   //   formRef.current.submitForm();
+  //   // }
+  // };
 
   return (
     <section className={styles.cart__section}>
@@ -96,39 +96,7 @@ const CartDelivery: React.FC = () => {
               <p className={styles.cart__block_text}>Вибір способу оплати</p>
             </div>
           </div>
-          <div className={styles.cart__wrapper_main}>
-            <div className={styles.cart__main_data}>
-              <p className={styles.cart__data_text}>
-                Поля із <span className={styles.cart__text_primary}>*</span>{" "}
-                обов’язкові для заповнення
-              </p>
-              <CartDeliveryForms
-                ref={formRef}
-                onSubmitFormsData={handleCartNextStep}
-              />
-            </div>
-            <div className={styles.cart__main_footer}>
-              <div className={styles.cart__footer_required}>
-                <p className={styles.cart__required_text}>
-                  Поля із <span className={styles.cart__text_primary}>*</span>{" "}
-                  обов’язкові для заповнення
-                </p>
-              </div>
-              <div className={styles.cart__footer_continue}>
-                <div className={styles.cart__continue_block}>
-                  <p className={styles.cart__continue_text}>Загальна сума: </p>
-                  <span className={styles.cart__continue_price}>1998 грн</span>
-                </div>
-                <button
-                  onClick={handleContinueClick}
-                  className={styles.cart__continue_button}
-                  type="button"
-                >
-                  ПРОДОВЖИТИ
-                </button>
-              </div>
-            </div>
-          </div>
+          <CartDeliveryForms key={"uniq1"} />
         </div>
       </div>
     </section>

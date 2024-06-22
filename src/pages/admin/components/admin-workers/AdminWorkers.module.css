@@ -33,3 +33,9 @@
 .admin__workers_table {
   width: 100%;
 }
+
+@media (max-width: 1000px) {
+  .admin__main_workers {
+    padding: 40px 20px;
+  }
+}
