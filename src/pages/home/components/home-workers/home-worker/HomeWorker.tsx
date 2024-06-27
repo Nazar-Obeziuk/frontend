@@ -7,7 +7,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { Navigation } from "swiper/modules";
-import { workerData } from "worker_threads";
 
 interface WorkerProps {
   worker: IWorker;
@@ -23,7 +22,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
           <div className={styles.home__worker_wrapper}>
             <div className={styles.home__worker_banner}>
               <img
-                src={worker.worker_image_path}
+                src={worker.image_url}
                 alt="worker banner"
                 className={styles.home__worker_image}
               />
@@ -31,22 +30,20 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
             </div>
             <div className={styles.home__worker_info}>
               <div className={styles.home__info_header}>
-                <h3 className={styles.home__info_title}>
-                  {worker.worker_title_ua}
-                </h3>
+                <h3 className={styles.home__info_title}>{worker.name_ua}</h3>
                 <span className={styles.home__info_subtitle}>
-                  {worker.worker_subtitle_ua}
+                  {worker.subtitle_ua}
                 </span>
               </div>
               <div className={styles.home__info_about}>
                 <p className={styles.home__about_text}>
-                  {worker.worker_first_text_ua}
+                  {worker.first_description_ua}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.worker_second_text_ua}
+                  {worker.second_description_ua}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.worker_third_text_ua}
+                  {worker.third_description_ua}
                 </p>
               </div>
               <div className={styles.home__info_galery}>
@@ -62,7 +59,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     modules={[Navigation]}
                     className={`workerSwiper-${worker.id}`}
                   >
-                    {worker.worker_slider_images.map((workerSlideImage) => (
+                    {/* {worker.worker_slider_images.map((workerSlideImage) => (
                       <SwiperSlide key={workerSlideImage}>
                         <div className={styles.home__slider_card}>
                           <img
@@ -72,7 +69,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                           />
                         </div>
                       </SwiperSlide>
-                    ))}
+                    ))} */}
                   </Swiper>
                 </div>
 
@@ -123,22 +120,20 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
           <div className={styles.home__wrapper_mobile}>
             <div className={styles.home__info_mobile}>
               <div className={styles.home__info_header}>
-                <h3 className={styles.home__info_title}>
-                  {worker.worker_title_ua}
-                </h3>
+                <h3 className={styles.home__info_title}>{worker.name_ua}</h3>
                 <span className={styles.home__info_subtitle}>
-                  {worker.worker_subtitle_ua}
+                  {worker.subtitle_ua}
                 </span>
               </div>
               <div className={styles.home__info_about}>
                 <p className={styles.home__about_text}>
-                  {worker.worker_first_text_ua}
+                  {worker.first_description_ua}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.worker_second_text_ua}
+                  {worker.second_description_ua}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.worker_third_text_ua}
+                  {worker.third_description_ua}
                 </p>
               </div>
             </div>
@@ -154,7 +149,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
             <div className={styles.home__banners_mobile}>
               <div className={styles.home__worker_banner}>
                 <img
-                  src={worker.worker_image_path}
+                  src={worker.image_url}
                   alt="worker banner"
                   className={styles.home__worker_image}
                 />
@@ -178,7 +173,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                     modules={[Navigation]}
                     className={`worker-slider workerSwiper-${worker.id}`}
                   >
-                    {worker.worker_slider_images.map((workerSlideImage) => (
+                    {/* {worker.worker_slider_images.map((workerSlideImage) => (
                       <SwiperSlide key={workerSlideImage}>
                         <div className={styles.home__card_mobile}>
                           <img
@@ -188,7 +183,7 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
                           />
                         </div>
                       </SwiperSlide>
-                    ))}
+                    ))} */}
                   </Swiper>
                 </div>
 

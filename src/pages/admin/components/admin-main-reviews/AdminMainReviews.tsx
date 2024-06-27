@@ -1,7 +1,7 @@
 import React from "react";
 
 const AdminMainReviews: React.FC = () => {
-  return <div>AdminMainReviews</div>;
+  return <div></div>;
 };
 
 export default AdminMainReviews;

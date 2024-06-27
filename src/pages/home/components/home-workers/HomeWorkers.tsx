@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeWorker from "./home-worker/HomeWorker";
 import styles from "./HomeWorkers.module.css";
-import { workersData } from "../../../../utils/data/HomeWorkers.data";
+import { IWorker } from "../../../../services/workers/worker.interface";
+import { getAllWorkers } from "../../../../services/workers/workers";
 
 const HomeWorkers: React.FC = () => {
+  const [adminWorkers, setAdminWorkers] = useState<IWorker[]>([]);
+
+  const getAll = async () => {
+    const workersData = await getAllWorkers();
+    setAdminWorkers(workersData);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
   return (
     <>
       <section className={styles.home__workers_section}>
@@ -18,7 +30,7 @@ const HomeWorkers: React.FC = () => {
         </div>
       </section>
       <div className={styles.home__workers_box}>
-        {workersData.map((worker) => (
+        {adminWorkers.map((worker: IWorker) => (
           <HomeWorker worker={worker} key={worker.id} />
         ))}
       </div>

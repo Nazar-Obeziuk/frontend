@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Admin.module.css";
-import AdminSidebar from "./components/admin-sidebar/AdminSidebar";
 import AdminLayout from "./components/admin-layout/AdminLayout";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { checkRole } from "../../services/check-role/checkRole";
 
 const Admin: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const func = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const response = await checkRole(token);
+
+        if (response.error) console.log("you are not admin");
+        else console.log("you are admin, good luck");
+      } else {
+        navigate("/admin/login");
+      }
+    };
+
+    func();
+  }, []);
+
   return (
     <section className={styles.admin__section}>
       <div className={styles.container}>

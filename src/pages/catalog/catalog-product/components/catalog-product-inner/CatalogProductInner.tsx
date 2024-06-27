@@ -32,7 +32,7 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
 
   useEffect(() => {
     if (!catalogProduct.product_variations.sizes) return;
-    const res = JSON.parse(catalogProduct.product_image_url);
+    const res = catalogProduct.product_image_url;
   });
 
   return (

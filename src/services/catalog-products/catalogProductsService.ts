@@ -12,6 +12,7 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id: string) => {
   try {
+    console.log(id);
     const { data } = await axios.get(`/products/${id}`);
     return data;
   } catch (error) {

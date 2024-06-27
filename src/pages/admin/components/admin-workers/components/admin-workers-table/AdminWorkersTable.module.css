@@ -1,6 +1,16 @@
 .admin__table_block {
   width: 100%;
   overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin__block_info {
+  font-family: "Fixel-Display";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--white);
 }
 .admin__table_item {
   width: 100%;
@@ -12,10 +22,6 @@
 .admin__table_tr {
   width: 100%;
 }
-/* .admin__table_body > .admin__table_td {
-  height: 100px;
-  overflow: scroll;
-} */
 .admin__table_th,
 .admin__table_td {
   padding: 16px 42px;

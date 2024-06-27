@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AdminWorkersTable.module.css";
-import { workersData } from "../../../../../../utils/data/HomeWorkers.data";
 import { IWorker } from "../../../../../../services/workers/worker.interface";
+import { getAllWorkers } from "../../../../../../services/workers/workers";
 
 const AdminWorkersTable: React.FC = () => {
-  const [adminWorkers, setAdminWorkers] = useState<IWorker[]>(workersData);
+  const [adminWorkers, setAdminWorkers] = useState<IWorker[]>([]);
+
+  const getAll = async () => {
+    const workersData = await getAllWorkers();
+    setAdminWorkers(workersData);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
 
   return (
     <div className={styles.admin__table_block}>
+      <p className={styles.admin__block_info}>
+        Для того щоб скролити таблицю на Windows потрібно нажати на shift і
+        крутити коліщатком
+      </p>
       <table className={styles.admin__table_item}>
         <thead className={styles.admin__table_head}>
           <tr className={styles.admin__table_tr}>
@@ -31,37 +44,33 @@ const AdminWorkersTable: React.FC = () => {
             <tr key={index} className={styles.admin__table_tr}>
               <td className={styles.admin__table_td}>{adminWorker.id}</td>
               <td className={styles.admin__table_td}>
-                <img src={adminWorker.worker_image_path} alt="" />
+                <img src={adminWorker.image_url} alt="worker banner" />
+              </td>
+              <td className={styles.admin__table_td}>{adminWorker.name_ua}</td>
+              <td className={styles.admin__table_td}>{adminWorker.name_en}</td>
+              <td className={styles.admin__table_td}>
+                {adminWorker.subtitle_ua}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_title_ua}
+                {adminWorker.subtitle_en}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_title_en}
+                {adminWorker.first_description_ua}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_subtitle_ua}
+                {adminWorker.first_description_en}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_subtitle_en}
+                {adminWorker.second_description_ua}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_first_text_ua}
+                {adminWorker.second_description_en}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_first_text_en}
+                {adminWorker.third_description_ua}
               </td>
               <td className={styles.admin__table_td}>
-                {adminWorker.worker_second_text_ua}
-              </td>
-              <td className={styles.admin__table_td}>
-                {adminWorker.worker_second_text_en}
-              </td>
-              <td className={styles.admin__table_td}>
-                {adminWorker.worker_third_text_ua}
-              </td>
-              <td className={styles.admin__table_td}>
-                {adminWorker.worker_third_text_en}
+                {adminWorker.third_description_en}
               </td>
               <td
                 className={`${styles.admin__table_td} ${styles.admin__td_actions}`}

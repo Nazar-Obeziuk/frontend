@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./AdminLogin.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { loginUser } from "../../../services/auth/login/login";
+import { IUserResponse } from "../../../services/auth/login/login.interface";
 
 const AdminLogin: React.FC = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: any) => {
+    const response: IUserResponse = await loginUser(data);
+    localStorage.setItem("token", response.token);
+    reset();
+
+    const token = localStorage.getItem("token");
+    if (token) navigate("/admin");
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) navigate("/admin");
+  }, []);
+
   return (
     <section className={styles.admin__login_section}>
       <div className={styles.container}>
@@ -40,16 +60,21 @@ const AdminLogin: React.FC = () => {
               <h2 className={styles.admin__block_title}>
                 З поверненням до адмін панелі!
               </h2>
-              <form className={styles.admin__block_form}>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={styles.admin__block_form}
+              >
                 <input
                   type="text"
                   className={styles.admin__form_field}
-                  placeholder="Ваш логін"
+                  placeholder="Ваш email"
+                  {...register("email", { required: true })}
                 />
                 <input
                   type="password"
                   className={styles.admin__form_field}
                   placeholder="Ваш пароль"
+                  {...register("password", { required: true })}
                 />
                 <button className={styles.admin__form_button} type="submit">
                   Увійти

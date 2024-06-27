@@ -1,33 +1,88 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./AdminWorkersForm.module.css";
 import { useForm } from "react-hook-form";
+import { createWorker } from "../../../../../../services/workers/workers";
+import { useDropzone } from "react-dropzone";
+import styled from "styled-components";
 
 interface Props {
   toggleWorkersForm: () => void;
 }
 
+const getColor = (props: any) => {
+  if (props.isDragAccept) {
+    return "#00e676";
+  }
+  if (props.isDragReject) {
+    return "#ff1744";
+  }
+  if (props.isFocused) {
+    return "#2196f3";
+  }
+  return "#eeeeee";
+};
+
+const AdminImage = styled.div`
+  width: 100%;
+  padding: 16px 26px 14px 26px;
+  border-width: 1px;
+  border-radius: 12px;
+  border-color: ${(props) => getColor(props)};
+  border-style: solid;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 20px;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+`;
+
 const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
   const [fileInputs, setFileInputs] = useState<string[]>(["worker-image"]);
+  const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     mode: "onChange",
   });
+  // const onDrop = useCallback((acceptedFiles: any) => {
+  //   const newFiles = acceptedFiles.map((file: any) =>
+  //     URL.createObjectURL(file)
+  //   );
+  //   setUploadedFiles([...uploadedFiles, ...newFiles]);
+  // }, []);
+  // const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
+  //   useDropzone({ accept: "image/*", onDrop });
 
   const addFileInput = () => {
     const newFileInputName = `worker-slider-image-${fileInputs.length}`;
     setFileInputs([...fileInputs, newFileInputName]);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const fullData = {
+        ...data,
+        image: uploadedFiles,
+        slider_images: null,
+      };
+      await createWorker(fullData, token);
+      console.log(fullData);
+      reset();
+    }
   };
 
   const handleUploadFile = (event: any) => {
     const file = event.target.files[0];
-    const urlImage = URL.createObjectURL(file);
+    // const urlImage = URL.createObjectURL(file);
+    // console.log(file);
+    setUploadedFiles(file);
   };
 
   return (
@@ -36,21 +91,29 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
       className={styles.admin__form_block}
     >
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-image" className={styles.admin__control_label}>
+        <label htmlFor="image" className={styles.admin__control_label}>
           Зображення працівника
         </label>
         <input
           type="file"
           className={styles.admin__control_field}
-          {...register("worker-image", { required: `Це поле обов'язкове!` })}
-          style={errors["worker-image"] ? { border: "1px solid #EB001B" } : {}}
+          {...register("image", { required: `Це поле обов'язкове!` })}
+          style={errors["image"] ? { border: "1px solid #EB001B" } : {}}
           onChange={handleUploadFile}
         />
-        {errors["worker-image"] && (
+        {errors["image"] && (
           <span className={styles.error_message}>
-            {errors["worker-image"]?.message as string}
+            {errors["image"]?.message as string}
           </span>
         )}
+        {/* <div className="admin__worker_image">
+          <AdminImage
+            {...getRootProps({ isFocused, isDragAccept, isDragReject })}
+          >
+            <input {...getInputProps()} />
+            <p>Перетягніть файли</p>
+          </AdminImage>
+        </div> */}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="fullName_ua" className={styles.admin__control_label}>
@@ -59,30 +122,30 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         <input
           type="text"
           className={`${styles.admin__control_field} `}
-          style={errors["fullName_ua"] ? { border: "1px solid #EB001B" } : {}}
+          style={errors["name_ua"] ? { border: "1px solid #EB001B" } : {}}
           placeholder="Ім'я та прізвище працівника (Укр)"
-          {...register("fullName_ua", { required: `Це поле обов'язкове!` })}
+          {...register("name_ua", { required: `Це поле обов'язкове!` })}
         />
-        {errors["fullName_ua"] && (
+        {errors["name_ua"] && (
           <span className={styles.error_message}>
-            {errors["fullName_ua"]?.message as string}
+            {errors["name_ua"]?.message as string}
           </span>
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="fullName_en" className={styles.admin__control_label}>
+        <label htmlFor="name_en" className={styles.admin__control_label}>
           Ім'я та прізвище працівника (Англ)
         </label>
         <input
           type="text"
           className={styles.admin__control_field}
-          style={errors["fullName_en"] ? { border: "1px solid #EB001B" } : {}}
+          style={errors["name_en"] ? { border: "1px solid #EB001B" } : {}}
           placeholder="Ім'я та прізвище працівника (Англ)"
-          {...register("fullName_en", { required: `Це поле обов'язкове!` })}
+          {...register("name_en", { required: `Це поле обов'язкове!` })}
         />
-        {errors["fullName_en"] && (
+        {errors["name_en"] && (
           <span className={styles.error_message}>
-            {errors["fullName_en"]?.message as string}
+            {errors["name_en"]?.message as string}
           </span>
         )}
       </div>
@@ -125,7 +188,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
       </div>
       <div className={styles.admin__block_control}>
         <label
-          htmlFor="worker-desc-1-ua"
+          htmlFor="first_description_ua"
           className={styles.admin__control_label}
         >
           Перший опис працівника (Укр)
@@ -134,7 +197,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Перший опис працівника (Укр)"
-          {...register("worker-desc-1-ua", { required: false })}
+          {...register("first_description_ua", { required: false })}
         />
       </div>
       <div className={styles.admin__block_control}>
@@ -148,7 +211,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Перший опис працівника (Англ)"
-          {...register("worker-desc-1-en", { required: false })}
+          {...register("first_description_en", { required: false })}
         />
       </div>
       <div className={styles.admin__block_control}>
@@ -162,7 +225,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Другий опис працівника (Укр)"
-          {...register("worker-desc-2-ua", { required: false })}
+          {...register("second_description_ua", { required: false })}
         />
       </div>
       <div className={styles.admin__block_control}>
@@ -176,7 +239,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Другий опис працівника (Англ)"
-          {...register("worker-desc-2-en", { required: false })}
+          {...register("second_description_en", { required: false })}
         />
       </div>
       <div className={styles.admin__block_control}>
@@ -190,7 +253,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Третій опис працівника (Укр)"
-          {...register("worker-desc-3-ua", { required: false })}
+          {...register("third_description_ua", { required: false })}
         />
       </div>
       <div className={styles.admin__block_control}>
@@ -204,10 +267,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           type="text"
           className={styles.admin__control_field}
           placeholder="Третій опис працівника (Англ)"
-          {...register("worker-desc-3-en", { required: false })}
+          {...register("third_description_en", { required: false })}
         />
       </div>
-      {fileInputs.map((fileInputName, index) => (
+      {/* {fileInputs.map((fileInputName, index) => (
         <div key={index} className={styles.admin__block_control}>
           <label
             htmlFor={fileInputName}
@@ -218,12 +281,12 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           <input
             type="file"
             className={styles.admin__control_field}
-            {...register(`worker-slider-image-${index + 1}`, {
+            {...register(`slider-images`, {
               required: false,
             })}
           />
         </div>
-      ))}
+      ))} */}
       <button
         onClick={addFileInput}
         className={`${styles.admin__actions_button} ${styles.admin__button_slider}`}
