@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import styles from "./AdminWorkersForm.module.css";
 import { useForm } from "react-hook-form";
 import { createWorker } from "../../../../../../services/workers/workers";
-import { useDropzone } from "react-dropzone";
+import { useDropzone, Accept } from "react-dropzone";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,23 +39,56 @@ const AdminImage = styled.div`
   line-height: 20px;
   outline: none;
   transition: border 0.24s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;
 
 const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
-  const [uploadedFiles, setUploadedFiles] = useState<File | null>(null);
+  const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: "onChange" });
+
+  const acceptType: Accept = {
+    'image/*': ['.jpeg', '.jpg', '.png', '.gif']
+  };
+
+  // Dropzone for main image
+  const onDropMainImage = useCallback((acceptedFiles: File[]) => {
+    setMainImage(acceptedFiles[0]);
+  }, []);
+
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    mode: "onChange",
+    getRootProps: getMainRootProps,
+    getInputProps: getMainInputProps,
+    isDragActive: isMainDragActive,
+    isDragAccept: isMainDragAccept,
+    isDragReject: isMainDragReject,
+    isFocused: isMainFocused,
+  } = useDropzone({
+    onDrop: onDropMainImage,
+    multiple: false,
+    accept: acceptType,
   });
 
-  const addFileInput = () => {
-    setSliderImages([...sliderImages, new File([], "")]);
-  };
+  // Dropzone for certificate images
+  const onDropSliderImages = useCallback((acceptedFiles: File[]) => {
+    setSliderImages((prevSliderImages) => [...prevSliderImages, ...acceptedFiles]);
+  }, []);
+
+  const {
+    getRootProps: getSliderRootProps,
+    getInputProps: getSliderInputProps,
+    isDragActive: isSliderDragActive,
+    isDragAccept: isSliderDragAccept,
+    isDragReject: isSliderDragReject,
+    isFocused: isSliderFocused,
+  } = useDropzone({
+    onDrop: onDropSliderImages,
+    multiple: true,
+    accept: acceptType,
+  });
 
   const onSubmit = async (data: any) => {
     const formData = new FormData();
@@ -63,14 +96,12 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
       formData.append(key, data[key]);
     });
 
-    if (uploadedFiles) {
-      formData.append("image", uploadedFiles);
+    if (mainImage) {
+      formData.append("image", mainImage);
     }
 
-    sliderImages.forEach((file, index) => {
-      if (file.size > 0) {
-        formData.append(`slider_images`, file);
-      }
+    sliderImages.forEach((file) => {
+      formData.append("slider_images", file);
     });
 
     const token = localStorage.getItem("token");
@@ -90,46 +121,48 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
     }
   };
 
-  const handleUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setUploadedFiles(file);
-    }
-  };
-
-  const handleUploadSliderImages = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const newSliderImages = [...sliderImages];
-      newSliderImages[index] = file;
-      setSliderImages(newSliderImages);
-    }
-  };
-
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={styles.admin__form_block}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.admin__form_block}>
       <div className={styles.admin__block_control}>
         <label htmlFor="image" className={styles.admin__control_label}>
           Зображення працівника
         </label>
-        <input
-          type="file"
-          className={styles.admin__control_field}
-          {...register("image", { required: `Це поле обов'язкове!` })}
-          style={errors["image"] ? { border: "1px solid #EB001B" } : {}}
-          onChange={handleUploadFile}
-        />
+        <AdminImage
+          {...getMainRootProps({ isDragActive: isMainDragActive, isDragAccept: isMainDragAccept, isDragReject: isMainDragReject, isFocused: isMainFocused })}
+        >
+          <input {...getMainInputProps()} />
+          {isMainDragActive ? (
+            <p>Перетягніть сюди файли ...</p>
+          ) : (
+            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+          )}
+        </AdminImage>
+        {mainImage && <p>{mainImage.name}</p>}
         {errors["image"] && (
           <span className={styles.error_message}>
             {errors["image"]?.message as string}
           </span>
         )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label htmlFor="certificates" className={styles.admin__control_label}>
+          Зображення сертифікатів
+        </label>
+        <AdminImage
+          {...getSliderRootProps({ isDragActive: isSliderDragActive, isDragAccept: isSliderDragAccept, isDragReject: isSliderDragReject, isFocused: isSliderFocused })}
+        >
+          <input {...getSliderInputProps()} />
+          {isSliderDragActive ? (
+            <p>Перетягніть сюди файли ...</p>
+          ) : (
+            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+          )}
+        </AdminImage>
+        <ul>
+          {sliderImages.map((file, index) => (
+            <li key={index}>{file.name}</li>
+          ))}
+        </ul>
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="fullName_ua" className={styles.admin__control_label}>
@@ -183,10 +216,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-subtitle-en"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-subtitle-en" className={styles.admin__control_label}>
           Напрямок працівника (Англ)
         </label>
         <input
@@ -203,10 +233,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="first_description_ua"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="first_description_ua" className={styles.admin__control_label}>
           Перший опис працівника (Укр)
         </label>
         <input
@@ -217,10 +244,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-desc-1-en"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-desc-1-en" className={styles.admin__control_label}>
           Перший опис працівника (Англ)
         </label>
         <input
@@ -231,10 +255,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-desc-2-ua"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-desc-2-ua" className={styles.admin__control_label}>
           Другий опис працівника (Укр)
         </label>
         <input
@@ -245,10 +266,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-desc-2-en"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-desc-2-en" className={styles.admin__control_label}>
           Другий опис працівника (Англ)
         </label>
         <input
@@ -259,10 +277,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-desc-3-ua"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-desc-3-ua" className={styles.admin__control_label}>
           Третій опис працівника (Укр)
         </label>
         <input
@@ -273,10 +288,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-desc-3-en"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="worker-desc-3-en" className={styles.admin__control_label}>
           Третій опис працівника (Англ)
         </label>
         <input
@@ -286,30 +298,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           {...register("third_description_en", { required: false })}
         />
       </div>
-      {sliderImages.map((sliderImage, index) => (
-        <div key={index} className={styles.admin__block_control}>
-          <label
-            htmlFor={sliderImage.name}
-            className={styles.admin__control_label}
-          >
-            Зображення для слайдера працівника {index + 1}
-          </label>
-          <input
-            type="file"
-            className={styles.admin__control_field}
-            {...register(`slider-images`, {
-              required: false,
-            })}
-          />
-        </div>
-      ))}
-      <button
-        onClick={addFileInput}
-        className={`${styles.admin__actions_button} ${styles.admin__button_slider}`}
-        type="button"
-      >
-        Додати зображення для слайдера працівника
-      </button>
       <div className={styles.admin__block_actions}>
         <button className={styles.admin__actions_button} type="submit">
           Підтвердити

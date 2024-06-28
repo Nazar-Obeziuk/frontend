@@ -10,9 +10,9 @@ const AdminLogin: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
-    const response: IUserResponse = await loginUser(data);
-    console.log("dsoivhfiu", response);
-    localStorage.setItem("token", response.token);
+    const response: any = await loginUser(data);
+
+    localStorage.setItem("token", response.data.token);
     reset();
 
     checkToken();
