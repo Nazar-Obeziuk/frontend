@@ -12,7 +12,7 @@ const AdminLogin: React.FC = () => {
   const onSubmit = async (data: any) => {
     const response: any = await loginUser(data);
 
-    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token", response.token);
     reset();
 
     checkToken();

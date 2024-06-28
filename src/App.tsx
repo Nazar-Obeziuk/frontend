@@ -23,6 +23,7 @@ import CartDelivery from "./pages/cart/cart-delivery/CartDelivery";
 import CartPayment from "./pages/cart/cart-payment/CartPayment";
 import Admin from "./pages/admin/Admin";
 import AdminLogin from "./pages/admin/admin-login/AdminLogin";
+import AdminWorkerUpdate from "./pages/admin/components/admin-workers/components/admin-worker-update/AdminWorkerUpdate";
 
 function App() {
   return (
@@ -87,6 +88,10 @@ function App() {
         ></Route>
         <Route path="/home/cart/payment" element={<CartPayment />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
+        <Route
+          path="/admin/update-worker/:id"
+          element={<AdminWorkerUpdate />}
+        ></Route>
         <Route path="/admin/login" element={<AdminLogin />}></Route>
       </Routes>
     </Layout>

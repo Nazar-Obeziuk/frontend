@@ -6,6 +6,7 @@ import { useDropzone, Accept } from "react-dropzone";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IWorker } from "../../../../../../services/workers/worker.interface";
 
 interface Props {
   toggleWorkersForm: () => void;
@@ -48,13 +49,17 @@ const AdminImage = styled.div`
 const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({ mode: "onChange" });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({ mode: "onChange" });
 
   const acceptType: Accept = {
-    'image/*': ['.jpeg', '.jpg', '.png', '.gif']
+    "image/*": [".jpeg", ".jpg", ".png", ".gif"],
   };
 
-  // Dropzone for main image
   const onDropMainImage = useCallback((acceptedFiles: File[]) => {
     setMainImage(acceptedFiles[0]);
   }, []);
@@ -72,9 +77,11 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
     accept: acceptType,
   });
 
-  // Dropzone for certificate images
   const onDropSliderImages = useCallback((acceptedFiles: File[]) => {
-    setSliderImages((prevSliderImages) => [...prevSliderImages, ...acceptedFiles]);
+    setSliderImages((prevSliderImages) => [
+      ...prevSliderImages,
+      ...acceptedFiles,
+    ]);
   }, []);
 
   const {
@@ -122,13 +129,21 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.admin__form_block}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.admin__form_block}
+    >
       <div className={styles.admin__block_control}>
         <label htmlFor="image" className={styles.admin__control_label}>
           Зображення працівника
         </label>
         <AdminImage
-          {...getMainRootProps({ isDragActive: isMainDragActive, isDragAccept: isMainDragAccept, isDragReject: isMainDragReject, isFocused: isMainFocused })}
+          {...getMainRootProps({
+            isDragActive: isMainDragActive,
+            isDragAccept: isMainDragAccept,
+            isDragReject: isMainDragReject,
+            isFocused: isMainFocused,
+          })}
         >
           <input {...getMainInputProps()} />
           {isMainDragActive ? (
@@ -149,7 +164,12 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           Зображення сертифікатів
         </label>
         <AdminImage
-          {...getSliderRootProps({ isDragActive: isSliderDragActive, isDragAccept: isSliderDragAccept, isDragReject: isSliderDragReject, isFocused: isSliderFocused })}
+          {...getSliderRootProps({
+            isDragActive: isSliderDragActive,
+            isDragAccept: isSliderDragAccept,
+            isDragReject: isSliderDragReject,
+            isFocused: isSliderFocused,
+          })}
         >
           <input {...getSliderInputProps()} />
           {isSliderDragActive ? (
@@ -216,7 +236,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-subtitle-en" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-subtitle-en"
+          className={styles.admin__control_label}
+        >
           Напрямок працівника (Англ)
         </label>
         <input
@@ -233,7 +256,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="first_description_ua" className={styles.admin__control_label}>
+        <label
+          htmlFor="first_description_ua"
+          className={styles.admin__control_label}
+        >
           Перший опис працівника (Укр)
         </label>
         <input
@@ -244,7 +270,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-desc-1-en" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-desc-1-en"
+          className={styles.admin__control_label}
+        >
           Перший опис працівника (Англ)
         </label>
         <input
@@ -255,7 +284,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-desc-2-ua" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-desc-2-ua"
+          className={styles.admin__control_label}
+        >
           Другий опис працівника (Укр)
         </label>
         <input
@@ -266,7 +298,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-desc-2-en" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-desc-2-en"
+          className={styles.admin__control_label}
+        >
           Другий опис працівника (Англ)
         </label>
         <input
@@ -277,7 +312,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-desc-3-ua" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-desc-3-ua"
+          className={styles.admin__control_label}
+        >
           Третій опис працівника (Укр)
         </label>
         <input
@@ -288,7 +326,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="worker-desc-3-en" className={styles.admin__control_label}>
+        <label
+          htmlFor="worker-desc-3-en"
+          className={styles.admin__control_label}
+        >
           Третій опис працівника (Англ)
         </label>
         <input

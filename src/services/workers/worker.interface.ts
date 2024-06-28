@@ -11,4 +11,5 @@ export interface IWorker {
   second_description_en: string;
   third_description_ua: string;
   third_description_en: string;
+  slider_images: string[];
 }

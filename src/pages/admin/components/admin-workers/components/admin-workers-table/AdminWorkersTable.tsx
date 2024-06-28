@@ -3,12 +3,17 @@ import styles from "./AdminWorkersTable.module.css";
 import { IWorker } from "../../../../../../services/workers/worker.interface";
 import { getAllWorkers } from "../../../../../../services/workers/workers";
 
-const AdminWorkersTable: React.FC = () => {
+interface Props {
+  handleEditWorker: (id: number) => void;
+}
+
+const AdminWorkersTable: React.FC<Props> = ({ handleEditWorker }) => {
   const [adminWorkers, setAdminWorkers] = useState<IWorker[]>([]);
 
   const getAll = async () => {
     const workersData = await getAllWorkers();
     setAdminWorkers(workersData);
+    console.log(adminWorkers);
   };
 
   useEffect(() => {
@@ -74,18 +79,21 @@ const AdminWorkersTable: React.FC = () => {
                 {adminWorker.third_description_en}
               </td>
               {/* <td className={styles.admin__table_td}>
-                {adminWorker.sliderImages.forEach(sliderImage) => (
+                {adminWorker.slider_images.map((sliderImage: string) => (
                   <img src={sliderImage} alt="" />
-                )}
+                ))}
               </td> */}
-              <td className={styles.admin__table_td}>slider images</td>
               <td
                 className={`${styles.admin__table_td} ${styles.admin__td_actions}`}
               >
                 <button className={styles.admin__td_action} type="button">
                   Видалити
                 </button>
-                <button className={styles.admin__td_action} type="button">
+                <button
+                  onClick={() => handleEditWorker(adminWorker.id)}
+                  className={styles.admin__td_action}
+                  type="button"
+                >
                   Редагувати
                 </button>
               </td>

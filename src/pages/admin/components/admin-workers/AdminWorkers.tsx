@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import styles from "./AdminWorkers.module.css";
 import AdminWorkersForm from "./components/admin-workers-form/AdminWorkersForm";
 import AdminWorkersTable from "./components/admin-workers-table/AdminWorkersTable";
+import { useNavigate } from "react-router-dom";
 
 const AdminWorkers: React.FC = () => {
   const [isAdminWorkersFormOpen, setAdminWorkersFormOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleWorkersForm = () => {
     setAdminWorkersFormOpen((prevState) => !prevState);
+  };
+
+  const onEditWorker = (workerId: number) => {
+    navigate(`/admin/update-worker/${workerId}`);
   };
 
   return (
@@ -29,7 +35,7 @@ const AdminWorkers: React.FC = () => {
           />
         )}
       </div>
-      <AdminWorkersTable key={"uniq1"} />
+      <AdminWorkersTable handleEditWorker={onEditWorker} key={"uniq1"} />
     </div>
   );
 };
