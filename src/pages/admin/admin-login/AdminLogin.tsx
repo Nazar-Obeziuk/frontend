@@ -11,17 +11,21 @@ const AdminLogin: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     const response: IUserResponse = await loginUser(data);
+    console.log("dsoivhfiu", response);
     localStorage.setItem("token", response.token);
     reset();
 
-    const token = localStorage.getItem("token");
-    if (token) navigate("/admin");
+    checkToken();
   };
 
   useEffect(() => {
+    checkToken();
+  }, []);
+
+  const checkToken = () => {
     const token = localStorage.getItem("token");
     if (token) navigate("/admin");
-  }, []);
+  };
 
   return (
     <section className={styles.admin__login_section}>

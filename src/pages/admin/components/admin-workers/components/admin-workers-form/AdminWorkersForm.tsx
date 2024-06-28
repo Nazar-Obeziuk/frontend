@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { createWorker } from "../../../../../../services/workers/workers";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
   toggleWorkersForm: () => void;
@@ -40,8 +42,8 @@ const AdminImage = styled.div`
 `;
 
 const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
-  const [fileInputs, setFileInputs] = useState<string[]>(["worker-image"]);
-  const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File | null>(null);
+  const [sliderImages, setSliderImages] = useState<File[]>([]);
   const {
     register,
     handleSubmit,
@@ -50,39 +52,61 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
   } = useForm({
     mode: "onChange",
   });
-  // const onDrop = useCallback((acceptedFiles: any) => {
-  //   const newFiles = acceptedFiles.map((file: any) =>
-  //     URL.createObjectURL(file)
-  //   );
-  //   setUploadedFiles([...uploadedFiles, ...newFiles]);
-  // }, []);
-  // const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
-  //   useDropzone({ accept: "image/*", onDrop });
 
   const addFileInput = () => {
-    const newFileInputName = `worker-slider-image-${fileInputs.length}`;
-    setFileInputs([...fileInputs, newFileInputName]);
+    setSliderImages([...sliderImages, new File([], "")]);
   };
 
   const onSubmit = async (data: any) => {
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
+
+    if (uploadedFiles) {
+      formData.append("image", uploadedFiles);
+    }
+
+    sliderImages.forEach((file, index) => {
+      if (file.size > 0) {
+        formData.append(`slider_images`, file);
+      }
+    });
+
     const token = localStorage.getItem("token");
+    const notify = (message: string) => toast(message);
+
     if (token) {
-      const fullData = {
-        ...data,
-        image: uploadedFiles,
-        slider_images: null,
-      };
-      await createWorker(fullData, token);
-      console.log(fullData);
-      reset();
+      try {
+        const response = await createWorker(formData, token);
+        notify(response.message);
+        reset();
+      } catch (error) {
+        console.error("Error creating worker:", error);
+        notify("Щось пішло не так...");
+      }
+    } else {
+      notify("Авторизуйтеся будь ласка!");
     }
   };
 
-  const handleUploadFile = (event: any) => {
-    const file = event.target.files[0];
-    // const urlImage = URL.createObjectURL(file);
-    // console.log(file);
-    setUploadedFiles(file);
+  const handleUploadFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setUploadedFiles(file);
+    }
+  };
+
+  const handleUploadSliderImages = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const newSliderImages = [...sliderImages];
+      newSliderImages[index] = file;
+      setSliderImages(newSliderImages);
+    }
   };
 
   return (
@@ -106,14 +130,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
             {errors["image"]?.message as string}
           </span>
         )}
-        {/* <div className="admin__worker_image">
-          <AdminImage
-            {...getRootProps({ isFocused, isDragAccept, isDragReject })}
-          >
-            <input {...getInputProps()} />
-            <p>Перетягніть файли</p>
-          </AdminImage>
-        </div> */}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="fullName_ua" className={styles.admin__control_label}>
@@ -270,10 +286,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           {...register("third_description_en", { required: false })}
         />
       </div>
-      {/* {fileInputs.map((fileInputName, index) => (
+      {sliderImages.map((sliderImage, index) => (
         <div key={index} className={styles.admin__block_control}>
           <label
-            htmlFor={fileInputName}
+            htmlFor={sliderImage.name}
             className={styles.admin__control_label}
           >
             Зображення для слайдера працівника {index + 1}
@@ -286,7 +302,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
             })}
           />
         </div>
-      ))} */}
+      ))}
       <button
         onClick={addFileInput}
         className={`${styles.admin__actions_button} ${styles.admin__button_slider}`}
@@ -306,6 +322,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
           Скасувати
         </button>
       </div>
+      <ToastContainer />
     </form>
   );
 };

@@ -24,7 +24,7 @@ export const getWorkerById = async (id: string) => {
 
 export const createWorker = async (formData: FormData, token: string) => {
   try {
-    const response = await axios.post("/api/workers", formData, {
+    const response = await axios.post("/workers", formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

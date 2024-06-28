@@ -13,8 +13,10 @@ const Admin: React.FC = () => {
       if (token) {
         const response = await checkRole(token);
 
-        if (response.error) console.log("you are not admin");
-        else console.log("you are admin, good luck");
+        console.log("admin response", response);
+
+        // if (response.error) console.log("you are not admin");
+        // else console.log("you are admin, good luck");
       } else {
         navigate("/admin/login");
       }

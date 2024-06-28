@@ -36,6 +36,7 @@ const AdminWorkersTable: React.FC = () => {
             <th className={styles.admin__table_th}>Другий опис (Англ)</th>
             <th className={styles.admin__table_th}>Третій опис (Укр)</th>
             <th className={styles.admin__table_th}>Третій опис (Англ)</th>
+            <th className={styles.admin__table_th}>Слайдер зображення</th>
             <th className={styles.admin__table_th}>Дії</th>
           </tr>
         </thead>
@@ -72,6 +73,12 @@ const AdminWorkersTable: React.FC = () => {
               <td className={styles.admin__table_td}>
                 {adminWorker.third_description_en}
               </td>
+              {/* <td className={styles.admin__table_td}>
+                {adminWorker.sliderImages.forEach(sliderImage) => (
+                  <img src={sliderImage} alt="" />
+                )}
+              </td> */}
+              <td className={styles.admin__table_td}>slider images</td>
               <td
                 className={`${styles.admin__table_td} ${styles.admin__td_actions}`}
               >
