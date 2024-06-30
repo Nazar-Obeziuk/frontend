@@ -1,8 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../admin-workers-form/AdminWorkersForm.module.css";
 import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAdminWorkersContext } from "../../../../../../context/admin-workers/AdminWorkersContext";
+import { updateWorker } from "../../../../../../services/workers/workers";
 
 const AdminWorkerUpdate: React.FC = () => {
+  const { editWorker } = useAdminWorkersContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      name_ua: editWorker?.name_ua,
+      name_en: editWorker?.name_en,
+      subtitle_ua: editWorker?.subtitle_ua,
+      subtitle_en: editWorker?.subtitle_en,
+      first_description_ua: editWorker?.first_description_ua,
+      first_description_en: editWorker?.first_description_en,
+      second_description_ua: editWorker?.second_description_ua,
+      second_description_en: editWorker?.second_description_en,
+      third_description_ua: editWorker?.third_description_ua,
+      third_description_en: editWorker?.third_description_en,
+    },
+  });
+
+  useEffect(() => {
+    if (editWorker) {
+      reset(editWorker);
+    }
+  }, [reset]);
+
+  const notify = (message: string) => toast(message);
+
+  const onSubmit = async (data: any) => {
+    const editedWorker = {
+      ...data,
+      image: null,
+      slider_images: null,
+    };
+
+    try {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await updateWorker(
+          editedWorker,
+          editedWorker.id,
+          token
+        );
+        notify(response.message);
+      } else {
+        // redirect
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!editWorker) {
+    return <p>Щось пішло не так спробуйте ще раз</p>;
+  }
+
   return (
     <section className={styles.admin__update_section}>
       <div className={styles.container}>
@@ -46,59 +109,65 @@ const AdminWorkerUpdate: React.FC = () => {
               Редагування документу
             </p>
           </div>
+          <h2 className={styles.admin__wrapper_title}>
+            Оновлення даних працівника
+          </h2>
           <div className={styles.admin__wrapper_main}>
-            <form className={styles.admin__form_block}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className={styles.admin__form_block}
+            >
               {/* <div className={styles.admin__block_control}>
-    <label htmlFor="image" className={styles.admin__control_label}>
-      Зображення працівника
-    </label>
-    <AdminImage
-      {...getMainRootProps({
-        isDragActive: isMainDragActive,
-        isDragAccept: isMainDragAccept,
-        isDragReject: isMainDragReject,
-        isFocused: isMainFocused,
-      })}
-    >
-      <input {...getMainInputProps()} />
-      {isMainDragActive ? (
-        <p>Перетягніть сюди файли ...</p>
-      ) : (
-        <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
-      )}
-    </AdminImage>
-    {mainImage && <p>{mainImage.name}</p>}
-    {errors["image"] && (
-      <span className={styles.error_message}>
-        {errors["image"]?.message as string}
-      </span>
-    )}
-  </div>
-  <div className={styles.admin__block_control}>
-    <label htmlFor="certificates" className={styles.admin__control_label}>
-      Зображення сертифікатів
-    </label>
-    <AdminImage
-      {...getSliderRootProps({
-        isDragActive: isSliderDragActive,
-        isDragAccept: isSliderDragAccept,
-        isDragReject: isSliderDragReject,
-        isFocused: isSliderFocused,
-      })}
-    >
-      <input {...getSliderInputProps()} />
-      {isSliderDragActive ? (
-        <p>Перетягніть сюди файли ...</p>
-      ) : (
-        <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
-      )}
-    </AdminImage>
-    <ul>
-      {sliderImages.map((file, index) => (
-        <li key={index}>{file.name}</li>
-      ))}
-    </ul>
-  </div> */}
+        <label htmlFor="image" className={styles.admin__control_label}>
+          Зображення працівника
+        </label>
+        <AdminImage
+          {...getMainRootProps({
+            isDragActive: isMainDragActive,
+            isDragAccept: isMainDragAccept,
+            isDragReject: isMainDragReject,
+            isFocused: isMainFocused,
+          })}
+        >
+          <input {...getMainInputProps()} />
+          {isMainDragActive ? (
+            <p>Перетягніть сюди файли ...</p>
+          ) : (
+            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+          )}
+        </AdminImage>
+        {mainImage && <p>{mainImage.name}</p>}
+        {errors["image"] && (
+          <span className={styles.error_message}>
+            {errors["image"]?.message as string}
+          </span>
+        )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label htmlFor="certificates" className={styles.admin__control_label}>
+          Зображення сертифікатів
+        </label>
+        <AdminImage
+          {...getSliderRootProps({
+            isDragActive: isSliderDragActive,
+            isDragAccept: isSliderDragAccept,
+            isDragReject: isSliderDragReject,
+            isFocused: isSliderFocused,
+          })}
+        >
+          <input {...getSliderInputProps()} />
+          {isSliderDragActive ? (
+            <p>Перетягніть сюди файли ...</p>
+          ) : (
+            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+          )}
+        </AdminImage>
+        <ul>
+          {sliderImages.map((file, index) => (
+            <li key={index}>{file.name}</li>
+          ))}
+        </ul>
+      </div> */}
               <div className={styles.admin__block_control}>
                 <label
                   htmlFor="fullName_ua"
@@ -109,14 +178,17 @@ const AdminWorkerUpdate: React.FC = () => {
                 <input
                   type="text"
                   className={`${styles.admin__control_field} `}
-                  //   style={errors["name_ua"] ? { border: "1px solid #EB001B" } : {}}
+                  style={
+                    errors["name_ua"] ? { border: "1px solid #EB001B" } : {}
+                  }
                   placeholder="Ім'я та прізвище працівника (Укр)"
+                  {...register("name_ua", { required: `Це поле обов'язкове!` })}
                 />
-                {/* {errors["name_ua"] && (
-      <span className={styles.error_message}>
-        {errors["name_ua"]?.message as string}
-      </span>
-    )} */}
+                {errors["name_ua"] && (
+                  <span className={styles.error_message}>
+                    {errors["name_ua"]?.message as string}
+                  </span>
+                )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
@@ -128,14 +200,17 @@ const AdminWorkerUpdate: React.FC = () => {
                 <input
                   type="text"
                   className={styles.admin__control_field}
-                  //   style={errors["name_en"] ? { border: "1px solid #EB001B" } : {}}
+                  style={
+                    errors["name_en"] ? { border: "1px solid #EB001B" } : {}
+                  }
                   placeholder="Ім'я та прізвище працівника (Англ)"
+                  {...register("name_en", { required: `Це поле обов'язкове!` })}
                 />
-                {/* {errors["name_en"] && (
-      <span className={styles.error_message}>
-        {errors["name_en"]?.message as string}
-      </span>
-    )} */}
+                {errors["name_en"] && (
+                  <span className={styles.error_message}>
+                    {errors["name_en"]?.message as string}
+                  </span>
+                )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
@@ -147,14 +222,19 @@ const AdminWorkerUpdate: React.FC = () => {
                 <input
                   type="text"
                   className={styles.admin__control_field}
-                  //   style={errors["subtitle_ua"] ? { border: "1px solid #EB001B" } : {}}
+                  style={
+                    errors["subtitle_ua"] ? { border: "1px solid #EB001B" } : {}
+                  }
                   placeholder="Напрямок працівника (Укр)"
+                  {...register("subtitle_ua", {
+                    required: `Це поле обов'язкове!`,
+                  })}
                 />
-                {/* {errors["subtitle_ua"] && (
-      <span className={styles.error_message}>
-        {errors["subtitle_ua"]?.message as string}
-      </span>
-    )} */}
+                {errors["subtitle_ua"] && (
+                  <span className={styles.error_message}>
+                    {errors["subtitle_ua"]?.message as string}
+                  </span>
+                )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
@@ -165,15 +245,20 @@ const AdminWorkerUpdate: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  //   style={errors["subtitle_en"] ? { border: "1px solid #EB001B" } : {}}
+                  style={
+                    errors["subtitle_en"] ? { border: "1px solid #EB001B" } : {}
+                  }
                   className={styles.admin__control_field}
                   placeholder="Напрямок працівника (Англ)"
+                  {...register("subtitle_en", {
+                    required: `Це поле обов'язкове!`,
+                  })}
                 />
-                {/* {errors["subtitle_en"] && (
-      <span className={styles.error_message}>
-        {errors["subtitle_en"]?.message as string}
-      </span>
-    )} */}
+                {errors["subtitle_en"] && (
+                  <span className={styles.error_message}>
+                    {errors["subtitle_en"]?.message as string}
+                  </span>
+                )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
@@ -186,6 +271,7 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Перший опис працівника (Укр)"
+                  {...register("first_description_ua", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_control}>
@@ -199,6 +285,7 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Перший опис працівника (Англ)"
+                  {...register("first_description_en", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_control}>
@@ -212,6 +299,7 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Другий опис працівника (Укр)"
+                  {...register("second_description_ua", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_control}>
@@ -225,6 +313,7 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Другий опис працівника (Англ)"
+                  {...register("second_description_en", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_control}>
@@ -238,6 +327,7 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Третій опис працівника (Укр)"
+                  {...register("third_description_ua", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_control}>
@@ -251,14 +341,15 @@ const AdminWorkerUpdate: React.FC = () => {
                   type="text"
                   className={styles.admin__control_field}
                   placeholder="Третій опис працівника (Англ)"
+                  {...register("third_description_en", { required: false })}
                 />
               </div>
               <div className={styles.admin__block_actions}>
-                <button className={styles.admin__actions_button} type="submit">
-                  Оновити дані
-                </button>
-                <button className={styles.admin__actions_button} type="button">
-                  Скасувати
+                <button
+                  className={`${styles.admin__actions_button} ${styles.admin__button_full}`}
+                  type="submit"
+                >
+                  Підтвердити
                 </button>
               </div>
             </form>

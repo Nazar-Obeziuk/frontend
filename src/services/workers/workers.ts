@@ -1,20 +1,9 @@
 import axios from "../../utils/axios/axios";
-import { IUser } from "../auth/login/login.interface";
+import { IWorker } from "./worker.interface";
 
 export const getAllWorkers = async () => {
   try {
     const { data } = await axios.get("/workers");
-    return data;
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-};
-
-export const getWorkerById = async (id: string) => {
-  try {
-    console.log(id);
-    const { data } = await axios.get(`/workers/${id}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -37,9 +26,18 @@ export const createWorker = async (formData: FormData, token: string) => {
   }
 };
 
-export const updateWorker = async (params: any) => {
+export const updateWorker = async (
+  updatedWorker: IWorker,
+  id: number,
+  token: string
+) => {
   try {
-    const { data } = await axios.post("/workers", params);
+    const { data } = await axios.put(`/workers/${id}`, updatedWorker, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return data;
   } catch (error) {
     console.log(error);
@@ -47,9 +45,14 @@ export const updateWorker = async (params: any) => {
   }
 };
 
-export const deleteWorker = async (id: string) => {
+export const deleteWorker = async (id: number, token: string) => {
   try {
-    const { data } = await axios.delete(`/workers/${id}`);
+    const { data } = await axios.delete(`/workers/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return data;
   } catch (error) {
     console.log(error);

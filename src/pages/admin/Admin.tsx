@@ -3,20 +3,23 @@ import styles from "./Admin.module.css";
 import AdminLayout from "./components/admin-layout/AdminLayout";
 import { NavLink, useNavigate } from "react-router-dom";
 import { checkRole } from "../../services/check-role/checkRole";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Admin: React.FC = () => {
   const navigate = useNavigate();
+
+  const notify = (message: string) => toast(message);
 
   useEffect(() => {
     const func = async () => {
       const token = localStorage.getItem("token");
       if (token) {
-        const response = await checkRole(token);
+        const response: any = await checkRole(token);
 
-        console.log("admin response", response);
-
-        // if (response.error) console.log("you are not admin");
-        // else console.log("you are admin, good luck");
+        response.status === 200
+          ? notify(response.data.message)
+          : notify("Щось пішло не так...");
       } else {
         navigate("/admin/login");
       }

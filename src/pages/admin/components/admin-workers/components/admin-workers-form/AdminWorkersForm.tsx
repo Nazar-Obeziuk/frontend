@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import { createWorker } from "../../../../../../services/workers/workers";
 import { useDropzone, Accept } from "react-dropzone";
 import styled from "styled-components";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { IWorker } from "../../../../../../services/workers/worker.interface";
 
 interface Props {
   toggleWorkersForm: () => void;
+  getAll: () => void;
 }
 
 const getColor = (props: any) => {
@@ -30,7 +30,7 @@ const AdminImage = styled.div`
   padding: 16px 26px 14px 26px;
   border-width: 1px;
   border-radius: 12px;
-  border-color: ${(props) => getColor(props)};
+  border-color: ${(props: any) => getColor(props)};
   border-style: solid;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.5);
@@ -44,15 +44,35 @@ const AdminImage = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  &[isdragactive="true"] {
+    /* Style for drag active */
+  }
+
+  &[isdragaccept="true"] {
+    /* Style for drag accept */
+    border-color: #00e676;
+  }
+
+  &[isdragreject="true"] {
+    /* Style for drag reject */
+    border-color: #ff1744;
+  }
+
+  &[isfocused="true"] {
+    /* Style for focused */
+    border-color: #2196f3;
+  }
 `;
 
-const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
+const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm({ mode: "onChange" });
 
@@ -98,6 +118,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
   });
 
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
@@ -117,14 +138,18 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
     if (token) {
       try {
         const response = await createWorker(formData, token);
+        getAll();
         notify(response.message);
         reset();
       } catch (error) {
         console.error("Error creating worker:", error);
         notify("Щось пішло не так...");
+      } finally {
+        setIsLoading(false);
       }
     } else {
       notify("Авторизуйтеся будь ласка!");
+      setIsLoading(false);
     }
   };
 
@@ -139,10 +164,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         </label>
         <AdminImage
           {...getMainRootProps({
-            isDragActive: isMainDragActive,
-            isDragAccept: isMainDragAccept,
-            isDragReject: isMainDragReject,
-            isFocused: isMainFocused,
+            isdragactive: isMainDragActive.toString(),
+            isdragaccept: isMainDragAccept.toString(),
+            isdragreject: isMainDragReject.toString(),
+            isfocused: isMainFocused.toString(),
           })}
         >
           <input {...getMainInputProps()} />
@@ -165,10 +190,10 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         </label>
         <AdminImage
           {...getSliderRootProps({
-            isDragActive: isSliderDragActive,
-            isDragAccept: isSliderDragAccept,
-            isDragReject: isSliderDragReject,
-            isFocused: isSliderFocused,
+            isdragactive: isSliderDragActive.toString(),
+            isdragaccept: isSliderDragAccept.toString(),
+            isdragreject: isSliderDragReject.toString(),
+            isfocused: isSliderFocused.toString(),
           })}
         >
           <input {...getSliderInputProps()} />
@@ -185,7 +210,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         </ul>
       </div>
       <div className={styles.admin__block_control}>
-        <label htmlFor="fullName_ua" className={styles.admin__control_label}>
+        <label htmlFor="name_ua" className={styles.admin__control_label}>
           Ім'я та прізвище працівника (Укр)
         </label>
         <input
@@ -340,18 +365,22 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm }) => {
         />
       </div>
       <div className={styles.admin__block_actions}>
-        <button className={styles.admin__actions_button} type="submit">
-          Підтвердити
+        <button
+          className={styles.admin__actions_button}
+          type="submit"
+          disabled={isLoading || !isValid}
+        >
+          {isLoading ? "Загрузка..." : "Підтвердити"}
         </button>
         <button
           onClick={toggleWorkersForm}
           className={styles.admin__actions_button}
           type="button"
+          disabled={isLoading}
         >
           Скасувати
         </button>
       </div>
-      <ToastContainer />
     </form>
   );
 };

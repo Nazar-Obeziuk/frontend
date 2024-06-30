@@ -45,6 +45,13 @@
 .admin__router_active {
   color: var(--primary);
 }
+.admin__wrapper_title {
+  font-family: "Fixel-Display";
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--white);
+}
 .admin__wrapper_main {
   width: 100%;
   background: var(--dark-gray);
@@ -119,6 +126,9 @@
   background: transparent;
   color: var(--primary);
 }
+.admin__button_full {
+  width: 100% !important;
+}
 .admin__button_slider {
   width: 100% !important;
 }
@@ -177,5 +187,14 @@
     padding: 12px 48px;
     font-size: 16px;
     border-width: 1px;
+  }
+
+  .admin__wrapper_title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .admin__update_wrapper {
+    gap: 30px;
   }
 }

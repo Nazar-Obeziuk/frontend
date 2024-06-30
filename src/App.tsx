@@ -24,6 +24,7 @@ import CartPayment from "./pages/cart/cart-payment/CartPayment";
 import Admin from "./pages/admin/Admin";
 import AdminLogin from "./pages/admin/admin-login/AdminLogin";
 import AdminWorkerUpdate from "./pages/admin/components/admin-workers/components/admin-worker-update/AdminWorkerUpdate";
+import AdminError from "./pages/admin/admin-error/AdminError";
 
 function App() {
   return (
@@ -93,6 +94,7 @@ function App() {
           element={<AdminWorkerUpdate />}
         ></Route>
         <Route path="/admin/login" element={<AdminLogin />}></Route>
+        <Route path="/admin/error" element={<AdminError />}></Route>
       </Routes>
     </Layout>
   );
