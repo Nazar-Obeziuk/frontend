@@ -177,7 +177,11 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-        {mainImage && <p>{mainImage.name}</p>}
+        {mainImage && (
+          <div>
+            <img src={URL.createObjectURL(mainImage)} alt="preview" width="100" />
+          </div>
+        )}
         {errors["image"] && (
           <span className={styles.error_message}>
             {errors["image"]?.message as string}
@@ -203,9 +207,11 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-        <ul>
+        <ul className={styles.prevFlex}>
           {sliderImages.map((file, index) => (
-            <li key={index}>{file.name}</li>
+            <li key={index}>
+              <img src={URL.createObjectURL(file)} alt={`preview-${index}`} width="100" />
+            </li>
           ))}
         </ul>
       </div>
@@ -366,7 +372,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
       </div>
       <div className={styles.admin__block_actions}>
         <button
-          className={styles.admin__actions_button}
+          className={isLoading ? styles.admin__actions_button + " disable" : styles.admin__actions_button}
           type="submit"
           disabled={isLoading || !isValid}
         >
