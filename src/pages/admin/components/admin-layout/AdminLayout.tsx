@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./AdminLayout.module.css";
 import AdminWorkers from "../admin-workers/AdminWorkers";
-import AdminMainReviews from "../admin-main-reviews/AdminMainReviews";
 import AdminSidebar from "../admin-sidebar/AdminSidebar";
-import AdminOrthopedicInsoles from "../admin-orthopedic-insoles/AdminOrthopedicInsoles";
+import AdminProducts from "../admin-products/AdminProducts";
+import AdminReviews from "../admin-reviews/AdminReviews";
 
 const AdminLayout: React.FC = () => {
   const [activeSection, setActiveSection] = useState("workers");
@@ -12,10 +12,10 @@ const AdminLayout: React.FC = () => {
     switch (activeSection) {
       case "workers":
         return <AdminWorkers />;
-      case "main-reviews":
-        return <AdminMainReviews />;
-      case "orthopedic-insoles":
-        return <AdminOrthopedicInsoles />;
+      case "products":
+        return <AdminProducts />;
+      case "reviews":
+        return <AdminReviews />;
       default:
         return null;
     }

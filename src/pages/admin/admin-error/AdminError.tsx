@@ -1,7 +1,14 @@
 import React from "react";
 import styles from "./AdminError.module.css";
+import { useNavigate } from "react-router-dom";
 
 const AdminError: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleBackToHomeAdmin = () => {
+    navigate("/admin");
+  };
+
   return (
     <section className={styles.admin__error_section}>
       <div className={styles.container}>
@@ -15,8 +22,12 @@ const AdminError: React.FC = () => {
               проблема не вирішиться повідомте будь ласка розробникам про
               проблему!😉
             </p>
-            <button className={styles.admin__info_button} type="button">
-              Увійти ще раз
+            <button
+              onClick={handleBackToHomeAdmin}
+              className={styles.admin__info_button}
+              type="button"
+            >
+              Повернутися на головну
             </button>
           </div>
           <div className={styles.admin__wrapper_banner}>

@@ -5,20 +5,20 @@ import { Navigation } from "swiper/modules";
 import styles from "./HomeReview.module.css";
 import "swiper/css";
 import "swiper/css/navigation";
-import { getAllReviews } from "../../../../../services/reviews/reviewsService";
+// import { getAllReviews } from "../../../../../services/reviews/reviews";
 import { IReview } from "../../../../../services/reviews/review.interface";
 
 const HomeReview: React.FC = () => {
   const [reviews, setReviews] = useState([]);
   const swiper = useSwiper();
 
-  const getAll = async () => {
-    const reviewsData = await getAllReviews();
-    setReviews(reviewsData);
-  };
+  // const getAll = async () => {
+  //   const reviewsData = await getAllReviews();
+  //   setReviews(reviewsData);
+  // };
 
   useEffect(() => {
-    getAll();
+    // getAll();
   }, []);
 
   return (

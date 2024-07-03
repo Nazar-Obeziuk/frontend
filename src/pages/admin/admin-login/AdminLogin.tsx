@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AdminLogin.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../../services/auth/login/login";
-import { IUserResponse } from "../../../services/auth/login/login.interface";
 
 const AdminLogin: React.FC = () => {
   const { register, handleSubmit, reset } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
-    const response: any = await loginUser(data);
+    try {
+      const response: any = await loginUser(data);
+      localStorage.setItem("token", response.data.token);
 
-    localStorage.setItem("token", response.data.token);
-
-    reset();
-    checkToken();
+      setIsLoading(true);
+      reset();
+      checkToken();
+    } catch (error) {
+      console.log("login error", error);
+    }
   };
 
   useEffect(() => {
@@ -80,8 +84,12 @@ const AdminLogin: React.FC = () => {
                   placeholder="Ваш пароль"
                   {...register("password", { required: true })}
                 />
-                <button className={styles.admin__form_button} type="submit">
-                  Увійти
+                <button
+                  className={styles.admin__form_button}
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Загрузка..." : "Увійти"}
                 </button>
               </form>
             </div>

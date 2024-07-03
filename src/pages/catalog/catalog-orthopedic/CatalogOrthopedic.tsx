@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./CatalogOrthopedic.module.css";
 import { NavLink } from "react-router-dom";
 import CatalogProductItem from "../../../components/catalog-product-item/CatalogProductItem";
-import { ICatalogProductItem } from "../../../services/catalog-products/catalog-products.interface";
-import { getAllProducts } from "../../../services/catalog-products/catalogProductsService";
+import { IProduct } from "../../../services/products/product.interface";
+import { getAllProducts } from "../../../services/products/product";
 
 const CatalogOrthopedic: React.FC = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   const getProducts = async () => {
     const productsData = await getAllProducts();
@@ -50,9 +50,15 @@ const CatalogOrthopedic: React.FC = () => {
             </p>
           </div>
           <div className={styles.catalog__wrapper_main}>
-            {products.map((product: ICatalogProductItem) => (
-              <CatalogProductItem product={product} key={product.product_id} />
-            ))}
+            {products.length > 0 ? (
+              products.map((product: IProduct) => (
+                <CatalogProductItem product={product} key={product.id} />
+              ))
+            ) : (
+              <h2 className={styles.admin__products_empty}>
+                Товари зараз не доступні.
+              </h2>
+            )}
           </div>
         </div>
       </div>

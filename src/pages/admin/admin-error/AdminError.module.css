@@ -34,7 +34,7 @@
   color: var(--white);
 }
 .admin__info_button {
-  width: 180px;
+  width: 260px;
   background: var(--primary);
   border-radius: 12px;
   border: 2px solid var(--primary);
@@ -62,16 +62,28 @@
 
 @media (max-width: 768px) {
   .admin__error_section {
-    padding: 100px 0;
+    padding: 100px 15px;
   }
 
   .admin__error_wrapper {
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     gap: 40px;
   }
 
-  .admin__wrapper_info,
-  .admin__wrapper_banner {
+  .admin__wrapper_info {
     width: 100%;
+  }
+
+  .admin__wrapper_banner {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin__info_title {
+    font-size: 26px;
+    line-height: 30px;
   }
 }

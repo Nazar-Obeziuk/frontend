@@ -1,17 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
-import styles from "../admin-workers-form/AdminWorkersForm.module.css";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import styles from "../admin-products-form/AdminProductsForm.module.css";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Accept, useDropzone } from "react-dropzone";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
-  getWorkerById,
-  updateWorker,
-} from "../../../../../../services/workers/workers";
+  getAllProductsVariations,
+  updateProductVariation,
+} from "../../../../../../services/products/product";
+import { toast } from "react-toastify";
+import { useAdminVariationsContext } from "../../../../../../context/admin-products/AdminProductsContext";
 import AdminError from "../../../../admin-error/AdminError";
 import styled from "styled-components";
-import { Accept, useDropzone } from "react-dropzone";
-import { IWorker } from "../../../../../../services/workers/worker.interface";
 
 const getColor = (props: any) => {
   if (props.isDragAccept) {
@@ -65,15 +64,13 @@ const AdminImage = styled.div`
   }
 `;
 
-const AdminWorkerUpdate: React.FC = () => {
-  const [mainImage, setMainImage] = useState<File | null>(null);
-  const [sliderImages, setSliderImages] = useState<File[]>([]);
+const AdminProductVariationUpdate = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [editWorker, setEditWorker] = useState<IWorker>();
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const [mainImage, setMainImage] = useState<File | null>(null);
   const [isEditUploadOpen, setEditUploadOpen] = useState(false);
-  const [isEditUploadSlidersOpen, setEditUploadSlidersOpen] = useState(false);
+  const { editVariation } = useAdminVariationsContext();
+  const { id } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -104,57 +101,29 @@ const AdminWorkerUpdate: React.FC = () => {
     accept: acceptType,
   });
 
-  const onDropSliderImages = useCallback((acceptedFiles: File[]) => {
-    setSliderImages((prevSliderImages) => [
-      ...prevSliderImages,
-      ...acceptedFiles,
-    ]);
-  }, []);
-
-  const {
-    getRootProps: getSliderRootProps,
-    getInputProps: getSliderInputProps,
-    isDragActive: isSliderDragActive,
-    isDragAccept: isSliderDragAccept,
-    isDragReject: isSliderDragReject,
-    isFocused: isSliderFocused,
-  } = useDropzone({
-    onDrop: onDropSliderImages,
-    multiple: true,
-    accept: acceptType,
-  });
+  const getAllVariations = async () => {
+    try {
+      const response = await getAllProductsVariations(editVariation!.id);
+      // setVariations(response);
+    } catch (error) {
+      console.log("variation error", error);
+    }
+  };
 
   useEffect(() => {
-    const getEditedWorker = async () => {
-      try {
-        const editedWorker = await getWorkerById(id!);
-        setEditWorker(editedWorker);
-
-        if (editedWorker) {
-          const updatedObject = {
-            image_url: editedWorker?.image_url,
-            name_ua: editedWorker?.name_ua,
-            name_en: editedWorker?.name_en,
-            subtitle_ua: editedWorker?.subtitle_ua,
-            subtitle_en: editedWorker?.subtitle_en,
-            first_description_ua: editedWorker?.first_description_ua,
-            first_description_en: editedWorker?.first_description_en,
-            second_description_ua: editedWorker?.second_description_ua,
-            second_description_en: editedWorker?.second_description_en,
-            third_description_ua: editedWorker?.third_description_ua,
-            third_description_en: editedWorker?.third_description_en,
-            slider_images: editedWorker?.slider_images,
-          };
-
-          reset(updatedObject);
-        }
-      } catch (error) {
-        console.log(error);
-        return <AdminError />;
-      }
-    };
-
-    getEditedWorker();
+    getAllVariations();
+    if (editVariation) {
+      const updatedObject = {
+        variation_type: editVariation?.variation_type,
+        variation_value: editVariation?.variation_value,
+        additional_price: editVariation?.additional_price,
+        image_url: editVariation?.image_url,
+        article: editVariation?.article,
+        description_en: editVariation?.description_en,
+        description_ua: editVariation?.description_ua,
+      };
+      reset(updatedObject);
+    }
   }, []);
 
   const notify = (message: string) => toast(message);
@@ -170,18 +139,13 @@ const AdminWorkerUpdate: React.FC = () => {
       formData.append("image", mainImage);
     }
 
-    sliderImages.forEach((file) => {
-      formData.append("slider_images", file);
-    });
-
     try {
       const token = localStorage.getItem("token");
 
       if (token) {
-        const response = await updateWorker(formData, id!, token);
+        const response = await updateProductVariation(id!, formData, token);
         notify(response.message);
         navigate("/admin");
-        reset();
       } else {
         return <AdminError />;
       }
@@ -192,10 +156,6 @@ const AdminWorkerUpdate: React.FC = () => {
 
   const handleChangePhoto = () => {
     setEditUploadOpen((prevState) => !prevState);
-  };
-
-  const handleChangeSliders = () => {
-    setEditUploadSlidersOpen((prevState) => !prevState);
   };
 
   return (
@@ -238,11 +198,11 @@ const AdminWorkerUpdate: React.FC = () => {
             <p
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
-              Редагування документу
+              Редагування варіації
             </p>
           </div>
           <h2 className={styles.admin__wrapper_title}>
-            Оновлення даних працівника
+            Оновлення даних варіації
           </h2>
           <div className={styles.admin__wrapper_main}>
             <form
@@ -258,11 +218,11 @@ const AdminWorkerUpdate: React.FC = () => {
                       htmlFor="image"
                       className={styles.admin__control_label}
                     >
-                      Зображення робітника
+                      Зображення товару
                     </label>
                     <img
-                      src={editWorker?.image_url}
-                      alt="worker banner"
+                      src={editVariation!.image_url[0]}
+                      alt="variation banner"
                       className={styles.admin__control_image}
                     />
                   </div>
@@ -302,240 +262,162 @@ const AdminWorkerUpdate: React.FC = () => {
                   )}
                 </div>
               </div>
-              <div
-                className={`${styles.admin__block_control} ${styles.admin__control_block}`}
-              >
-                {!isEditUploadSlidersOpen && (
-                  <div className={styles.admin__control_item}>
-                    <label
-                      htmlFor="image"
-                      className={styles.admin__control_label}
-                    >
-                      Зображення фото сертифікатів
-                    </label>
-                    {editWorker?.slider_images.map(
-                      (slider_image: string, index: number) => (
-                        <img
-                          key={index}
-                          src={slider_image}
-                          alt="worker banner"
-                          className={styles.admin__control_image}
-                        />
-                      )
-                    )}
-                  </div>
-                )}
-                <div className={styles.admin__control_item}>
-                  <button
-                    onClick={handleChangeSliders}
-                    className={styles.admin__control_add}
-                    type="button"
-                  >
-                    {!isEditUploadSlidersOpen
-                      ? "Змінити фото сертифікатів"
-                      : "Скасувати"}
-                  </button>
-                  {isEditUploadSlidersOpen && (
-                    <div className={styles.admin__control_upload}>
-                      <AdminImage
-                        {...getSliderRootProps({
-                          isdragactive: isSliderDragActive.toString(),
-                          isdragaccept: isSliderDragAccept.toString(),
-                          isdragreject: isSliderDragReject.toString(),
-                          isfocused: isSliderFocused.toString(),
-                        })}
-                      >
-                        <input {...getSliderInputProps()} />
-                        {isSliderDragActive ? (
-                          <p>Перетягніть сюди файли ...</p>
-                        ) : (
-                          <p>Перетягніть або клацніть для вибору файлів</p>
-                        )}
-                      </AdminImage>
-                      <ul>
-                        {sliderImages.map((file, index) => (
-                          <li key={index}>{file.name}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
               <div className={styles.admin__block_control}>
                 <label
-                  htmlFor="fullName_ua"
+                  htmlFor="variation_type"
                   className={styles.admin__control_label}
                 >
-                  Ім'я та прізвище працівника (Укр)
+                  Тип варіації
                 </label>
-                <input
-                  type="text"
-                  className={`${styles.admin__control_field} `}
+                <select
                   style={
-                    errors["name_ua"] ? { border: "1px solid #EB001B" } : {}
+                    errors["variation_type"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
                   }
-                  placeholder="Ім'я та прізвище працівника (Укр)"
-                  {...register("name_ua", { required: `Це поле обов'язкове!` })}
-                />
-                {errors["name_ua"] && (
+                  {...register("variation_type", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                  className={styles.admin__control_field}
+                >
+                  <option value="coverage" defaultValue={"coverage"}>
+                    Покриття
+                  </option>
+                  <option value="sizes">Розміра</option>
+                </select>
+                {errors["variation_type"] && (
                   <span className={styles.error_message}>
-                    {errors["name_ua"]?.message as string}
+                    {errors["variation_type"]?.message as string}
                   </span>
                 )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
-                  htmlFor="name_en"
+                  htmlFor="variation_value"
                   className={styles.admin__control_label}
                 >
-                  Ім'я та прізвище працівника (Англ)
+                  Значення варіації
                 </label>
                 <input
                   type="text"
                   className={styles.admin__control_field}
                   style={
-                    errors["name_en"] ? { border: "1px solid #EB001B" } : {}
+                    errors["variation_value"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
                   }
-                  placeholder="Ім'я та прізвище працівника (Англ)"
-                  {...register("name_en", { required: `Це поле обов'язкове!` })}
-                />
-                {errors["name_en"] && (
-                  <span className={styles.error_message}>
-                    {errors["name_en"]?.message as string}
-                  </span>
-                )}
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="subtitle_ua"
-                  className={styles.admin__control_label}
-                >
-                  Напрямок працівника (Укр)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  style={
-                    errors["subtitle_ua"] ? { border: "1px solid #EB001B" } : {}
-                  }
-                  placeholder="Напрямок працівника (Укр)"
-                  {...register("subtitle_ua", {
+                  placeholder="Значення варіації"
+                  {...register("variation_value", {
                     required: `Це поле обов'язкове!`,
                   })}
                 />
-                {errors["subtitle_ua"] && (
+                {errors["variation_value"] && (
                   <span className={styles.error_message}>
-                    {errors["subtitle_ua"]?.message as string}
+                    {errors["variation_value"]?.message as string}
                   </span>
                 )}
               </div>
               <div className={styles.admin__block_control}>
                 <label
-                  htmlFor="worker-subtitle-en"
+                  htmlFor="additional_price"
                   className={styles.admin__control_label}
                 >
-                  Напрямок працівника (Англ)
+                  Ціна товару при змінні варіації варіації
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  style={
+                    errors["additional_price"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  placeholder=" Ціна товару при змінні варіації варіації"
+                  {...register("additional_price", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["additional_price"] && (
+                  <span className={styles.error_message}>
+                    {errors["additional_price"]?.message as string}
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="article"
+                  className={styles.admin__control_label}
+                >
+                  Артикул товару при змінні варіації
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  style={
+                    errors["article"] ? { border: "1px solid #EB001B" } : {}
+                  }
+                  placeholder="Артикул товару при змінні варіації"
+                  {...register("article", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["article"] && (
+                  <span className={styles.error_message}>
+                    {errors["article"]?.message as string}
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_ua"
+                  className={styles.admin__control_label}
+                >
+                  Опис товару при змінні варіації (Укр)
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  style={
+                    errors["description_ua"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  placeholder="Опис товару при змінні варіації (Укр)"
+                  {...register("description_ua", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["description_ua"] && (
+                  <span className={styles.error_message}>
+                    {errors["description_ua"]?.message as string}
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_en"
+                  className={styles.admin__control_label}
+                >
+                  Опис товару при змінні варіації (Англ)
                 </label>
                 <input
                   type="text"
                   style={
-                    errors["subtitle_en"] ? { border: "1px solid #EB001B" } : {}
+                    errors["description_en"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
                   }
                   className={styles.admin__control_field}
-                  placeholder="Напрямок працівника (Англ)"
-                  {...register("subtitle_en", {
+                  placeholder="Опис товару при змінні варіації (Англ)"
+                  {...register("description_en", {
                     required: `Це поле обов'язкове!`,
                   })}
                 />
-                {errors["subtitle_en"] && (
+                {errors["description_en"] && (
                   <span className={styles.error_message}>
-                    {errors["subtitle_en"]?.message as string}
+                    {errors["description_en"]?.message as string}
                   </span>
                 )}
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="first_description_ua"
-                  className={styles.admin__control_label}
-                >
-                  Перший опис працівника (Укр)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Перший опис працівника (Укр)"
-                  {...register("first_description_ua", { required: false })}
-                />
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="worker-desc-1-en"
-                  className={styles.admin__control_label}
-                >
-                  Перший опис працівника (Англ)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Перший опис працівника (Англ)"
-                  {...register("first_description_en", { required: false })}
-                />
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="worker-desc-2-ua"
-                  className={styles.admin__control_label}
-                >
-                  Другий опис працівника (Укр)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Другий опис працівника (Укр)"
-                  {...register("second_description_ua", { required: false })}
-                />
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="worker-desc-2-en"
-                  className={styles.admin__control_label}
-                >
-                  Другий опис працівника (Англ)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Другий опис працівника (Англ)"
-                  {...register("second_description_en", { required: false })}
-                />
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="worker-desc-3-ua"
-                  className={styles.admin__control_label}
-                >
-                  Третій опис працівника (Укр)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Третій опис працівника (Укр)"
-                  {...register("third_description_ua", { required: false })}
-                />
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="worker-desc-3-en"
-                  className={styles.admin__control_label}
-                >
-                  Третій опис працівника (Англ)
-                </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
-                  placeholder="Третій опис працівника (Англ)"
-                  {...register("third_description_en", { required: false })}
-                />
               </div>
               <div className={styles.admin__block_actions}>
                 <button
@@ -554,4 +436,4 @@ const AdminWorkerUpdate: React.FC = () => {
   );
 };
 
-export default AdminWorkerUpdate;
+export default AdminProductVariationUpdate;

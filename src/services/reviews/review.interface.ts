@@ -9,4 +9,5 @@ export interface IReview {
   pluses_en: string;
   minuses_ua: string;
   minuses_en: string;
+  product_id: number | null;
 }

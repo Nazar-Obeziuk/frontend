@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CatalogProduct.module.css";
-import CatalogProductInner from "./components/catalog-product-inner/CatalogProductInner";
+// import CatalogProductInner from "./components/catalog-product-inner/CatalogProductInner";
 import { NavLink } from "react-router-dom";
 import CatalogProductCharacteristics from "./components/catalog-product-characteristics/CatalogProductCharacteristics";
 import Reviews from "../../../components/reviews/Reviews";
 import ReviewPopup from "../../../components/review-popup/ReviewPopup";
-import { getProductById } from "../../../services/catalog-products/catalogProductsService";
 import { useParams } from "react-router-dom";
-import { IProductItemDetails } from "../../../services/catalog-products/catalog-products.interface";
 
 const CatalogProduct: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"characteristics" | "reviews">(
     "characteristics"
   );
   const [isOpenReviewPopup, setIsOpenReviewPopup] = useState(false);
-  const [catalogProduct, setCatalogProduct] = useState<
-    IProductItemDetails | undefined
-  >(undefined);
+  // const [catalogProduct, setCatalogProduct] = useState<
+  //   IProductItemDetails | undefined
+  // >(undefined);
   const { id } = useParams();
 
   const toggleReviewPopup = () => {
     setIsOpenReviewPopup((prevState) => !prevState);
   };
 
-  const getOneProduct = async () => {
-    if (!id) return;
-    const productData = await getProductById(id);
-    setCatalogProduct(productData);
-  };
+  // const getOneProduct = async () => {
+  //   if (!id) return;
+  //   const productData = await getProductById(id);
+  //   setCatalogProduct(productData);
+  // };
 
   useEffect(() => {
-    getOneProduct();
+    // getOneProduct();
   }, [id]);
 
-  if (!catalogProduct) {
-    return <p>Loading...</p>;
-  }
+  // if (!catalogProduct) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <>
@@ -67,14 +65,14 @@ const CatalogProduct: React.FC = () => {
               <p
                 className={`${styles.catalog__router_name} ${styles.catalog__router_active}`}
               >
-                {catalogProduct.product_name_en}
+                {/* {catalogProduct.product_name_en} */}
               </p>
             </div>
             <div className={styles.catalog__product_main}>
-              <CatalogProductInner
+              {/* <CatalogProductInner
                 catalogProduct={catalogProduct}
                 key={"uniq1"}
-              />
+              /> */}
               <div className={styles.catalog__main_info}>
                 <div className={styles.catalog__info_tabs}>
                   <span

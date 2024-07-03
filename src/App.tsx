@@ -25,6 +25,10 @@ import Admin from "./pages/admin/Admin";
 import AdminLogin from "./pages/admin/admin-login/AdminLogin";
 import AdminWorkerUpdate from "./pages/admin/components/admin-workers/components/admin-worker-update/AdminWorkerUpdate";
 import AdminError from "./pages/admin/admin-error/AdminError";
+import AdminProductUpdate from "./pages/admin/components/admin-products/components/admin-product-update/AdminProductUpdate";
+import AdminProductVariation from "./pages/admin/components/admin-products/components/admin-product-variation/AdminProductVariation";
+import AdminProductVariationUpdate from "./pages/admin/components/admin-products/components/admin-product-variation-update/AdminProductVariationUpdate";
+import AdminReviewsUpdate from "./pages/admin/components/admin-reviews/components/admin-reviews-update/AdminReviewsUpdate";
 
 function App() {
   return (
@@ -92,6 +96,22 @@ function App() {
         <Route
           path="/admin/update-worker/:id"
           element={<AdminWorkerUpdate />}
+        ></Route>
+        <Route
+          path="/admin/update-product/:id"
+          element={<AdminProductUpdate />}
+        ></Route>
+        <Route
+          path="/admin/variation-product/:id"
+          element={<AdminProductVariation />}
+        ></Route>
+        <Route
+          path="/admin/product-variation-update/:id"
+          element={<AdminProductVariationUpdate />}
+        ></Route>
+        <Route
+          path="/admin/update-general-review/:id"
+          element={<AdminReviewsUpdate />}
         ></Route>
         <Route path="/admin/login" element={<AdminLogin />}></Route>
         <Route path="/admin/error" element={<AdminError />}></Route>

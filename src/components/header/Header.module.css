@@ -130,9 +130,6 @@
   gap: 32px;
 }
 
-.header__info_phone {
-}
-
 .header__phone_item {
   color: var(--white);
   font-size: 16px;

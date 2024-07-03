@@ -6,6 +6,7 @@ import { useDropzone, Accept } from "react-dropzone";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   toggleWorkersForm: () => void;
@@ -69,6 +70,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -140,7 +142,9 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
         const response = await createWorker(formData, token);
         getAll();
         notify(response.message);
+        navigate("/admin");
         reset();
+        toggleWorkersForm();
       } catch (error) {
         console.error("Error creating worker:", error);
         notify("Щось пішло не так...");

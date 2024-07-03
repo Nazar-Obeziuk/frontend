@@ -6,12 +6,14 @@ interface Props {
   handleEditWorker: (id: IWorker) => void;
   handleDeleteWorker: (id: number) => void;
   adminWorkers: IWorker[];
+  isLoading: boolean;
 }
 
 const AdminWorkersTable: React.FC<Props> = ({
   handleEditWorker,
   handleDeleteWorker,
   adminWorkers,
+  isLoading,
 }) => {
   return (
     <div className={styles.admin__table_block}>
@@ -23,7 +25,6 @@ const AdminWorkersTable: React.FC<Props> = ({
         <table className={styles.admin__table_item}>
           <thead className={styles.admin__table_head}>
             <tr className={styles.admin__table_tr}>
-              <th className={styles.admin__table_th}>Айді</th>
               <th className={styles.admin__table_th}>Зображення</th>
               <th className={styles.admin__table_th}>Ім'я (Укр)</th>
               <th className={styles.admin__table_th}>Ім'я (Англ)</th>
@@ -42,7 +43,6 @@ const AdminWorkersTable: React.FC<Props> = ({
           <tbody className={styles.admin__table_body}>
             {adminWorkers.map((adminWorker: IWorker, index) => (
               <tr key={index} className={styles.admin__table_tr}>
-                <td className={styles.admin__table_td}>{adminWorker.id}</td>
                 <td className={styles.admin__table_td}>
                   <img src={adminWorker.image_url} alt="worker banner" />
                 </td>
@@ -81,7 +81,7 @@ const AdminWorkersTable: React.FC<Props> = ({
                 >
                   {adminWorker.slider_images.map(
                     (sliderImage: string, index: number) => (
-                      <img key={index} src={sliderImage} alt="" />
+                      <img key={index} src={sliderImage} alt="slider banner" />
                     )
                   )}
                 </td>
@@ -92,8 +92,9 @@ const AdminWorkersTable: React.FC<Props> = ({
                     onClick={() => handleDeleteWorker(adminWorker.id)}
                     className={styles.admin__td_action}
                     type="button"
+                    disabled={isLoading}
                   >
-                    Видалити
+                    {isLoading ? "Видалення..." : "Видалити"}
                   </button>
                   <button
                     onClick={() => handleEditWorker(adminWorker)}

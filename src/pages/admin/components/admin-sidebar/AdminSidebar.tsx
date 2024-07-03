@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./AdminSidebar.module.css";
+import { useNavigate } from "react-router-dom";
 
 type AdminSidebarProps = {
   onSectionChange: (section: string) => void;
@@ -7,8 +8,15 @@ type AdminSidebarProps = {
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ onSectionChange }) => {
   const [activeAdminPage, setActiveAdminPage] = useState<
-    "workers" | "main-reviews" | "orthopedic-insoles"
+    "workers" | "products" | "reviews"
   >("workers");
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <div className={styles.admin__content_sidebar}>
       <div className={styles.admin__sidebar_wrapper}>
@@ -26,29 +34,31 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onSectionChange }) => {
           </div>
           <div
             onClick={() => {
-              onSectionChange("main-reviews");
-              setActiveAdminPage("main-reviews");
+              onSectionChange("products");
+              setActiveAdminPage("products");
             }}
             className={`${styles.admin__wrapper_item} ${
-              activeAdminPage === "main-reviews" ? styles.active : ""
+              activeAdminPage === "products" ? styles.active : ""
             }`}
           >
-            Головні відгуки
+            Товари
           </div>
           <div
             onClick={() => {
-              onSectionChange("orthopedic-insoles");
-              setActiveAdminPage("orthopedic-insoles");
+              onSectionChange("reviews");
+              setActiveAdminPage("reviews");
             }}
             className={`${styles.admin__wrapper_item} ${
-              activeAdminPage === "orthopedic-insoles" ? styles.active : ""
+              activeAdminPage === "reviews" ? styles.active : ""
             }`}
           >
-            Ортопедичні устілки
+            Відгуки
           </div>
         </div>
         <div className={styles.admin__wrapper_logout}>
-          <div className={styles.admin__wrapper_item}>Вийти</div>
+          <div onClick={handleSignOut} className={styles.admin__wrapper_item}>
+            Вийти
+          </div>
         </div>
       </div>
     </div>

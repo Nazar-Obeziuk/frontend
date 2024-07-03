@@ -18,22 +18,26 @@ const HomeWorkers: React.FC = () => {
 
   return (
     <>
-      <section className={styles.home__workers_section}>
-        <div className={styles.container}>
-          <div className={styles.home__workers_wrapper}>
-            <h2 className={styles.home__workers_title}>
-              НАШІ{" "}
-              <span className={styles.home__workers_primary}>ЕКСПЕРТИ</span> З
-              ВИГОТОВЛЕННЯ УСТІЛОК
-            </h2>
+      {adminWorkers.length > 0 && (
+        <>
+          <section className={styles.home__workers_section}>
+            <div className={styles.container}>
+              <div className={styles.home__workers_wrapper}>
+                <h2 className={styles.home__workers_title}>
+                  НАШІ{" "}
+                  <span className={styles.home__workers_primary}>ЕКСПЕРТИ</span>{" "}
+                  З ВИГОТОВЛЕННЯ УСТІЛОК
+                </h2>
+              </div>
+            </div>
+          </section>
+          <div className={styles.home__workers_box}>
+            {adminWorkers.map((worker: IWorker) => (
+              <HomeWorker worker={worker} key={worker.id} />
+            ))}
           </div>
-        </div>
-      </section>
-      <div className={styles.home__workers_box}>
-        {adminWorkers.map((worker: IWorker) => (
-          <HomeWorker worker={worker} key={worker.id} />
-        ))}
-      </div>
+        </>
+      )}
     </>
   );
 };

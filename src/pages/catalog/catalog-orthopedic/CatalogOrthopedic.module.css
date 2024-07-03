@@ -55,113 +55,15 @@
   gap: 30px;
   padding-bottom: 800px;
 }
-/* .catalog__main_item {
-  width: calc(50% - 15px);
-  padding: 25px;
-  background: var(--dark-gray);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-.catalog__item_banner {
-  width: 50%;
-  height: 100%;
-}
-.catalog__banner_image {
+.admin__products_empty {
   width: 100%;
-  height: 100%;
-  border-radius: 15px;
-}
-.catalog__item_info {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.catalog__info_header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.catalog__header_title {
+  text-align: center;
   font-family: "Fixel-Display";
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
-  line-height: 26px;
+  line-height: 30px;
   color: var(--white);
 }
-.catalog__info_reviews {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.catalog__reviews_stars {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.catalog__reviews_count {
-  font-family: "Fixel-Display";
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
-  color: var(--white-gray);
-  padding-top: 4px;
-}
-.catalog__header_left {
-  display: none;
-}
-.catalog__left_review {
-  font-family: "Fixel-Display";
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 22px;
-  color: var(--primary);
-}
-.catalog__main_description {
-  font-family: "Fixel-Display";
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 22px;
-  color: var(--white);
-}
-.catalog__info_footer {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.catalog__footer_price {
-  font-family: "Fixel-Display";
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 32px;
-  color: var(--white);
-}
-.catalog__footer_button {
-  background: var(--primary);
-  border-radius: 8px;
-  outline: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  padding: 7px 27px;
-  font-family: "Euclid";
-  font-weight: 400;
-  font-size: 15px;
-  color: var(--black);
-  transition: 0.4s;
-  box-shadow: 0 24px 46px rgba(240, 173, 0, 0.19);
-  user-select: none;
-  text-transform: uppercase;
-}
-
-.catalog__footer_button:hover {
-  background: transparent;
-  border-color: var(--primary);
-  color: var(--primary);
-} */
 
 @media (max-width: 1200px) {
   .catalog__orthopedic_section {

@@ -48,7 +48,6 @@
 
 .admin__td_slider img {
   height: 40px;
-  margin-right: 10px;
 }
 
 .admin__td_actions {
@@ -76,7 +75,11 @@
 .admin__td_action:hover {
   transform: scale(1.1);
 }
-
+.admin__table_star {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 5px;
+}
 .admin__table_empty {
   padding: 80px 0;
   font-size: 16px;
