@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./CatalogProductItem.module.css";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../services/products/product.interface";
@@ -9,6 +9,11 @@ interface Props {
 
 const CatalogProductItem: React.FC<Props> = ({ product }) => {
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    console.log(product);
+  }, [])
 
   const buyProduct = () => {
     navigate(`/catalog/orthopedic-insoles/${product.id}`);

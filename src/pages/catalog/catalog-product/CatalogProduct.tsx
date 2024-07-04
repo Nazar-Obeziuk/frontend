@@ -79,24 +79,22 @@ const CatalogProduct: React.FC = () => {
               <div className={styles.catalog__main_info}>
                 <div className={styles.catalog__info_tabs}>
                   <span
-                    className={`${styles.catalog__tabs_item} ${
-                      activeTab === "characteristics" ? styles.active : ""
-                    }`}
+                    className={`${styles.catalog__tabs_item} ${activeTab === "characteristics" ? styles.active : ""
+                      }`}
                     onClick={() => setActiveTab("characteristics")}
                   >
                     Характеристики
                   </span>
                   <span
-                    className={`${styles.catalog__tabs_item} ${
-                      activeTab === "reviews" ? styles.active : ""
-                    }`}
+                    className={`${styles.catalog__tabs_item} ${activeTab === "reviews" ? styles.active : ""
+                      }`}
                     onClick={() => setActiveTab("reviews")}
                   >
                     Відгуки (0)
                   </span>
                 </div>
                 {activeTab === "characteristics" && (
-                  <CatalogProductCharacteristics key={"uniq1"} />
+                  <CatalogProductCharacteristics key={"uniq1"} characteristics={catalogProduct.characteristics} />
                 )}
                 {activeTab === "reviews" && (
                   <Reviews

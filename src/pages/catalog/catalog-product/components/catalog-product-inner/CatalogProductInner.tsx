@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CatalogProductInner.module.css";
 import { IProductDetails } from "../../../../../services/products/product.interface";
 
@@ -9,7 +9,10 @@ interface Props {
 const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
   const [countOfProduct, setCountOfProduct] = useState<number>(1);
   const [currentProductSize, setCurrentProductSize] = useState<any | undefined>(
-    catalogProduct.variations.sizes[0]
+    catalogProduct?.variations?.sizes ? catalogProduct.variations.sizes[0] : undefined
+  );
+  const [currentProductColor, setCurrentProductColor] = useState<any | undefined>(
+    catalogProduct?.variations?.colors ? catalogProduct.variations.colors[0] : undefined
   );
 
   const handleCountOfCertificate = (operation: "increment" | "decrement") => {
@@ -27,35 +30,39 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
     setCurrentProductSize(productSize);
   };
 
+  const handleProductColor = (productColor: any) => {
+    setCurrentProductColor(productColor);
+  };
+
   useEffect(() => {
-    // if (!catalogProduct.product_variations.sizes) return;
-    // const res = catalogProduct.product_image_url;
-  });
+    if (catalogProduct?.variations?.sizes) {
+      setCurrentProductSize(catalogProduct.variations.sizes[0]);
+    }
+    if (catalogProduct?.variations?.colors) {
+      setCurrentProductColor(catalogProduct.variations.colors[0]);
+    }
+  }, [catalogProduct]);
+
+  if (!catalogProduct) {
+    return <div>Loading...</div>;
+  }
+
+  const imagesToShow = [
+    catalogProduct.image_url[0],
+    ...(currentProductColor?.image_url || []).slice(0, 3)
+  ].slice(0, 4);
 
   return (
     <div className={styles.catalog__main_product}>
       <div className={styles.catalog__product_banners}>
-        {/* {res.product_image_url.ma} */}
-        <img
-          src={catalogProduct.image_url[0]}
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
-        <img
-          src="../../images/individual-product-2.jpg"
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
-        <img
-          src="../../images/individual-product-3.jpg"
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
-        <img
-          src="../../images/individual-product-4.jpg"
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
+        {imagesToShow.map((url, index) => (
+          <img
+            key={index}
+            src={url}
+            alt={`Product banner ${index + 1}`}
+            className={styles.catalog__banners_item}
+          />
+        ))}
       </div>
       <div className={styles.catalog__product_info}>
         <div className={styles.catalog__info_header}>
@@ -69,12 +76,13 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
                 alt="review star icon"
                 className={styles.catalog__reviews_star}
               />
+              <span>{catalogProduct.average_rating} ({catalogProduct.reviews_count} відгуків)</span>
             </div>
             <p className={styles.catalog__header_left}>Залишити відгук</p>
             <p className={styles.catalog__header_code}>
               Код товару:{" "}
               <span className={styles.catalog__code_item}>
-                {currentProductSize?.article}
+                {catalogProduct.article}
               </span>
             </p>
           </div>
@@ -90,7 +98,7 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
             >
               <img
                 src="../../images/minus-icon.svg"
-                alt="certificate action icon"
+                alt="decrease count"
                 className={styles.catalog__button_action}
               />
             </span>
@@ -101,45 +109,78 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
             >
               <img
                 src="../../images/plus-icon.svg"
-                alt="certificate action icon"
+                alt="increase count"
                 className={styles.catalog__button_action}
               />
             </span>
           </div>
         </div>
         <div className={styles.catalog__info_footer}>
-          <div className={styles.catalog__footer_sizes}>
-            <p className={styles.catalog__sizes_title}>
-              Оберіть розмір:{" "}
-              <span className={styles.catalog__sizes_types}>
-                {currentProductSize?.description_en}
-              </span>
-            </p>
-            <div className={styles.catalog__sizes_main}>
-              <div className={styles.catalog__block_items}>
-                {catalogProduct.variations.sizes.map(
-                  (productSize: any, index: number) => (
-                    <span
-                      onClick={() => handleProductSize(productSize)}
-                      key={index}
-                      className={styles.catalog__block_circle}
-                    >
-                      {productSize.value}
-                    </span>
-                  )
-                )}
+          {currentProductSize && (
+            <div className={styles.catalog__footer_sizes}>
+              <p className={styles.catalog__sizes_title}>
+                Оберіть розмір:{" "}
+                <span className={styles.catalog__sizes_types}>
+                  {currentProductSize.description_en}
+                </span>
+              </p>
+              <div className={styles.catalog__sizes_main}>
+                <div className={styles.catalog__block_items}>
+                  {catalogProduct.variations.sizes.map(
+                    (productSize: any, index: number) => (
+                      <span
+                        onClick={() => handleProductSize(productSize)}
+                        key={index}
+                        className={`${styles.catalog__block_circle} ${currentProductSize?.value === productSize.value
+                          ? styles.selected
+                          : ""
+                          }`}
+                      >
+                        {productSize.value}
+                      </span>
+                    )
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.catalog__footer_info}>
-            <p className={styles.catalog__info_text}>
-              {catalogProduct.description_ua}
-            </p>
-          </div>
-          <button className={styles.catalog__info_order} type="button">
-            ЗАМОВИТИ УСТІЛКИ
-          </button>
+          )}
+          {currentProductColor && (
+            <div className={styles.catalog__footer_colors}>
+              <p className={styles.catalog__sizes_title}>
+                Оберіть колір:{" "}
+                <span className={styles.catalog__colors_types}>
+                  {currentProductColor.description_en}
+                </span>
+              </p>
+              <div className={styles.catalog__colors_main}>
+                <div className={styles.catalog__block_items}>
+                  {catalogProduct.variations.colors.map(
+                    (productColor: any, index: number) => (
+                      <span
+                        onClick={() => handleProductColor(productColor)}
+                        key={index}
+                        className={`${styles.catalog__block_circle} ${currentProductColor?.value === productColor.value
+                          ? styles.selected
+                          : ""
+                          }`}
+                      >
+                        {productColor.value}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
+        <div className={styles.catalog__footer_info}>
+          <p className={styles.catalog__info_text}>
+            {catalogProduct.description_ua}
+          </p>
+        </div>
+        <button className={styles.catalog__info_order} type="button">
+          ЗАМОВИТИ УСТІЛКИ
+        </button>
       </div>
     </div>
   );

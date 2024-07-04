@@ -12,7 +12,7 @@ export interface IProduct {
 
 export interface IProductDetails {
   article: string;
-  average_ration: number;
+  average_rating: number;
   base_price: number;
   description_en: string;
   description_ua: string;
@@ -21,6 +21,7 @@ export interface IProductDetails {
   name_ua: string;
   product_id: number;
   reviews_count: number;
+  characteristics: any,
   variations: {
     colors: Array<any>;
     sizes: Array<any>;

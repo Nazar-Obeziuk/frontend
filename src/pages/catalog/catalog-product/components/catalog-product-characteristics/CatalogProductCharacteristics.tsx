@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./CatalogProductCharacteristics.module.css";
 
-const CatalogProductCharacteristics: React.FC = () => {
+interface Props {
+  characteristics: { [key: string]: any };
+}
+
+const CatalogProductCharacteristics: React.FC<Props> = ({ characteristics }) => {
   return (
     <div className={styles.catalog__main_characteristics}>
       <div className={styles.catalog__characteristics_info}>
@@ -16,43 +20,12 @@ const CatalogProductCharacteristics: React.FC = () => {
       <div className={styles.catalog__characteristics_table}>
         <table className={styles.catalog__table_item}>
           <tbody>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Тип виробу</th>
-              <td className={styles.catalog__line_value}>
-                Індивідуальні ортопедичні устілки
-              </td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Бренд</th>
-              <td className={styles.catalog__line_value}>Prostopoo</td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Країна виробник</th>
-              <td className={styles.catalog__line_value}>Україна</td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Призначення</th>
-              <td className={styles.catalog__line_value}>
-                плоскостопість (поздовжня, поперечна), вальгусна і варусна
-                стопа, варикоз і набряклість, діабетична стопа, п'яткова шпора,
-                натоптні й мозолі, робота на ногах, втома ніг під час
-                вагітності, травми й пошкодження кісток стопи та інше.
-              </td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Матеріал основи</th>
-              <td className={styles.catalog__line_value}>EVA, 40-50 Shr</td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Матеріал покриття</th>
-              <td className={styles.catalog__line_value}>
-                замінник шкіри, бежевий, перфорований
-              </td>
-            </tr>
-            <tr className={styles.catalog__item_line}>
-              <th className={styles.catalog__line_key}>Розмір</th>
-              <td className={styles.catalog__line_value}>від 18 до 50</td>
-            </tr>
+            {Object.entries(characteristics).map(([key, value]) => (
+              <tr className={styles.catalog__item_line} key={key}>
+                <th className={styles.catalog__line_key}>{key}</th>
+                <td className={styles.catalog__line_value}>{value}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
