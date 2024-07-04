@@ -190,7 +190,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-<<<<<<< HEAD
         {mainImagePreview && (
           <div className={styles.admin__drag_preview}>
             <img
@@ -198,11 +197,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
               alt="banner preview"
               className={styles.admin__drag_image}
             />
-=======
-        {mainImage && (
-          <div>
-            <img src={URL.createObjectURL(mainImage)} alt="preview" width="100" />
->>>>>>> 447a9f32f6f57974dde8059ae8b81f7e451fbcb0
           </div>
         )}
         {errors["image"] && (
@@ -230,7 +224,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-<<<<<<< HEAD
         <ul className={styles.admin__drag_slider}>
           {sliderImagesPreview &&
             sliderImagesPreview.map((preview, index) => (
@@ -243,14 +236,6 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
                 />
               </li>
             ))}
-=======
-        <ul className={styles.prevFlex}>
-          {sliderImages.map((file, index) => (
-            <li key={index}>
-              <img src={URL.createObjectURL(file)} alt={`preview-${index}`} width="100" />
-            </li>
-          ))}
->>>>>>> 447a9f32f6f57974dde8059ae8b81f7e451fbcb0
         </ul>
       </div>
       <div className={styles.admin__block_control}>

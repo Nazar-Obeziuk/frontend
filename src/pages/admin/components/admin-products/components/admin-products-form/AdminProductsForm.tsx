@@ -45,22 +45,19 @@ const AdminImage = styled.div`
   cursor: pointer;
 
   &[isdragactive="true"] {
-    /* Style for drag active */
+    border-color: #00e676;
   }
 
   &[isdragaccept="true"] {
-    /* Style for drag accept */
-    border-color: #ffed00;
+    border-color: #00e676;
   }
 
   &[isdragreject="true"] {
-    /* Style for drag reject */
-    border-color: #ff0000;
+    border-color: #ff1744;
   }
 
   &[isfocused="true"] {
-    /* Style for focused */
-    border-color: none;
+    border-color: #2196f3;
   }
 `;
 
@@ -68,6 +65,7 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [characteristics, setCharacteristics] = useState<{ key: string; value: string }[]>([]);
   const {
     register,
     handleSubmit,
@@ -98,6 +96,21 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
     accept: acceptType,
   });
 
+  const handleAddCharacteristic = () => {
+    setCharacteristics([...characteristics, { key: "", value: "" }]);
+  };
+
+  const handleCharacteristicChange = (index: number, key: string, value: string) => {
+    const newCharacteristics = [...characteristics];
+    newCharacteristics[index] = { key, value };
+    setCharacteristics(newCharacteristics);
+  };
+
+  const handleRemoveCharacteristic = (index: number) => {
+    const newCharacteristics = characteristics.filter((_, i) => i !== index);
+    setCharacteristics(newCharacteristics);
+  };
+
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     const formData = new FormData();
@@ -108,6 +121,14 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
     if (mainImage) {
       formData.append("image", mainImage);
     }
+
+    const characteristicsObject = characteristics.reduce((obj: any, item) => {
+      if (item.key && item.value) {
+        obj[item.key] = item.value;
+      }
+      return obj;
+    }, {});
+    formData.append("characteristics", JSON.stringify(characteristicsObject));
 
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
@@ -121,6 +142,7 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
         toggleProductsForm();
         setMainImage(null);
         setMainImagePreview(null);
+        setCharacteristics([]);
       } catch (error) {
         console.error("Error creating product:", error);
         notify("Щось пішло не так...");
@@ -134,10 +156,7 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={styles.admin__form_block}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.admin__form_block}>
       <div className={styles.admin__block_control}>
         <label htmlFor="image" className={styles.admin__control_label}>
           Зображення товару
@@ -280,6 +299,45 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
             {errors["article"]?.message as string}
           </span>
         )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label className={styles.admin__control_label}>Характеристики</label>
+        {characteristics.map((char, index) => (
+          <div key={index} className={styles.admin__dynamic_field}>
+            <input
+              type="text"
+              className={styles.admin__control_field}
+              placeholder="Ключ"
+              value={char.key}
+              onChange={(e) =>
+                handleCharacteristicChange(index, e.target.value, char.value)
+              }
+            />
+            <input
+              type="text"
+              className={styles.admin__control_field}
+              placeholder="Значення"
+              value={char.value}
+              onChange={(e) =>
+                handleCharacteristicChange(index, char.key, e.target.value)
+              }
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveCharacteristic(index)}
+              className={styles.admin__remove_button}
+            >
+              Видалити
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          onClick={handleAddCharacteristic}
+          className={styles.admin__add_button}
+        >
+          Додати характеристику
+        </button>
       </div>
       <div className={styles.admin__block_actions}>
         <button
