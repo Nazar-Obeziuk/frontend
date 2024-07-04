@@ -81,11 +81,11 @@ export const getAllProductsVariations = async (id: number) => {
 
 export const createProductVariation = async (
   formData: FormData,
-  parentId: string,
+  producttId: string,
   token: string
 ) => {
   try {
-    const { data } = await axios.post(`/variations/${parentId}`, formData, {
+    const { data } = await axios.post(`/variations/${producttId}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

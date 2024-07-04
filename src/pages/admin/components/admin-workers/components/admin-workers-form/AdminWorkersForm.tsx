@@ -43,7 +43,6 @@ const AdminImage = styled.div`
   transition: border 0.24s ease-in-out;
   display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
 
   &[isdragactive="true"] {
@@ -52,23 +51,27 @@ const AdminImage = styled.div`
 
   &[isdragaccept="true"] {
     /* Style for drag accept */
-    border-color: #00e676;
+    border-color: #ffed00;
   }
 
   &[isdragreject="true"] {
     /* Style for drag reject */
-    border-color: #ff1744;
+    border-color: #ff0000;
   }
 
   &[isfocused="true"] {
     /* Style for focused */
-    border-color: #2196f3;
+    border-color: none;
   }
 `;
 
 const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
+  const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
+  const [sliderImagesPreview, setSliderImagesPreview] = useState<
+    string[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
@@ -83,7 +86,9 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
   };
 
   const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-    setMainImage(acceptedFiles[0]);
+    const file = acceptedFiles[0];
+    setMainImage(file);
+    setMainImagePreview(URL.createObjectURL(file));
   }, []);
 
   const {
@@ -100,9 +105,13 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
   });
 
   const onDropSliderImages = useCallback((acceptedFiles: File[]) => {
-    setSliderImages((prevSliderImages) => [
-      ...prevSliderImages,
-      ...acceptedFiles,
+    const files = acceptedFiles;
+    setSliderImages((prevSliderImages) => [...prevSliderImages, ...files]);
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setSliderImagesPreview((prevPreviews) => [
+      ...(prevPreviews || []),
+      ...newPreviews,
     ]);
   }, []);
 
@@ -181,7 +190,15 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-        {mainImage && <p>{mainImage.name}</p>}
+        {mainImagePreview && (
+          <div className={styles.admin__drag_preview}>
+            <img
+              src={mainImagePreview}
+              alt="banner preview"
+              className={styles.admin__drag_image}
+            />
+          </div>
+        )}
         {errors["image"] && (
           <span className={styles.error_message}>
             {errors["image"]?.message as string}
@@ -207,10 +224,18 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
             <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
           )}
         </AdminImage>
-        <ul>
-          {sliderImages.map((file, index) => (
-            <li key={index}>{file.name}</li>
-          ))}
+        <ul className={styles.admin__drag_slider}>
+          {sliderImagesPreview &&
+            sliderImagesPreview.map((preview, index) => (
+              <li key={index} className={styles.admin__drag_preview}>
+                <img
+                  className={styles.admin__drag_image}
+                  src={preview}
+                  alt={`Slider preview ${index}`}
+                  width={100}
+                />
+              </li>
+            ))}
         </ul>
       </div>
       <div className={styles.admin__block_control}>

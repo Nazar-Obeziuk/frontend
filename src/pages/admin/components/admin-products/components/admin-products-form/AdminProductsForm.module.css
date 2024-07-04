@@ -97,6 +97,15 @@
   width: 100%;
   height: 100%;
 }
+.admin__table_empty {
+  width: 100%;
+  text-align: center;
+  font-family: "Fixel-Display";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--white);
+}
 .admin__form_block {
   width: 100%;
   display: flex;
@@ -211,6 +220,7 @@
 .admin__table_td {
   font-size: 13px;
   line-height: 16px;
+  text-align: center;
 }
 .admin__table_td img {
   height: 120px;

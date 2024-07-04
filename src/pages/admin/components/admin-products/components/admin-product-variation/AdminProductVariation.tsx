@@ -63,7 +63,7 @@ const AdminImage = styled.div`
 const AdminProductVariation = () => {
   const [productsImages, setProductsImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const id = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const {
     register,
@@ -112,7 +112,7 @@ const AdminProductVariation = () => {
 
     try {
       if (token) {
-        const response = await createProductVariation(formData, id.id!, token);
+        const response = await createProductVariation(formData, id!, token);
         notify(response.message);
         reset();
         navigate("/admin");

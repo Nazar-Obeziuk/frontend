@@ -15,7 +15,6 @@ import "react-toastify/dist/ReactToastify.css";
 const AdminWorkers: React.FC = () => {
   const [isAdminWorkersFormOpen, setAdminWorkersFormOpen] = useState(true);
   const [adminWorkers, setAdminWorkers] = useState<IWorker[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const { setEditWorker } = useAdminWorkersContext();
@@ -41,7 +40,6 @@ const AdminWorkers: React.FC = () => {
   };
 
   const onDeleteWorker = async (id: number) => {
-    setIsLoading(true);
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -75,7 +73,6 @@ const AdminWorkers: React.FC = () => {
         adminWorkers={adminWorkers}
         handleEditWorker={onEditWorker}
         handleDeleteWorker={onDeleteWorker}
-        isLoading={isLoading}
         key={"uniq1"}
       />
     </div>

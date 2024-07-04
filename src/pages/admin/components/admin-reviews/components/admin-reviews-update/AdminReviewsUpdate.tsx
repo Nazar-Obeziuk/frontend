@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import AdminError from "../../../../admin-error/AdminError";
-import { updateGeneralReview } from "../../../../../../services/reviews/reviews";
+import {
+  getReviewById,
+  updateGeneralReview,
+} from "../../../../../../services/reviews/reviews";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styles from "../admin-reviews-form/AdminReviewsForm.module.css";
+import { IReviewGeneral } from "../../../../../../services/reviews/review.interface";
 
 const AdminReviewsUpdate: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [editReview, setEditReview] = useState<IReviewGeneral>();
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -20,11 +25,30 @@ const AdminReviewsUpdate: React.FC = () => {
   });
 
   useEffect(() => {
-    if (true) {
-      const updatedObject = {};
-      reset(updatedObject);
-    }
-  }, []);
+    const getEditedReview = async () => {
+      try {
+        const editedReview: IReviewGeneral = await getReviewById(id!);
+        setEditReview(editedReview);
+
+        if (editedReview) {
+          const updatedObject = {
+            stars: editedReview.stars,
+            name_ua: editedReview.name_ua,
+            name_en: editedReview.name_en,
+            description_ua: editedReview.description_ua,
+            description_en: editedReview.description_en,
+          };
+
+          reset(updatedObject);
+        }
+      } catch (error) {
+        console.log(error);
+        return <AdminError />;
+      }
+    };
+
+    getEditedReview();
+  }, [id, reset]);
 
   const notify = (message: string) => toast(message);
 
@@ -214,118 +238,14 @@ const AdminReviewsUpdate: React.FC = () => {
                   </span>
                 )}
               </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="pluses_ua"
-                  className={styles.admin__control_label}
-                >
-                  Плюси відгука (Укр)
-                </label>
-                <input
-                  type="text"
-                  style={
-                    errors["pluses_ua"] ? { border: "1px solid #EB001B" } : {}
-                  }
-                  className={styles.admin__control_field}
-                  placeholder="Плюси відгука (Укр)"
-                  {...register("pluses_ua", {
-                    required: `Це поле обов'язкове!`,
-                  })}
-                />
-                {errors["pluses_ua"] && (
-                  <span className={styles.error_message}>
-                    {errors["pluses_ua"]?.message as string}
-                  </span>
-                )}
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="pluses_en"
-                  className={styles.admin__control_label}
-                >
-                  Плюси відгука (Англ)
-                </label>
-                <input
-                  type="text"
-                  style={
-                    errors["pluses_en"] ? { border: "1px solid #EB001B" } : {}
-                  }
-                  className={styles.admin__control_field}
-                  placeholder=" Плюси відгука (Англ)"
-                  {...register("pluses_en", {
-                    required: `Це поле обов'язкове!`,
-                  })}
-                />
-                {errors["pluses_en"] && (
-                  <span className={styles.error_message}>
-                    {errors["pluses_en"]?.message as string}
-                  </span>
-                )}
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="minuses_ua"
-                  className={styles.admin__control_label}
-                >
-                  Мінуси відгука (Укр)
-                </label>
-                <input
-                  type="text"
-                  style={
-                    errors["minuses_ua"] ? { border: "1px solid #EB001B" } : {}
-                  }
-                  className={styles.admin__control_field}
-                  placeholder="Мінуси відгука (Укр)"
-                  {...register("minuses_ua", {
-                    required: `Це поле обов'язкове!`,
-                  })}
-                />
-                {errors["pluses_ua"] && (
-                  <span className={styles.error_message}>
-                    {errors["minuses_ua"]?.message as string}
-                  </span>
-                )}
-              </div>
-              <div className={styles.admin__block_control}>
-                <label
-                  htmlFor="minuses_en"
-                  className={styles.admin__control_label}
-                >
-                  Мінуси відгука (Англ)
-                </label>
-                <input
-                  type="text"
-                  style={
-                    errors["minuses_en"] ? { border: "1px solid #EB001B" } : {}
-                  }
-                  className={styles.admin__control_field}
-                  placeholder=" Мінуси відгука (Англ)"
-                  {...register("minuses_en", {
-                    required: `Це поле обов'язкове!`,
-                  })}
-                />
-                {errors["pluses_en"] && (
-                  <span className={styles.error_message}>
-                    {errors["minuses_en"]?.message as string}
-                  </span>
-                )}
-              </div>
               <div className={styles.admin__block_actions}>
                 <button
-                  className={styles.admin__actions_button}
+                  className={`${styles.admin__actions_button} ${styles.admin__button_full}`}
                   type="submit"
                   disabled={isLoading || !isValid}
                 >
                   {isLoading ? "Загрузка..." : "Підтвердити"}
                 </button>
-                {/* <button
-        onClick={toggleReviewsForm}
-        className={styles.admin__actions_button}
-        type="button"
-        disabled={isLoading}
-      >
-        Скасувати
-      </button> */}
               </div>
             </form>
           </div>

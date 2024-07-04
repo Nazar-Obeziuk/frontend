@@ -10,6 +10,16 @@ export const getAllGeneralReviews = async () => {
   }
 };
 
+export const getReviewById = async (id: string) => {
+  try {
+    const { data } = await axios.get(`/reviews/${id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 export const createGeneralReview = async (
   formData: FormData,
   token: string
@@ -29,12 +39,12 @@ export const createGeneralReview = async (
 };
 
 export const updateGeneralReview = async (
-  updatedWorker: FormData,
+  updatedReview: FormData,
   id: string,
   token: string
 ) => {
   try {
-    const { data } = await axios.put(`/reviews/general/${id}`, updatedWorker, {
+    const { data } = await axios.put(`/reviews/${id}`, updatedReview, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -87,23 +97,5 @@ export const createProductsReview = async (
   } catch (error) {
     console.error("Error creating review:", error);
     throw error;
-  }
-};
-
-export const updateProductsReview = async (
-  updatedWorker: FormData,
-  id: string,
-  token: string
-) => {
-  try {
-    const { data } = await axios.put(`/reviews/product/${id}`, updatedWorker, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return data;
-  } catch (error) {
-    console.log(error);
-    return [];
   }
 };

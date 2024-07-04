@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./AdminWorkersTable.module.css";
 import { IWorker } from "../../../../../../services/workers/worker.interface";
 
@@ -6,14 +6,12 @@ interface Props {
   handleEditWorker: (id: IWorker) => void;
   handleDeleteWorker: (id: number) => void;
   adminWorkers: IWorker[];
-  isLoading: boolean;
 }
 
 const AdminWorkersTable: React.FC<Props> = ({
   handleEditWorker,
   handleDeleteWorker,
   adminWorkers,
-  isLoading,
 }) => {
   return (
     <div className={styles.admin__table_block}>
@@ -92,9 +90,8 @@ const AdminWorkersTable: React.FC<Props> = ({
                     onClick={() => handleDeleteWorker(adminWorker.id)}
                     className={styles.admin__td_action}
                     type="button"
-                    disabled={isLoading}
                   >
-                    {isLoading ? "Видалення..." : "Видалити"}
+                    Видалити
                   </button>
                   <button
                     onClick={() => handleEditWorker(adminWorker)}

@@ -4,67 +4,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form";
 import { createGeneralReview } from "../../../../../../services/reviews/reviews";
-import { IReview } from "../../../../../../services/reviews/review.interface";
 
 interface Props {
   toggleReviewsForm: () => void;
   getAll: () => void;
 }
 
-// const getColor = (props: any) => {
-//   if (props.isDragAccept) {
-//     return "#00e676";
-//   }
-//   if (props.isDragReject) {
-//     return "#ff1744";
-//   }
-//   if (props.isFocused) {
-//     return "#2196f3";
-//   }
-//   return "#eeeeee";
-// };
-
-// const AdminImage = styled.div`
-//   width: 100%;
-//   padding: 16px 26px 14px 26px;
-//   border-width: 1px;
-//   border-radius: 12px;
-//   border-color: ${(props: any) => getColor(props)};
-//   border-style: solid;
-//   background-color: transparent;
-//   color: rgba(255, 255, 255, 0.5);
-//   font-family: "Fixel-Display";
-//   font-size: 18px;
-//   font-weight: 300;
-//   line-height: 20px;
-//   outline: none;
-//   transition: border 0.24s ease-in-out;
-//   display: flex;
-//   align-items: center;
-//   cursor: pointer;
-
-//   &[isdragactive="true"] {
-//     /* Style for drag active */
-//   }
-
-//   &[isdragaccept="true"] {
-//     /* Style for drag accept */
-//     border-color: #00e676;
-//   }
-
-//   &[isdragreject="true"] {
-//     /* Style for drag reject */
-//     border-color: #ff1744;
-//   }
-
-//   &[isfocused="true"] {
-//     /* Style for focused */
-//     border-color: #2196f3;
-//   }
-// `;
-
 const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
-  // const [mainImage, setMainImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -72,27 +18,6 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
     formState: { errors, isValid },
     reset,
   } = useForm({ mode: "onChange" });
-
-  // const acceptType: Accept = {
-  //   "image/*": [".jpeg", ".jpg", ".png", ".gif"],
-  // };
-
-  // const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-  //   setMainImage(acceptedFiles[0]);
-  // }, []);
-
-  // const {
-  //   getRootProps: getMainRootProps,
-  //   getInputProps: getMainInputProps,
-  //   isDragActive: isMainDragActive,
-  //   isDragAccept: isMainDragAccept,
-  //   isDragReject: isMainDragReject,
-  //   isFocused: isMainFocused,
-  // } = useDropzone({
-  //   onDrop: onDropMainImage,
-  //   multiple: false,
-  //   accept: acceptType,
-  // });
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
@@ -102,10 +27,6 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
       formData.append(key, data[key]);
     });
 
-    // if (mainImage) {
-    //   formData.append("image", mainImage);
-    // }
-
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
 
@@ -114,8 +35,8 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
         const response = await createGeneralReview(formData, token);
         getAll();
         notify(response.message);
-        console.log(data);
         reset();
+        toggleReviewsForm();
       } else {
         notify("Авторизуйтеся будь ласка!");
         setIsLoading(false);
@@ -225,7 +146,7 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
           </span>
         )}
       </div>
-      <div className={styles.admin__block_control}>
+      {/* <div className={styles.admin__block_control}>
         <label htmlFor="pluses_ua" className={styles.admin__control_label}>
           Плюси відгука (Укр)
         </label>
@@ -258,8 +179,8 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
             {errors["pluses_en"]?.message as string}
           </span>
         )}
-      </div>
-      <div className={styles.admin__block_control}>
+      </div> */}
+      {/* <div className={styles.admin__block_control}>
         <label htmlFor="minuses_ua" className={styles.admin__control_label}>
           Мінуси відгука (Укр)
         </label>
@@ -292,7 +213,7 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
             {errors["minuses_en"]?.message as string}
           </span>
         )}
-      </div>
+      </div> */}
       <div className={styles.admin__block_actions}>
         <button
           className={styles.admin__actions_button}

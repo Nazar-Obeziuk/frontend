@@ -127,7 +127,7 @@ const AdminWorkerUpdate: React.FC = () => {
   useEffect(() => {
     const getEditedWorker = async () => {
       try {
-        const editedWorker = await getWorkerById(id!);
+        const editedWorker: IWorker = await getWorkerById(id!);
         setEditWorker(editedWorker);
 
         if (editedWorker) {

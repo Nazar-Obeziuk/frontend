@@ -1,5 +1,6 @@
 export interface IProduct {
   id: number;
+  product_id: number;
   name_ua: string;
   name_en: string;
   description_ua: string;
@@ -9,7 +10,22 @@ export interface IProduct {
   image_url: string[];
 }
 
-export interface IProductDetails {}
+export interface IProductDetails {
+  article: string;
+  average_ration: number;
+  base_price: number;
+  description_en: string;
+  description_ua: string;
+  image_url: string[];
+  name_en: string;
+  name_ua: string;
+  product_id: number;
+  reviews_count: number;
+  variations: {
+    colors: Array<any>;
+    sizes: Array<any>;
+  };
+}
 
 export interface IProductVariation {
   id: number;

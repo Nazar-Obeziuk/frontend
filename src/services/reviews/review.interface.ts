@@ -11,3 +11,12 @@ export interface IReview {
   minuses_en: string;
   product_id: number | null;
 }
+
+export interface IReviewGeneral {
+  id: number;
+  stars: number;
+  name_ua: string;
+  name_en: string;
+  description_ua: string;
+  description_en: string;
+}
