@@ -111,8 +111,9 @@ const AdminProductUpdate: React.FC = () => {
 
   const getAllVariations = async () => {
     try {
-      const response = await getAllProductsVariations(editProduct!.id);
+      const response = await getAllProductsVariations(id!);
       setVariations(response);
+      console.log(variations);
     } catch (error) {
       console.log("variation error", error);
     }
@@ -144,6 +145,7 @@ const AdminProductUpdate: React.FC = () => {
     };
 
     getEditedProduct();
+    getAllVariations();
   }, [id, reset]);
 
   const notify = (message: string) => toast(message);
@@ -471,7 +473,9 @@ const AdminProductUpdate: React.FC = () => {
                 <table className={styles.admin__table_item}>
                   <thead className={styles.admin__table_head}>
                     <tr className={styles.admin__table_tr}>
-                      <th className={styles.admin__table_th}>Зображення</th>
+                      <th className={styles.admin__table_th}>
+                        Зображення варіації товарів
+                      </th>
                       <th className={styles.admin__table_th}>Тип варіації</th>
                       <th className={styles.admin__table_th}>
                         Значення варіації
@@ -490,6 +494,7 @@ const AdminProductUpdate: React.FC = () => {
                       (adminVariation: IProductVariation, index: number) => (
                         <tr key={index} className={styles.admin__table_tr}>
                           <td className={styles.admin__table_td}>
+                            {adminVariation.image_url}
                             <img
                               src={adminVariation.image_url[0]}
                               alt="product variation banner"

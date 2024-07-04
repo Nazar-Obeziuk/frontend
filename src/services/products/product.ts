@@ -69,9 +69,9 @@ export const deleteProduct = async (id: number, token: string) => {
 
 // products variations
 
-export const getAllProductsVariations = async (id: number) => {
+export const getAllProductsVariations = async (producttId: string) => {
   try {
-    const { data } = await axios.get(`/variations/${id}`);
+    const { data } = await axios.get(`/variations/${producttId}`);
     return data;
   } catch (error) {
     console.log(error);

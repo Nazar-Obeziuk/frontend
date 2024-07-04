@@ -46,23 +46,26 @@ const AdminImage = styled.div`
 
   &[isdragaccept="true"] {
     /* Style for drag accept */
-    border-color: #00e676;
+    border-color: #ffed00;
   }
 
   &[isdragreject="true"] {
     /* Style for drag reject */
-    border-color: #ff1744;
+    border-color: #ff0000;
   }
 
   &[isfocused="true"] {
     /* Style for focused */
-    border-color: #2196f3;
+    border-color: none;
   }
 `;
 
 const AdminProductVariation = () => {
   const [productsImages, setProductsImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [variationImagesPreview, setVariationImagesPreview] = useState<
+    string[] | null
+  >(null);
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -77,9 +80,16 @@ const AdminProductVariation = () => {
   };
 
   const onDropProductImages = useCallback((acceptedFiles: File[]) => {
+    const files = acceptedFiles;
     setProductsImages((prevProductImages: any) => [
       ...prevProductImages,
-      ...acceptedFiles,
+      ...files,
+    ]);
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setVariationImagesPreview((prevPreviews) => [
+      ...(prevPreviews || []),
+      ...newPreviews,
     ]);
   }, []);
 
@@ -198,10 +208,19 @@ const AdminProductVariation = () => {
                     <p>Перетягніть файли сюди, або клацніть...</p>
                   )}
                 </AdminImage>
-                <ul>
-                  {productsImages.map((file, index) => (
-                    <li key={index}>{file.name}</li>
-                  ))}
+                <ul className={styles.admin__drag_slider}>
+                  {variationImagesPreview &&
+                    variationImagesPreview.map(
+                      (preview: string, index: number) => (
+                        <li key={index} className={styles.admin__drag_preview}>
+                          <img
+                            className={styles.admin__drag_image}
+                            src={preview}
+                            alt={`variation preview ${index}`}
+                          />
+                        </li>
+                      )
+                    )}
                 </ul>
               </div>
               <div className={styles.admin__block_control}>

@@ -103,7 +103,7 @@ const AdminProductVariationUpdate = () => {
 
   const getAllVariations = async () => {
     try {
-      const response = await getAllProductsVariations(editVariation!.id);
+      const response = await getAllProductsVariations(id!);
       // setVariations(response);
     } catch (error) {
       console.log("variation error", error);
