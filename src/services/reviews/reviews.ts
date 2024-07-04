@@ -72,9 +72,9 @@ export const deleteReview = async (id: number, token: string) => {
 
 // product review
 
-export const getAllProductsReviews = async () => {
+export const getAllProductsReviews = async (productId: number) => {
   try {
-    const { data } = await axios.get("/reviews/product");
+    const { data } = await axios.get(`/reviews/product/${productId}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -84,15 +84,20 @@ export const getAllProductsReviews = async () => {
 
 export const createProductsReview = async (
   formData: FormData,
-  token: string
+  token: string,
+  productId: number
 ) => {
   try {
-    const response = await axios.post("/reviews/product", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axios.post(
+      `/reviews/product/${productId}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error creating review:", error);

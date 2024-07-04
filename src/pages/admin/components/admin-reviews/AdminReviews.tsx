@@ -45,6 +45,7 @@ const AdminReviews: React.FC = () => {
       getAll();
     }
   };
+
   return (
     <div className={styles.admin__main_reviews}>
       <div className={styles.admin__reviews_form}>

@@ -18,6 +18,8 @@ import {
 } from "../../../../../../services/products/product.interface";
 import { Accept, useDropzone } from "react-dropzone";
 import styled from "styled-components";
+import AdminProductUpdateVariations from "./components/admin-product-update-variations/AdminProductUpdateVariations";
+import AdminProductUpdateReviews from "./components/admin-product-update-reviews/AdminProductUpdateReviews";
 
 const getColor = (props: any) => {
   if (props.isDragAccept) {
@@ -72,11 +74,14 @@ const AdminImage = styled.div`
 `;
 
 const AdminProductUpdate: React.FC = () => {
-  const [variations, setVariations] = useState<IProductVariation[]>([]);
+  // const [variations, setVariations] = useState<IProductVariation[]>([]);
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [isEditUploadOpen, setEditUploadOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [editProduct, setEditProduct] = useState<IProduct>();
+  const [activeTab, setActiveTab] = useState<"variations" | "reviews">(
+    "variations"
+  );
   const { id } = useParams();
   const {
     register,
@@ -109,16 +114,6 @@ const AdminProductUpdate: React.FC = () => {
     accept: acceptType,
   });
 
-  const getAllVariations = async () => {
-    try {
-      const response = await getAllProductsVariations(id!);
-      setVariations(response);
-      console.log(variations);
-    } catch (error) {
-      console.log("variation error", error);
-    }
-  };
-
   useEffect(() => {
     const getEditedProduct = async () => {
       try {
@@ -145,7 +140,7 @@ const AdminProductUpdate: React.FC = () => {
     };
 
     getEditedProduct();
-    getAllVariations();
+    // getAllVariations();
   }, [id, reset]);
 
   const notify = (message: string) => toast(message);
@@ -177,24 +172,24 @@ const AdminProductUpdate: React.FC = () => {
     }
   };
 
-  const handleDeleteProductVariation = async (variationId: number) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const response = await deleteProductVariation(variationId, token);
-        notify(response.message);
-        getAllVariations();
-      } else {
-        return <AdminError />;
-      }
-    } catch (error) {
-      console.log("delete variation", error);
-    }
-  };
+  // const onDeleteProductVariation = async (variationId: number) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (token) {
+  //       const response = await deleteProductVariation(variationId, token);
+  //       notify(response.message);
+  //       getAllVariations();
+  //     } else {
+  //       return <AdminError />;
+  //     }
+  //   } catch (error) {
+  //     console.log("delete variation", error);
+  //   }
+  // };
 
-  const handleEditVariation = (adminVariation: IProductVariation) => {
-    navigate(`/admin/product-variation-update/${editProduct!.product_id}`);
-  };
+  // const onEditVariation = (adminVariation: IProductVariation) => {
+  //   navigate(`/admin/product-variation-update/${editProduct!.product_id}`);
+  // };
 
   const onAddVariation = () => {
     console.log(editProduct);
@@ -468,88 +463,37 @@ const AdminProductUpdate: React.FC = () => {
                 </button>
               </div>
             </form>
-            {variations.length > 0 ? (
-              <div className={styles.admin__main_table}>
-                <table className={styles.admin__table_item}>
-                  <thead className={styles.admin__table_head}>
-                    <tr className={styles.admin__table_tr}>
-                      <th className={styles.admin__table_th}>
-                        Зображення варіації товарів
-                      </th>
-                      <th className={styles.admin__table_th}>Тип варіації</th>
-                      <th className={styles.admin__table_th}>
-                        Значення варіації
-                      </th>
-                      <th className={styles.admin__table_th}>Ціна</th>
-                      <th className={styles.admin__table_th}>
-                        Артикул варіації
-                      </th>
-                      <th className={styles.admin__table_th}>Опис (Укр)</th>
-                      <th className={styles.admin__table_th}>Опис (Англ)</th>
-                      <th className={styles.admin__table_th}>Дії</th>
-                    </tr>
-                  </thead>
-                  <tbody className={styles.admin__table_body}>
-                    {variations.map(
-                      (adminVariation: IProductVariation, index: number) => (
-                        <tr key={index} className={styles.admin__table_tr}>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.image_url}
-                            <img
-                              src={adminVariation.image_url[0]}
-                              alt="product variation banner"
-                            />
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.variation_type}
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.variation_value}
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.additional_price}
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.article}
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.description_ua}
-                          </td>
-                          <td className={styles.admin__table_td}>
-                            {adminVariation.description_en}
-                          </td>
-                          <td
-                            className={`${styles.admin__table_td} ${styles.admin__td_actions}`}
-                          >
-                            <button
-                              onClick={() =>
-                                handleDeleteProductVariation(adminVariation.id)
-                              }
-                              className={styles.admin__td_action}
-                              type="button"
-                            >
-                              Видалити
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleEditVariation(adminVariation)
-                              }
-                              className={styles.admin__td_action}
-                              type="button"
-                            >
-                              Редагувати
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <p className={styles.admin__table_empty}>
-                Для данного продукту варіацій ще немає!
-              </p>
+            <div className={styles.admin__main_tabs}>
+              <button
+                onClick={() => setActiveTab("variations")}
+                className={`${styles.admin__tabs_button} ${
+                  activeTab === "variations" ? styles.admin__tabs_active : {}
+                }`}
+                type="button"
+              >
+                Варіації продукта
+              </button>
+              <button
+                onClick={() => setActiveTab("reviews")}
+                className={`${styles.admin__tabs_button} ${
+                  activeTab === "reviews" ? styles.admin__tabs_active : {}
+                }`}
+                type="button"
+              >
+                Відгуки продукта
+              </button>
+            </div>
+            {activeTab === "variations" && (
+              <AdminProductUpdateVariations
+                key={"uniq1"}
+                editProduct={editProduct!}
+              />
+            )}
+            {activeTab === "reviews" && (
+              <AdminProductUpdateReviews
+                key={"uniq1"}
+                editProduct={editProduct!}
+              />
             )}
           </div>
         </div>
