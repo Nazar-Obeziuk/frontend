@@ -7,10 +7,12 @@
   background-position-x: right;
   background-size: contain;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .admin__update_wrapper {
   width: 100%;
   height: 100%;
@@ -18,18 +20,22 @@
   flex-direction: column;
   gap: 60px;
 }
+
 .admin__wrapper_route {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
 }
+
 .admin__router_icon:hover {
   cursor: pointer;
 }
+
 .admin__router_icon:hover path {
   stroke: var(--primary);
 }
+
 .admin__router_name {
   font-family: "Fixel-Display";
   font-size: 12px;
@@ -39,12 +45,15 @@
   margin-top: 2px;
   cursor: pointer;
 }
+
 .admin__router_name:hover {
   color: var(--primary);
 }
+
 .admin__router_active {
   color: var(--primary);
 }
+
 .admin__wrapper_title {
   font-family: "Fixel-Display";
   font-size: 26px;
@@ -52,12 +61,14 @@
   line-height: 32px;
   color: var(--white);
 }
+
 .admin__wrapper_main {
   width: 100%;
   background: var(--dark-gray);
   border-radius: 12px;
   padding: 40px 20px;
 }
+
 .admin__form_block {
   width: 100%;
   display: flex;
@@ -65,12 +76,14 @@
   row-gap: 20px;
   column-gap: 20px;
 }
+
 .admin__block_control {
   width: calc(50% - 10px);
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .admin__control_label {
   font-family: "Fixel-Display";
   font-size: 14px;
@@ -78,6 +91,7 @@
   line-height: 16px;
   color: var(--white);
 }
+<<<<<<< HEAD
 .admin__control_image {
   width: 50px;
   height: 100%;
@@ -117,6 +131,9 @@
   flex-direction: column;
   gap: 8px;
 }
+=======
+
+>>>>>>> 447a9f32f6f57974dde8059ae8b81f7e451fbcb0
 .admin__control_field {
   width: 100%;
   border: 1px solid var(--white);
@@ -130,6 +147,7 @@
   color: rgba(255, 255, 255, 0.5);
   outline: none;
 }
+
 .admin__control_field::placeholder {
   font-family: "Fixel-Display";
   font-size: 18px;
@@ -137,6 +155,7 @@
   line-height: 20px;
   color: rgba(255, 255, 255, 0.5);
 }
+
 .admin__block_actions {
   width: 100%;
   display: flex;
@@ -144,6 +163,7 @@
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
+
 .admin__actions_button {
   width: calc(50% - 15px);
   background: var(--primary);
@@ -161,13 +181,16 @@
   user-select: none;
   text-transform: uppercase;
 }
+
 .admin__actions_button:hover {
   background: transparent;
   color: var(--primary);
 }
+
 .admin__button_full {
   width: 100% !important;
 }
+
 .admin__button_slider {
   width: 100% !important;
 }
@@ -191,6 +214,11 @@
   font-family: "Fixel-Display";
   font-weight: 300;
   line-height: 16px;
+}
+
+.prevFlex {
+  display: flex;
+  gap: 10px;
 }
 
 @media (max-width: 1200px) {
