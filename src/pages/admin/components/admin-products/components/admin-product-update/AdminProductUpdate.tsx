@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "../admin-products-form/AdminProductsForm.module.css";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -74,7 +74,6 @@ const AdminImage = styled.div`
 `;
 
 const AdminProductUpdate: React.FC = () => {
-  // const [variations, setVariations] = useState<IProductVariation[]>([]);
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [isEditUploadOpen, setEditUploadOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -88,8 +87,13 @@ const AdminProductUpdate: React.FC = () => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    control,
   } = useForm({
     mode: "onChange",
+  });
+  const { fields } = useFieldArray({
+    control,
+    name: "characteristics",
   });
   const navigate = useNavigate();
 
@@ -119,6 +123,7 @@ const AdminProductUpdate: React.FC = () => {
       try {
         const editedProduct: IProduct = await getProductById(id!);
         setEditProduct(editedProduct);
+        console.log(editedProduct);
 
         if (editedProduct) {
           const updatedObject = {
@@ -132,6 +137,16 @@ const AdminProductUpdate: React.FC = () => {
           };
 
           reset(updatedObject);
+
+          if (editedProduct.characteristics) {
+            const characteristicsArray = Object.entries(
+              editedProduct.characteristics
+            ).map(([key, value]) => ({
+              key,
+              value,
+            }));
+            reset({ characteristics: characteristicsArray });
+          }
         }
       } catch (error) {
         console.log(error);
@@ -140,7 +155,6 @@ const AdminProductUpdate: React.FC = () => {
     };
 
     getEditedProduct();
-    // getAllVariations();
   }, [id, reset]);
 
   const notify = (message: string) => toast(message);
@@ -149,20 +163,34 @@ const AdminProductUpdate: React.FC = () => {
     setIsLoading(true);
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
+      if (key !== "characteristics") {
+        formData.append(key, data[key]);
+      }
     });
 
     if (mainImage) {
       formData.append("image", mainImage);
     }
 
+    if (data.characteristics) {
+      const characteristics = data.characteristics.reduce(
+        (obj: any, item: any) => {
+          obj[item.key] = item.value;
+          return obj;
+        },
+        {}
+      );
+      formData.append("characteristics", JSON.stringify(characteristics));
+    }
+
     try {
       const token = localStorage.getItem("token");
 
       if (token) {
-        const response = await updateProduct(formData, id!, token);
-        notify(response.message);
-        navigate("/admin");
+        // const response = await updateProduct(formData, id!, token);
+        // notify(response.message);
+        // navigate("/admin");
+        console.log(data);
         reset();
       } else {
         return <AdminError />;
@@ -170,30 +198,6 @@ const AdminProductUpdate: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  // const onDeleteProductVariation = async (variationId: number) => {
-  //   try {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       const response = await deleteProductVariation(variationId, token);
-  //       notify(response.message);
-  //       getAllVariations();
-  //     } else {
-  //       return <AdminError />;
-  //     }
-  //   } catch (error) {
-  //     console.log("delete variation", error);
-  //   }
-  // };
-
-  // const onEditVariation = (adminVariation: IProductVariation) => {
-  //   navigate(`/admin/product-variation-update/${editProduct!.product_id}`);
-  // };
-
-  const onAddVariation = () => {
-    console.log(editProduct);
-    navigate(`/admin/variation-product/${editProduct!.product_id}`);
   };
 
   const handleChangePhoto = () => {
@@ -335,7 +339,7 @@ const AdminProductUpdate: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  className={styles.admin__control_field}
+                  className={`${styles.admin__control_field} `}
                   style={
                     errors["name_en"] ? { border: "1px solid #EB001B" } : {}
                   }
@@ -356,8 +360,7 @@ const AdminProductUpdate: React.FC = () => {
                   Опис товару (Укр)
                 </label>
                 <input
-                  type="text"
-                  className={styles.admin__control_field}
+                  className={`${styles.admin__control_field} `}
                   style={
                     errors["description_ua"]
                       ? { border: "1px solid #EB001B" }
@@ -382,13 +385,12 @@ const AdminProductUpdate: React.FC = () => {
                   Опис товару (Англ)
                 </label>
                 <input
-                  type="text"
+                  className={`${styles.admin__control_field} `}
                   style={
                     errors["description_en"]
                       ? { border: "1px solid #EB001B" }
                       : {}
                   }
-                  className={styles.admin__control_field}
                   placeholder="Опис товару (Англ)"
                   {...register("description_en", {
                     required: `Це поле обов'язкове!`,
@@ -409,11 +411,11 @@ const AdminProductUpdate: React.FC = () => {
                 </label>
                 <input
                   type="text"
+                  className={`${styles.admin__control_field} `}
                   style={
                     errors["base_price"] ? { border: "1px solid #EB001B" } : {}
                   }
-                  className={styles.admin__control_field}
-                  placeholder="Ціна товару"
+                  placeholder="Базова ціна товару"
                   {...register("base_price", {
                     required: `Це поле обов'язкове!`,
                   })}
@@ -433,12 +435,12 @@ const AdminProductUpdate: React.FC = () => {
                 </label>
                 <input
                   type="text"
+                  className={`${styles.admin__control_field} `}
                   style={
                     errors["article"] ? { border: "1px solid #EB001B" } : {}
                   }
-                  className={styles.admin__control_field}
                   placeholder="Артикул товару"
-                  {...register("article", { required: false })}
+                  {...register("article", { required: `Це поле обов'язкове!` })}
                 />
                 {errors["article"] && (
                   <span className={styles.error_message}>
@@ -446,20 +448,36 @@ const AdminProductUpdate: React.FC = () => {
                   </span>
                 )}
               </div>
+              {fields.map((item, index) => (
+                <div key={index} className={styles.admin__block_control}>
+                  <label className={styles.admin__control_label}>
+                    Характеристики {index + 1}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Назва характеристики"
+                    {...register(`characteristics.${index}.key`, {
+                      required: `Це поле обов'язкове!`,
+                    })}
+                    className={styles.admin__control_field}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Значення характеристики"
+                    {...register(`characteristics.${index}.value`, {
+                      required: `Це поле обов'язкове!`,
+                    })}
+                    className={styles.admin__control_field}
+                  />
+                </div>
+              ))}
               <div className={styles.admin__block_actions}>
                 <button
-                  className={styles.admin__actions_button}
+                  className={`${styles.admin__actions_button} ${styles.admin__button_full}`}
                   type="submit"
                   disabled={isLoading || !isValid}
                 >
-                  {isLoading ? "Загрузка..." : "Підтвердити"}
-                </button>
-                <button
-                  onClick={onAddVariation}
-                  className={styles.admin__actions_button}
-                  type="button"
-                >
-                  Додати варіацію
+                  {isLoading ? "Оновлення..." : "Підтвердити"}
                 </button>
               </div>
             </form>

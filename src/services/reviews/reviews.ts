@@ -82,6 +82,16 @@ export const getAllProductsReviews = async (productId: number) => {
   }
 };
 
+export const getProductsReviewById = async (productId: number) => {
+  try {
+    const { data } = await axios.get(`/reviews/product/${productId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 export const createProductsReview = async (
   formData: FormData,
   token: string,

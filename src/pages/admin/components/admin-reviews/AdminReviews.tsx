@@ -32,7 +32,6 @@ const AdminReviews: React.FC = () => {
   };
 
   const onEditReview = (review: any) => {
-    getAll();
     navigate(`/admin/update-general-review/${review.id}`);
   };
 

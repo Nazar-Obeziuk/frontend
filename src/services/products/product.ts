@@ -69,7 +69,17 @@ export const deleteProduct = async (id: number, token: string) => {
 
 // products variations
 
-export const getAllProductsVariations = async (producttId: string) => {
+export const getAllProductsVariations = async (producttId: number) => {
+  try {
+    const { data } = await axios.get(`/variations/${producttId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const getVariationById = async (producttId: number) => {
   try {
     const { data } = await axios.get(`/variations/${producttId}`);
     return data;

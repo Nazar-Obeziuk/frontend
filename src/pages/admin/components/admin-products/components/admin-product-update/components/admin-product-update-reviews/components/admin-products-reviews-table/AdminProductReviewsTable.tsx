@@ -13,25 +13,7 @@ const AdminProductReviewsTable: React.FC<Props> = ({
   productReviews,
   getAll,
 }) => {
-  //   const [adminProductReviews, setAdminProductReviews] = useState<
-  //     IProductReview[]
-  //   >([]);
-
   const notify = (message: string) => toast(message);
-
-  //   const getProductReviews = async () => {
-  //     try {
-  //       const response = await getAllProductsReviews();
-  //       setAdminProductReviews(response);
-  //       console.log(adminProductReviews);
-  //     } catch (error) {
-  //       console.log("product review error", error);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getProductReviews();
-  //   }, []);
 
   const handleEditProductReview = (productReview: IProductReview) => {};
 

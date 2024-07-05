@@ -65,7 +65,9 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [characteristics, setCharacteristics] = useState<{ key: string; value: string }[]>([]);
+  const [characteristics, setCharacteristics] = useState<
+    { key: string; value: string }[]
+  >([]);
   const {
     register,
     handleSubmit,
@@ -100,7 +102,11 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
     setCharacteristics([...characteristics, { key: "", value: "" }]);
   };
 
-  const handleCharacteristicChange = (index: number, key: string, value: string) => {
+  const handleCharacteristicChange = (
+    index: number,
+    key: string,
+    value: string
+  ) => {
     const newCharacteristics = [...characteristics];
     newCharacteristics[index] = { key, value };
     setCharacteristics(newCharacteristics);
@@ -156,7 +162,10 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.admin__form_block}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.admin__form_block}
+    >
       <div className={styles.admin__block_control}>
         <label htmlFor="image" className={styles.admin__control_label}>
           Зображення товару
@@ -301,44 +310,116 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label className={styles.admin__control_label}>Характеристики</label>
-        {characteristics.map((char, index) => (
-          <div key={index} className={styles.admin__dynamic_field}>
-            <input
-              type="text"
-              className={styles.admin__control_field}
-              placeholder="Ключ"
-              value={char.key}
-              onChange={(e) =>
-                handleCharacteristicChange(index, e.target.value, char.value)
-              }
-            />
-            <input
-              type="text"
-              className={styles.admin__control_field}
-              placeholder="Значення"
-              value={char.value}
-              onChange={(e) =>
-                handleCharacteristicChange(index, char.key, e.target.value)
-              }
-            />
-            <button
-              type="button"
-              onClick={() => handleRemoveCharacteristic(index)}
-              className={styles.admin__remove_button}
-            >
-              Видалити
-            </button>
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={handleAddCharacteristic}
-          className={styles.admin__add_button}
+        <label
+          htmlFor="article_variation"
+          className={styles.admin__control_label}
         >
-          Додати характеристику
-        </button>
+          Артикул варіації
+        </label>
+        <input
+          type="text"
+          style={
+            errors["article_variation"] ? { border: "1px solid #EB001B" } : {}
+          }
+          className={styles.admin__control_field}
+          placeholder="Артикул варіації"
+          {...register("article_variation", {
+            required: `Це поле обов'язкове!`,
+          })}
+        />
+        {errors["article_variation"] && (
+          <span className={styles.error_message}>
+            {errors["article_variation"]?.message as string}
+          </span>
+        )}
       </div>
+      <div className={styles.admin__block_control}>
+        <label
+          htmlFor="characteristics_ua"
+          className={styles.admin__control_label}
+        >
+          Текст характеристики (Укр)
+        </label>
+        <input
+          type="text"
+          style={
+            errors["characteristics_ua"] ? { border: "1px solid #EB001B" } : {}
+          }
+          className={styles.admin__control_field}
+          placeholder="Текст характеристики (Укр)"
+          {...register("characteristics_ua", {
+            required: `Це поле обов'язкове!`,
+          })}
+        />
+        {errors["characteristics_ua"] && (
+          <span className={styles.error_message}>
+            {errors["characteristics_ua"]?.message as string}
+          </span>
+        )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label
+          htmlFor="characteristics_en"
+          className={styles.admin__control_label}
+        >
+          Текст характеристики (Англ)
+        </label>
+        <input
+          type="text"
+          style={
+            errors["characteristics_en"] ? { border: "1px solid #EB001B" } : {}
+          }
+          className={styles.admin__control_field}
+          placeholder="Текст характеристики (Англ)"
+          {...register("characteristics_en", {
+            required: `Це поле обов'язкове!`,
+          })}
+        />
+        {errors["characteristics_en"] && (
+          <span className={styles.error_message}>
+            {errors["characteristics_en"]?.message as string}
+          </span>
+        )}
+      </div>
+      {characteristics.map((char, index) => (
+        <div className={styles.admin__block_control}>
+          <label className={styles.admin__control_label}>
+            Характеристики {index + 1}
+          </label>
+          <input
+            type="text"
+            className={styles.admin__control_field}
+            placeholder="Ключ"
+            value={char.key}
+            onChange={(e) =>
+              handleCharacteristicChange(index, e.target.value, char.value)
+            }
+          />
+          <input
+            type="text"
+            className={styles.admin__control_field}
+            placeholder="Значення"
+            value={char.value}
+            onChange={(e) =>
+              handleCharacteristicChange(index, char.key, e.target.value)
+            }
+          />
+          <button
+            type="button"
+            onClick={() => handleRemoveCharacteristic(index)}
+            className={styles.admin__remove_button}
+          >
+            Видалити характеристику {index + 1}
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        onClick={handleAddCharacteristic}
+        className={styles.admin__add_button}
+      >
+        Додати характеристику
+      </button>
       <div className={styles.admin__block_actions}>
         <button
           className={styles.admin__actions_button}

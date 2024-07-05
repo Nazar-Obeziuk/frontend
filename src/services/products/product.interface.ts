@@ -8,6 +8,7 @@ export interface IProduct {
   base_price: number;
   article: string;
   image_url: string[];
+  characteristics: {};
 }
 
 export interface IProductDetails {

@@ -35,7 +35,6 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
   return (
     <div className={styles.catalog__main_product}>
       <div className={styles.catalog__product_banners}>
-        {/* {res.product_image_url.ma} */}
         <img
           src={catalogProduct.image_url[0]}
           alt="certificate gift banner"

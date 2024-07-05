@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CatalogProduct.module.css";
-// import CatalogProductInner from "./components/catalog-product-inner/CatalogProductInner";
 import { NavLink } from "react-router-dom";
 import CatalogProductCharacteristics from "./components/catalog-product-characteristics/CatalogProductCharacteristics";
 import Reviews from "../../../components/reviews/Reviews";
@@ -59,6 +58,17 @@ const CatalogProduct: React.FC = () => {
                     strokeOpacity="0.8"
                   />
                 </svg>
+              </NavLink>
+              <img
+                src="../../images/navigation-arrow.svg"
+                alt="router arrow"
+                className={styles.catalog__router_arrow}
+              />
+              <NavLink
+                to={"/home/catalog/orthopedic-insoles"}
+                className={styles.catalog__router_name}
+              >
+                Каталог
               </NavLink>
               <img
                 src="../../images/navigation-arrow.svg"

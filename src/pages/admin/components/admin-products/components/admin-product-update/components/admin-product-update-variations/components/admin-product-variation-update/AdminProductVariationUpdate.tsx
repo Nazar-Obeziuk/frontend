@@ -1,12 +1,17 @@
-import React, { useCallback, useState } from "react";
-import styles from "../admin-products-form/AdminProductsForm.module.css";
+import React, { useCallback, useEffect, useState } from "react";
+import styles from "../../../../../admin-products-form/AdminProductsForm.module.css";
+import AdminError from "../../../../../../../../admin-error/AdminError";
+import {
+  getAllProductsVariations,
+  getVariationById,
+  updateProductVariation,
+} from "../../../../../../../../../../services/products/product";
+import { toast } from "react-toastify";
+import { Accept, useDropzone } from "react-dropzone";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Accept, useDropzone } from "react-dropzone";
 import styled from "styled-components";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { createProductVariation } from "../../../../../../services/products/product";
+import { IProductVariation } from "../../../../../../../../../../services/products/product.interface";
 
 const getColor = (props: any) => {
   if (props.isDragAccept) {
@@ -46,26 +51,26 @@ const AdminImage = styled.div`
 
   &[isdragaccept="true"] {
     /* Style for drag accept */
-    border-color: #ffed00;
+    border-color: #00e676;
   }
 
   &[isdragreject="true"] {
     /* Style for drag reject */
-    border-color: #ff0000;
+    border-color: #ff1744;
   }
 
   &[isfocused="true"] {
     /* Style for focused */
-    border-color: none;
+    border-color: #2196f3;
   }
 `;
 
-const AdminProductVariation = () => {
-  const [productsImages, setProductsImages] = useState<File[]>([]);
+const AdminProductVariationUpdate: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [variationImagesPreview, setVariationImagesPreview] = useState<
-    string[] | null
-  >(null);
+  const [editVariation, setEditVariation] = useState<IProductVariation>();
+  const [mainImage, setMainImage] = useState<File | null>(null);
+  const [isEditUploadOpen, setEditUploadOpen] = useState(false);
+  // const { editVariation } = useAdminVariationsContext();
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -73,38 +78,85 @@ const AdminProductVariation = () => {
     handleSubmit,
     formState: { errors, isValid },
     reset,
-  } = useForm({ mode: "onChange" });
+  } = useForm({
+    mode: "onChange",
+  });
 
   const acceptType: Accept = {
     "image/*": [".jpeg", ".jpg", ".png", ".gif"],
   };
 
-  const onDropProductImages = useCallback((acceptedFiles: File[]) => {
-    const files = acceptedFiles;
-    setProductsImages((prevProductImages: any) => [
-      ...prevProductImages,
-      ...files,
-    ]);
-
-    const newPreviews = files.map((file) => URL.createObjectURL(file));
-    setVariationImagesPreview((prevPreviews) => [
-      ...(prevPreviews || []),
-      ...newPreviews,
-    ]);
+  const onDropMainImage = useCallback((acceptedFiles: File[]) => {
+    setMainImage(acceptedFiles[0]);
   }, []);
 
   const {
-    getRootProps: getSliderRootProps,
-    getInputProps: getSliderInputProps,
-    isDragActive: isSliderDragActive,
-    isDragAccept: isSliderDragAccept,
-    isDragReject: isSliderDragReject,
-    isFocused: isSliderFocused,
+    getRootProps: getMainRootProps,
+    getInputProps: getMainInputProps,
+    isDragActive: isMainDragActive,
+    isDragAccept: isMainDragAccept,
+    isDragReject: isMainDragReject,
+    isFocused: isMainFocused,
   } = useDropzone({
-    onDrop: onDropProductImages,
-    multiple: true,
+    onDrop: onDropMainImage,
+    multiple: false,
     accept: acceptType,
   });
+
+  const getAllVariations = async () => {
+    try {
+      const response = await getAllProductsVariations(+id!);
+      // setVariations(response);
+    } catch (error) {
+      console.log("variation error", error);
+    }
+  };
+
+  //   useEffect(() => {
+  //     getAllVariations();
+  //     // if (editVariation) {
+  //     //   const updatedObject = {
+  // variation_type: editVariation?.variation_type,
+  // variation_value: editVariation?.variation_value,
+  // additional_price: editVariation?.additional_price,
+  // image_url: editVariation?.image_url,
+  // article: editVariation?.article,
+  // description_en: editVariation?.description_en,
+  // description_ua: editVariation?.description_ua,
+  //     //   };
+  //     //   reset(updatedObject);
+  //     // }
+  //   }, []);
+
+  useEffect(() => {
+    const getEditedVariation = async () => {
+      try {
+        const editedVariation: IProductVariation = await getVariationById(+id!);
+        setEditVariation(editedVariation);
+
+        if (editedVariation) {
+          const updatedObject = {
+            variation_type: editedVariation?.variation_type,
+            variation_value: editedVariation?.variation_value,
+            additional_price: editedVariation?.additional_price,
+            image_url: editedVariation?.image_url,
+            article: editedVariation?.article,
+            description_en: editedVariation?.description_en,
+            description_ua: editedVariation?.description_ua,
+          };
+
+          reset(updatedObject);
+        }
+      } catch (error) {
+        console.log(error);
+        return <AdminError />;
+      }
+    };
+
+    getEditedVariation();
+  }, [id, reset]);
+
+  const notify = (message: string) => toast(message);
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
@@ -113,29 +165,27 @@ const AdminProductVariation = () => {
       formData.append(key, data[key]);
     });
 
-    productsImages.forEach((file) => {
-      formData.append("image", file);
-    });
-
-    const token = localStorage.getItem("token");
-    const notify = (message: string) => toast(message);
+    if (mainImage) {
+      formData.append("image", mainImage);
+    }
 
     try {
+      const token = localStorage.getItem("token");
+
       if (token) {
-        const response = await createProductVariation(formData, id!, token);
+        const response = await updateProductVariation(id!, formData, token);
         notify(response.message);
-        reset();
         navigate("/admin");
       } else {
-        notify("Авторизуйтеся будь ласка!");
-        setIsLoading(false);
+        return <AdminError />;
       }
     } catch (error) {
-      console.error("Error creating worker:", error);
-      notify("Щось пішло не так...");
-    } finally {
-      setIsLoading(false);
+      console.log(error);
     }
+  };
+
+  const handleChangePhoto = () => {
+    setEditUploadOpen((prevState) => !prevState);
   };
 
   return (
@@ -189,39 +239,58 @@ const AdminProductVariation = () => {
               onSubmit={handleSubmit(onSubmit)}
               className={styles.admin__form_block}
             >
-              <div className={styles.admin__block_control}>
-                <label htmlFor="image" className={styles.admin__control_label}>
-                  Зображення варіації
-                </label>
-                <AdminImage
-                  {...getSliderRootProps({
-                    isdragactive: isSliderDragActive.toString(),
-                    isdragaccept: isSliderDragAccept.toString(),
-                    isdragreject: isSliderDragReject.toString(),
-                    isfocused: isSliderFocused.toString(),
-                  })}
-                >
-                  <input {...getSliderInputProps()} />
-                  {isSliderDragActive ? (
-                    <p>Перетягніть сюди файли ...</p>
-                  ) : (
-                    <p>Перетягніть файли сюди, або клацніть...</p>
+              <div
+                className={`${styles.admin__block_control} ${styles.admin__control_block}`}
+              >
+                {!isEditUploadOpen && (
+                  <div className={styles.admin__control_item}>
+                    <label
+                      htmlFor="image"
+                      className={styles.admin__control_label}
+                    >
+                      Зображення товару
+                    </label>
+                    <img
+                      //   src={editVariation!.image_url[0]}
+                      alt="variation banner"
+                      className={styles.admin__control_image}
+                    />
+                  </div>
+                )}
+                <div className={styles.admin__control_item}>
+                  <button
+                    onClick={handleChangePhoto}
+                    className={styles.admin__control_add}
+                    type="button"
+                  >
+                    {!isEditUploadOpen ? "Змінити фото" : "Скасувати"}
+                  </button>
+                  {isEditUploadOpen && (
+                    <div className={styles.admin__control_upload}>
+                      <AdminImage
+                        {...getMainRootProps({
+                          isdragactive: isMainDragActive.toString(),
+                          isdragaccept: isMainDragAccept.toString(),
+                          isdragreject: isMainDragReject.toString(),
+                          isfocused: isMainFocused.toString(),
+                        })}
+                      >
+                        <input {...getMainInputProps()} />
+                        {isMainDragActive ? (
+                          <p>Перетягніть сюди файли ...</p>
+                        ) : (
+                          <p>Клацніть або перетягніть файли</p>
+                        )}
+                      </AdminImage>
+                      {mainImage && <p>{mainImage.name}</p>}
+                      {errors["image_url"] && (
+                        <span className={styles.error_message}>
+                          {errors["image_url"]?.message as string}
+                        </span>
+                      )}
+                    </div>
                   )}
-                </AdminImage>
-                <ul className={styles.admin__drag_slider}>
-                  {variationImagesPreview &&
-                    variationImagesPreview.map(
-                      (preview: string, index: number) => (
-                        <li key={index} className={styles.admin__drag_preview}>
-                          <img
-                            className={styles.admin__drag_image}
-                            src={preview}
-                            alt={`variation preview ${index}`}
-                          />
-                        </li>
-                      )
-                    )}
-                </ul>
+                </div>
               </div>
               <div className={styles.admin__block_control}>
                 <label
@@ -397,4 +466,4 @@ const AdminProductVariation = () => {
   );
 };
 
-export default AdminProductVariation;
+export default AdminProductVariationUpdate;
