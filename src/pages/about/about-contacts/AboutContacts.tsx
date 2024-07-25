@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./AboutContacts.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AboutContacts: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.about__contacts_section}>
       <div className={styles.container}>
@@ -30,7 +33,9 @@ const AboutContacts: React.FC = () => {
               className={styles.about__router_arrow}
             />
             <NavLink to={"/home/prostopoo/about"}>
-              <p className={styles.about__router_name}>ПРО PROSTOPOO</p>
+              <p className={styles.about__router_name}>
+                {t("contacts.contactsRoute1")}
+              </p>
             </NavLink>
             <img
               src="../../images/navigation-arrow.svg"
@@ -40,16 +45,20 @@ const AboutContacts: React.FC = () => {
             <p
               className={`${styles.about__router_name} ${styles.about__router_active}`}
             >
-              Контакти
+              {t("contacts.contactsRoute2")}
             </p>
           </div>
           <div className={styles.about__contacts_name}>
-            <h2 className={styles.about__name_title}>Контакти</h2>
+            <h2 className={styles.about__name_title}>
+              {t("contacts.contactsTitle")}
+            </h2>
           </div>
           <div className={styles.about__contacts_main}>
             <h2 className={styles.about__main_title}>
-              Інтернет-магазин{" "}
-              <span className={styles.about__title_upper}>Prostopoo</span>
+              {t("contacts.contactsSubtitleChild1")}
+              <span className={styles.about__title_upper}>
+                {t("contacts.contactsSubtitleChild2")}
+              </span>
             </h2>
             <div className={styles.about__main_info}>
               <div className={styles.about__info_location}>
@@ -59,8 +68,7 @@ const AboutContacts: React.FC = () => {
                   className={styles.about__location_icon}
                 />
                 <p className={styles.about__info_text}>
-                  03045, Україна, м. Київ, вул. Набережно-Корчуватська, 14
-                  prostopoo.com.ua
+                  {t("contacts.contactsLocation")}
                 </p>
               </div>
               <div className={styles.about__info_location}>
@@ -75,17 +83,26 @@ const AboutContacts: React.FC = () => {
               </div>
             </div>
             <p className={styles.about__main_text}>
-              <span className={styles.about__text_primary}>*</span> дзвінки по
-              Україні{" "}
-              <span className={styles.about__text_bold}>БЕЗКОШТОВНІ</span>
+              <span className={styles.about__text_primary}>
+                {t("contacts.contactsCallsChild1")}
+              </span>
+              {t("contacts.contactsCallsChild2")}
+              <span className={styles.about__text_bold}>
+                {t("contacts.contactsCallsChild3")}
+              </span>
             </p>
             <div className={styles.about__main_payment}>
-              <span className={styles.about__text_primary}>Реквізити:</span>
+              <span className={styles.about__text_primary}>
+                {t("contacts.contactsDetailsTitle")}
+              </span>
               <p className={styles.about__info_text}>
-                ФОП Стадольська Лілія Іванівна <br /> Код ЄДРПОУ 2826212066{" "}
-                <br /> Дата реєстрації: 29.07.2017 <br /> №20520000000002678{" "}
-                <br /> 03045, Україна, м. Київ, <br /> вул.
-                Набережно-Корчуватська, 14 <br /> (метро Видубичі)
+                {t("contacts.contactsDetailsText1")} <br />
+                {t("contacts.contactsDetailsText2")} <br />
+                {t("contacts.contactsDetailsText3")} <br />
+                {t("contacts.contactsDetailsText4")} <br />
+                {t("contacts.contactsDetailsText5")} <br />
+                {t("contacts.contactsDetailsText6")} <br />
+                {t("contacts.contactsDetailsText7")}
               </p>
             </div>
           </div>

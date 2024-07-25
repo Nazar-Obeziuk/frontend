@@ -6,7 +6,7 @@
   padding-bottom: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
-.review__list_item:last-child {
+.review__list_item:first-child {
   border-bottom: none;
 }
 .review__item_header {

@@ -28,6 +28,10 @@ const AdminReviewsTable: React.FC<Props> = ({
               <th className={styles.admin__table_th}>Назва (Англ)</th>
               <th className={styles.admin__table_th}>Опис (Укр)</th>
               <th className={styles.admin__table_th}>Опис (Англ)</th>
+              <th className={styles.admin__table_th}>Плюси (Укр)</th>
+              <th className={styles.admin__table_th}>Плюси (Англ)</th>
+              <th className={styles.admin__table_th}>Мінуси (Укр)</th>
+              <th className={styles.admin__table_th}>Мінуси (Англ)</th>
               <th className={styles.admin__table_th}>Дії</th>
             </tr>
           </thead>
@@ -63,6 +67,18 @@ const AdminReviewsTable: React.FC<Props> = ({
                   </td>
                   <td className={styles.admin__table_td}>
                     {adminReview.description_en}
+                  </td>
+                  <td className={styles.admin__table_td}>
+                    {adminReview.pluses_ua ? adminReview.pluses_ua : "Немає"}
+                  </td>
+                  <td className={styles.admin__table_td}>
+                    {adminReview.pluses_en ? adminReview.pluses_en : "Немає"}
+                  </td>
+                  <td className={styles.admin__table_td}>
+                    {adminReview.minuses_ua ? adminReview.minuses_ua : "Немає"}
+                  </td>
+                  <td className={styles.admin__table_td}>
+                    {adminReview.minuses_en ? adminReview.minuses_en : "Немає"}
                   </td>
                   <td
                     className={`${styles.admin__table_td} ${styles.admin__td_actions}`}

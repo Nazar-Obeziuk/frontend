@@ -62,6 +62,7 @@
   align-items: center;
   gap: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
 }
 .catalog__tabs_item {
   padding-right: 30px;
@@ -101,8 +102,14 @@
 
 @media (max-width: 600px) {
   .catalog__info_tabs {
-    gap: 0;
     justify-content: space-between;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .catalog__info_tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .catalog__individual_section {

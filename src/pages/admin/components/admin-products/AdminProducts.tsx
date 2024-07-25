@@ -10,14 +10,11 @@ import {
   deleteProduct,
   getAllProducts,
 } from "../../../../services/products/product";
-import { useAdminProductsContext } from "../../../../context/admin-products/AdminProductsContext";
 
 const AdminProducts: React.FC = () => {
   const [isAdminProductsFormOpen, setAdminProductsFormOpen] = useState(true);
   const [adminProducts, setAdminProducts] = useState<IProduct[]>([]);
   const navigate = useNavigate();
-
-  const { setEditProduct } = useAdminProductsContext();
 
   const notify = (message: string) => toast(message);
 
@@ -35,7 +32,6 @@ const AdminProducts: React.FC = () => {
   };
 
   const onEditProduct = (product: IProduct) => {
-    setEditProduct(product);
     navigate(`/admin/update-product/${product.id}`);
   };
 

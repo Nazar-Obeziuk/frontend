@@ -1,54 +1,64 @@
 import React from "react";
 import styles from "./AboutHistory.module.css";
+import { useTranslation } from "react-i18next";
 
 const AboutHistory: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.about__history_section}>
       <div className={styles.container}>
         <div className={styles.about__history_wrapper}>
           <div className={styles.about__history_inner}>
             <div className={styles.about__inner_info}>
-              <h2 className={styles.about__info_title}>ПРО PROSTOPOO</h2>
+              <h2 className={styles.about__info_title}>
+                {t("aboutUs.aboutUsHistory.aboutUsHistoryTitle1")}
+              </h2>
               <div className={styles.about__info_main}>
                 <p className={styles.about__main_text}>
-                  <span className={styles.about__text_primary}>Prostopoo</span>{" "}
-                  — ми український виробник індивідуальних ортопедичних устілок.
+                  <span className={styles.about__text_primary}>
+                    {t("aboutUs.aboutUsHistory.aboutUsHistoryText1Child1")}
+                  </span>
+                  {t("aboutUs.aboutUsHistory.aboutUsHistoryText1Child2")}
                 </p>
                 <p className={styles.about__main_text}>
-                  <span className={styles.about__text_primary}>Prostopoo</span>{" "}
-                  — нашими устілками вже користуються жителі всієї України та
-                  закордоном.
+                  <span className={styles.about__text_primary}>
+                    {t("aboutUs.aboutUsHistory.aboutUsHistoryText2Child1")}
+                  </span>
+                  {t("aboutUs.aboutUsHistory.aboutUsHistoryText2Child2")}
                 </p>
                 <p className={styles.about__main_text}>
-                  <span className={styles.about__text_primary}>Prostopoo</span>{" "}
-                  — ми надаємо послуги по виготовленню індивідуальних
-                  ортопедичних устілок, з використанням передових технологій.
+                  <span className={styles.about__text_primary}>
+                    {t("aboutUs.aboutUsHistory.aboutUsHistoryText3Child1")}
+                  </span>
+                  {t("aboutUs.aboutUsHistory.aboutUsHistoryText3Child2")}
                 </p>
                 <p className={styles.about__main_text}>
-                  <span className={styles.about__text_primary}>Prostopoo</span>{" "}
-                  — швидке та легке рішення для ефективного догляду за своїми
-                  стопами.
+                  <span className={styles.about__text_primary}>
+                    {t("aboutUs.aboutUsHistory.aboutUsHistoryText4Child1")}
+                  </span>
+                  {t("aboutUs.aboutUsHistory.aboutUsHistoryText4Child2")}
                 </p>
               </div>
             </div>
             <div className={styles.about__inner_galery}>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../../images/about-foot-1.svg"
+                  src={t("aboutUs.aboutUsHistory.aboutUsHistoryImage1URL")}
                   alt="about foot 1"
                   className={styles.about__item_image}
                 />
               </div>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../../images/about-foot-2.svg"
+                  src={t("aboutUs.aboutUsHistory.aboutUsHistoryImage2URL")}
                   alt="about foot 2"
                   className={styles.about__item_image}
                 />
               </div>
               <div className={styles.about__galery_item}>
                 <img
-                  src="../../images/about-foot-3.svg"
+                  src={t("aboutUs.aboutUsHistory.aboutUsHistoryImage3URL")}
                   alt="about foot 3"
                   className={styles.about__item_image}
                 />
@@ -64,21 +74,17 @@ const AboutHistory: React.FC = () => {
               />
             </div>
             <div className={styles.about__banner_history}>
-              <h3 className={styles.about__history_title}>Історія бренду</h3>
+              <h3 className={styles.about__history_title}>
+                {t("aboutUs.aboutUsHistory.aboutUsHistoryTitle2")}
+              </h3>
               <p className={styles.about__history_text}>
-                Раніше виготовлення індивідуальних ортопедичних устілок
-                потребувало чимало часу та ресурсів.
+                {t("aboutUs.aboutUsHistory.aboutUsHistoryText5")}
               </p>
               <p className={styles.about__history_text}>
-                Ми поставили собі за мету зробити процес замовлення та
-                виготовлення індивідуальних устілок доступним будь-кому та
-                будь-де, автоматизованим і швидким, якісним і комфортним.
+                {t("aboutUs.aboutUsHistory.aboutUsHistoryText6")}
               </p>
               <p className={styles.about__history_text}>
-                Наша команда розробила стратегію та план виготовлення адаптивних
-                й ефективних індивідуальних ортопедичних устілок. У перший рік
-                створення бренду ми виготовили понад 5000 пар устілок. Кількість
-                нових клієнтів безупинно зростає.
+                {t("aboutUs.aboutUsHistory.aboutUsHistoryText7")}
               </p>
             </div>
           </div>

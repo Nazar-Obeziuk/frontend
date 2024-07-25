@@ -3,6 +3,7 @@ import styles from "./AdminProductReviewsTable.module.css";
 import { toast } from "react-toastify";
 import { IProductReview } from "../../../../../../../../../../services/products/product.interface";
 import { deleteReview } from "../../../../../../../../../../services/reviews/reviews";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   productReviews: IProductReview[];
@@ -14,8 +15,11 @@ const AdminProductReviewsTable: React.FC<Props> = ({
   getAll,
 }) => {
   const notify = (message: string) => toast(message);
+  const navigate = useNavigate();
 
-  const handleEditProductReview = (productReview: IProductReview) => {};
+  const handleEditProductReview = (review_id: number) => {
+    navigate(`/admin/product-review-update/${review_id}`);
+  };
 
   const handleDeleteProductReview = async (id: number) => {
     const token = localStorage.getItem("token");
@@ -105,7 +109,7 @@ const AdminProductReviewsTable: React.FC<Props> = ({
                       </button>
                       <button
                         onClick={() =>
-                          handleEditProductReview(adminProductReview)
+                          handleEditProductReview(adminProductReview.id)
                         }
                         className={styles.admin__td_action}
                         type="button"

@@ -19,6 +19,9 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
     reset,
   } = useForm({ mode: "onChange" });
 
+  const notify = (message: string) => toast(message);
+  const token = localStorage.getItem("token");
+
   const onSubmit = async (data: any) => {
     setIsLoading(true);
 
@@ -27,26 +30,22 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
       formData.append(key, data[key]);
     });
 
-    const token = localStorage.getItem("token");
-    const notify = (message: string) => toast(message);
-
-    try {
-      if (token) {
+    if (token) {
+      try {
         const response = await createGeneralReview(formData, token);
-        getAll();
-        notify(response.message);
-        reset();
-        toggleReviewsForm();
-      } else {
-        notify("Авторизуйтеся будь ласка!");
-        setIsLoading(false);
+        resetValues(response);
+      } catch (error) {
+        console.error("Error creating review:", error);
+        notify("Щось пішло не так...");
       }
-    } catch (error) {
-      console.error("Error creating review:", error);
-      notify("Щось пішло не так...");
-    } finally {
-      setIsLoading(false);
     }
+  };
+
+  const resetValues = (response: any) => {
+    getAll();
+    notify(response.message);
+    reset();
+    toggleReviewsForm();
   };
 
   return (
@@ -106,6 +105,26 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
+        <label htmlFor="category" className={styles.admin__control_label}>
+          Категорія відгука
+        </label>
+        <select
+          {...register("category", { required: `Це поле обов'язкове!` })}
+          className={styles.admin__control_field}
+        >
+          <option value="general" defaultValue={"Генеральні"}>
+            Генеральні
+          </option>
+          <option value="certificate">Сертифікату</option>
+          <option value="individual">Індивідуальні</option>
+        </select>
+        {errors["category"] && (
+          <span className={styles.error_message}>
+            {errors["category"]?.message as string}
+          </span>
+        )}
+      </div>
+      <div className={styles.admin__block_control}>
         <label htmlFor="description_ua" className={styles.admin__control_label}>
           Текст відгука (Укр)
         </label>
@@ -125,10 +144,7 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
         )}
       </div>
       <div className={styles.admin__block_control}>
-        <label
-          htmlFor="worker-subtitle-en"
-          className={styles.admin__control_label}
-        >
+        <label htmlFor="description_en" className={styles.admin__control_label}>
           Текст відгука (Англ)
         </label>
         <input
@@ -146,74 +162,50 @@ const AdminReviewsForm: React.FC<Props> = ({ toggleReviewsForm, getAll }) => {
           </span>
         )}
       </div>
-      {/* <div className={styles.admin__block_control}>
+      <div className={styles.admin__block_control}>
         <label htmlFor="pluses_ua" className={styles.admin__control_label}>
-          Плюси відгука (Укр)
+          Плюси (Укр)
         </label>
         <input
           type="text"
-          style={errors["pluses_ua"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder="Плюси відгука (Укр)"
-          {...register("pluses_ua", { required: `Це поле обов'язкове!` })}
+          placeholder="Плюси (Укр)"
+          {...register("pluses_ua", { required: false })}
         />
-        {errors["pluses_ua"] && (
-          <span className={styles.error_message}>
-            {errors["pluses_ua"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="pluses_en" className={styles.admin__control_label}>
-          Плюси відгука (Англ)
+          Плюси (Англ)
         </label>
         <input
           type="text"
-          style={errors["pluses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder=" Плюси відгука (Англ)"
-          {...register("pluses_en", { required: `Це поле обов'язкове!` })}
+          placeholder="Плюси (Англ)"
+          {...register("pluses_en", { required: false })}
         />
-        {errors["pluses_en"] && (
-          <span className={styles.error_message}>
-            {errors["pluses_en"]?.message as string}
-          </span>
-        )}
-      </div> */}
-      {/* <div className={styles.admin__block_control}>
+      </div>
+      <div className={styles.admin__block_control}>
         <label htmlFor="minuses_ua" className={styles.admin__control_label}>
-          Мінуси відгука (Укр)
+          Мінуси (Укр)
         </label>
         <input
           type="text"
-          style={errors["minuses_ua"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder="Мінуси відгука (Укр)"
-          {...register("minuses_ua", { required: `Це поле обов'язкове!` })}
+          placeholder="Мінуси (Укр)"
+          {...register("minuses_ua", { required: false })}
         />
-        {errors["pluses_ua"] && (
-          <span className={styles.error_message}>
-            {errors["minuses_ua"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="minuses_en" className={styles.admin__control_label}>
-          Мінуси відгука (Англ)
+          Мінуси (Англ)
         </label>
         <input
           type="text"
-          style={errors["minuses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder=" Мінуси відгука (Англ)"
-          {...register("minuses_en", { required: `Це поле обов'язкове!` })}
+          placeholder="Мінуси (Англ)"
+          {...register("minuses_en", { required: false })}
         />
-        {errors["pluses_en"] && (
-          <span className={styles.error_message}>
-            {errors["minuses_en"]?.message as string}
-          </span>
-        )}
-      </div> */}
+      </div>
       <div className={styles.admin__block_actions}>
         <button
           className={styles.admin__actions_button}

@@ -10,9 +10,10 @@ import { Navigation } from "swiper/modules";
 
 interface WorkerProps {
   worker: IWorker;
+  activeLanguage: string;
 }
 
-const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
+const HomeWorker: React.FC<WorkerProps> = ({ worker, activeLanguage }) => {
   const swiper = useSwiper();
 
   return (
@@ -30,20 +31,30 @@ const HomeWorker: React.FC<WorkerProps> = ({ worker }) => {
             </div>
             <div className={styles.home__worker_info}>
               <div className={styles.home__info_header}>
-                <h3 className={styles.home__info_title}>{worker.name_ua}</h3>
+                <h3 className={styles.home__info_title}>
+                  {activeLanguage === "ua" ? worker.name_ua : worker.name_en}
+                </h3>
                 <span className={styles.home__info_subtitle}>
-                  {worker.subtitle_ua}
+                  {activeLanguage === "ua"
+                    ? worker.subtitle_ua
+                    : worker.subtitle_en}
                 </span>
               </div>
               <div className={styles.home__info_about}>
                 <p className={styles.home__about_text}>
-                  {worker.first_description_ua}
+                  {activeLanguage === "ua"
+                    ? worker.first_description_ua
+                    : worker.first_description_en}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.second_description_ua}
+                  {activeLanguage === "ua"
+                    ? worker.second_description_ua
+                    : worker.second_description_en}
                 </p>
                 <p className={styles.home__about_text}>
-                  {worker.third_description_ua}
+                  {activeLanguage === "ua"
+                    ? worker.third_description_ua
+                    : worker.third_description_en}
                 </p>
               </div>
               {worker.slider_images && (

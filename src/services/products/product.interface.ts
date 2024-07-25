@@ -1,3 +1,7 @@
+interface ICharacteristics {
+  [key: string]: string;
+}
+
 export interface IProduct {
   id: number;
   product_id: number;
@@ -8,12 +12,18 @@ export interface IProduct {
   base_price: number;
   article: string;
   image_url: string[];
-  characteristics: {};
+  reviews_count: number;
+  characteristics_ua: ICharacteristics;
+  characteristics_en: ICharacteristics;
+  description_details_en: string;
+  description_details_ua: string;
+  description_characteristics_ua: string;
+  description_characteristics_en: string;
 }
 
 export interface IProductDetails {
   article: string;
-  average_ration: number;
+  average_rating: number;
   base_price: number;
   description_en: string;
   description_ua: string;
@@ -22,6 +32,12 @@ export interface IProductDetails {
   name_ua: string;
   product_id: number;
   reviews_count: number;
+  description_details_en: string;
+  description_details_ua: string;
+  description_characteristics_ua: string;
+  description_characteristics_en: string;
+  characteristics_en: ICharacteristics;
+  characteristics_ua: ICharacteristics;
   variations: {
     colors: Array<any>;
     sizes: Array<any>;
@@ -34,7 +50,7 @@ export interface IProductVariation {
   variation_type: string;
   variation_value: string;
   additional_price: number;
-  image_url: string;
+  image_url: string[];
   article: string;
   description_en: string;
   description_ua: string;
@@ -52,4 +68,5 @@ export interface IProductReview {
   minuses_ua: string;
   minuses_en: string;
   product_id: number | null;
+  created_at?: string;
 }

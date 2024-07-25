@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./OrderDelivery.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const OrderDelivery: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.order__delivery_section}>
       <div className={styles.container}>
@@ -32,11 +35,13 @@ const OrderDelivery: React.FC = () => {
             <p
               className={`${styles.order__router_name} ${styles.order__router_active}`}
             >
-              Доставка
+              {t("delivery.deliveryRoute")}
             </p>
           </div>
           <div className={styles.order__delivery_main}>
-            <h2 className={styles.order__main_title}>Доставка</h2>
+            <h2 className={styles.order__main_title}>
+              {t("delivery.deliveryMainTitle")}
+            </h2>
           </div>
           <div className={styles.order__delivery_main}>
             <img
@@ -46,31 +51,29 @@ const OrderDelivery: React.FC = () => {
             />
             <div className={styles.order__main_nova}>
               <h2 className={styles.order__nova_title}>
-                До відділення «Нова пошта»
+                {t("delivery.deliveryBlock1Title")}
               </h2>
               <p className={styles.order__main_text}>
-                Доставка Новою Поштою в межах України{" "}
-                <span className={styles.order__text_bold}>БЕЗКОШТОВНА.</span>{" "}
-                <br /> Адресну доставку замовлень здійснюємо за додаткову плату
-                (кур’єрські послуги за тарифами Нової Пошти сплачує замовник).
+                {t("delivery.deliveryBlock1Text1Child1")}
+                <span className={styles.order__text_bold}>
+                  {t("delivery.deliveryBlock1Text1Child2")}
+                </span>{" "}
+                <br /> {t("delivery.deliveryBlock1Text2")}
               </p>
               <p className={styles.order__main_text}>
-                Терміни доставки до відділення «Нова пошта» 2 - 3 дні після
-                підтвердження замовлення.
+                {t("delivery.deliveryBlock1Text3")}
               </p>
               <p className={styles.order__main_text}>
-                Після відправки замовлення ви отримаєте SMS-повідомлення з
-                номером експрес-накладної. Уточнити дату отримання вашого
-                замовлення ви можете на{" "}
+                {t("delivery.deliveryBlock1Text4Child1")}
                 <a
                   href="https://novaposhta.ua/"
                   target="_blank"
                   rel="noreferrer"
                   className={styles.order__text_link}
                 >
-                  сайті компанії «Нова пошта»
-                </a>{" "}
-                або в особистому додатку.
+                  {t("delivery.deliveryBlock1Text4Child2")}
+                </a>
+                {t("delivery.deliveryBlock1Text4Child3")}
               </p>
             </div>
             <div className={styles.order__main_line}></div>
@@ -80,18 +83,18 @@ const OrderDelivery: React.FC = () => {
                 alt="nova global icon"
                 className={styles.order__global_icon}
               />
-              <h2 className={styles.order__nova_title}>Міжнародна доставка</h2>
+              <h2 className={styles.order__nova_title}>
+                {t("delivery.deliveryBlock2Title")}
+              </h2>
               <p className={styles.order__main_text}>
-                Міжнародну доставку здійснюємо за допомогою оператора Нова
-                Глобал. Вартість доставки за{" "}
+                {t("delivery.deliveryBlock2Text1Child1")}
                 <a
                   href="../../images/delivery-global.pdf"
                   target="_blank"
                   className={styles.order__text_link}
                 >
-                  тарифами перевізника
+                  {t("delivery.deliveryBlock2Text1Child2")}
                 </a>
-                .
               </p>
             </div>
           </div>

@@ -1,0 +1,40 @@
+.admin__main_reviews {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.admin__reviews_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.admin__form_show {
+  background: var(--primary);
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  outline: none;
+  cursor: pointer;
+  padding: 16px 48px;
+  font-size: 20px;
+  font-family: "Euclid";
+  font-weight: 400;
+  color: var(--dark);
+  transition: 0.4s;
+  box-shadow: 0 24px 46px rgba(240, 173, 0, 0.19);
+  user-select: none;
+  text-transform: uppercase;
+}
+.admin__form_show:hover {
+  background: transparent;
+  color: var(--primary);
+}
+.admin__workers_table {
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .admin__main_workers {
+    padding: 40px 20px;
+  }
+}

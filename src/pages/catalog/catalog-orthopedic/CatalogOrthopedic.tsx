@@ -4,9 +4,11 @@ import { NavLink } from "react-router-dom";
 import CatalogProductItem from "../../../components/catalog-product-item/CatalogProductItem";
 import { IProduct } from "../../../services/products/product.interface";
 import { getAllProducts } from "../../../services/products/product";
+import { useTranslation } from "react-i18next";
 
 const CatalogOrthopedic: React.FC = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const { t } = useTranslation();
 
   const getProducts = async () => {
     const productsData = await getAllProducts();
@@ -46,7 +48,7 @@ const CatalogOrthopedic: React.FC = () => {
             <p
               className={`${styles.catalog__router_name} ${styles.catalog__router_active}`}
             >
-              Ортопедичні устілки
+              {t("catalogProduct.catalogProductRoute2")}
             </p>
           </div>
           <div className={styles.catalog__wrapper_main}>
@@ -56,7 +58,7 @@ const CatalogOrthopedic: React.FC = () => {
               ))
             ) : (
               <h2 className={styles.admin__products_empty}>
-                Товари зараз не доступні.
+                {t("catalogProduct.catalogProductEmpty")}
               </h2>
             )}
           </div>

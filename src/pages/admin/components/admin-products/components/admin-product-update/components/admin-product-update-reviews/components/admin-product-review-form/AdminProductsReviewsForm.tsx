@@ -36,7 +36,7 @@ const AdminProductsReviewsForm: React.FC<Props> = ({
 
     try {
       if (token) {
-        const response = await createProductsReview(formData, token, productId);
+        const response = await createProductsReview(formData, productId);
         notify(response.message);
         reset();
         getAll();
@@ -175,7 +175,7 @@ const AdminProductsReviewsForm: React.FC<Props> = ({
           type="text"
           style={errors["pluses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder=" Плюси відгука (Англ)"
+          placeholder="Плюси відгука (Англ)"
           {...register("pluses_en", { required: `Це поле обов'язкове!` })}
         />
         {errors["pluses_en"] && (
@@ -209,7 +209,7 @@ const AdminProductsReviewsForm: React.FC<Props> = ({
           type="text"
           style={errors["minuses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
-          placeholder=" Мінуси відгука (Англ)"
+          placeholder="Мінуси відгука (Англ)"
           {...register("minuses_en", { required: `Це поле обов'язкове!` })}
         />
         {errors["pluses_en"] && (
@@ -218,6 +218,23 @@ const AdminProductsReviewsForm: React.FC<Props> = ({
           </span>
         )}
       </div>
+      {/* <div className={styles.admin__block_control}>
+        <label htmlFor="date" className={styles.admin__control_label}>
+          Дата додавання відгука
+        </label>
+        <input
+          type="text"
+          style={errors["date"] ? { border: "1px solid #EB001B" } : {}}
+          className={styles.admin__control_field}
+          placeholder="Дата додавання відгука"
+          {...register("date", { required: `Це поле обов'язкове!` })}
+        />
+        {errors["date"] && (
+          <span className={styles.error_message}>
+            {errors["date"]?.message as string}
+          </span>
+        )}
+      </div> */}
       <div className={styles.admin__block_actions}>
         <button
           className={styles.admin__actions_button}

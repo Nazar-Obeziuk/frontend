@@ -1,36 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogIndividualAbout.module.css";
+import {
+  IIndividualInsole,
+  IIndividualVariation,
+} from "../../../../../services/individual-insoles/individualInsoles.interface";
+import Loader from "../../../../../components/loader/Loader";
+import { useTranslation } from "react-i18next";
 
-const CatalogIndividualAbout: React.FC = () => {
+interface Props {
+  individualInsoles: IIndividualInsole[];
+  activeCoverage: IIndividualVariation;
+}
+
+const CatalogIndividualAbout: React.FC<Props> = ({
+  individualInsoles,
+  activeCoverage,
+}) => {
+  const [activeLanguage, setActiveLanguage] = useState("ua");
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else if (i18n.language === "en") {
+      setActiveLanguage("en");
+    }
+  }, [i18n.language]);
+
+  if (!individualInsoles[0]) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.catalog__info_about}>
       <p className={styles.catalog__about_text}>
-        Індивідуальні ортопедичні устілки від бренда Prostopoo (Простопу)
-        розроблено із міцних матеріалів для запобігання пошкодженню стоп та
-        зменшення або усунення болю.
+        {/* {activeLanguage === "ua"
+          ? activeCoverage
+            ? activeCoverage.first_about_description_ua
+            : individualInsoles[0].first_about_description_ua
+          : activeCoverage
+          ? activeCoverage.first_about_description_en
+          : individualInsoles[0].first_about_description_en} */}
+        {activeLanguage === "ua"
+          ? individualInsoles[0].first_about_description_ua
+          : individualInsoles[0].first_about_description_en}
       </p>
       <p className={styles.catalog__about_text}>
-        Головним завданням устілок є не просто підтримання склепінь стоп, а й
-        тренування м’язового апарату, для правильного функціонування та
-        формування анатомічної форми стопи. Устілки Prostopoo м’якіші за звичні
-        нам каркасні устілки, мають вищі супінатори для правильного
-        позиціонування кісток стопи.
+        {activeCoverage
+          ? activeCoverage.second_about_description_ua
+          : individualInsoles[0].second_about_description_ua}
       </p>
       <p className={styles.catalog__about_text}>
-        Покриття, яке використовують для виготовлення устілок, відрізняється
-        матеріалом, кольором та іншими характеристиками. Основу устілок
-        виготовляють із блоку EVA різної щільності (від 30 до 70 Shr). Ступінь
-        твердості матеріалу для ваших устілок визначає фахівець із урахуванням
-        особливостей стоп.
+        {activeCoverage
+          ? activeCoverage.third_about_description_ua
+          : individualInsoles[0].third_about_description_ua}
       </p>
       <p className={styles.catalog__about_text}>
-        <span className={styles.catalog__text_primary}>
-          У вартість індивідуальних устілок Prostopoo входить
-        </span>{" "}
-        діагностичний бокс, доставка боксу покупцеві до відділення Нової пошти,
-        зворотна доставка (від покупця до нас), доставка готового виробу. В
-        комплект для самодіагностики входить: діагностичний бокс для зняття
-        відбитків стоп, анкета, інструкція.
+        {activeCoverage
+          ? activeCoverage.fourth_about_description_ua
+          : individualInsoles[0].fourth_about_description_ua}
       </p>
     </div>
   );

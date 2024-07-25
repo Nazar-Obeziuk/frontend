@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
@@ -7,11 +7,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { IReviewGeneral } from "../../../../../services/reviews/review.interface";
 import { getAllGeneralReviews } from "../../../../../services/reviews/reviews";
+import { useTranslation } from "react-i18next";
 
 const HomeReview: React.FC = () => {
   const [reviews, setReviews] = useState<IReviewGeneral[]>([]);
   const [isReviewsError, setReviewsError] = useState(false);
   const swiper = useSwiper();
+  const { t } = useTranslation();
 
   const getAll = async () => {
     try {
@@ -84,7 +86,7 @@ const HomeReview: React.FC = () => {
                       </div>
                       <div className={styles.home__reviews_main}>
                         <span className={styles.home__reviews_experience}>
-                          Досвід використання:
+                          {t("home.homeReviews.homeReviewsExperienceOfUse")}
                         </span>
                         <p className={styles.home__reviews_text}>
                           {review.description_ua}

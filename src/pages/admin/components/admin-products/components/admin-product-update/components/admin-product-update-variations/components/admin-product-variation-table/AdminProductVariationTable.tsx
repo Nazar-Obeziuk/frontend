@@ -38,9 +38,9 @@ const AdminProductVariationTable: React.FC<Props> = ({
           <table className={styles.admin__table_item}>
             <thead className={styles.admin__table_head}>
               <tr className={styles.admin__table_tr}>
-                <th className={styles.admin__table_th}>
+                {/* <th className={styles.admin__table_th}>
                   Зображення варіації товарів
-                </th>
+                </th> */}
                 <th className={styles.admin__table_th}>Тип варіації</th>
                 <th className={styles.admin__table_th}>Значення варіації</th>
                 <th className={styles.admin__table_th}>Ціна</th>
@@ -54,12 +54,18 @@ const AdminProductVariationTable: React.FC<Props> = ({
               {productVariation.map(
                 (adminVariation: IProductVariation, index: number) => (
                   <tr key={index} className={styles.admin__table_tr}>
-                    <td className={styles.admin__table_td}>
-                      <img
-                        src={adminVariation.image_url[0]}
-                        alt="product variation banner"
-                      />
-                    </td>
+                    {/* <td className={styles.admin__table_td}>
+                      {adminVariation.image_url.map(
+                        (image: string, index: number) => (
+                          <img
+                            className={styles.admin__td_icon}
+                            key={index}
+                            src={image}
+                            alt="product variation banner"
+                          />
+                        )
+                      )}
+                    </td> */}
                     <td className={styles.admin__table_td}>
                       {adminVariation.variation_type}
                     </td>

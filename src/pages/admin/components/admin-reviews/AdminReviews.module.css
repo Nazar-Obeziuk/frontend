@@ -33,6 +33,35 @@
 .admin__workers_table {
   width: 100%;
 }
+.admin__main_tabs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.admin__tabs_button {
+  width: fit-content;
+  background: transparent;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  outline: none;
+  cursor: pointer;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-family: "Euclid";
+  font-weight: 400;
+  color: var(--primary);
+  transition: 0.4s;
+  box-shadow: 0 24px 46px rgba(240, 173, 0, 0.19);
+  user-select: none;
+}
+.admin__tabs_active {
+  background: var(--primary);
+  color: var(--dark);
+}
+.admin__tabs_button:hover {
+  background: var(--primary);
+  color: var(--dark);
+}
 
 @media (max-width: 1000px) {
   .admin__main_workers {

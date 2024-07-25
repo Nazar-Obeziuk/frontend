@@ -2,8 +2,11 @@ import React, { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./CartDelivery.module.css";
 import CartDeliveryForms from "./components/cart-delivery-forms/CartDeliveryForms";
+import { useTranslation } from "react-i18next";
 
 const CartDelivery: React.FC = () => {
+  const { t } = useTranslation();
+
   // const navigate = useNavigate();
   // // const formRef = useRef<any>(null);
 
@@ -45,7 +48,7 @@ const CartDelivery: React.FC = () => {
               className={styles.cart__router_arrow}
             />
             <NavLink to={"/home/cart"} className={styles.cart__router_name}>
-              Корзина
+              {t("cart.cartRoute1")}
             </NavLink>
             <img
               src="../../images/navigation-arrow.svg"
@@ -55,7 +58,7 @@ const CartDelivery: React.FC = () => {
             <p
               className={`${styles.cart__router_name} ${styles.cart__router_active}`}
             >
-              Контактні дані та адреса доставки
+              {t("cart.cartRoute2")}
             </p>
           </div>
           <div className={styles.cart__wrapper_inner}>
@@ -67,7 +70,9 @@ const CartDelivery: React.FC = () => {
                   className={styles.cart__circle_icon}
                 />
               </span>
-              <p className={styles.cart__block_text}>Корзина</p>
+              <p className={styles.cart__block_text}>
+                {t("cart.cartStep1SubRoute")}
+              </p>
             </div>
             <div className={styles.cart__inner_line}></div>
             <div
@@ -81,7 +86,7 @@ const CartDelivery: React.FC = () => {
                 />
               </span>
               <p className={styles.cart__block_text}>
-                Контактні дані та адреса доставки
+                {t("cart.cartStep2SubRoute")}
               </p>
             </div>
             <div className={styles.cart__inner_line}></div>
@@ -93,7 +98,9 @@ const CartDelivery: React.FC = () => {
                   className={styles.cart__circle_icon}
                 />
               </span>
-              <p className={styles.cart__block_text}>Вибір способу оплати</p>
+              <p className={styles.cart__block_text}>
+                {t("cart.cartStep3SubRoute")}
+              </p>
             </div>
           </div>
           <CartDeliveryForms key={"uniq1"} />

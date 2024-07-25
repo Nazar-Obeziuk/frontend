@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogCertificateGift.module.css";
+import { IReview } from "../../../../../services/reviews/review.interface";
+import { ICertificate } from "../../../../../services/gift-certificate/gift-certificate.interface";
+import Loader from "../../../../../components/loader/Loader";
+import { useTranslation } from "react-i18next";
 
-const CatalogCertificateGift: React.FC = () => {
+interface Props {
+  certificateReviews: IReview[];
+  onOpenReviewPopup: () => void;
+  certificates: ICertificate[];
+}
+
+const CatalogCertificateGift: React.FC<Props> = ({
+  certificateReviews,
+  onOpenReviewPopup,
+  certificates,
+}) => {
   const [countOfCertificate, setCountOfCertificate] = useState(1);
+  const [activeLanguage, setActiveLanguage] = useState<string>("ua");
+  const { t, i18n } = useTranslation();
 
   const handleCountOfCertificate = (operation: "increment" | "decrement") => {
     setCountOfCertificate((prevCount) => {
@@ -15,42 +31,96 @@ const CatalogCertificateGift: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else {
+      setActiveLanguage("en");
+    }
+  }, [i18n.language]);
+
+  if (!certificates[0]) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.catalog__main_gift}>
       <div className={styles.catalog__gift_banners}>
-        <img
-          src="../../images/gift-card.jpg"
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
-        <img
-          src="../../images/gift-image.jpg"
-          alt="certificate gift banner"
-          className={styles.catalog__banners_item}
-        />
+        {certificates[0].image_url.map((image: string, index: number) => (
+          <img
+            key={index}
+            src={image}
+            alt="certificate gift banner"
+            className={styles.catalog__banners_item}
+          />
+        ))}
       </div>
       <div className={styles.catalog__gift_info}>
         <div className={styles.catalog__info_header}>
           <h3 className={styles.catalog__header_title}>
-            Подарунковий сертифікат Prostopoo
+            {activeLanguage === "ua"
+              ? certificates[0].name_ua
+              : certificates[0].name_en}
           </h3>
           <div className={styles.catalog__header_info}>
-            <div className={styles.catalog__header_reviews}>
-              <img
-                src="../../images/review-star.svg"
-                alt="review star icon"
-                className={styles.catalog__reviews_star}
-              />
-            </div>
-            <p className={styles.catalog__header_left}>Залишити відгук</p>
+            {certificateReviews.length > 0 ? (
+              <div className={styles.catalog__header_reviews}>
+                <img
+                  src="../../images/review-star.svg"
+                  alt="review star icon"
+                  className={styles.catalog__reviews_star}
+                />
+                <img
+                  src="../../images/review-star.svg"
+                  alt="review star icon"
+                  className={styles.catalog__reviews_star}
+                />
+                <img
+                  src="../../images/review-star.svg"
+                  alt="review star icon"
+                  className={styles.catalog__reviews_star}
+                />
+                <img
+                  src="../../images/review-star.svg"
+                  alt="review star icon"
+                  className={styles.catalog__reviews_star}
+                />
+                <img
+                  src="../../images/review-star.svg"
+                  alt="review star icon"
+                  className={styles.catalog__reviews_star}
+                />
+                <span className={styles.admin__reviews_count}>
+                  (
+                  {certificateReviews.length === 1
+                    ? certificateReviews.length +
+                      t("products.productsReviewSingle")
+                    : certificateReviews.length +
+                      t("products.productsReviewMulti")}
+                  )
+                </span>
+              </div>
+            ) : (
+              <p
+                onClick={onOpenReviewPopup}
+                className={styles.catalog__header_left}
+              >
+                {t("products.productsLeftReview")}
+              </p>
+            )}
             <p className={styles.catalog__header_code}>
-              Код товару:{" "}
-              <span className={styles.catalog__code_item}>PROSTO-GIFT</span>
+              {t("products.productsCode")}
+              <span className={styles.catalog__code_item}>
+                {certificates[0].article}
+              </span>
             </p>
           </div>
         </div>
         <div className={styles.catalog__info_main}>
-          <h2 className={styles.catalog__main_price}>1499 грн</h2>
+          <h2 className={styles.catalog__main_price}>
+            {certificates[0].base_price}{" "}
+            {activeLanguage === "ua" ? "грн" : "UAH"}
+          </h2>
           <div className={styles.catalog__main_count}>
             <span
               onClick={() => handleCountOfCertificate("decrement")}
@@ -77,11 +147,12 @@ const CatalogCertificateGift: React.FC = () => {
         </div>
         <div className={styles.catalog__info_footer}>
           <p className={styles.catalog__info_text}>
-            Подарунковий сертифікат надає право отримати 1 пару індивідуальних
-            ортопедичних устілок бренда Prostopoo.
+            {activeLanguage === "ua"
+              ? certificates[0].description_ua
+              : certificates[0].description_en}
           </p>
           <button className={styles.catalog__info_order} type="button">
-            ЗАМОВИТИ СЕРТИФІКАТ
+            {t("certificate.certificateButtonText")}
           </button>
         </div>
       </div>

@@ -1,13 +1,11 @@
 import React from "react";
 import styles from "./ClientNeed.module.css";
-import {
-  clientNeedsIndividualData,
-  clientNeedsOrthopedicData,
-} from "../../../utils/data/ClientNeeds.data";
-import InsoleItem from "../../../components/insole-item/InsoleItem";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ClientNeed: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={styles.client__individual_section}>
@@ -38,17 +36,164 @@ const ClientNeed: React.FC = () => {
               <p
                 className={`${styles.client__router_name} ${styles.client__router_active}`}
               >
-                Кому потрібні індивідуальні ортопедичні устілки
+                {t("clientWhoNeeds.clientWhoNeedsRoute")}
               </p>
             </div>
             <div className={styles.client__individual_main}>
               <h2 className={styles.client__main_title}>
-                Індивідуальні ортопедичні устілки потрібні:
+                {t("clientWhoNeeds.clientWhoNeedsTitle1")}
               </h2>
               <div className={styles.client__main_insoles}>
-                {clientNeedsIndividualData.map((insoleItem) => (
-                  <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
-                ))}
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/soldier-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText1")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/sportman-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText2")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/pregnant-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText3")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/children-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText4")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/old-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText5")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/flat-foot-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText6")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/foot-hole-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText7")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/pain-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText8")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/work-on-foot-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText9")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/size-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText10")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/amputation-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText11")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/varusna-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText12")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/overweight-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText13")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/diabet-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText14")}
+                  </p>
+                </div>
+                <div className={styles.home__insole_item}>
+                  <img
+                    src="../../images/diffirent-icon.svg"
+                    alt="insole item icon"
+                    className={styles.home__item_image}
+                  />
+                  <p className={styles.home__item_text}>
+                    {t("clientWhoNeeds.clientWhoNeedsItemText15")}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -58,12 +203,59 @@ const ClientNeed: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.client__orthopedic_wrapper}>
             <h2 className={styles.client__main_title}>
-              Ортопедичні устілки необхідні для:
+              {t("clientWhoNeeds.clientWhoNeedsTitle1")}
             </h2>
             <div className={styles.client__main_insoles}>
-              {clientNeedsOrthopedicData.map((insoleItem) => (
-                <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
-              ))}
+              <div className={styles.home__insole_item}>
+                <img
+                  src="../../images/protect-icon.svg"
+                  alt="insole item icon"
+                  className={styles.home__item_image}
+                />
+                <p className={styles.home__item_text}>
+                  {t("clientWhoNeeds.clientWhoNeedsItemText16")}
+                </p>
+              </div>
+              <div className={styles.home__insole_item}>
+                <img
+                  src="../../images/load-on-foot-icon.svg"
+                  alt="insole item icon"
+                  className={styles.home__item_image}
+                />
+                <p className={styles.home__item_text}>
+                  {t("clientWhoNeeds.clientWhoNeedsItemText17")}
+                </p>
+              </div>
+              <div className={styles.home__insole_item}>
+                <img
+                  src="../../images/stabilization-icon.svg"
+                  alt="insole item icon"
+                  className={styles.home__item_image}
+                />
+                <p className={styles.home__item_text}>
+                  {t("clientWhoNeeds.clientWhoNeedsItemText18")}
+                </p>
+              </div>
+              <div className={styles.home__insole_item}>
+                <img
+                  src="../../images/endurance-icon.svg"
+                  alt="insole item icon"
+                  className={styles.home__item_image}
+                />
+                <p className={styles.home__item_text}>
+                  {t("clientWhoNeeds.clientWhoNeedsItemText19")}
+                </p>
+              </div>
+              <div className={styles.home__insole_item}>
+                <img
+                  src="../../images/aparat-icon.svg"
+                  alt="insole item icon"
+                  className={styles.home__item_image}
+                />
+                <p className={styles.home__item_text}>
+                  {t("clientWhoNeeds.clientWhoNeedsItemText20")}
+                </p>
+              </div>
             </div>
           </div>
         </div>

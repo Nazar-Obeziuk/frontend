@@ -1,28 +1,26 @@
 import React from "react";
 import styles from "./AboutGoal.module.css";
+import { useTranslation } from "react-i18next";
 
 const AboutGoal: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.about__goal_section}>
       <div className={styles.container}>
         <div className={styles.about__goal_wrapper}>
           <div className={styles.about__wrapper_info}>
             <h2 className={styles.about__info_title}>
-              Наша <span className={styles.about__title_upper}>мета</span> та{" "}
-              <span className={styles.about__title_upper}>місія</span>
+              {t("aboutUs.aboutUsGoal.aboutUsGoalTitle")}
             </h2>
             <p className={styles.about__info_text}>
-              Ми поставили собі за мету забезпечити зручність і швидкість
-              процесу замовлення та виготовлення індивідуальних устілок у
-              будь-якому місці, відповідно високим стандартам якості.
+              {t("aboutUs.aboutUsGoal.aboutUsGoalText1")}
             </p>
             <p className={styles.about__info_text}>
-              Ми прагнемо запропонувати винятково доступний та професійний
-              сервіс. Допомогти в вирішенні різноманітних проблем стоп.
+              {t("aboutUs.aboutUsGoal.aboutUsGoalText2")}
             </p>
             <p className={styles.about__info_text}>
-              Ми робимо все можливе, щоб наші клієнти завжди були задоволені
-              якістю устілок та сервісом.
+              {t("aboutUs.aboutUsGoal.aboutUsGoalText3")}
             </p>
           </div>
           <div className={styles.about__wrapper_banner}>

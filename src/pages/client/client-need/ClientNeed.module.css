@@ -84,6 +84,25 @@
   gap: 60px;
 }
 
+.home__insole_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.home__item_image {
+  height: 84px;
+}
+.home__item_text {
+  max-width: 80%;
+  text-align: center;
+  font-family: "Fixel-Display";
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+  color: var(--white);
+}
+
 @media (max-width: 1200px) {
   .client__individual_section {
     padding: 20px 15px 70px 15px;
@@ -97,6 +116,15 @@
 @media (max-width: 1000px) {
   .client__main_insoles div {
     width: calc(33% - 40px);
+  }
+  .home__insole_item {
+    width: 33%;
+  }
+}
+
+@media (max-width: 900px) {
+  .home__item_text {
+    max-width: 80% !important;
   }
 }
 
@@ -135,5 +163,17 @@
   .client__main_title {
     font-size: 22px;
     line-height: 28px;
+  }
+  .home__insole_item {
+    width: 50%;
+  }
+
+  .home__item_image {
+    height: 66px;
+  }
+
+  .home__item_text {
+    max-width: 100% !important;
+    font-size: 15px;
   }
 }

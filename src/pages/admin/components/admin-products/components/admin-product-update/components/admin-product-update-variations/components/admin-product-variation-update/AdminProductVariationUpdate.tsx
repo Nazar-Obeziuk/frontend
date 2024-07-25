@@ -13,64 +13,63 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { IProductVariation } from "../../../../../../../../../../services/products/product.interface";
 
-const getColor = (props: any) => {
-  if (props.isDragAccept) {
-    return "#00e676";
-  }
-  if (props.isDragReject) {
-    return "#ff1744";
-  }
-  if (props.isFocused) {
-    return "#2196f3";
-  }
-  return "#eeeeee";
-};
+// const getColor = (props: any) => {
+//   if (props.isDragAccept) {
+//     return "#00e676";
+//   }
+//   if (props.isDragReject) {
+//     return "#ff1744";
+//   }
+//   if (props.isFocused) {
+//     return "#2196f3";
+//   }
+//   return "#eeeeee";
+// };
 
-const AdminImage = styled.div`
-  width: 100%;
-  padding: 16px 26px 14px 26px;
-  border-width: 1px;
-  border-radius: 12px;
-  border-color: ${(props: any) => getColor(props)};
-  border-style: solid;
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  font-family: "Fixel-Display";
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 20px;
-  outline: none;
-  transition: border 0.24s ease-in-out;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+// const AdminImage = styled.div`
+//   width: 100%;
+//   padding: 16px 26px 14px 26px;
+//   border-width: 1px;
+//   border-radius: 12px;
+//   border-color: ${(props: any) => getColor(props)};
+//   border-style: solid;
+//   background-color: transparent;
+//   color: rgba(255, 255, 255, 0.5);
+//   font-family: "Fixel-Display";
+//   font-size: 18px;
+//   font-weight: 300;
+//   line-height: 20px;
+//   outline: none;
+//   transition: border 0.24s ease-in-out;
+//   display: flex;
+//   align-items: center;
+//   cursor: pointer;
 
-  &[isdragactive="true"] {
-    /* Style for drag active */
-  }
+//   &[isdragactive="true"] {
+//     /* Style for drag active */
+//   }
 
-  &[isdragaccept="true"] {
-    /* Style for drag accept */
-    border-color: #00e676;
-  }
+//   &[isdragaccept="true"] {
+//     /* Style for drag accept */
+//     border-color: #00e676;
+//   }
 
-  &[isdragreject="true"] {
-    /* Style for drag reject */
-    border-color: #ff1744;
-  }
+//   &[isdragreject="true"] {
+//     /* Style for drag reject */
+//     border-color: #ff1744;
+//   }
 
-  &[isfocused="true"] {
-    /* Style for focused */
-    border-color: #2196f3;
-  }
-`;
+//   &[isfocused="true"] {
+//     /* Style for focused */
+//     border-color: #2196f3;
+//   }
+// `;
 
 const AdminProductVariationUpdate: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [editVariation, setEditVariation] = useState<IProductVariation>();
-  const [mainImage, setMainImage] = useState<File | null>(null);
-  const [isEditUploadOpen, setEditUploadOpen] = useState(false);
-  // const { editVariation } = useAdminVariationsContext();
+  // const [mainImage, setMainImage] = useState<File | null>(null);
+  // const [isEditUploadOpen, setEditUploadOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -82,51 +81,26 @@ const AdminProductVariationUpdate: React.FC = () => {
     mode: "onChange",
   });
 
-  const acceptType: Accept = {
-    "image/*": [".jpeg", ".jpg", ".png", ".gif"],
-  };
+  // const acceptType: Accept = {
+  //   "image/*": [".jpeg", ".jpg", ".png", ".gif"],
+  // };
 
-  const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-    setMainImage(acceptedFiles[0]);
-  }, []);
+  // const onDropMainImage = useCallback((acceptedFiles: File[]) => {
+  //   setMainImage(acceptedFiles[0]);
+  // }, []);
 
-  const {
-    getRootProps: getMainRootProps,
-    getInputProps: getMainInputProps,
-    isDragActive: isMainDragActive,
-    isDragAccept: isMainDragAccept,
-    isDragReject: isMainDragReject,
-    isFocused: isMainFocused,
-  } = useDropzone({
-    onDrop: onDropMainImage,
-    multiple: false,
-    accept: acceptType,
-  });
-
-  const getAllVariations = async () => {
-    try {
-      const response = await getAllProductsVariations(+id!);
-      // setVariations(response);
-    } catch (error) {
-      console.log("variation error", error);
-    }
-  };
-
-  //   useEffect(() => {
-  //     getAllVariations();
-  //     // if (editVariation) {
-  //     //   const updatedObject = {
-  // variation_type: editVariation?.variation_type,
-  // variation_value: editVariation?.variation_value,
-  // additional_price: editVariation?.additional_price,
-  // image_url: editVariation?.image_url,
-  // article: editVariation?.article,
-  // description_en: editVariation?.description_en,
-  // description_ua: editVariation?.description_ua,
-  //     //   };
-  //     //   reset(updatedObject);
-  //     // }
-  //   }, []);
+  // const {
+  //   getRootProps: getMainRootProps,
+  //   getInputProps: getMainInputProps,
+  //   isDragActive: isMainDragActive,
+  //   isDragAccept: isMainDragAccept,
+  //   isDragReject: isMainDragReject,
+  //   isFocused: isMainFocused,
+  // } = useDropzone({
+  //   onDrop: onDropMainImage,
+  //   multiple: false,
+  //   accept: acceptType,
+  // });
 
   useEffect(() => {
     const getEditedVariation = async () => {
@@ -160,14 +134,15 @@ const AdminProductVariationUpdate: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
+
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
-    if (mainImage) {
-      formData.append("image", mainImage);
-    }
+    // if (mainImage) {
+    //   formData.append("image", mainImage);
+    // }
 
     try {
       const token = localStorage.getItem("token");
@@ -184,9 +159,9 @@ const AdminProductVariationUpdate: React.FC = () => {
     }
   };
 
-  const handleChangePhoto = () => {
-    setEditUploadOpen((prevState) => !prevState);
-  };
+  // const handleChangePhoto = () => {
+  //   setEditUploadOpen((prevState) => !prevState);
+  // };
 
   return (
     <section className={styles.admin__update_section}>
@@ -239,7 +214,7 @@ const AdminProductVariationUpdate: React.FC = () => {
               onSubmit={handleSubmit(onSubmit)}
               className={styles.admin__form_block}
             >
-              <div
+              {/* <div
                 className={`${styles.admin__block_control} ${styles.admin__control_block}`}
               >
                 {!isEditUploadOpen && (
@@ -250,11 +225,24 @@ const AdminProductVariationUpdate: React.FC = () => {
                     >
                       Зображення товару
                     </label>
-                    <img
-                      //   src={editVariation!.image_url[0]}
-                      alt="variation banner"
-                      className={styles.admin__control_image}
-                    />
+                    <ul className={styles.admin__drag_slider}>
+                      {editVariation &&
+                        editVariation?.image_url.map(
+                          (image: string, index: number) => (
+                            <li
+                              key={index}
+                              className={styles.admin__drag_preview}
+                            >
+                              <img
+                                className={styles.admin__drag_image}
+                                src={image}
+                                alt={`product preview ${index}`}
+                                width={100}
+                              />
+                            </li>
+                          )
+                        )}
+                    </ul>
                   </div>
                 )}
                 <div className={styles.admin__control_item}>
@@ -291,7 +279,7 @@ const AdminProductVariationUpdate: React.FC = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
               <div className={styles.admin__block_control}>
                 <label
                   htmlFor="variation_type"
@@ -310,10 +298,9 @@ const AdminProductVariationUpdate: React.FC = () => {
                   })}
                   className={styles.admin__control_field}
                 >
-                  <option value="coverage" defaultValue={"coverage"}>
-                    Покриття
+                  <option value="sizes" defaultValue={"sizes"}>
+                    Розміра
                   </option>
-                  <option value="sizes">Розміра</option>
                 </select>
                 {errors["variation_type"] && (
                   <span className={styles.error_message}>
@@ -328,19 +315,45 @@ const AdminProductVariationUpdate: React.FC = () => {
                 >
                   Значення варіації
                 </label>
-                <input
-                  type="text"
-                  className={styles.admin__control_field}
+                <select
                   style={
                     errors["variation_value"]
                       ? { border: "1px solid #EB001B" }
                       : {}
                   }
-                  placeholder="Значення варіації"
                   {...register("variation_value", {
                     required: `Це поле обов'язкове!`,
                   })}
-                />
+                  className={styles.admin__control_field}
+                >
+                  <option value="21" defaultValue={"21"}>
+                    21
+                  </option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                  <option value="32">32</option>
+                  <option value="33">33</option>
+                  <option value="34">34</option>
+                  <option value="35">35</option>
+                  <option value="36">36</option>
+                  <option value="37">37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                  <option value="41">41</option>
+                  <option value="42">42</option>
+                  <option value="43">43</option>
+                  <option value="44">44</option>
+                  <option value="45">45</option>
+                </select>
                 {errors["variation_value"] && (
                   <span className={styles.error_message}>
                     {errors["variation_value"]?.message as string}

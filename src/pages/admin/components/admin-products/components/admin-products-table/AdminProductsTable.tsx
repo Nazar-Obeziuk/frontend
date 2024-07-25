@@ -23,7 +23,7 @@ const AdminProductsTable: React.FC<Props> = ({
         <table className={styles.admin__table_item}>
           <thead className={styles.admin__table_head}>
             <tr className={styles.admin__table_tr}>
-              <th className={styles.admin__table_th}>Зображення</th>
+              <th className={styles.admin__table_th}>Зображення товарів</th>
               <th className={styles.admin__table_th}>Назва (Укр)</th>
               <th className={styles.admin__table_th}>Назва (Англ)</th>
               <th className={styles.admin__table_th}>Опис (Укр)</th>
@@ -36,8 +36,14 @@ const AdminProductsTable: React.FC<Props> = ({
           <tbody className={styles.admin__table_body}>
             {adminProducts.map((adminProduct: IProduct, index: number) => (
               <tr key={index} className={styles.admin__table_tr}>
-                <td className={styles.admin__table_td}>
-                  <img src={adminProduct.image_url[0]} alt="product banner" />
+                <td
+                  className={`${styles.admin__table_td} ${styles.admin__td_slider}`}
+                >
+                  {adminProduct.image_url.map(
+                    (image_url: string, index: number) => (
+                      <img src={image_url} key={index} alt="product banner" />
+                    )
+                  )}
                 </td>
                 <td className={styles.admin__table_td}>
                   {adminProduct.name_ua}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogIndividual.module.css";
 import CatalogIndividualProduct from "./components/catalog-individual-product/CatalogIndividualProduct";
 import CatalogIndividualAbout from "./components/catalog-individual-about/CatalogIndividualAbout";
@@ -6,16 +6,101 @@ import CatalogIndividualCharacteristics from "./components/catalog-individual-ch
 import { NavLink } from "react-router-dom";
 import Reviews from "../../../components/reviews/Reviews";
 import ReviewPopup from "../../../components/review-popup/ReviewPopup";
+import {
+  createIndividualReview,
+  getAllIndividualReviews,
+} from "../../../services/reviews/reviews";
+import { IProductReview } from "../../../services/products/product.interface";
+import {
+  getAllIndividualInsoles,
+  getAllIndividualVariations,
+} from "../../../services/individual-insoles/individualInsoles";
+import {
+  IIndividualInsole,
+  IIndividualVariation,
+} from "../../../services/individual-insoles/individualInsoles.interface";
+import { useTranslation } from "react-i18next";
 
 const CatalogIndividual: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     "about" | "characteristics" | "reviews"
   >("about");
+  const [individualInsoles, setIndividualInsoles] = useState<
+    IIndividualInsole[]
+  >([]);
   const [isOpenReviewPopup, setIsOpenReviewPopup] = useState(false);
+  const [individualReviews, setIndividualReviews] = useState<IProductReview[]>(
+    []
+  );
+  const [variations, setVariations] = useState<IIndividualVariation[]>([]);
+  const [productId, setProductId] = useState<number | null>(null);
+  const [activeCoverage, setActiveCoverage] =
+    useState<IIndividualVariation | null>(null);
+  const { t } = useTranslation();
 
   const toggleReviewPopup = () => {
     setIsOpenReviewPopup((prevState) => !prevState);
   };
+
+  const getAll = async () => {
+    try {
+      const response = await getAllIndividualInsoles();
+      setIndividualInsoles(response);
+      if (response.length > 0) {
+        setProductId(response[0].id);
+        getAllVariations(response[0].id); // Load variations when the product is set
+        getReviews(response[0].id); // Load reviews when the product is set
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllVariations = async (productId: number) => {
+    try {
+      const response = await getAllIndividualVariations(productId);
+      setVariations(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getReviews = async (productId: number) => {
+    try {
+      const response = await getAllIndividualReviews(productId);
+      setIndividualReviews(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createReview = async (formData: FormData) => {
+    if (productId !== null) {
+      try {
+        const response = await createIndividualReview(formData, productId);
+        await getReviews(productId);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Product ID is not available");
+    }
+  };
+
+  const handleCoverageChange = (newCoverage: IIndividualVariation) => {
+    setActiveCoverage(newCoverage);
+    console.log("Coverage changed:", newCoverage);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
+  useEffect(() => {
+    if (productId !== null) {
+      getAllVariations(productId);
+    }
+  }, [productId]);
 
   return (
     <>
@@ -47,11 +132,17 @@ const CatalogIndividual: React.FC = () => {
               <p
                 className={`${styles.catalog__router_name} ${styles.catalog__router_active}`}
               >
-                Індивідуальні ортопедичні устілки
+                {t("individualInsoles.individualInsolesRoute")}
               </p>
             </div>
             <div className={styles.catalog__individual_main}>
-              <CatalogIndividualProduct />
+              <CatalogIndividualProduct
+                variations={variations}
+                individualInsoles={individualInsoles}
+                individualReviews={individualReviews}
+                onOpenReviewPopup={toggleReviewPopup}
+                onCoverageChange={handleCoverageChange}
+              />
               <div className={styles.catalog__main_info}>
                 <div className={styles.catalog__info_tabs}>
                   <span
@@ -60,7 +151,7 @@ const CatalogIndividual: React.FC = () => {
                     }`}
                     onClick={() => setActiveTab("about")}
                   >
-                    Про товар
+                    {t("products.productsTab1")}
                   </span>
                   <span
                     className={`${styles.catalog__tabs_item} ${
@@ -68,7 +159,7 @@ const CatalogIndividual: React.FC = () => {
                     }`}
                     onClick={() => setActiveTab("characteristics")}
                   >
-                    Характеристики
+                    {t("products.productsTab2")}
                   </span>
                   <span
                     className={`${styles.catalog__tabs_item} ${
@@ -76,15 +167,24 @@ const CatalogIndividual: React.FC = () => {
                     }`}
                     onClick={() => setActiveTab("reviews")}
                   >
-                    Відгуки (0)
+                    {t("products.productsTab3")} ({individualReviews.length})
                   </span>
                 </div>
-                {activeTab === "about" && <CatalogIndividualAbout />}
+                {activeTab === "about" && (
+                  <CatalogIndividualAbout
+                    activeCoverage={activeCoverage!}
+                    individualInsoles={individualInsoles}
+                  />
+                )}
                 {activeTab === "characteristics" && (
-                  <CatalogIndividualCharacteristics />
+                  <CatalogIndividualCharacteristics
+                    activeCoverage={activeCoverage!}
+                    individualInsoles={individualInsoles}
+                  />
                 )}
                 {activeTab === "reviews" && (
                   <Reviews
+                    reviews={individualReviews}
                     onOpenReviewPopup={toggleReviewPopup}
                     key={"uniq1"}
                   />
@@ -96,6 +196,8 @@ const CatalogIndividual: React.FC = () => {
       </section>
       {isOpenReviewPopup && (
         <ReviewPopup
+          createReviews={createReview}
+          getReviews={() => getReviews(productId!)}
           isOpen={isOpenReviewPopup}
           onClose={toggleReviewPopup}
           key={"uniq1"}

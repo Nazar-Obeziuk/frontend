@@ -34,6 +34,7 @@
 }
 .catalog__steps_item {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 .catalog__steps_block {

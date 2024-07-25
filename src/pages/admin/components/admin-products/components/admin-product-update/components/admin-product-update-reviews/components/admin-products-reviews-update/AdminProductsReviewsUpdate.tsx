@@ -5,14 +5,13 @@ import AdminError from "../../../../../../../../admin-error/AdminError";
 import { useForm } from "react-hook-form";
 import { IProductReview } from "../../../../../../../../../../services/products/product.interface";
 import {
-  getProductsReviewById,
-  updateGeneralReview,
+  getReviewById,
+  updateReview,
 } from "../../../../../../../../../../services/reviews/reviews";
 import { toast } from "react-toastify";
 
 const AdminProductsReviewsUpdate: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [editProductReview, setEditProductReview] = useState<IProductReview>();
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -27,10 +26,7 @@ const AdminProductsReviewsUpdate: React.FC = () => {
   useEffect(() => {
     const getEditedProductReview = async () => {
       try {
-        const editedProductReview: IProductReview = await getProductsReviewById(
-          +id!
-        );
-        setEditProductReview(editedProductReview);
+        const editedProductReview: IProductReview = await getReviewById(id!);
 
         if (editedProductReview) {
           const updatedObject = {
@@ -69,7 +65,7 @@ const AdminProductsReviewsUpdate: React.FC = () => {
       const token = localStorage.getItem("token");
 
       if (token) {
-        const response = await updateGeneralReview(formData, id!, token);
+        const response = await updateReview(formData, id!, token);
         notify(response.message);
         navigate("/admin");
       } else {

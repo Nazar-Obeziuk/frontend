@@ -3,8 +3,11 @@ import styles from "./CartPayment.module.css";
 import { NavLink } from "react-router-dom";
 import CartPaymentWay from "./components/cart-payment-way/CartPaymentWay";
 import CartPaymentProducts from "./components/cart-payment-products/CartPaymentProducts";
+import { useTranslation } from "react-i18next";
 
 const CartPayment: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.cart__section}>
       <div className={styles.container}>
@@ -32,7 +35,7 @@ const CartPayment: React.FC = () => {
               className={styles.cart__router_arrow}
             />
             <NavLink to={"/home/cart"} className={styles.cart__router_name}>
-              Корзина
+              {t("cart.cartRoute1")}
             </NavLink>
             <img
               src="../../images/navigation-arrow.svg"
@@ -43,7 +46,7 @@ const CartPayment: React.FC = () => {
               to={"/home/cart/contacts-and-delivery"}
               className={styles.cart__router_name}
             >
-              Контактні дані та адреса доставки
+              {t("cart.cartRoute2")}
             </NavLink>
             <img
               src="../../images/navigation-arrow.svg"
@@ -53,7 +56,7 @@ const CartPayment: React.FC = () => {
             <p
               className={`${styles.cart__router_name} ${styles.cart__router_active}`}
             >
-              Вибір способу оплати
+              {t("cart.cartRoute3")}
             </p>
           </div>
           <div className={styles.cart__wrapper_inner}>
@@ -65,7 +68,9 @@ const CartPayment: React.FC = () => {
                   className={styles.cart__circle_icon}
                 />
               </span>
-              <p className={styles.cart__block_text}>Корзина</p>
+              <p className={styles.cart__block_text}>
+                {t("cart.cartStep1SubRoute")}
+              </p>
             </div>
             <div className={styles.cart__inner_line}></div>
             <div className={styles.cart__inner_block}>
@@ -77,7 +82,7 @@ const CartPayment: React.FC = () => {
                 />
               </span>
               <p className={styles.cart__block_text}>
-                Контактні дані та адреса доставки
+                {t("cart.cartStep2SubRoute")}
               </p>
             </div>
             <div className={styles.cart__inner_line}></div>
@@ -91,7 +96,9 @@ const CartPayment: React.FC = () => {
                   className={styles.cart__circle_icon}
                 />
               </span>
-              <p className={styles.cart__block_text}>Вибір способу оплати</p>
+              <p className={styles.cart__block_text}>
+                {t("cart.cartStep3SubRoute")}
+              </p>
             </div>
           </div>
           <div className={styles.cart__wrapper_main}>

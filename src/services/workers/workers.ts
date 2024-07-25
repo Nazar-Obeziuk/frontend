@@ -30,8 +30,8 @@ export const createWorker = async (formData: FormData, token: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error creating worker:", error);
-    throw error;
+    console.log(error);
+    return [];
   }
 };
 

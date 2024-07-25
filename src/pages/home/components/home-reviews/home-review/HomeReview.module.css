@@ -5,6 +5,7 @@
   --swiper-theme-color: var(--primary);
 }
 .home__reviews_item {
+  height: 250px;
   border-radius: 12px;
   background: var(--dark-gray);
   padding: 30px;
@@ -42,6 +43,8 @@
   color: rgba(255, 255, 255, 0.5);
 }
 .home__reviews_text {
+  max-height: 100px;
+  overflow-y: auto;
   font-family: "Fixel-Display";
   font-size: 18px;
   font-weight: 300;

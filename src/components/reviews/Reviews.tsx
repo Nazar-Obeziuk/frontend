@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { ICertificateReview } from "../../services/certificate-reviews/certificateReviews.interface";
+import React from "react";
 import ReviewItem from "./review-item/ReviewItem";
 import styles from "./Reviews.module.css";
-import { catalogCertificateReviews } from "../../utils/data/Reviews.data";
+import { IProductReview } from "../../services/products/product.interface";
+import { useTranslation } from "react-i18next";
 
 interface ReviewsProps {
   onOpenReviewPopup: () => void;
+  reviews: IProductReview[];
 }
 
-const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
-  const [reviews, setReviews] = useState(catalogCertificateReviews);
+const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup, reviews }) => {
+  const { t } = useTranslation();
 
   return (
     <div className={styles.catalog__main_reviews}>
@@ -22,7 +23,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
               className={styles.catalog__info_icon}
             />
             <p className={styles.catalog__info_text}>
-              Відгуків про даний товар поки що немає. Залиште відгук першими.
+              {t("products.productsReviewText")}
             </p>
           </div>
           <button
@@ -30,7 +31,7 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
             className={styles.catalog__empty_button}
             type="button"
           >
-            Залишити відгук
+            {t("products.productsButtonReview")}
           </button>
         </div>
       )}
@@ -41,10 +42,10 @@ const Reviews: React.FC<ReviewsProps> = ({ onOpenReviewPopup }) => {
             className={styles.catalog__empty_button}
             type="button"
           >
-            Залишити відгук
+            {t("products.productsButtonReview")}
           </button>
           <ul className={styles.catalog__reviews_list}>
-            {reviews.map((review: ICertificateReview) => (
+            {reviews.map((review: IProductReview) => (
               <ReviewItem key={review.id} review={review} />
             ))}
           </ul>

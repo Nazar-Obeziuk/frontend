@@ -30,8 +30,8 @@ export const createProduct = async (formData: FormData, token: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error creating product:", error);
-    throw error;
+    console.log(error);
+    return [];
   }
 };
 
@@ -81,7 +81,7 @@ export const getAllProductsVariations = async (producttId: number) => {
 
 export const getVariationById = async (producttId: number) => {
   try {
-    const { data } = await axios.get(`/variations/${producttId}`);
+    const { data } = await axios.get(`/variations/variation/${producttId}`);
     return data;
   } catch (error) {
     console.log(error);

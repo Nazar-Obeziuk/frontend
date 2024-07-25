@@ -5,9 +5,18 @@ import CatalogProductCharacteristics from "./components/catalog-product-characte
 import Reviews from "../../../components/reviews/Reviews";
 import ReviewPopup from "../../../components/review-popup/ReviewPopup";
 import { useParams } from "react-router-dom";
-import { IProductDetails } from "../../../services/products/product.interface";
+import {
+  IProductDetails,
+  IProductReview,
+} from "../../../services/products/product.interface";
 import { getProductById } from "../../../services/products/product";
 import CatalogProductInner from "./components/catalog-product-inner/CatalogProductInner";
+import {
+  createProductsReview,
+  getAllProductsReviews,
+} from "../../../services/reviews/reviews";
+import Loader from "../../../components/loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const CatalogProduct: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"characteristics" | "reviews">(
@@ -17,7 +26,10 @@ const CatalogProduct: React.FC = () => {
   const [catalogProduct, setCatalogProduct] = useState<
     IProductDetails | undefined
   >(undefined);
+  const [productReviews, setProductReviews] = useState<IProductReview[]>([]);
+  const [activeLanguage, setActiveLanguage] = useState<string>("ua");
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
 
   const toggleReviewPopup = () => {
     setIsOpenReviewPopup((prevState) => !prevState);
@@ -29,12 +41,37 @@ const CatalogProduct: React.FC = () => {
     setCatalogProduct(productData);
   };
 
+  const getReviews = async () => {
+    try {
+      const response = await getAllProductsReviews(+id!);
+      setProductReviews(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createProductReview = async (formData: FormData, id: number) => {
+    try {
+      const response = await createProductsReview(formData, id);
+      await getReviews();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getOneProduct();
+    getReviews();
+
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else {
+      setActiveLanguage("en");
+    }
   }, [id]);
 
   if (!catalogProduct) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (
@@ -68,7 +105,7 @@ const CatalogProduct: React.FC = () => {
                 to={"/home/catalog/orthopedic-insoles"}
                 className={styles.catalog__router_name}
               >
-                Каталог
+                {t("catalogProduct.catalogProductRoute1")}
               </NavLink>
               <img
                 src="../../images/navigation-arrow.svg"
@@ -78,7 +115,9 @@ const CatalogProduct: React.FC = () => {
               <p
                 className={`${styles.catalog__router_name} ${styles.catalog__router_active}`}
               >
-                {catalogProduct.name_ua}
+                {activeLanguage === "ua"
+                  ? catalogProduct.name_ua
+                  : catalogProduct.name_en}
               </p>
             </div>
             <div className={styles.catalog__product_main}>
@@ -94,7 +133,7 @@ const CatalogProduct: React.FC = () => {
                     }`}
                     onClick={() => setActiveTab("characteristics")}
                   >
-                    Характеристики
+                    {t("products.productsTab2")}
                   </span>
                   <span
                     className={`${styles.catalog__tabs_item} ${
@@ -102,14 +141,18 @@ const CatalogProduct: React.FC = () => {
                     }`}
                     onClick={() => setActiveTab("reviews")}
                   >
-                    Відгуки (0)
+                    {t("products.productsTab3")} ({productReviews.length})
                   </span>
                 </div>
                 {activeTab === "characteristics" && (
-                  <CatalogProductCharacteristics key={"uniq1"} />
+                  <CatalogProductCharacteristics
+                    key={"uniq1"}
+                    catalogProduct={catalogProduct}
+                  />
                 )}
                 {activeTab === "reviews" && (
                   <Reviews
+                    reviews={productReviews}
                     onOpenReviewPopup={toggleReviewPopup}
                     key={"uniq1"}
                   />
@@ -121,6 +164,8 @@ const CatalogProduct: React.FC = () => {
       </section>
       {isOpenReviewPopup && (
         <ReviewPopup
+          createReviews={createProductReview}
+          getReviews={getReviews}
           isOpen={isOpenReviewPopup}
           onClose={toggleReviewPopup}
           key={"uniq1"}

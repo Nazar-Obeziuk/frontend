@@ -28,6 +28,10 @@ import AdminError from "./pages/admin/admin-error/AdminError";
 import AdminProductUpdate from "./pages/admin/components/admin-products/components/admin-product-update/AdminProductUpdate";
 import AdminReviewsUpdate from "./pages/admin/components/admin-reviews/components/admin-reviews-update/AdminReviewsUpdate";
 import AdminProductVariationUpdate from "./pages/admin/components/admin-products/components/admin-product-update/components/admin-product-update-variations/components/admin-product-variation-update/AdminProductVariationUpdate";
+import AdminProductsReviewsUpdate from "./pages/admin/components/admin-products/components/admin-product-update/components/admin-product-update-reviews/components/admin-products-reviews-update/AdminProductsReviewsUpdate";
+import AdminIndividualInsolesUpdate from "./pages/admin/components/admin-individual-insoles/components/admin-individual-insoles-update/AdminIndividualInsolesUpdate";
+import AdminIndividualInsolesVariationUpdate from "./pages/admin/components/admin-individual-insoles/components/admin-individual-insoles-update/components/admin-individual-insoles-update-variations/components/admin-individual-insoles-variation-update/AdminIndividualInsolesVariationUpdate";
+import AdminCertificateUpdate from "./pages/admin/components/admin-certificate/components/admin-certificate-update/AdminCertificateUpdate";
 
 function App() {
   return (
@@ -106,8 +110,24 @@ function App() {
           element={<AdminProductVariationUpdate />}
         ></Route>
         <Route
+          path="/admin/product-review-update/:id"
+          element={<AdminProductsReviewsUpdate />}
+        ></Route>
+        <Route
           path="/admin/update-general-review/:id"
           element={<AdminReviewsUpdate />}
+        ></Route>
+        <Route
+          path="/admin/update-individual/:id"
+          element={<AdminIndividualInsolesUpdate />}
+        ></Route>
+        <Route
+          path="/admin/individual-insoles-variation-update/:id"
+          element={<AdminIndividualInsolesVariationUpdate />}
+        ></Route>
+        <Route
+          path="/admin/update-certificate/:id"
+          element={<AdminCertificateUpdate />}
         ></Route>
         <Route path="/admin/login" element={<AdminLogin />}></Route>
         <Route path="/admin/error" element={<AdminError />}></Route>

@@ -127,6 +127,9 @@
 }
 
 .home__actions_video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   color: var(--primary);
   border: 1px solid var(--primary);

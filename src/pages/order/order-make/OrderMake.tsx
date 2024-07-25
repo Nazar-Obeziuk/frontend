@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./OrderMake.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const OrderMake: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={styles.order__first_section}>
@@ -33,19 +36,19 @@ const OrderMake: React.FC = () => {
               <p
                 className={`${styles.order__router_name} ${styles.order__router_active}`}
               >
-                Як зробити замовлення?
+                {t("howToOrder.howToOrderRoute")}
               </p>
             </div>
             <div className={styles.order__make_main}>
               <h2 className={styles.order__main_title}>
-                Як зробити замовлення індивідуальних устілок?
+                {t("howToOrder.howToOrderMainTitle")}
               </h2>
             </div>
             <div className={styles.order__make_main}>
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
-                  <span className={styles.order__title_count}>1.</span> Оформіть
-                  замовлення:
+                  <span className={styles.order__title_count}>1.</span>{" "}
+                  {t("howToOrder.howToOrderStep1")}
                 </h2>
                 <div className={styles.order__point_block}>
                   <div className={styles.order__block_website}>
@@ -57,7 +60,8 @@ const OrderMake: React.FC = () => {
                       />
                     </span>
                     <p className={styles.order__block_text}>
-                      на сайті <br /> prostopoo.com.ua
+                      {t("howToOrder.howToOrderStep1Text1")} <br />{" "}
+                      prostopoo.com.ua
                     </p>
                   </div>
                   <div className={styles.order__block_phone}>
@@ -69,7 +73,8 @@ const OrderMake: React.FC = () => {
                       />
                     </span>
                     <p className={styles.order__block_text}>
-                      телефоном <br /> 0 800 500 127
+                      {t("howToOrder.howToOrderStep1Text2")} <br /> 0 800 500
+                      127
                     </p>
                   </div>
                 </div>
@@ -77,34 +82,32 @@ const OrderMake: React.FC = () => {
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
                   <span className={styles.order__title_count}>2.</span>{" "}
-                  Отримайте діагностичний бокс
+                  {t("howToOrder.howToOrderStep2")}
                 </h2>
               </div>
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
-                  <span className={styles.order__title_count}>3.</span> Зробіть
-                  відтиск стопи:
+                  <span className={styles.order__title_count}>3.</span>{" "}
+                  {t("howToOrder.howToOrderStep3")}
                 </h2>
                 <ul className={styles.order__point_list}>
                   <li className={styles.order__list_item}>
-                    після відкриття коробки потрібно правильно стати на піну –
-                    так, щоб у ній помістилася вся стопа;
+                    {t("howToOrder.howToOrderStep3Text1")}
                   </li>
                   <li className={styles.order__list_item}>
-                    стоячи, перекочуючись з п’ятки на носок, зробіть зліпок
-                    спочатку лівої, а потім правої стопи. У місці пальців
-                    необхідно дотиснути відбиток, за допомогою руки;
+                    {t("howToOrder.howToOrderStep3Text2")}
                   </li>
                   <li className={styles.order__list_item}>
-                    заповніть анкету замовника.
+                    {t("howToOrder.howToOrderStep3Text3")}
                   </li>
                 </ul>
                 <div className={styles.order__point_instruction}>
                   <p className={styles.order__point_primary}>
-                    Відеоінструкція:
+                    {t("howToOrder.howToOrderStep3Text4")}
                   </p>
-                  <a
-                    href="https://google.com"
+                  <NavLink
+                    to={"https://youtu.be/wzwtNwJ7TLQ"}
+                    target={"_blank"}
                     className={styles.order__instruction_link}
                   >
                     <span className={styles.order__link_circle}>
@@ -114,7 +117,7 @@ const OrderMake: React.FC = () => {
                         className={styles.order__circle_play}
                       />
                     </span>
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -128,21 +131,19 @@ const OrderMake: React.FC = () => {
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
                   <span className={styles.order__title_count}>4.</span>{" "}
-                  Відправте діагностичний бокс нам за зворотною адресою (вказано
-                  на пакуванні).
+                  {t("howToOrder.howToOrderStep4")}
                 </h2>
               </div>
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
                   <span className={styles.order__title_count}>5.</span>{" "}
-                  Отримайте безкоштовну консультацію ерготерапевта.
+                  {t("howToOrder.howToOrderStep5")}
                 </h2>
               </div>
               <div className={styles.order__main_point}>
                 <h2 className={styles.order__point_title}>
                   <span className={styles.order__title_count}>6.</span>{" "}
-                  Дочекайтеся виготовлення та заберіть ваші індивідуальні
-                  устілки у відділенні Нової пошти.
+                  {t("howToOrder.howToOrderStep6")}
                 </h2>
               </div>
             </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "./HomeInfo.module.css";
+import { Trans, useTranslation } from "react-i18next";
 
 const HomeInfo: React.FC = () => {
   const [isOpenMobileInfoBlock, setIsOpenMobileInfoBlock] = useState(false);
+  const { t } = useTranslation();
 
   const handleInfoBlock = () => {
     setIsOpenMobileInfoBlock((prevState) => !prevState);
@@ -14,38 +16,37 @@ const HomeInfo: React.FC = () => {
         <div className={styles.home__info_wrapper}>
           <div className={styles.home__wrapper_about}>
             <p className={styles.home__info_text}>
-              Індивідуальні ортопедичні устілки{" "}
+              {t("home.homeInfo.homeInfoText1Child1")}
               <span className={styles.home__info_primary}>
-                PROSTOPOO (Простопу){" "}
-              </span>{" "}
-              — український бренд, який пропонує швидке та легке розв’язання
-              проблем зі стопами.
+                {t("home.homeInfo.homeInfoText1Child2")}
+              </span>
+              {t("home.homeInfo.homeInfoText1Child3")}
             </p>
             <p className={styles.home__info_text}>
-              Згідно зі статистикою
-              <span className={styles.home__info_primary}>*</span>{" "}
+              {t("home.homeInfo.homeInfoText2Child1")}
+              <span className={styles.home__info_primary}>
+                {t("home.homeInfo.homeInfoText2Child2")}
+              </span>
               <span className={styles.home__info_white}>
-                81% населення України
+                {t("home.homeInfo.homeInfoText2Child3")}
               </span>{" "}
-              потребує допомоги лікарів-ортопедів.
+              {t("home.homeInfo.homeInfoText2Child4")}
             </p>
             <p className={styles.home__info_text}>
-              Так, така значна частина населення має хвороби та деформації стоп,
-              відчувають болі та дискомфорт. Ми пропонуємо індивідуальні
-              ортопедичні устілки на замовлення, придбавши які ви не тільки
-              дізнаєтесь стан своїх стоп, отримаєте консультацію з експертом, а
-              й матимете зручне та дієве рішення для підтримання вашого
-              здоров’я.
+              {t("home.homeInfo.homeInfoText3")}
             </p>
             <p className={styles.home__info_university}>
-              <span className={styles.home__info_primary}>*</span>згідно з
-              дослідженням А.Б. ДОМБРОВСЬКИЙ, І.Т. СОЛТИК Хмельницький
-              національний університет.
+              <span className={styles.home__info_primary}>
+                {t("home.homeInfo.homeInfoText4Child1")}
+              </span>
+              {t("home.homeInfo.homeInfoText4Child2")}
             </p>
           </div>
           <div onClick={handleInfoBlock} className={styles.home__info_details}>
             <p className={styles.home__details_text}>
-              {isOpenMobileInfoBlock ? "згорнути" : "детальніше"}
+              {isOpenMobileInfoBlock
+                ? t("details.detailsClose")
+                : t("details.detailsOpen")}
             </p>
             <svg
               className={`${styles.home__details_icon} ${
@@ -67,69 +68,64 @@ const HomeInfo: React.FC = () => {
           </div>
           <div className={styles.home__wrapper_more}>
             <p className={styles.home__info_bold}>
-              Індивідуальна ортопедична устілка, замовити яку можна не виходячи
-              з дому, — це:
+              {t("home.homeInfo.homeInfoText5")}
             </p>
             <p className={styles.home__info_text}>
-              отримання діагностичного боксу в будь-яке відділення Нової пошти,
-              а протягом 48 годин отримання вже готових устілок. Замовивши
-              індивідуальну устілку ви отримаєте виріб, змодельований відповідно
-              до проблем саме ваших стоп.
+              {t("home.homeInfo.homeInfoText6")}
             </p>
-            <p className={styles.home__info_bold}>МИ ПРОПОНУЄМО:</p>
+            <p className={styles.home__info_bold}>
+              {t("home.homeInfo.homeInfoText7")}
+            </p>
             <div className={styles.home__info_offer}>
               <p className={styles.home__info_text}>
                 <span className={styles.home__info_white}>
-                  точність виконання
-                </span>{" "}
-                — завдяки сучасній технології CAD/CAM, яка зі 100% точністю
-                формує компенсаційні зони;
+                  {t("home.homeInfo.homeInfoText8Child1")}
+                </span>
+                {t("home.homeInfo.homeInfoText8Child2")}
               </p>
               <p className={styles.home__info_text}>
-                <span className={styles.home__info_white}>відмінну якість</span>{" "}
-                — ми використовуємо матеріали та основу устілок преміумякості,
-                матеріал ЕVA німецького виробництва
+                <span className={styles.home__info_white}>
+                  {t("home.homeInfo.homeInfoText9Child1")}
+                </span>
+                {t("home.homeInfo.homeInfoText9Child2")}
               </p>
               <p className={styles.home__info_text}>
-                <span className={styles.home__info_white}>якісний сервіс</span>{" "}
-                — ви отримуєте консультацію та відповіді на всі ваші запитання.
+                <span className={styles.home__info_white}>
+                  {t("home.homeInfo.homeInfoText10Child1")}
+                </span>
+                {t("home.homeInfo.homeInfoText10Child2")}
               </p>
             </div>
           </div>
           {isOpenMobileInfoBlock && (
             <div className={styles.home__more_mobile}>
               <p className={styles.home__info_bold}>
-                Індивідуальна ортопедична устілка, замовити яку можна не
-                виходячи з дому, — це:
+                {t("home.homeInfo.homeInfoText5")}
               </p>
               <p className={styles.home__info_text}>
-                отримання діагностичного боксу в будь-яке відділення Нової
-                пошти, а протягом 48 годин отримання вже готових устілок.
-                Замовивши індивідуальну устілку ви отримаєте виріб,
-                змодельований відповідно до проблем саме ваших стоп.
+                {t("home.homeInfo.homeInfoText6")}
               </p>
-              <p className={styles.home__info_bold}>МИ ПРОПОНУЄМО:</p>
+              <p className={styles.home__info_bold}>
+                {t("home.homeInfo.homeInfoText7")}
+              </p>
               <div className={styles.home__info_offer}>
                 <p className={styles.home__info_text}>
                   <span className={styles.home__info_white}>
-                    точність виконання
-                  </span>{" "}
-                  — завдяки сучасній технології CAD/CAM, яка зі 100% точністю
-                  формує компенсаційні зони;
+                    {t("home.homeInfo.homeInfoText8Child1")}
+                  </span>
+                  {t("home.homeInfo.homeInfoText8Child2")}
                 </p>
                 <p className={styles.home__info_text}>
                   <span className={styles.home__info_white}>
-                    відмінну якість
-                  </span>{" "}
-                  — ми використовуємо матеріали та основу устілок преміумякості,
-                  матеріал ЕVA німецького виробництва
+                    {t("home.homeInfo.homeInfoText9Child1")}
+                  </span>
+                  {t("home.homeInfo.homeInfoText9Child2")}
                 </p>
                 <p className={styles.home__info_text}>
                   <span className={styles.home__info_white}>
-                    якісний сервіс
-                  </span>{" "}
-                  — ви отримуєте консультацію та відповіді на всі ваші
-                  запитання.
+                    {t("home.homeInfo.homeInfoText10Child1")}
+                  </span>
+                  {t("home.homeInfo.homeInfoText10Child2")}
                 </p>
               </div>
             </div>

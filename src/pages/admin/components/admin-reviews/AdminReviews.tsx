@@ -7,21 +7,43 @@ import AdminReviewsForm from "./components/admin-reviews-form/AdminReviewsForm";
 import AdminReviewsTable from "./components/admin-reviews-table/AdminReviewsTable";
 import {
   deleteReview,
+  getAllCertificateReviews,
   getAllGeneralReviews,
+  getAllIndividualReviews,
 } from "../../../../services/reviews/reviews";
 import { IReview } from "../../../../services/reviews/review.interface";
+import AdminReviewsCertificateTable from "./components/admin-reviews-certificate-table/AdminReviewsCertificateTable";
 
 const AdminReviews: React.FC = () => {
   const [isAdminReviewsFormOpen, setAdminReviewsFormOpen] = useState(true);
   const [adminReviews, setAdminReviews] = useState<IReview[]>([]);
+  const [adminCertificateReviews, setAdminCertificateReviews] = useState<
+    IReview[]
+  >([]);
+  const [adminIndividualReviews, setAdminIndividualReviews] = useState<
+    IReview[]
+  >([]);
+  const [activeTab, setActiveTab] = useState<
+    "general" | "certificate" | "individual"
+  >("general");
   const navigate = useNavigate();
 
   const notify = (message: string) => toast(message);
 
   const getAll = async () => {
-    const productData = await getAllGeneralReviews();
-    setAdminReviews(productData);
+    const reviewData = await getAllGeneralReviews();
+    setAdminReviews(reviewData);
   };
+
+  // const getAllCertificate = async () => {
+  //   const reviewCertificateData = await getAllCertificateReviews();
+  //   setAdminCertificateReviews(reviewCertificateData);
+  // };
+
+  // const getAllIndividual = async () => {
+  //   const reviewIndividualData = await getAllIndividualReviews();
+  //   setAdminIndividualReviews(reviewIndividualData);
+  // };
 
   useEffect(() => {
     getAll();
@@ -71,6 +93,51 @@ const AdminReviews: React.FC = () => {
         handleDeleteReview={onDeleteReview}
         key={"uniq1"}
       />
+      {/* <div className={styles.admin__main_tabs}>
+        <button
+          onClick={() => setActiveTab("general")}
+          className={`${styles.admin__tabs_button} ${
+            activeTab === "general" ? styles.admin__tabs_active : {}
+          }`}
+          type="button"
+        >
+          Головні відгуки
+        </button>
+        <button
+          onClick={() => setActiveTab("certificate")}
+          className={`${styles.admin__tabs_button} ${
+            activeTab === "certificate" ? styles.admin__tabs_active : {}
+          }`}
+          type="button"
+        >
+          Відгуки сертифікату
+        </button>
+        <button
+          onClick={() => setActiveTab("individual")}
+          className={`${styles.admin__tabs_button} ${
+            activeTab === "individual" ? styles.admin__tabs_active : {}
+          }`}
+          type="button"
+        >
+          Відгуки індивідуальні
+        </button>
+      </div> */}
+      {/* {activeTab === "general" && (
+        <AdminReviewsTable
+          adminReviews={adminReviews}
+          handleEditReview={onEditReview}
+          handleDeleteReview={onDeleteReview}
+          key={"uniq1"}
+        />
+      )}
+      {activeTab === "certificate" && (
+        <AdminReviewsCertificateTable
+          adminCertificateReviews={adminCertificateReviews}
+          handleEditReview={onEditReview}
+          handleDeleteReview={onDeleteReview}
+          key={"uniq2"}
+        />
+      )} */}
     </div>
   );
 };

@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./AboutMade.module.css";
 import AboutMadeSlider from "./components/about-made-slider/AboutMadeSlider";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AboutMade: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <React.Fragment>
       <section className={styles.about__made_section}>
@@ -32,7 +35,9 @@ const AboutMade: React.FC = () => {
                 className={styles.about__router_arrow}
               />
               <NavLink to={"/home/prostopoo/about"}>
-                <p className={styles.about__router_name}>ПРО PROSTOPOO</p>
+                <p className={styles.about__router_name}>
+                  {t("production.productionRoute1")}
+                </p>
               </NavLink>
               <img
                 src="../../images/navigation-arrow.svg"
@@ -42,53 +47,53 @@ const AboutMade: React.FC = () => {
               <p
                 className={`${styles.about__router_name} ${styles.about__router_active}`}
               >
-                Виготовлення
+                {t("production.productionRoute2")}
               </p>
             </div>
             <div className={styles.about__made_name}>
-              <h2 className={styles.about__name_title}>Виготовлення</h2>
+              <h2 className={styles.about__name_title}>
+                {t("production.productionTitle")}
+              </h2>
             </div>
             <div className={styles.about__made_main}>
               <div className={styles.about__main_info}>
                 <h2 className={styles.about__info_title}>
-                  Технологія виготовлення індивідуальних устілок передбачає
-                  кілька важливих переваг для наших клієнтів:
+                  {t("production.productionSubtitle")}
                 </h2>
                 <div className={styles.about__info_block}>
                   <span className={styles.about__block_count}>1</span>
                   <p className={styles.about__block_text}>
-                    Індивідуальні ортопедичні устілки виготовляють за сучасною
-                    німецькою технологією CAD/CAM із використанням безпечних та
-                    якісних матеріалів.
+                    {t("production.productionText1")}
                   </p>
                 </div>
                 <div className={styles.about__info_block}>
                   <span className={styles.about__block_count}>2</span>
                   <p className={styles.about__block_text}>
-                    Використання технології{" "}
-                    <span className={styles.about__text_primary}>CAD/CAM</span>{" "}
-                    у виробництві устілок має безліч переваг.
+                    {t("production.productionText2Child1")}
+                    <span className={styles.about__text_primary}>
+                      {t("production.productionText2Child2")}
+                    </span>
+                    {t("production.productionText2Child3")}
                   </p>
                 </div>
                 <ul className={styles.about__info_list}>
                   <li className={styles.about__list_item}>
                     <span className={styles.about__item_bold}>
-                      Точність і деталізація
+                      {t("production.productionText3Child1")}
                     </span>
-                    : дозволяє створювати 3D моделі, для моделювання устілок.
+                    {t("production.productionText3Child2")}
                   </li>
                   <li className={styles.about__list_item}>
                     <span className={styles.about__item_bold}>
-                      Індивідуальний підхід
+                      {t("production.productionText4Child1")}
                     </span>
-                    : дозволяє враховувати індивідуальні особливості клієнтів.
+                    {t("production.productionText4Child2")}
                   </li>
                   <li className={styles.about__list_item}>
                     <span className={styles.about__item_bold}>
-                      Оптимізація та автоматизація
+                      {t("production.productionText5Child1")}
                     </span>
-                    : швидкість проєктування та виготовлення з використанням
-                    сучасної технології CAD/CAM та високоякісних матеріалів.
+                    {t("production.productionText5Child2")}
                   </li>
                 </ul>
               </div>
@@ -101,19 +106,18 @@ const AboutMade: React.FC = () => {
           <div className={styles.about__galery_wrapper}>
             <div className={styles.about__main_galery}>
               <h2 className={styles.about__galery_title}>
-                Етапи виготовлення:
+                {t("production.productionStepsTitle")}
               </h2>
               <div className={styles.about__galery_main}>
                 <AboutMadeSlider key={"uniq1"} />
               </div>
             </div>
             <p className={styles.about__galery_text}>
-              Завдяки сучасній німецькій технології{" "}
-              <span className={styles.about__galery_primary}>CAD/CAM</span> ви
-              отримаєте ідеально підібрані індивідуальні устілки, які не тільки
-              вбережуть ваші ноги від появи або прогресування проблем,
-              пов'язаних з опорно-руховим апаратом, а й зроблять ваше життя
-              комфортнішим, активнішим і здоровішим.
+              {t("production.productionText6Child1")}
+              <span className={styles.about__galery_primary}>
+                {t("production.productionText6Child2")}
+              </span>
+              {t("production.productionText6Child3")}
             </p>
           </div>
         </div>

@@ -145,7 +145,7 @@
   background-image: url("../../../../public/images/order-video-preview.jpg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: auto;
   border-radius: 12px;
   position: relative;
 }

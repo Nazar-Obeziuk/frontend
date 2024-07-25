@@ -8,7 +8,7 @@ type AdminSidebarProps = {
 
 const AdminSidebar: React.FC<AdminSidebarProps> = ({ onSectionChange }) => {
   const [activeAdminPage, setActiveAdminPage] = useState<
-    "workers" | "products" | "reviews"
+    "workers" | "products" | "reviews" | "individual" | "certificate"
   >("workers");
   const navigate = useNavigate();
 
@@ -53,6 +53,28 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onSectionChange }) => {
             }`}
           >
             Відгуки
+          </div>
+          <div
+            onClick={() => {
+              onSectionChange("individual");
+              setActiveAdminPage("individual");
+            }}
+            className={`${styles.admin__wrapper_item} ${
+              activeAdminPage === "individual" ? styles.active : ""
+            }`}
+          >
+            Індивідуальні устілки
+          </div>
+          <div
+            onClick={() => {
+              onSectionChange("certificate");
+              setActiveAdminPage("certificate");
+            }}
+            className={`${styles.admin__wrapper_item} ${
+              activeAdminPage === "certificate" ? styles.active : ""
+            }`}
+          >
+            Сертифікати
           </div>
         </div>
         <div className={styles.admin__wrapper_logout}>

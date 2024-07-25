@@ -46,9 +46,18 @@
   justify-content: space-between;
 }
 .catalog__header_reviews {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 6px;
+}
+.admin__reviews_count {
+  font-family: "Fixel-Display";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+  color: var(--white);
+  margin-left: 6px;
+  padding-top: 4px;
 }
 .catalog__header_left {
   font-family: "Fixel-Display";

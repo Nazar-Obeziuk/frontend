@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styles from "./AboutTechnologies.module.css";
+import { useTranslation } from "react-i18next";
 
 const AboutTechnologies: React.FC = () => {
   const [isOpenDetailsBlock, setIsOpenDetailsBlock] = useState(false);
+  const { t } = useTranslation();
 
   const handleInfoBlock = () => {
     setIsOpenDetailsBlock((prevState) => !prevState);
@@ -21,29 +23,41 @@ const AboutTechnologies: React.FC = () => {
           </div>
           <div className={styles.about__wrapper_info}>
             <h2 className={styles.about__info_title}>
-              Матеріали та технології
+              {t("aboutUs.aboutUsTechnologies.aboutUsTechnologiesTitle")}
             </h2>
             <div className={styles.about__info_main}>
               <p className={styles.about__main_text}>
-                Ми виготовляємо устілки за сучасною німецькою технологією 3D
-                CAD/CAM із використанням безпечних матеріалів.
+                {t("aboutUs.aboutUsTechnologies.aboutUsTechnologiesText1")}
               </p>
               <p className={styles.about__main_text}>
-                Основа устілки виготовлена з якісного матеріалу{" "}
-                <span className={styles.about__text_primary}>EVA.</span>
+                {t(
+                  "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText2Child1"
+                )}
+                <span className={styles.about__text_primary}>
+                  {t(
+                    "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText2Child2"
+                  )}
+                </span>
               </p>
               <div className={styles.about__main_for}>
                 <p className={styles.about__main_text}>
-                  <span className={styles.about__text_primary}>EVA (ЕВА)</span>{" "}
-                  — комфортний, універсальний та гіпоалергенний матеріал. Має
-                  різну щільність, відповідно до потреби та діагнозу замовника:
+                  <span className={styles.about__text_primary}>
+                    {t(
+                      "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText3Child1"
+                    )}
+                  </span>
+                  {t(
+                    "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText3Child2"
+                  )}
                 </p>
                 <div
                   onClick={handleInfoBlock}
                   className={styles.about__inner_details}
                 >
                   <p className={styles.about__details_text}>
-                    {isOpenDetailsBlock ? "згорнути" : "детальніше"}
+                    {isOpenDetailsBlock
+                      ? t("details.detailsClose")
+                      : t("details.detailsOpen")}
                   </p>
                   <svg
                     className={`${styles.about__details_icon} ${
@@ -66,32 +80,40 @@ const AboutTechnologies: React.FC = () => {
                 {isOpenDetailsBlock && (
                   <ul className={styles.about__main_list}>
                     <li className={styles.about__list_item}>
-                      <span className={styles.about__item_bold}>для дітей</span>{" "}
-                      використовують EVA м’якого типу, щоб не травмувати м’які
-                      тканини дитячих ніг;
+                      <span className={styles.about__item_bold}>
+                        {t(
+                          "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText4Child1"
+                        )}
+                      </span>
+                      {t(
+                        "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText4Child2"
+                      )}
                     </li>
                     <li className={styles.about__list_item}>
                       <span className={styles.about__item_bold}>
-                        для людей з діабетом і ревматичними розладами стопи
-                      </span>{" "}
-                      використовують EVA м’якого типу;
+                        {t(
+                          "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText5Child1"
+                        )}
+                      </span>
+                      {t(
+                        "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText5Child2"
+                      )}
                     </li>
                     <li className={styles.about__list_item}>
                       <span className={styles.about__item_bold}>
-                        для спортивних устілок
-                      </span>{" "}
-                      — комбіновану EVA, вона має в своїй структурі два шари
-                      матеріалу, один із яких жорсткіший за інший. Така
-                      комбінація сприяє правильному підтриманню та розвантаженню
-                      стоп, а також бере участь у амортизації та пом’якшенні під
-                      час занять спортом.
+                        {t(
+                          "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText6Child1"
+                        )}
+                      </span>
+                      {t(
+                        "aboutUs.aboutUsTechnologies.aboutUsTechnologiesText6Child2"
+                      )}
                     </li>
                   </ul>
                 )}
               </div>
               <p className={styles.about__main_text}>
-                Якісне німецьке покриття має широкий вибір матеріалів за
-                кольором та призначенням.
+                {t("aboutUs.aboutUsTechnologies.aboutUsTechnologiesText7")}
               </p>
             </div>
           </div>

@@ -1,172 +1,205 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogCertificateAbout.module.css";
+import Loader from "../../../../../components/loader/Loader";
+import { ICertificate } from "../../../../../services/gift-certificate/gift-certificate.interface";
+import { useTranslation } from "react-i18next";
 
-const CatalogCertificateAbout: React.FC = () => {
+interface Props {
+  certificates: ICertificate[];
+}
+
+const CatalogCertificateAbout: React.FC<Props> = ({ certificates }) => {
+  const [activeLanguage, setActiveLanguage] = useState<string>("ua");
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else {
+      setActiveLanguage("en");
+    }
+  }, [i18n.language]);
+
+  if (!certificates[0]) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.catalog__info_main}>
       <div className={styles.catalog__main_about}>
         <p className={styles.catalog__info_text}>
-          Дбайливий подарунок для близьких — це подарунковий сертифікат від{" "}
-          <span className={styles.catalog__info_primary}>PROSTOPOO</span>.
-          Презентуйте сертифікат чоловікові/дружині, мамі/батькові,
-          бабусі/дідусеві, колезі — будь-кому.
+          {activeLanguage === "ua"
+            ? certificates[0].first_about_description_ua
+            : certificates[0].first_about_description_en}
         </p>
         <p className={styles.catalog__info_text}>
-          Чудова можливість отримати устілки, які ідеально підходять будові
-          Вашої стопи, не виходячи з дому, та з можливістю використання
-          безкоштовної доставки до найближчого відділення Нової Пошти.
+          {activeLanguage === "ua"
+            ? certificates[0].second_about_description_ua
+            : certificates[0].second_about_description_en}
         </p>
         <p className={styles.catalog__info_text}>
-          <span className={styles.catalog__info_primary}>
-            У вартість індивідуальних устілок Prostopoo входить
-          </span>{" "}
-          діагностичний бокс, доставка боксу покупцеві до відділення Нової
-          пошти, зворотна доставка (від покупця до нас), доставка готового
-          виробу. В комплект для самодіагностики входить: діагностичний бокс для
-          зняття відбитків стоп, анкета, інструкція.
+          {activeLanguage === "ua"
+            ? certificates[0].third_about_description_ua
+            : certificates[0].third_about_description_en}
         </p>
       </div>
       <div className={styles.catalog__main_steps}>
         <p className={styles.catalog__info_primaryBold}>
-          Процес замовлення устілок передбачає:
+          {t("certificate.certificateBlock1Title")}
         </p>
         <ul className={styles.catalog__steps_list}>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 1</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text1Step1")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Оформлюйте замовлення за телефоном{" "}
-              <span className={styles.catalog__info_bold}>0 800 500 127</span>
+              {t("certificate.certificateBlock1Text1Child1")}
+              <span className={styles.catalog__info_bold}>
+                {t("certificate.certificateBlock1Text1Child2")}
+              </span>
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 2</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text2Step2")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Отримайте консультацію від менеджера кол-центру
+              {t("certificate.certificateBlock1Text2")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 3</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text3Step3")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Отримайте бокс самодіагностики
+              {t("certificate.certificateBlock1Text3")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 4</span>
-            <p className={styles.catalog__steps_text}>Зробіть відтиск стоп</p>
-          </li>
-          <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 5</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text4Step4")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Заповніть анкету, яка знаходиться всередині боксу
+              {t("certificate.certificateBlock1Text4")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 6</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text5Step5")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Запакуйте все в пакет, що йде в комплекті до боксу
+              {t("certificate.certificateBlock1Text5")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 7</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text6Step6")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Відправте нам з будь-якого відділення Нової Пошти (доставку
-              сплачує отримувач), зворотна адреса вказана на пакеті
+              {t("certificate.certificateBlock1Text6")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 8</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text7Step7")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Очікуйте на зв’язок із фізичним терапевтом для погодження всіх
-              деталей
+              {t("certificate.certificateBlock1Text7")}
             </p>
           </li>
           <li className={styles.catalog__steps_item}>
-            <span className={styles.catalog__steps_block}>КРОК 9</span>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text8Step8")}
+            </span>
             <p className={styles.catalog__steps_text}>
-              Час виготовлення — 24 години від моменту отримання скану стопи
-              клієнта
+              {t("certificate.certificateBlock1Text8")}
+            </p>
+          </li>
+          <li className={styles.catalog__steps_item}>
+            <span className={styles.catalog__steps_block}>
+              {t("certificate.certificateBlock1Text9Step9")}
+            </span>
+            <p className={styles.catalog__steps_text}>
+              {t("certificate.certificateBlock1Text9")}
             </p>
           </li>
         </ul>
       </div>
       <div className={styles.catalog__main_rules}>
         <p className={styles.catalog__info_primaryBold}>
-          Правила використання подарункового сертифіката
+          {t("certificate.certificateBlock2Title")}
         </p>
         <ul className={styles.catalog__main_list}>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>1.</span>
             <p className={styles.catalog__info_text}>
-              Подарунковий сертифікат — пластикова карта з QR-кодом певного
-              номіналу та визначеного строку дії, не є платіжним документом,
-              платіжним засобом або цінним папером.
+              {activeLanguage === "ua"
+                ? certificates[0].first_use_description_ua
+                : certificates[0].first_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>2.</span>
             <p className={styles.catalog__info_text}>
-              Подарунковий сертифікат надає право отримати{" "}
-              <span className={styles.catalog__info_primaryBold}>
-                1 пару індивідуальних ортопедичних устілок бренда Prostopoo.
-              </span>
+              {activeLanguage === "ua"
+                ? certificates[0].second_about_description_ua
+                : certificates[0].second_about_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>3.</span>
             <p className={styles.catalog__info_text}>
-              Покупець має право передавати подарунковий сертифікат третім
-              особам. У разі передачі подарункового сертифіката третім особам
-              Покупець зобов’язаний попередити таку третю особу про термін дії
-              подарункового сертифіката та умови цих «Правил використання
-              Подарункового сертифікату».
+              {activeLanguage === "ua"
+                ? certificates[0].third_use_description_ua
+                : certificates[0].third_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>4.</span>
             <p className={styles.catalog__info_text}>
-              Утримувач Подарункового сертифіката — будь-яка особа, що
-              пред’являє подарунковий сертифікат для придбання товарів.
+              {activeLanguage === "ua"
+                ? certificates[0].fourth_use_description_ua
+                : certificates[0].fourth_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>5.</span>
             <p className={styles.catalog__info_text}>
-              Подарунковий сертифікат може бути використаний виключно під час
-              однієї торгової операції (покупки 1 пари устілок).
+              {activeLanguage === "ua"
+                ? certificates[0].fifth_use_description_ua
+                : certificates[0].fifth_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>6.</span>
             <p className={styles.catalog__info_text}>
-              Дія подарункового сертифіката обмежується терміном дії{" "}
-              <span className={styles.catalog__info_bold}>
-                (вказано на сертифікаті).
-              </span>
+              {activeLanguage === "ua"
+                ? certificates[0].sixth_use_description_ua
+                : certificates[0].sixth_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>7.</span>
             <p className={styles.catalog__info_text}>
-              Термін дії подарункового сертифіката не може бути зміненим,
-              продовженим або відновленим.
+              {activeLanguage === "ua"
+                ? certificates[0].seventh_use_description_ua
+                : certificates[0].seventh_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>8.</span>
             <p className={styles.catalog__info_text}>
-              Якщо протягом терміну дії Подарункового сертифіката
-              Покупцем/Утримувачем Подарункового сертифіката не реалізовано
-              право на придбання товару, то зобов’язання Продавця подарункового
-              сертифіката вважаються припиненими, а грошова сума, сплачена за
-              подарунковий сертифікат, поверненню не підлягає й залишається в
-              розпорядженні Продавця.
+              {activeLanguage === "ua"
+                ? certificates[0].eighth_use_description_ua
+                : certificates[0].eighth_use_description_en}
             </p>
           </li>
           <li className={styles.catalog__list_item}>
             <span className={styles.catalog__item_count}>9.</span>
             <p className={styles.catalog__info_text}>
-              Подарунковий сертифікат не підлягає поверненню та зворотній
-              конвертації в грошовий еквівалент.
+              {activeLanguage === "ua"
+                ? certificates[0].nineth_use_description_ua
+                : certificates[0].nineth_use_description_en}
             </p>
           </li>
         </ul>

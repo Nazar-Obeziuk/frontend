@@ -13,68 +13,68 @@ interface Props {
   toggleProductVariationForm: () => void;
 }
 
-const getColor = (props: any) => {
-  if (props.isDragAccept) {
-    return "#00e676";
-  }
-  if (props.isDragReject) {
-    return "#ff1744";
-  }
-  if (props.isFocused) {
-    return "#2196f3";
-  }
-  return "#eeeeee";
-};
+// const getColor = (props: any) => {
+//   if (props.isDragAccept) {
+//     return "#00e676";
+//   }
+//   if (props.isDragReject) {
+//     return "#ff1744";
+//   }
+//   if (props.isFocused) {
+//     return "#2196f3";
+//   }
+//   return "#eeeeee";
+// };
 
-const AdminImage = styled.div`
-  width: 100%;
-  padding: 16px 26px 14px 26px;
-  border-width: 1px;
-  border-radius: 12px;
-  border-color: ${(props: any) => getColor(props)};
-  border-style: solid;
-  background-color: transparent;
-  color: rgba(255, 255, 255, 0.5);
-  font-family: "Fixel-Display";
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 20px;
-  outline: none;
-  transition: border 0.24s ease-in-out;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+// const AdminImage = styled.div`
+//   width: 100%;
+//   padding: 16px 26px 14px 26px;
+//   border-width: 1px;
+//   border-radius: 12px;
+//   border-color: ${(props: any) => getColor(props)};
+//   border-style: solid;
+//   background-color: transparent;
+//   color: rgba(255, 255, 255, 0.5);
+//   font-family: "Fixel-Display";
+//   font-size: 18px;
+//   font-weight: 300;
+//   line-height: 20px;
+//   outline: none;
+//   transition: border 0.24s ease-in-out;
+//   display: flex;
+//   align-items: center;
+//   cursor: pointer;
 
-  &[isdragactive="true"] {
-    /* Style for drag active */
-  }
+//   &[isdragactive="true"] {
+//     /* Style for drag active */
+//   }
 
-  &[isdragaccept="true"] {
-    /* Style for drag accept */
-    border-color: #ffed00;
-  }
+//   &[isdragaccept="true"] {
+//     /* Style for drag accept */
+//     border-color: #ffed00;
+//   }
 
-  &[isdragreject="true"] {
-    /* Style for drag reject */
-    border-color: #ff0000;
-  }
+//   &[isdragreject="true"] {
+//     /* Style for drag reject */
+//     border-color: #ff0000;
+//   }
 
-  &[isfocused="true"] {
-    /* Style for focused */
-    border-color: none;
-  }
-`;
+//   &[isfocused="true"] {
+//     /* Style for focused */
+//     border-color: none;
+//   }
+// `;
 
 const AdminProductVariationForm: React.FC<Props> = ({
   getAll,
   productId,
   toggleProductVariationForm,
 }) => {
-  const [productsImages, setProductsImages] = useState<File[]>([]);
+  // const [productsImages, setProductsImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [variationImagesPreview, setVariationImagesPreview] = useState<
-    string[] | null
-  >(null);
+  // const [variationImagesPreview, setVariationImagesPreview] = useState<
+  //   string[] | null
+  // >(null);
   const { id } = useParams();
   const {
     register,
@@ -83,36 +83,36 @@ const AdminProductVariationForm: React.FC<Props> = ({
     reset,
   } = useForm({ mode: "onChange" });
 
-  const acceptType: Accept = {
-    "image/*": [".jpeg", ".jpg", ".png", ".gif"],
-  };
+  // const acceptType: Accept = {
+  //   "image/*": [".jpeg", ".jpg", ".png", ".gif"],
+  // };
 
-  const onDropProductImages = useCallback((acceptedFiles: File[]) => {
-    const files = acceptedFiles;
-    setProductsImages((prevProductImages: any) => [
-      ...prevProductImages,
-      ...files,
-    ]);
+  // const onDropProductImages = useCallback((acceptedFiles: File[]) => {
+  //   const files = acceptedFiles;
+  //   setProductsImages((prevProductImages: any) => [
+  //     ...prevProductImages,
+  //     ...files,
+  //   ]);
 
-    const newPreviews = files.map((file) => URL.createObjectURL(file));
-    setVariationImagesPreview((prevPreviews) => [
-      ...(prevPreviews || []),
-      ...newPreviews,
-    ]);
-  }, []);
+  //   const newPreviews = files.map((file) => URL.createObjectURL(file));
+  //   setVariationImagesPreview((prevPreviews) => [
+  //     ...(prevPreviews || []),
+  //     ...newPreviews,
+  //   ]);
+  // }, []);
 
-  const {
-    getRootProps: getSliderRootProps,
-    getInputProps: getSliderInputProps,
-    isDragActive: isSliderDragActive,
-    isDragAccept: isSliderDragAccept,
-    isDragReject: isSliderDragReject,
-    isFocused: isSliderFocused,
-  } = useDropzone({
-    onDrop: onDropProductImages,
-    multiple: true,
-    accept: acceptType,
-  });
+  // const {
+  //   getRootProps: getSliderRootProps,
+  //   getInputProps: getSliderInputProps,
+  //   isDragActive: isSliderDragActive,
+  //   isDragAccept: isSliderDragAccept,
+  //   isDragReject: isSliderDragReject,
+  //   isFocused: isSliderFocused,
+  // } = useDropzone({
+  //   onDrop: onDropProductImages,
+  //   multiple: true,
+  //   accept: acceptType,
+  // });
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
@@ -121,9 +121,9 @@ const AdminProductVariationForm: React.FC<Props> = ({
       formData.append(key, data[key]);
     });
 
-    productsImages.forEach((file) => {
-      formData.append("image", file);
-    });
+    // productsImages.forEach((file) => {
+    //   formData.append("image", file);
+    // });
 
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
@@ -152,7 +152,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
       onSubmit={handleSubmit(onSubmit)}
       className={styles.admin__form_block}
     >
-      <div className={styles.admin__block_control}>
+      {/* <div className={styles.admin__block_control}>
         <label htmlFor="image" className={styles.admin__control_label}>
           Зображення варіації
         </label>
@@ -183,7 +183,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
               </li>
             ))}
         </ul>
-      </div>
+      </div> */}
       <div className={styles.admin__block_control}>
         <label htmlFor="variation_type" className={styles.admin__control_label}>
           Тип варіації
@@ -197,10 +197,9 @@ const AdminProductVariationForm: React.FC<Props> = ({
           })}
           className={styles.admin__control_field}
         >
-          <option value="coverage" defaultValue={"coverage"}>
-            Покриття
+          <option value="sizes" defaultValue={"sizes"}>
+            Розміра
           </option>
-          <option value="sizes">Розміра</option>
         </select>
         {errors["variation_type"] && (
           <span className={styles.error_message}>
@@ -215,17 +214,43 @@ const AdminProductVariationForm: React.FC<Props> = ({
         >
           Значення варіації
         </label>
-        <input
-          type="text"
-          className={styles.admin__control_field}
+        <select
           style={
             errors["variation_value"] ? { border: "1px solid #EB001B" } : {}
           }
-          placeholder="Значення варіації"
           {...register("variation_value", {
             required: `Це поле обов'язкове!`,
           })}
-        />
+          className={styles.admin__control_field}
+        >
+          <option value="21" defaultValue={"21"}>
+            21
+          </option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+        </select>
         {errors["variation_value"] && (
           <span className={styles.error_message}>
             {errors["variation_value"]?.message as string}
@@ -245,7 +270,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
           style={
             errors["additional_price"] ? { border: "1px solid #EB001B" } : {}
           }
-          placeholder=" Ціна товару при змінні варіації варіації"
+          placeholder="Ціна товару при змінні варіації варіації"
           {...register("additional_price", {
             required: `Це поле обов'язкове!`,
           })}
@@ -277,7 +302,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="description_ua" className={styles.admin__control_label}>
-          Опис товару при змінні варіації (Укр)
+          Текст розміру при змінні варіації (Укр)
         </label>
         <input
           type="text"
@@ -285,7 +310,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
           style={
             errors["description_ua"] ? { border: "1px solid #EB001B" } : {}
           }
-          placeholder="Опис товару при змінні варіації (Укр)"
+          placeholder="Текст розміру при змінні варіації (Укр)"
           {...register("description_ua", {
             required: `Це поле обов'язкове!`,
           })}
@@ -298,7 +323,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="description_en" className={styles.admin__control_label}>
-          Опис товару при змінні варіації (Англ)
+          Текст розміру при змінні варіації (Англ)
         </label>
         <input
           type="text"
@@ -306,7 +331,7 @@ const AdminProductVariationForm: React.FC<Props> = ({
             errors["description_en"] ? { border: "1px solid #EB001B" } : {}
           }
           className={styles.admin__control_field}
-          placeholder="Опис товару при змінні варіації (Англ)"
+          placeholder="Текст розміру при змінні варіації (Англ)"
           {...register("description_en", {
             required: `Це поле обов'язкове!`,
           })}

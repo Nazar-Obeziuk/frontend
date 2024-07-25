@@ -45,27 +45,35 @@ const AdminImage = styled.div`
   cursor: pointer;
 
   &[isdragactive="true"] {
-    border-color: #00e676;
+    /* Style for drag active */
   }
 
   &[isdragaccept="true"] {
-    border-color: #00e676;
+    /* Style for drag accept */
+    border-color: #ffed00;
   }
 
   &[isdragreject="true"] {
-    border-color: #ff1744;
+    /* Style for drag reject */
+    border-color: #ff0000;
   }
 
   &[isfocused="true"] {
-    border-color: #2196f3;
+    /* Style for focused */
+    border-color: none;
   }
 `;
 
 const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
-  const [mainImage, setMainImage] = useState<File | null>(null);
-  const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
+  const [productImages, setProductImages] = useState<File[]>([]);
+  const [productImagesPreview, setProductImagesPreview] = useState<
+    string[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [characteristics, setCharacteristics] = useState<
+  const [characteristicsUA, setCharacteristicsUA] = useState<
+    { key: string; value: string }[]
+  >([]);
+  const [characteristicsEN, setCharacteristicsEN] = useState<
     { key: string; value: string }[]
   >([]);
   const {
@@ -79,42 +87,64 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
     "image/*": [".jpeg", ".jpg", ".png", ".gif"],
   };
 
-  const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
-    setMainImage(file);
-    setMainImagePreview(URL.createObjectURL(file));
+  const onDropProductImages = useCallback((acceptedFiles: File[]) => {
+    const files = acceptedFiles;
+    setProductImages((prevProductImages) => [...prevProductImages, ...files]);
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setProductImagesPreview((prevPreviews) => [
+      ...(prevPreviews || []),
+      ...newPreviews,
+    ]);
   }, []);
 
   const {
-    getRootProps: getMainRootProps,
-    getInputProps: getMainInputProps,
-    isDragActive: isMainDragActive,
-    isDragAccept: isMainDragAccept,
-    isDragReject: isMainDragReject,
-    isFocused: isMainFocused,
+    getRootProps: getProductsRootProps,
+    getInputProps: getProductsInputProps,
+    isDragActive: isProductsDragActive,
+    isDragAccept: isProductsDragAccept,
+    isDragReject: isProductsDragReject,
+    isFocused: isProductsFocused,
   } = useDropzone({
-    onDrop: onDropMainImage,
-    multiple: false,
+    onDrop: onDropProductImages,
+    multiple: true,
     accept: acceptType,
   });
 
   const handleAddCharacteristic = () => {
-    setCharacteristics([...characteristics, { key: "", value: "" }]);
+    setCharacteristicsUA([...characteristicsUA, { key: "", value: "" }]);
+    setCharacteristicsEN([...characteristicsEN, { key: "", value: "" }]);
   };
 
   const handleCharacteristicChange = (
     index: number,
     key: string,
-    value: string
+    value: string,
+    lang: "UA" | "EN"
   ) => {
-    const newCharacteristics = [...characteristics];
-    newCharacteristics[index] = { key, value };
-    setCharacteristics(newCharacteristics);
+    if (lang === "UA") {
+      const newCharacteristics = [...characteristicsUA];
+      newCharacteristics[index] = { key, value };
+      setCharacteristicsUA(newCharacteristics);
+    } else {
+      const newCharacteristics = [...characteristicsEN];
+      newCharacteristics[index] = { key, value };
+      setCharacteristicsEN(newCharacteristics);
+    }
   };
 
-  const handleRemoveCharacteristic = (index: number) => {
-    const newCharacteristics = characteristics.filter((_, i) => i !== index);
-    setCharacteristics(newCharacteristics);
+  const handleRemoveCharacteristic = (index: number, lang: "UA" | "EN") => {
+    if (lang === "UA") {
+      const newCharacteristics = characteristicsUA.filter(
+        (_, i) => i !== index
+      );
+      setCharacteristicsUA(newCharacteristics);
+    } else {
+      const newCharacteristics = characteristicsEN.filter(
+        (_, i) => i !== index
+      );
+      setCharacteristicsEN(newCharacteristics);
+    }
   };
 
   const onSubmit = async (data: any) => {
@@ -124,17 +154,40 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
       formData.append(key, data[key]);
     });
 
-    if (mainImage) {
-      formData.append("image", mainImage);
+    if (productImages) {
+      productImages.forEach((file) => {
+        formData.append("images", file);
+      });
     }
 
-    const characteristicsObject = characteristics.reduce((obj: any, item) => {
-      if (item.key && item.value) {
-        obj[item.key] = item.value;
-      }
-      return obj;
-    }, {});
-    formData.append("characteristics", JSON.stringify(characteristicsObject));
+    const characteristicsObjectUA = characteristicsUA.reduce(
+      (obj: any, item) => {
+        if (item.key && item.value) {
+          obj[item.key] = item.value;
+        }
+        return obj;
+      },
+      {}
+    );
+
+    const characteristicsObjectEN = characteristicsEN.reduce(
+      (obj: any, item) => {
+        if (item.key && item.value) {
+          obj[item.key] = item.value;
+        }
+        return obj;
+      },
+      {}
+    );
+
+    formData.append(
+      "characteristics_ua",
+      JSON.stringify(characteristicsObjectUA)
+    );
+    formData.append(
+      "characteristics_en",
+      JSON.stringify(characteristicsObjectEN)
+    );
 
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
@@ -146,9 +199,10 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
         notify(response.message);
         reset();
         toggleProductsForm();
-        setMainImage(null);
-        setMainImagePreview(null);
-        setCharacteristics([]);
+        setProductImages([]);
+        setProductImagesPreview(null);
+        setCharacteristicsUA([]);
+        setCharacteristicsEN([]);
       } catch (error) {
         console.error("Error creating product:", error);
         notify("Щось пішло не так...");
@@ -171,29 +225,35 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
           Зображення товару
         </label>
         <AdminImage
-          {...getMainRootProps({
-            isdragactive: isMainDragActive.toString(),
-            isdragaccept: isMainDragAccept.toString(),
-            isdragreject: isMainDragReject.toString(),
-            isfocused: isMainFocused.toString(),
+          {...getProductsRootProps({
+            isdragactive: isProductsDragActive.toString(),
+            isdragaccept: isProductsDragAccept.toString(),
+            isdragreject: isProductsDragReject.toString(),
+            isfocused: isProductsFocused.toString(),
           })}
         >
-          <input {...getMainInputProps()} />
-          {isMainDragActive ? (
+          <input {...getProductsInputProps()} />
+          {isProductsDragActive ? (
             <p>Перетягніть сюди файли ...</p>
           ) : (
-            <p>Клацніть або перетягніть файли</p>
+            <p>Перетягніть файли сюди, або клацніть</p>
           )}
         </AdminImage>
-        {mainImagePreview && (
-          <div className={styles.admin__drag_preview}>
-            <img
-              src={mainImagePreview}
-              alt="banner preview"
-              className={styles.admin__drag_image}
-            />
-          </div>
-        )}
+        <ul className={styles.admin__drag_slider}>
+          {productImagesPreview &&
+            productImagesPreview.map(
+              (productImagesPreview: string, index: number) => (
+                <li key={index} className={styles.admin__drag_preview}>
+                  <img
+                    className={styles.admin__drag_image}
+                    src={productImagesPreview}
+                    alt={`product preview ${index}`}
+                    width={100}
+                  />
+                </li>
+              )
+            )}
+        </ul>
         {errors["image"] && (
           <span className={styles.error_message}>
             {errors["image"]?.message as string}
@@ -335,7 +395,59 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
       </div>
       <div className={styles.admin__block_control}>
         <label
-          htmlFor="characteristics_ua"
+          htmlFor="description_details_ua"
+          className={styles.admin__control_label}
+        >
+          Текст опис в середині товару (Укр)
+        </label>
+        <input
+          type="text"
+          style={
+            errors["description_details_ua"]
+              ? { border: "1px solid #EB001B" }
+              : {}
+          }
+          className={styles.admin__control_field}
+          placeholder="Текст опис в середині товару (Укр)"
+          {...register("description_details_ua", {
+            required: `Це поле обов'язкове!`,
+          })}
+        />
+        {errors["description_details_ua"] && (
+          <span className={styles.error_message}>
+            {errors["description_details_ua"]?.message as string}
+          </span>
+        )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label
+          htmlFor="description_details_en"
+          className={styles.admin__control_label}
+        >
+          Текст опис в середині товару (Англ)
+        </label>
+        <input
+          type="text"
+          style={
+            errors["description_details_en"]
+              ? { border: "1px solid #EB001B" }
+              : {}
+          }
+          className={styles.admin__control_field}
+          placeholder="Текст опис в середині товару (Англ)"
+          {...register("description_details_en", {
+            required: `Це поле обов'язкове!`,
+          })}
+        />
+        {errors["description_details_en"] && (
+          <span className={styles.error_message}>
+            {errors["description_details_en"]?.message as string}
+          </span>
+        )}
+      </div>
+      <div className={styles.admin__block_control}>
+        <label
+          htmlFor="description_characteristics_ua"
           className={styles.admin__control_label}
         >
           Текст характеристики (Укр)
@@ -343,23 +455,25 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
         <input
           type="text"
           style={
-            errors["characteristics_ua"] ? { border: "1px solid #EB001B" } : {}
+            errors["description_characteristics_ua"]
+              ? { border: "1px solid #EB001B" }
+              : {}
           }
           className={styles.admin__control_field}
           placeholder="Текст характеристики (Укр)"
-          {...register("characteristics_ua", {
+          {...register("description_characteristics_ua", {
             required: `Це поле обов'язкове!`,
           })}
         />
-        {errors["characteristics_ua"] && (
+        {errors["description_characteristics_ua"] && (
           <span className={styles.error_message}>
-            {errors["characteristics_ua"]?.message as string}
+            {errors["description_characteristics_ua"]?.message as string}
           </span>
         )}
       </div>
       <div className={styles.admin__block_control}>
         <label
-          htmlFor="characteristics_en"
+          htmlFor="description_characteristics_en"
           className={styles.admin__control_label}
         >
           Текст характеристики (Англ)
@@ -367,24 +481,26 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
         <input
           type="text"
           style={
-            errors["characteristics_en"] ? { border: "1px solid #EB001B" } : {}
+            errors["description_characteristics_en"]
+              ? { border: "1px solid #EB001B" }
+              : {}
           }
           className={styles.admin__control_field}
           placeholder="Текст характеристики (Англ)"
-          {...register("characteristics_en", {
+          {...register("description_characteristics_en", {
             required: `Це поле обов'язкове!`,
           })}
         />
-        {errors["characteristics_en"] && (
+        {errors["description_characteristics_en"] && (
           <span className={styles.error_message}>
-            {errors["characteristics_en"]?.message as string}
+            {errors["description_characteristics_en"]?.message as string}
           </span>
         )}
       </div>
-      {characteristics.map((char, index) => (
-        <div className={styles.admin__block_control}>
+      {characteristicsUA.map((char, index) => (
+        <div key={index} className={styles.admin__block_control}>
           <label className={styles.admin__control_label}>
-            Характеристики {index + 1}
+            Характеристики {index + 1} (Укр)
           </label>
           <input
             type="text"
@@ -392,7 +508,12 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
             placeholder="Ключ"
             value={char.key}
             onChange={(e) =>
-              handleCharacteristicChange(index, e.target.value, char.value)
+              handleCharacteristicChange(
+                index,
+                e.target.value,
+                char.value,
+                "UA"
+              )
             }
           />
           <input
@@ -401,12 +522,49 @@ const AdminProductsForm: React.FC<Props> = ({ toggleProductsForm, getAll }) => {
             placeholder="Значення"
             value={char.value}
             onChange={(e) =>
-              handleCharacteristicChange(index, char.key, e.target.value)
+              handleCharacteristicChange(index, char.key, e.target.value, "UA")
             }
           />
           <button
             type="button"
-            onClick={() => handleRemoveCharacteristic(index)}
+            onClick={() => handleRemoveCharacteristic(index, "UA")}
+            className={styles.admin__remove_button}
+          >
+            Видалити характеристику {index + 1}
+          </button>
+        </div>
+      ))}
+      {characteristicsEN.map((char, index) => (
+        <div key={index} className={styles.admin__block_control}>
+          <label className={styles.admin__control_label}>
+            Характеристики {index + 1} (Англ)
+          </label>
+          <input
+            type="text"
+            className={styles.admin__control_field}
+            placeholder="Ключ"
+            value={char.key}
+            onChange={(e) =>
+              handleCharacteristicChange(
+                index,
+                e.target.value,
+                char.value,
+                "EN"
+              )
+            }
+          />
+          <input
+            type="text"
+            className={styles.admin__control_field}
+            placeholder="Значення"
+            value={char.value}
+            onChange={(e) =>
+              handleCharacteristicChange(index, char.key, e.target.value, "EN")
+            }
+          />
+          <button
+            type="button"
+            onClick={() => handleRemoveCharacteristic(index, "EN")}
             className={styles.admin__remove_button}
           >
             Видалити характеристику {index + 1}

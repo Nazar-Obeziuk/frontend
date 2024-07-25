@@ -38,7 +38,7 @@ export const createGeneralReview = async (
   }
 };
 
-export const updateGeneralReview = async (
+export const updateReview = async (
   updatedReview: FormData,
   id: string,
   token: string
@@ -82,9 +82,26 @@ export const getAllProductsReviews = async (productId: number) => {
   }
 };
 
-export const getProductsReviewById = async (productId: number) => {
+export const createProductsReview = async (
+  formData: FormData,
+  productId: number
+) => {
   try {
-    const { data } = await axios.get(`/reviews/product/${productId}`);
+    const response = await axios.post(
+      `/reviews/product/${productId}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error creating review:", error);
+    throw error;
+  }
+};
+
+// certificate reviews
+export const getAllCertificateReviews = async (certificateId: number) => {
+  try {
+    const { data } = await axios.get(`/reviews/certificate/${certificateId}`);
     return data;
   } catch (error) {
     console.log(error);
@@ -92,25 +109,46 @@ export const getProductsReviewById = async (productId: number) => {
   }
 };
 
-export const createProductsReview = async (
+export const createCertificateReview = async (
   formData: FormData,
-  token: string,
-  productId: number
+  certificateId: number
 ) => {
   try {
     const response = await axios.post(
-      `/reviews/product/${productId}`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      `/reviews/certificate/${certificateId}`,
+      formData
     );
     return response.data;
   } catch (error) {
     console.error("Error creating review:", error);
     throw error;
+  }
+};
+
+// individual
+
+export const getAllIndividualReviews = async (individualId: number) => {
+  try {
+    const { data } = await axios.get(`/reviews/individual/${individualId}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+export const createIndividualReview = async (
+  formData: FormData,
+  individualId: number
+) => {
+  try {
+    const response = await axios.post(
+      `/reviews/individual/${individualId}`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 };

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./InsolesNeeds.module.css";
-import { homeInsolesNeeds } from "../../../../../utils/data/HomeInsoles.data";
-import InsoleItem from "../../../../../components/insole-item/InsoleItem";
+import { useTranslation } from "react-i18next";
 
 const InsolesNeeds: React.FC = () => {
   const [isOpenDetailsBlock, setIsOpenDetailsBlock] = useState(false);
+  const { t } = useTranslation();
 
   const handleInfoBlock = () => {
     setIsOpenDetailsBlock((prevState) => !prevState);
@@ -13,18 +13,79 @@ const InsolesNeeds: React.FC = () => {
   return (
     <div className={styles.home__insoles_inner}>
       <h2 className={styles.home__inner_title}>
-        Кому необхідні{" "}
-        <span className={styles.home__title_primary}>індивідуальні</span>{" "}
-        ОРТОПЕДИЧНІ устілки?
+        {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesTitleChild1")}
+        <span className={styles.home__title_primary}>
+          {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesTitleChild2")}
+        </span>
+        {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesTitleChild3")}
       </h2>
       <div className={styles.home__inner_main}>
-        {homeInsolesNeeds.map((insoleItem) => (
-          <InsoleItem insoleItem={insoleItem} key={insoleItem.id} />
-        ))}
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/sportman-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText1")}
+          </p>
+        </div>
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/soldier-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText2")}
+          </p>
+        </div>
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/pregnant-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText3")}
+          </p>
+        </div>
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/children-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText4")}
+          </p>
+        </div>
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/old-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText5")}
+          </p>
+        </div>
+        <div className={styles.home__insole_item}>
+          <img
+            src="../../images/everyone-icon.svg"
+            alt="insole item icon"
+            className={styles.home__item_image}
+          />
+          <p className={styles.home__item_text}>
+            {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesItemText6")}
+          </p>
+        </div>
       </div>
       <div onClick={handleInfoBlock} className={styles.home__inner_details}>
         <p className={styles.home__details_text}>
-          {isOpenDetailsBlock ? "згорнути" : "детальніше"}
+          {isOpenDetailsBlock
+            ? t("details.detailsClose")
+            : t("details.detailsOpen")}
         </p>
         <svg
           className={`${styles.home__details_icon} ${
@@ -48,42 +109,34 @@ const InsolesNeeds: React.FC = () => {
         <div className={styles.home__inner_more}>
           <div className={styles.home__more_block}>
             <h3 className={styles.home__more_title}>
-              Спортсменам і військовим
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc1Title")}
             </h3>
             <p className={styles.home__more_text}>
-              Індивідуальна устілка покращить амортизацію під час фізичних
-              навантажень, знизить травматизацію суглобів і структуру хребта.
-              Особливо це важливо під час довготривалої активності, стрибків,
-              бігу та під час підіймання важких предметів.
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc1Text")}
             </p>
           </div>
           <div className={styles.home__more_block}>
-            <h3 className={styles.home__more_title}>Людям літнього віку</h3>
+            <h3 className={styles.home__more_title}>
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc2Title")}
+            </h3>
             <p className={styles.home__more_text}>
-              З віком незначні проблеми можуть перерости в хронічні
-              захворювання, тому важливо підтримувати склепіння стоп і зупинити
-              розвиток деформацій. Під час використання індивідуальних
-              ортопедичних устілок болі в ногах, набряки більше не будуть
-              перешкодою активному життю.
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc2Text")}
             </p>
           </div>
           <div className={styles.home__more_block}>
-            <h3 className={styles.home__more_title}>Дітям</h3>
+            <h3 className={styles.home__more_title}>
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc3Title")}
+            </h3>
             <p className={styles.home__more_text}>
-              Дитячі індивідуальні ортопедичні устілки мають лікувальні
-              властивості та сприяють зменшенню й повному виправленню деформацій
-              стопи. Під час стрімкого росту дитину вкрай важливо зберегти
-              дитячі ноги в правильному положенні, що вплине на структуру та
-              роботу всього опорно-рухового апарату.
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc3Text")}
             </p>
           </div>
           <div className={styles.home__more_block}>
-            <h3 className={styles.home__more_title}>Вагітним</h3>
+            <h3 className={styles.home__more_title}>
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc4Title")}
+            </h3>
             <p className={styles.home__more_text}>
-              Під час вагітності організм жінки зіштовхується з додатковим
-              навантаженням на стопи та опорно-руховий апарат, тому важливо в
-              період вагітності використовувати ортопедичну устілку, для
-              правильного розподілу навантаження на точки опори стоп.
+              {t("home.homeWhoNeedsInsoles.homeWhoNeedsInsolesDesc4Text")}
             </p>
           </div>
         </div>

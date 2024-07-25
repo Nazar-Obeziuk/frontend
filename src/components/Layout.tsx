@@ -9,12 +9,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <React.Fragment>
+    <>
       <Header />
       {children}
       <Footer />
       <ToastContainer />
-    </React.Fragment>
+    </>
   );
 };
 

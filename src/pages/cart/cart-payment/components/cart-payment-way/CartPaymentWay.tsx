@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./CartPaymentWay.module.css";
+import { useTranslation } from "react-i18next";
 
 const CartPaymentWay: React.FC = () => {
+  const { t } = useTranslation();
   const [activePaymentWay, setActivePaymentWay] = useState<
     "privat" | "apple-pay" | "mono-pay" | "iban" | ""
   >("");
@@ -10,7 +12,9 @@ const CartPaymentWay: React.FC = () => {
     <div className={styles.cart__main_way}>
       <div className={styles.cart__way_block}>
         <div className={styles.cart__block_payments}>
-          <p className={styles.cart__payments_title}>Виберіть спосіб оплати</p>
+          <p className={styles.cart__payments_title}>
+            {t("cart.cartStep3Text1")}
+          </p>
           <div className={styles.cart__payments_banks}>
             <div
               onClick={() => setActivePaymentWay("privat")}
@@ -64,27 +68,34 @@ const CartPaymentWay: React.FC = () => {
         </div>
         {activePaymentWay === "iban" && (
           <div className={styles.cart__block_info}>
-            <p className={styles.cart__info_title}>Реквізити:</p>
+            <p className={styles.cart__info_title}>
+              {t("cart.cartStep3Text3Title")}
+            </p>
             <p className={styles.cart__info_text}>
-              <span className={styles.cart__text_gray}>ФОП</span> Стадольська
-              Лілія Іванівна <br />
-              Код ЄДРПОУ 2826212066 <br />
               <span className={styles.cart__text_gray}>
-                Дата реєстрації:
-              </span>{" "}
-              29.07.2017 №20520000000002678 <br />
+                {t("cart.cartStep3Text3Child1")}
+              </span>
+              {t("cart.cartStep3Text3Child2")} <br />
               <span className={styles.cart__text_gray}>
-                03045, Україна, м. Київ, <br /> вул. Набережно-Корчуватська, 14{" "}
-                <br /> (метро Видубичі)
+                {t("cart.cartStep3Text4Child1")}
+              </span>
+              {t("cart.cartStep3Text4Child2")} <br />
+              <span className={styles.cart__text_gray}>
+                {t("cart.cartStep3Text5Child1")}
+              </span>
+              {t("cart.cartStep3Text5Child2")} <br />
+              {t("cart.cartStep3Text6")} <br />
+              <span className={styles.cart__text_gray}>
+                {t("cart.cartStep3Text7")} <br />
+                {t("cart.cartStep3Text8")} <br />
+                {t("cart.cartStep3Text9")}
               </span>
             </p>
           </div>
         )}
       </div>
       <div className={styles.cart__way_pib}>
-        <p className={styles.cart__pib_text}>
-          При здійсненні оплати необхідно вказати в коментарях свої ПІБ
-        </p>
+        <p className={styles.cart__pib_text}>{t("cart.cartStep3Text2")}</p>
       </div>
     </div>
   );

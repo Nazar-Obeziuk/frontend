@@ -4,7 +4,6 @@ import AdminWorkersForm from "./components/admin-workers-form/AdminWorkersForm";
 import AdminWorkersTable from "./components/admin-workers-table/AdminWorkersTable";
 import { useNavigate } from "react-router-dom";
 import { IWorker } from "../../../../services/workers/worker.interface";
-import { useAdminWorkersContext } from "../../../../context/admin-workers/AdminWorkersContext";
 import {
   deleteWorker,
   getAllWorkers,
@@ -16,8 +15,6 @@ const AdminWorkers: React.FC = () => {
   const [isAdminWorkersFormOpen, setAdminWorkersFormOpen] = useState(true);
   const [adminWorkers, setAdminWorkers] = useState<IWorker[]>([]);
   const navigate = useNavigate();
-
-  const { setEditWorker } = useAdminWorkersContext();
 
   const notify = (message: string) => toast(message);
 
@@ -35,7 +32,6 @@ const AdminWorkers: React.FC = () => {
   };
 
   const onEditWorker = (worker: IWorker) => {
-    setEditWorker(worker);
     navigate(`/admin/update-worker/${worker.id}`);
   };
 

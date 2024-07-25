@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./OrderPayment.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const OrderPayment: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.order__payment_section}>
       <div className={styles.container}>
@@ -32,11 +35,13 @@ const OrderPayment: React.FC = () => {
             <p
               className={`${styles.order__router_name} ${styles.order__router_active}`}
             >
-              Оплата
+              {t("payment.paymentRoute")}
             </p>
           </div>
           <div className={styles.order__payment_main}>
-            <h2 className={styles.order__main_title}>Оплата</h2>
+            <h2 className={styles.order__main_title}>
+              {t("payment.paymentMainTitle")}
+            </h2>
           </div>
           <div className={styles.order__payment_main}>
             <div className={styles.order__main_block}>
@@ -47,12 +52,16 @@ const OrderPayment: React.FC = () => {
               />
               <div className={styles.order__block_info}>
                 <h3 className={styles.order__info_title}>
-                  Онлайн-оплата{" "}
-                  <span className={styles.order__title_link}>ТУТ</span>
+                  {t("payment.paymentBlock1TitleChild1")}
+                  <a
+                    href="https://google.com"
+                    className={styles.order__title_link}
+                  >
+                    {t("payment.paymentBlock1TitleChild2")}
+                  </a>
                 </h3>
                 <p className={styles.order__main_text}>
-                  Під час оформлення замовлення з будь-якого міста України ви
-                  можете оплатити через:
+                  {t("payment.paymentBlock1Text1")}
                 </p>
                 <div className={styles.order__main_payments}>
                   <img
@@ -72,8 +81,7 @@ const OrderPayment: React.FC = () => {
                   />
                 </div>
                 <p className={styles.order__main_text}>
-                  Квитанцію з нашими реквізитами можна роздрукувати після
-                  оформлення замовлення на сайті.
+                  {t("payment.paymentBlock1Text2")}
                 </p>
               </div>
             </div>
@@ -87,25 +95,23 @@ const OrderPayment: React.FC = () => {
               />
               <div className={styles.order__block_info}>
                 <h3 className={styles.order__info_title}>
-                  Оплата за реквізитами
+                  {t("payment.paymentBlock2Title")}
                 </h3>
                 <p className={styles.order__main_text}>
-                  ПАТ КБ «ПРИВАТБАНК», м. Київ, Україна <br /> ФОП Стадольська
-                  Лілія Іванівна <br /> Код ЄДРПОУ 2826212066 <br /> Дата
-                  реєстрації: 29.07.2017 <br />
-                  №20520000000002678
+                  {t("payment.paymentBlock2Text1Child1")} <br />
+                  {t("payment.paymentBlock2Text1Child2")} <br />
+                  {t("payment.paymentBlock2Text1Child3")} <br />
+                  {t("payment.paymentBlock2Text1Child4")} <br />
+                  {t("payment.paymentBlock2Text1Child5")}
                 </p>
                 <p className={styles.order__main_text}>
-                  У призначенні платежу необхідно вказати ПІБ та номер телефону.
+                  {t("payment.paymentBlock2Text2")}
                 </p>
               </div>
             </div>
             <div className={styles.order__main_info}>
               <p className={styles.order__main_text}>
-                Після відправлення товару ви отримаєте номер експрес-накладної
-                вашого замовлення. Під час отримання товару у відділенні
-                необхідно показати свій паспорт або інший документ, що посвідчує
-                особу.
+                {t("payment.paymentText1")}
               </p>
             </div>
           </div>

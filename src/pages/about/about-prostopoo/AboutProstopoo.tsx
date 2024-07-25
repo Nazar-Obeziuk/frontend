@@ -6,8 +6,11 @@ import AboutSolutions from "./components/about-solutions/AboutSolutions";
 import AboutTechnologies from "./components/about-technologies/AboutTechnologies";
 import AboutGoal from "./components/about-goal/AboutGoal";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AboutProstopoo: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <main className={styles.main}>
       <section className={styles.about__prostopoo_section}>
@@ -35,9 +38,13 @@ const AboutProstopoo: React.FC = () => {
                 alt="router arrow"
                 className="about__router_arrow"
               />
-              <p className={styles.about__router_name}>ПРО PROSTOPOO</p>
+              <p className={styles.about__router_name}>
+                {t("aboutUs.aboutUsRoute")}
+              </p>
             </div>
-            <h2 className={styles.about__wrapper_title}>ПРО PROSTOPOO</h2>
+            <h2 className={styles.about__wrapper_title}>
+              {t("aboutUs.aboutUsHeaderTitle")}
+            </h2>
           </div>
         </div>
       </section>
@@ -50,8 +57,10 @@ const AboutProstopoo: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.about__footer_wrapper}>
             <h2 className={styles.about__footer_title}>
-              <span className={styles.about__title_primary}>Prostopoo</span> —
-              подбай про свою стопу!
+              <span className={styles.about__title_primary}>
+                {t("aboutUs.aboutUsFooterTitleChild1")}
+              </span>
+              {t("aboutUs.aboutUsFooterTitleChild2")}
             </h2>
           </div>
         </div>

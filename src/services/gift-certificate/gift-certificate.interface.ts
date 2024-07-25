@@ -1,0 +1,35 @@
+export interface ICertificate {
+  id: number;
+  image_url: string[];
+  name_ua: string;
+  name_en: string;
+  reviews_count: number;
+  article: string;
+  base_price: number;
+  description_ua: string;
+  description_en: string;
+  first_about_description_ua: string;
+  first_about_description_en: string;
+  second_about_description_ua: string;
+  second_about_description_en: string;
+  third_about_description_ua: string;
+  third_about_description_en: string;
+  first_use_description_ua: string;
+  first_use_description_en: string;
+  second_use_description_ua: string;
+  second_use_description_en: string;
+  third_use_description_ua: string;
+  third_use_description_en: string;
+  fourth_use_description_ua: string;
+  fourth_use_description_en: string;
+  fifth_use_description_ua: string;
+  fifth_use_description_en: string;
+  sixth_use_description_ua: string;
+  sixth_use_description_en: string;
+  seventh_use_description_ua: string;
+  seventh_use_description_en: string;
+  eighth_use_description_ua: string;
+  eighth_use_description_en: string;
+  nineth_use_description_ua: string;
+  nineth_use_description_en: string;
+}

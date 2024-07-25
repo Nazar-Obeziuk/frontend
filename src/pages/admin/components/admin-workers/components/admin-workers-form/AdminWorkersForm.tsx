@@ -154,6 +154,8 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
         navigate("/admin");
         reset();
         toggleWorkersForm();
+        setSliderImagesPreview([]);
+        setMainImagePreview(null);
       } catch (error) {
         console.error("Error creating worker:", error);
         notify("Щось пішло не так...");
@@ -187,7 +189,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
           {isMainDragActive ? (
             <p>Перетягніть сюди файли ...</p>
           ) : (
-            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+            <p>Перетягніть файли сюди файли</p>
           )}
         </AdminImage>
         {mainImagePreview && (
@@ -221,7 +223,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
           {isSliderDragActive ? (
             <p>Перетягніть сюди файли ...</p>
           ) : (
-            <p>Перетягніть файли сюди, або клацніть для вибору файлів</p>
+            <p>Перетягніть файли сюди файли</p>
           )}
         </AdminImage>
         <ul className={styles.admin__drag_slider}>
@@ -395,11 +397,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
       </div>
       <div className={styles.admin__block_actions}>
         <button
-          className={
-            isLoading
-              ? styles.admin__actions_button + " disable"
-              : styles.admin__actions_button
-          }
+          className={styles.admin__actions_button}
           type="submit"
           disabled={isLoading || !isValid}
         >

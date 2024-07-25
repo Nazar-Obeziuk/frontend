@@ -3,40 +3,47 @@ import styles from "./ReviewPopup.module.css";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import { useParams } from "react-router-dom";
+import { IReview } from "../../services/reviews/review.interface";
+import { useTranslation } from "react-i18next";
 
 interface ReviewPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  getReviews: () => void;
+  createReviews: (formData: FormData, id: number) => void;
 }
 
-interface FormValues {
-  name: string;
-  review: string;
-  pluses: string;
-  minuses: string;
-}
-
-const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
-  const defaultRatingValue = 4.5;
+const ReviewPopup: React.FC<ReviewPopupProps> = ({
+  isOpen,
+  onClose,
+  getReviews,
+  createReviews,
+}) => {
+  const defaultRatingValue = 5;
   const [rating, setRating] = useState<number | null>(defaultRatingValue);
+  const { id } = useParams();
+  const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<IReview>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const formattedData = {
-      ...data,
-      review: data.review === "" ? null : data.review,
-      pluses: data.pluses === "" ? null : data.pluses,
-      minuses: data.minuses === "" ? null : data.minuses,
-      rating: rating,
-    };
+  const onSubmit: SubmitHandler<IReview> = async (data) => {
+    const formData = new FormData();
+    formData.append("name_ua", data.name_ua);
+    formData.append("description_ua", data.description_ua || "");
+    formData.append("pluses_ua", data.pluses_ua || "");
+    formData.append("minuses_ua", data.minuses_ua || "");
+    formData.append("product_id", id!);
+    if (rating !== null) {
+      formData.append("stars", rating.toString());
+    }
 
-    console.log(formattedData);
+    createReviews(formData, +id!);
     resetForm();
   };
 
@@ -72,9 +79,13 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
               className={styles.popup__close_icon}
             />
           </span>
-          <h2 className={styles.popup__wrapper_title}>Відгук про товар</h2>
+          <h2 className={styles.popup__wrapper_title}>
+            {t("popupReviews.popupReviewsTitle")}
+          </h2>
           <div className={styles.popup__wrapper_rating}>
-            <p className={styles.popup__rating_text}>Поставте оцінку</p>
+            <p className={styles.popup__rating_text}>
+              {t("popupReviews.popupReviewsRating")}
+            </p>
             <div className={styles.popup__rating_stars}>
               <Stack spacing={1}>
                 <Rating
@@ -84,7 +95,7 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
                   name="user-rating"
                   value={rating}
                   defaultValue={defaultRatingValue}
-                  precision={0.5}
+                  precision={1}
                 />
               </Stack>
             </div>
@@ -97,41 +108,57 @@ const ReviewPopup: React.FC<ReviewPopupProps> = ({ isOpen, onClose }) => {
               <div className={styles.popup__fields_control}>
                 <input
                   type="text"
-                  className={`${styles.popup__fields_input} ${
-                    errors.name ? styles.inputError : ""
-                  }`}
-                  placeholder="Ваше ім’я"
-                  {...register("name", { required: "Це поле обов'язкове" })}
+                  className={styles.popup__fields_input}
+                  style={
+                    errors["name_ua"] ? { border: "1px solid #EB001B" } : {}
+                  }
+                  placeholder={t("popupReviews.popupReviewsPlaceholder1")}
+                  {...register("name_ua", { required: true })}
                 />
-                {errors.name && (
+                {errors.name_ua && (
                   <p className={styles.popup__input_error}>
-                    {errors.name.message}
+                    {errors.name_ua.message}
+                  </p>
+                )}
+              </div>
+              <div className={styles.popup__fields_control}>
+                <textarea
+                  placeholder={t("popupReviews.popupReviewsPlaceholder2")}
+                  style={
+                    errors["description_ua"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  className={`${styles.popup__fields_input} ${
+                    errors.description_ua ? styles.inputError : ""
+                  }`}
+                  {...register("description_ua", {
+                    required: true,
+                  })}
+                ></textarea>
+                {errors.description_ua && (
+                  <p className={styles.popup__input_error}>
+                    {errors.description_ua.message}
                   </p>
                 )}
               </div>
               <textarea
-                placeholder="Ваш відгук"
+                placeholder={t("popupReviews.popupReviewsPlaceholder3")}
                 className={styles.popup__fields_textarea}
-                {...register("review")}
+                {...register("pluses_ua")}
               ></textarea>
               <textarea
-                placeholder="Плюси"
+                placeholder={t("popupReviews.popupReviewsPlaceholder4")}
                 className={styles.popup__fields_textarea}
-                {...register("pluses")}
-              ></textarea>
-              <textarea
-                placeholder="Мінуси"
-                className={styles.popup__fields_textarea}
-                {...register("minuses")}
+                {...register("minuses_ua")}
               ></textarea>
             </div>
             <button className={styles.popup__form_button} type="submit">
-              Залишити відгук
+              {t("popupReviews.popupReviewsButtonText")}
             </button>
           </form>
           <p className={styles.popup__wrapper_info}>
-            Відправляючи коментар / відгук на сайті ви погоджуєтеся з правилами
-            модерації коментарів і відгуків
+            {t("popupReviews.popupReviewsInfo")}
           </p>
         </div>
       </div>

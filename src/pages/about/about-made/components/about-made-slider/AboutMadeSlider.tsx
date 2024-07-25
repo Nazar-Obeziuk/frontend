@@ -2,9 +2,12 @@ import React from "react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import styles from "../../AboutMade.module.css";
+import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 const AboutMadeSlider: React.FC = () => {
   const swiper = useSwiper();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -43,7 +46,7 @@ const AboutMadeSlider: React.FC = () => {
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>1</span>
                 <p className={styles.about__slider_text}>
-                  Консультування ерготерапевта та моделювання майбутніх устілок
+                  {t("production.productionStepsText1")}
                 </p>
               </div>
             </div>
@@ -58,7 +61,7 @@ const AboutMadeSlider: React.FC = () => {
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>2</span>
                 <p className={styles.about__slider_text}>
-                  Друк за технологією СAD/CAM
+                  {t("production.productionStepsText2")}
                 </p>
               </div>
             </div>
@@ -73,7 +76,7 @@ const AboutMadeSlider: React.FC = () => {
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>3</span>
                 <p className={styles.about__slider_text}>
-                  Шліфування основи майбутніх устілок
+                  {t("production.productionStepsText3")}
                 </p>
               </div>
             </div>
@@ -88,7 +91,7 @@ const AboutMadeSlider: React.FC = () => {
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>4</span>
                 <p className={styles.about__slider_text}>
-                  Фіксація та покриття
+                  {t("production.productionStepsText4")}
                 </p>
               </div>
             </div>
@@ -102,7 +105,9 @@ const AboutMadeSlider: React.FC = () => {
               />
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>5</span>
-                <p className={styles.about__slider_text}>Пресування</p>
+                <p className={styles.about__slider_text}>
+                  {t("production.productionStepsText5")}
+                </p>
               </div>
             </div>
           </SwiperSlide>
@@ -116,7 +121,7 @@ const AboutMadeSlider: React.FC = () => {
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>6</span>
                 <p className={styles.about__slider_text}>
-                  Пакування готових устілок
+                  {t("production.productionStepsText6")}
                 </p>
               </div>
             </div>
@@ -130,13 +135,16 @@ const AboutMadeSlider: React.FC = () => {
               />
               <div className={styles.about__slider_info}>
                 <span className={styles.about__block_count}>7</span>
-                <p className={styles.about__slider_text}>Відправка устілок</p>
+                <p className={styles.about__slider_text}>
+                  {t("production.productionStepsText7")}
+                </p>
               </div>
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <a
-              href="https://google.com"
+            <NavLink
+              to={"https://youtu.be/wzwtNwJ7TLQ"}
+              target={"_blank"}
               className={styles.about__galery_slider}
             >
               <img
@@ -151,7 +159,7 @@ const AboutMadeSlider: React.FC = () => {
                   className={styles.about__circle_play}
                 />
               </span>
-            </a>
+            </NavLink>
           </SwiperSlide>
         </Swiper>
       </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./ClientRecomendation.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const ClientRecommendation: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <section className={styles.client__recommendation_section}>
@@ -33,38 +36,33 @@ const ClientRecommendation: React.FC = () => {
               <p
                 className={`${styles.client__router_name} ${styles.client__router_active}`}
               >
-                Рекомендації
+                {t("recommendations.recommendationsRoute")}
               </p>
             </div>
             <div className={styles.client__recommendation_name}>
-              <h2 className={styles.client__name_title}>Рекомендації</h2>
+              <h2 className={styles.client__name_title}>
+                {t("recommendations.recommendationsMainTitle")}
+              </h2>
             </div>
             <div className={styles.client__recommendation_info}>
               <h3 className={styles.client__info_title}>
-                Рекомендації щодо застосування устілок:
+                {t("recommendations.recommendationsBlock1Title")}
               </h3>
               <ul className={styles.client__info_list}>
                 <li className={styles.client__list_item}>
-                  використовуйте устілки у взутті з закритою п’ятою;
+                  {t("recommendations.recommendationsBlock1Text1")}
                 </li>
                 <li className={styles.client__list_item}>
-                  під час підбору передбачайте, що устілки додають об’єму
-                  всередині взуття;
+                  {t("recommendations.recommendationsBlock1Text2")}
                 </li>
                 <li className={styles.client__list_item}>
-                  можливе самостійне підрізання в передній частині за допомогою
-                  звичайних ножиць. Підрізання задньої частини устілки
-                  недопустиме;
+                  {t("recommendations.recommendationsBlock1Text3")}
                 </li>
                 <li className={styles.client__list_item}>
-                  можливе тимчасове виникнення відчуття дискомфорту після
-                  початку використання устілок;
+                  {t("recommendations.recommendationsBlock1Text4")}
                 </li>
                 <li className={styles.client__list_item}>
-                  з метою зменшення відчуття дискомфорту рекомендовано
-                  використовувати устілки до двох годин на день протягом першого
-                  тижня, після чого час використання варто поступово
-                  збільшувати;
+                  {t("recommendations.recommendationsBlock1Text5")}
                 </li>
               </ul>
             </div>
@@ -87,7 +85,7 @@ const ClientRecommendation: React.FC = () => {
                     />
                     <span className={styles.client__count_item}>1</span>
                     <p className={styles.client__info_text}>
-                      Дістаньте стару устілку
+                      {t("recommendations.recommendationsBlock1Text6")}
                     </p>
                   </div>
                   <div className={styles.client__galery_line}></div>
@@ -99,9 +97,9 @@ const ClientRecommendation: React.FC = () => {
                     />
                     <span className={styles.client__count_item}>2</span>
                     <p className={styles.client__info_text}>
-                      Розмістіть устілку{" "}
+                      {t("recommendations.recommendationsBlock1Text7Child1")}
                       <span className={styles.client__text_bold}>
-                        Prostopoo
+                        {t("recommendations.recommendationsBlock1Text7Child2")}
                       </span>
                     </p>
                   </div>
@@ -114,7 +112,7 @@ const ClientRecommendation: React.FC = () => {
                     />
                     <span className={styles.client__count_item}>3</span>
                     <p className={styles.client__info_text}>
-                      За потреби — підріжте передню частину
+                      {t("recommendations.recommendationsBlock1Text8")}
                     </p>
                   </div>
                 </div>
@@ -123,28 +121,27 @@ const ClientRecommendation: React.FC = () => {
             <div className={styles.client__wrapper_main}>
               <div className={styles.client__main_remember}>
                 <h2 className={styles.client__main_title}>
-                  Під час використання устілок, треба пам’ятати:
+                  {t("recommendations.recommendationsBlock2Title")}
                 </h2>
                 <ul className={styles.client__info_list}>
                   <li className={styles.client__list_item}>
-                    моделювання устілок під взуття неможливе;
+                    {t("recommendations.recommendationsBlock2Text1")}
                   </li>
                   <li className={styles.client__list_item}>
-                    устілка моделюється під стопу користувача.
+                    {t("recommendations.recommendationsBlock2Text2")}
                   </li>
                 </ul>
               </div>
               <div className={styles.client__main_care}>
                 <h2 className={styles.client__main_title}>
-                  Рекомендації з догляду за устілками:
+                  {t("recommendations.recommendationsBlock3Title")}
                 </h2>
                 <ul className={styles.client__info_list}>
                   <li className={styles.client__list_item}>
-                    протирайте устілки за допомогою вологої губки або серветки;
+                    {t("recommendations.recommendationsBlock3Text1")}
                   </li>
                   <li className={styles.client__list_item}>
-                    не сушіть на нагрівальних приладах, в мікрохвильовій печі та
-                    не піддавайте обробці паром.
+                    {t("recommendations.recommendationsBlock3Text2")}
                   </li>
                 </ul>
                 <div className={styles.client__care_banners}>
@@ -171,14 +168,16 @@ const ClientRecommendation: React.FC = () => {
                 </div>
               </div>
               <div className={styles.client__main_save}>
-                <h2 className={styles.client__main_title}>Умови зберігання:</h2>
+                <h2 className={styles.client__main_title}>
+                  {t("recommendations.recommendationsBlock4Title")}
+                </h2>
                 <div className={styles.client__save_block}>
                   <ul className={styles.client__info_list}>
                     <li className={styles.client__list_item}>
-                      температура повітря від +5 до +35°C;
+                      {t("recommendations.recommendationsBlock4Text1")}
                     </li>
                     <li className={styles.client__list_item}>
-                      вологість повітря 15-70%.
+                      {t("recommendations.recommendationsBlock4Text2")}
                     </li>
                   </ul>
                   <img

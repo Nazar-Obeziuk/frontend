@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminError from "../../../../admin-error/AdminError";
 import {
   getReviewById,
-  updateGeneralReview,
+  updateReview,
 } from "../../../../../../services/reviews/reviews";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
@@ -29,6 +29,7 @@ const AdminReviewsUpdate: React.FC = () => {
       try {
         const editedReview: IReviewGeneral = await getReviewById(id!);
         setEditReview(editedReview);
+        console.log(editReview);
 
         if (editedReview) {
           const updatedObject = {
@@ -37,6 +38,10 @@ const AdminReviewsUpdate: React.FC = () => {
             name_en: editedReview.name_en,
             description_ua: editedReview.description_ua,
             description_en: editedReview.description_en,
+            pluses_ua: editedReview.pluses_ua,
+            pluses_en: editedReview.pluses_en,
+            minuses_ua: editedReview.minuses_ua,
+            minuses_en: editedReview.minuses_en,
           };
 
           reset(updatedObject);
@@ -54,7 +59,9 @@ const AdminReviewsUpdate: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
+
     const formData = new FormData();
+
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
@@ -63,7 +70,7 @@ const AdminReviewsUpdate: React.FC = () => {
       const token = localStorage.getItem("token");
 
       if (token) {
-        const response = await updateGeneralReview(formData, id!, token);
+        const response = await updateReview(formData, id!, token);
         notify(response.message);
         navigate("/admin");
       } else {
@@ -237,6 +244,62 @@ const AdminReviewsUpdate: React.FC = () => {
                     {errors["description_en"]?.message as string}
                   </span>
                 )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="pluses_ua"
+                  className={styles.admin__control_label}
+                >
+                  Плюси (Укр)
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  placeholder="Плюси (Укр)"
+                  {...register("pluses_ua", { required: false })}
+                />
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="pluses_en"
+                  className={styles.admin__control_label}
+                >
+                  Плюси (Англ)
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  placeholder="Плюси (Англ)"
+                  {...register("pluses_en", { required: false })}
+                />
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="minuses_ua"
+                  className={styles.admin__control_label}
+                >
+                  Мінуси (Укр)
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  placeholder="Мінуси (Укр)"
+                  {...register("minuses_ua", { required: false })}
+                />
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="minuses_en"
+                  className={styles.admin__control_label}
+                >
+                  Мінуси (Англ)
+                </label>
+                <input
+                  type="text"
+                  className={styles.admin__control_field}
+                  placeholder="Мінуси (Англ)"
+                  {...register("minuses_en", { required: false })}
+                />
               </div>
               <div className={styles.admin__block_actions}>
                 <button

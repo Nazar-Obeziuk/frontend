@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./AboutWarranty.module.css";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const AboutWarranty: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <section
@@ -33,7 +36,9 @@ const AboutWarranty: React.FC = () => {
                 className={styles.about__router_arrow}
               />
               <NavLink to={"/home/prostopoo/about"}>
-                <p className={styles.about__router_name}>ПРО PROSTOPOO</p>
+                <p className={styles.about__router_name}>
+                  {t("warranty.warrantyRoute1")}
+                </p>
               </NavLink>
               <img
                 src="../../images/navigation-arrow.svg"
@@ -43,74 +48,79 @@ const AboutWarranty: React.FC = () => {
               <p
                 className={`${styles.about__router_name} ${styles.about__router_active}`}
               >
-                Гарантія та обмін
+                {t("warranty.warrantyRoute2")}
               </p>
             </div>
             <div className={styles.about__warranty_name}>
-              <h2 className={styles.about__name_title}>Гарантія та обмін</h2>
+              <h2 className={styles.about__name_title}>
+                {t("warranty.warrantyTitle")}
+              </h2>
             </div>
             <div className={styles.about__warranty_header}>
-              <h2 className={styles.about__header_title}>Гарантії</h2>
+              <h2 className={styles.about__header_title}>
+                {t("warranty.warrantyBlock1Title")}
+              </h2>
               <p className={styles.about__warranty_text}>
-                Устілки{" "}
-                <span className={styles.about__text_bold}>PROSTOPOO</span>{" "}
+                {t("warranty.warrantyText1Child1")}
+                <span className={styles.about__text_bold}>
+                  {t("warranty.warrantyText1Child2")}
+                </span>
                 <a
                   href="../../images/declaration-1.pdf"
                   target="_blank"
                   className={styles.about__header_link}
                 >
-                  сертифіковано
-                </a>{" "}
-                та забезпечено фірмовою гарантією, строк якої встановлено
-                фірмою-виробником.
+                  {t("warranty.warrantyText1Child3")}
+                </a>
+                {t("warranty.warrantyText1Child4")}
               </p>
               <div className={styles.about__header_term}>
                 <p className={styles.about__primary_text}>
-                  Строк, до якого гарантоване безпечне застосування:{" "}
+                  {t("warranty.warrantyText2Child1")}
                   <span className={styles.about__text_bold}>
-                    2 роки з дати виготовлення.
+                    {t("warranty.warrantyText2Child2")}
                   </span>
                 </p>
                 <p className={styles.about__primary_text}>
-                  Гарантійний термін використання виробу (при дотриманні умов
-                  зберігання та використання):{" "}
-                  <span className={styles.about__text_bold}>30 днів.</span>
+                  {t("warranty.warrantyText3Child1")}
+                  <span className={styles.about__text_bold}>
+                    {t("warranty.warrantyText3Child2")}
+                  </span>
                 </p>
               </div>
             </div>
             <div className={styles.about__warranty_main}>
-              <h2 className={styles.about__main_title}>Обмін</h2>
+              <h2 className={styles.about__main_title}>
+                {t("warranty.warrantyBlock2Title")}
+              </h2>
               <div className={styles.about__main_info}>
                 <p className={styles.about__warranty_text}>
-                  Виріб незадовільної якості підлягає заміні або
-                  перевиготовленню.
+                  {t("warranty.warrantyText4")}
                 </p>
                 <span className={styles.about__text_bold}>
-                  Окрім випадків зазначених далі:
+                  {t("warranty.warrantyList1Title")}
                 </span>
                 <ul className={styles.about__warranty_list}>
                   <li className={styles.about__list_item}>
-                    недотримання покупцем вимог виробника;
+                    {t("warranty.warrantyList1Text1")}
                   </li>
                   <li className={styles.about__list_item}>
-                    ремонту не уповноваженими на це особами;
+                    {t("warranty.warrantyList1Text2")}
                   </li>
                   <li className={styles.about__list_item}>
-                    розбирання виробу, зміни конструкції та інших втручань;
+                    {t("warranty.warrantyList1Text3")}
                   </li>
                   <li className={styles.about__list_item}>
-                    пошкоджень, викликаних екстремальними умовами та дією
-                    непереборної сили (пожежа, стихійні лиха тощо);
+                    {t("warranty.warrantyList1Text4")}
                   </li>
                   <li className={styles.about__list_item}>
-                    недбалого зберігання та/або недбалого транспортування
-                    власником;
+                    {t("warranty.warrantyList1Text5")}
                   </li>
                   <li className={styles.about__list_item}>
-                    ушкоджень викликаних тваринами або комахами;
+                    {t("warranty.warrantyList1Text6")}
                   </li>
                   <li className={styles.about__list_item}>
-                    використання виробу з метою, для яких воно не призначене.
+                    {t("warranty.warrantyList1Tex7")}
                   </li>
                 </ul>
               </div>
@@ -125,388 +135,278 @@ const AboutWarranty: React.FC = () => {
           <div className={styles.about__warranty_wrapper}>
             <div className={styles.about__wrapper_exchange}>
               <p className={styles.about__text_bold}>
-                Щоб здійснити обмін товару вам необхідно:
+                {t("warranty.warrantyList2Title")}
               </p>
               <ol className={styles.about__exchange_list}>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>1.</span> Написати
-                  повідомлення або зателефонувати на один із номерів телефону,
-                  які вказані на сайті, назвати менеджеру Ваші ПІБ або номер
-                  телефону, на який було оформлено замовлення.
+                  <span className={styles.about__list_count}>1.</span>
+                  {t("warranty.warrantyList2Text1")}
                 </li>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>2.</span> Після —
-                  варто вказати, який товар ви замовляли, причину
-                  обміну/повернення. Для повернення також варто зазначити
-                  реквізити вашої карти, на яку необхідно повернути гроші.
+                  <span className={styles.about__list_count}>2.</span>
+                  {t("warranty.warrantyList2Text2")}
                 </li>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>3.</span>{" "}
-                  Відправити товар на адресу: с. Ходосівка (Київська обл.), Нова
-                  пошта № 1, отримувач:….
+                  <span className={styles.about__list_count}>3.</span>
+                  {t("warranty.warrantyList2Text3")}
                 </li>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>4.</span> Якщо
-                  повернення/обмін здійснюється через нашу помилку – послуги
-                  доставки сплачує компанія, у разі повернення з причин, що від
-                  нас не залежать, послуги доставки оплачує відправник.
+                  <span className={styles.about__list_count}>4.</span>
+                  {t("warranty.warrantyList2Text4")}
                 </li>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>5.</span> Повідомте
-                  менеджеру номер декларації відправленої посилки.
+                  <span className={styles.about__list_count}>5.</span>
+                  {t("warranty.warrantyList2Text5")}
                 </li>
                 <li className={styles.about__list_numeric}>
-                  <span className={styles.about__list_count}>6.</span> Після
-                  отримання вашої посилки протягом трьох робочих днів ми
-                  повернемо вам кошти або надішлемо інший товар.
+                  <span className={styles.about__list_count}>6.</span>
+                  {t("warranty.warrantyList2Text6")}
                 </li>
               </ol>
             </div>
             <div className={styles.about__wrapper_important}>
               <p className={styles.about__warranty_text}>
-                <span className={styles.about__primary_text}>Важливо:</span> у
-                разі обміну, відправку нового товару здійснюємо лише після
-                отримання й огляду товару, що повернувся.
+                <span className={styles.about__primary_text}>
+                  {t("warranty.warrantyText5Child1")}
+                </span>
+                {t("warranty.warrantyText5Child2")}
               </p>
               <p className={styles.about__warranty_text}>
-                При наявності можливих протипоказань проконсультуйтесь з
-                фахівцем.
+                {t("warranty.warrantyText6")}
               </p>
               <p className={styles.about__warranty_text}>
-                Виготовлено згідно з технічними умовами ТУ У
-                15.2-37560237-001:2023 «Устілки ортопедичні. Технічні умови».
-                Висновок державної санітарно-епідеміологічної експертизи
-                №12.2-18-2/5516 від 16.05.2023 року
+                {t("warranty.warrantyText7")}
               </p>
             </div>
             <div className={styles.about__wrapper_consumers}>
               <h2 className={styles.about__consumers_title}>
-                Права споживачів
+                {t("warranty.warrantyBlock3Title")}
               </h2>
               <div className={styles.about__consumers_main}>
                 <p className={styles.about__text_bold}>
-                  СТАТТІ ІЗ ЗАКОНУ ПРО ЗАХИСТ ПРАВ СПОЖИВАЧІВ ЩОДО ПРОДАЖУ,
-                  ОБМІНУ ТА РЕМОНТУ ТОВАРІВ ПОБУТОВОГО ПРИЗНАЧЕННЯ
+                  {t("warranty.warrantyBlock3Subtitle")}
                 </p>
                 <p className={styles.about__warranty_text}>
-                  Цей Закон регулює відносини між споживачами товарів, робіт і
-                  послуг та виробниками і продавцями товарів, виконавцями робіт
-                  і надавачами послуг різних форм власності, встановлює права
-                  споживачів, а також визначає механізм їх захисту та основи
-                  реалізації державної політики у сфері захисту прав споживачів.
+                  {t("warranty.warrantyText8")}
                 </p>
               </div>
             </div>
             <div className={styles.about__wrapper_position}>
-              <p className={styles.about__position_title}>ЗАГАЛЬНІ ПОЛОЖЕННЯ</p>
+              <p className={styles.about__position_title}>
+                {t("warranty.warrantyText9")}
+              </p>
               <div className={styles.about__position_main}>
                 <p className={styles.about__primary_text}>
-                  Стаття 1. Визначення термінів
+                  {t("warranty.warrantyTextArticle1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>5)</span>{" "}
-                  гарантійний строк — строк, протягом якого виробник (продавець,
-                  виконавець або будь-яка третя особа) бере на себе зобов'язання
-                  про здійснення безоплатного ремонту або заміни відповідної
-                  продукції у зв'язку з введенням її в обіг;
+                  <span className={styles.about__warranty_text}>5)</span>
+                  {t("warranty.warrantyTextArticle1Text1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>12)</span>{" "}
-                  істотний недолік — недолік, який робить неможливим чи
-                  недопустимим використання товару відповідно до його цільового
-                  призначення, виник з вини виробника (продавця, виконавця),
-                  після його усунення проявляється знову з незалежних від
-                  споживача причин і при цьому наділений хоча б однією з
-                  нижченаведених ознак:
+                  <span className={styles.about__warranty_text}>12)</span>
+                  {t("warranty.warrantyTextArticle1Text2")}
                 </p>
                 <div className={styles.about__position_list}>
                   <p className={styles.about__warranty_text}>
-                    a) він взагалі не може бути усунутий;
+                    a) {t("warranty.warrantyTextArticle1Text3")}
                   </p>
                   <p className={styles.about__warranty_text}>
-                    б) його усунення потребує понад чотирнадцять календарних
-                    днів;
+                    б) {t("warranty.warrantyTextArticle1Text4")}
                   </p>
                   <p className={styles.about__warranty_text}>
-                    в) він робить товар суттєво іншим, ніж передбачено
-                    договором;
+                    в) {t("warranty.warrantyTextArticle1Text5")}
                   </p>
                 </div>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>13)</span>{" "}
-                  належна якість товару, роботи або послуги — властивість
-                  продукції, яка відповідає вимогам, встановленим для цієї
-                  категорії продукції у нормативно-правових актах і нормативних
-                  документах, та умовам договору із споживачем;
+                  <span className={styles.about__warranty_text}>13)</span>
+                  {t("warranty.warrantyTextArticle1Text6")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>15)</span>{" "}
-                  недолік — будь-яка невідповідність продукції вимогам
-                  нормативно-правових актів і нормативних документів, умовам
-                  договорів або вимогам, що пред'являються до неї, а також
-                  інформації про продукцію, наданій виробником (виконавцем,
-                  продавцем);
+                  <span className={styles.about__warranty_text}>15)</span>
+                  {t("warranty.warrantyTextArticle1Text7")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>18)</span>{" "}
-                  продавець — суб'єкт господарювання, який згідно з договором
-                  реалізує споживачеві товари або пропонує їх до реалізації;
+                  <span className={styles.about__warranty_text}>18)</span>
+                  {t("warranty.warrantyTextArticle1Text8")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>22)</span>{" "}
-                  споживач — фізична особа, яка придбаває, замовляє,
-                  використовує або має намір придбати чи замовити продукцію для
-                  особистих потреб, безпосередньо не пов'язаних з
-                  підприємницькою діяльністю або виконанням обов'язків найманого
-                  працівника;
+                  <span className={styles.about__warranty_text}>22)</span>
+                  {t("warranty.warrantyTextArticle1Text9")}
                 </p>
               </div>
               <div className={styles.about__position_protect}>
                 <p className={styles.about__position_title}>
-                  Стаття 2. Законодавство про захист прав споживачів
+                  {t("warranty.warrantyTextArticle2")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>5)</span>{" "}
-                  Законодавство про захист прав споживачів складається з цього
-                  Закону, Цивільного кодексу України ( 435-15 ), Господарського
-                  кодексу України ( 436-15 ) та інших нормативно-правових актів,
-                  що містять положення про захист прав споживачів.
+                  <span className={styles.about__warranty_text}>5)</span>
+                  {t("warranty.warrantyTextArticle2Text1")}
                 </p>
               </div>
             </div>
             <div className={styles.about__wrapper_second}>
-              <p className={styles.about__position_title}>РОЗДІЛ II</p>
               <p className={styles.about__position_title}>
-                Права споживачів та їх захист
+                {t("warranty.warrantyTextChart2")}
+              </p>
+              <p className={styles.about__position_title}>
+                {t("warranty.warrantyTextChart2Text1")}
               </p>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 4. Права та обов'язки споживачів
+                  {t("warranty.warrantyTextChart2Text2")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span>{" "}
-                  Споживачі під час придбання, замовлення або використання
-                  продукції, яка реалізується на території України, для
-                  задоволення своїх особистих потреб мають право на:
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextChart2Text3")}
                 </p>
                 <ul className={styles.about__warranty_list}>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>1)</span>{" "}
-                    захист своїх прав державою;
+                    <span className={styles.about__warranty_text}>1)</span>
+                    {t("warranty.warrantyTextChart2Text4")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>2)</span>{" "}
-                    належну якість продукції та обслуговування;
+                    <span className={styles.about__warranty_text}>2)</span>
+                    {t("warranty.warrantyTextChart2Text5")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>3)</span>{" "}
-                    безпеку продукції;
+                    <span className={styles.about__warranty_text}>3)</span>
+                    {t("warranty.warrantyTextChart2Text6")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>4)</span>{" "}
-                    необхідну, доступну, достовірну та своєчасну інформацію про
-                    продукцію, її кількість, якість, асортимент, а також про її
-                    виробника (виконавця, продавця);
+                    <span className={styles.about__warranty_text}>4)</span>
+                    {t("warranty.warrantyTextChart2Text7")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>5)</span>{" "}
-                    відшкодування шкоди (збитків), завданих дефектною чи
-                    фальсифікованою продукцією або продукцією неналежної якості,
-                    а також майнової та моральної (немайнової) шкоди, заподіяної
-                    небезпечною для життя і здоров'я людей продукцією у
-                    випадках, передбачених законодавством;
+                    <span className={styles.about__warranty_text}>5)</span>
+                    {t("warranty.warrantyTextChart2Text8")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>6)</span>{" "}
-                    звернення до суду та інших уповноважених органів державної
-                    влади за захистом порушених прав;
+                    <span className={styles.about__warranty_text}>6)</span>
+                    {t("warranty.warrantyTextChart2Text9")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>7)</span>{" "}
-                    об'єднання в громадські організації споживачів (об'єднання
-                    споживачів).
+                    <span className={styles.about__warranty_text}>7)</span>
+                    {t("warranty.warrantyTextChart2Text10")}
                   </li>
                 </ul>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span>{" "}
-                  Споживачі також мають інші права, встановлені законодавством
-                  про захист прав споживачів.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextChart2Text11")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>3.</span>{" "}
-                  Споживачі зобов'язані:
+                  <span className={styles.about__warranty_text}>3.</span>
+                  {t("warranty.warrantyTextChart2Text12")}
                 </p>
                 <ul className={styles.about__warranty_list}>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>1)</span>{" "}
-                    перед початком експлуатації товару уважно ознайомитися з
-                    правилами експлуатації, викладеними в наданій виробником
-                    (продавцем, виконавцем) документації на товар;
+                    <span className={styles.about__warranty_text}>1)</span>
+                    {t("warranty.warrantyTextChart2Text13")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>2)</span> в
-                    разі необхідності роз'яснення умов та правил використання
-                    товару — до початку використання товару звернутися за
-                    роз'ясненнями до продавця (виробника, виконавця) або до
-                    іншої вказаної в експлуатаційній документації особи, що
-                    виконує їх функції;
+                    <span className={styles.about__warranty_text}>2)</span>
+                    {t("warranty.warrantyTextChart2Text14")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>3)</span>{" "}
-                    користуватися товаром згідно з його цільовим призначенням та
-                    дотримуватися умов (вимог, норм, правил), встановлених
-                    виробником товару (виконавцем) в експлуатаційній
-                    документації;
+                    <span className={styles.about__warranty_text}>3)</span>
+                    {t("warranty.warrantyTextChart2Text15")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>4)</span> з
-                    метою запобігання негативним для споживача наслідкам
-                    використання товару - застосовувати передбачені виробником в
-                    товарі засоби безпеки з дотриманням передбачених
-                    експлуатаційною документацією спеціальних правил, а в разі
-                    відсутності таких правил в документації - дотримуватися
-                    звичайних розумних заходів безпеки, встановлених для товарів
-                    такого роду.
+                    <span className={styles.about__warranty_text}>4)</span>
+                    {t("warranty.warrantyTextChart2Text16")}
                   </li>
                 </ul>
               </div>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 5. Захист прав споживачів
+                  {t("warranty.warrantyTextArticle5")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span>{" "}
-                  Держава забезпечує споживачам захист їх прав, надає можливість
-                  вільного вибору продукції, здобуття знань і кваліфікації,
-                  необхідних для прийняття самостійних рішень під час придбання
-                  та використання продукції відповідно до їх потреб, і гарантує
-                  придбання або одержання продукції іншими законними способами в
-                  обсязі, що забезпечує рівень споживання, достатній для
-                  підтримання здоров'я і життєдіяльності.
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextArticle5Text1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span>{" "}
-                  Держава створює умови для здобуття споживачами потрібних знань
-                  з питань реалізації їх прав.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextArticle5Text2")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>3.</span> Захист
-                  прав споживачів здійснюють спеціально уповноважений
-                  центральний орган виконавчої влади у сфері захисту прав
-                  споживачів та його територіальні органи, Рада міністрів
-                  Автономної Республіки Крим, місцеві державні адміністрації,
-                  органи і установи, що здійснюють державний
-                  санітарно-епідеміологічний нагляд, інші органи виконавчої
-                  влади, органи місцевого самоврядування згідно із
-                  законодавством, а також суди.
+                  <span className={styles.about__warranty_text}>3.</span>
+                  {t("warranty.warrantyTextArticle5Text3")}
                 </p>
               </div>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 6. Право споживача на належну якість продукції
+                  {t("warranty.warrantyTextArticle6")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span>{" "}
-                  Продавець (виробник, виконавець) зобов'язаний передати
-                  споживачеві продукцію належної якості, а також надати
-                  інформацію про цю продукцію.
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextArticle6Text1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span>{" "}
-                  Продавець (виробник, виконавець) на вимогу споживача
-                  зобов'язаний надати йому документи, які підтверджують належну
-                  якість продукції.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextArticle6Text2")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>3.</span> Вимоги
-                  до продукції щодо її безпеки для життя, здоров'я і майна
-                  споживачів, а також навколишнього природного середовища
-                  встановлюються нормативними документами. Щодо окремих груп
-                  продукції зазначені вимоги встановлюються законами та іншими
-                  нормативно-правовими актами.
+                  <span className={styles.about__warranty_text}>3.</span>
+                  {t("warranty.warrantyTextArticle6Text3")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>6.</span>{" "}
-                  Реалізація інтересів споживачів у встановленні вимог до
-                  належної якості продукції забезпечується правом участі
-                  споживачів та їх об'єднань у розробленні нормативних
-                  документів згідно із законодавством.
+                  <span className={styles.about__warranty_text}>6.</span>
+                  {t("warranty.warrantyTextArticle6Text4")}
                 </p>
               </div>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 7. Гарантійні зобов'язання
+                  {t("warranty.warrantyTextArticle7")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span>{" "}
-                  Виробник (виконавець) забезпечує належну роботу (застосування,
-                  використання) продукції, в тому числі комплектуючих виробів,
-                  протягом гарантійного строку, встановленого
-                  нормативно-правовими актами, нормативними документами чи
-                  договором. Гарантійний строк на комплектуючі вироби повинен
-                  бути не менший, ніж гарантійний строк на основний виріб, якщо
-                  інше не передбачено нормативно-правовими актами, нормативними
-                  документами чи договором.
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextArticle7Text1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span>{" "}
-                  Гарантійний строк зазначається в паспорті на продукцію або на
-                  етикетці чи в будь-якому іншому документі, що додається до
-                  продукції.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextArticle7Text2")}
                 </p>
                 <p className={styles.about__warranty_text}>
-                  Гарантійні зобов'язання у будь-якому випадку включають також
-                  будь-які зобов'язання виробника (виконавця) або продавця,
-                  передбачені рекламою.
+                  {t("warranty.warrantyTextArticle7Text3")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>6.</span> Вимоги
-                  При виконанні гарантійного ремонту гарантійний строк
-                  збільшується на час перебування продукції в ремонті.
-                  Зазначений час обчислюється від дня, коли споживач звернувся з
-                  вимогою про усунення недоліків.
+                  <span className={styles.about__warranty_text}>6.</span>
+                  {t("warranty.warrantyTextArticle7Text4")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>7.</span> При
-                  обміні товару його гарантійний строк обчислюється заново від
-                  дня обміну.
+                  <span className={styles.about__warranty_text}>7.</span>
+                  {t("warranty.warrantyTextArticle7Text5")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>8.</span>{" "}
-                  Гарантійне зобов'язання припиняється на загальних підставах
-                  передбачених Цивільним кодексом України ( 435-15 ).
+                  <span className={styles.about__warranty_text}>8.</span>
+                  {t("warranty.warrantyTextArticle7Text6")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>9.</span>{" "}
-                  Гарантійне зобов'язання не припиняється у разі неможливості
-                  виконання такого зобов'язання з причини відсутності необхідних
-                  для його виконання матеріалів, комплектуючих або запасних
-                  частин.
+                  <span className={styles.about__warranty_text}>9.</span>
+                  {t("warranty.warrantyTextArticle7Text7")}
                 </p>
               </div>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 8. Права споживача у разі придбання ним товару
-                  неналежної якості
+                  {t("warranty.warrantyTextArticle8")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span> У разі
-                  виявлення протягом встановленого гарантійного строку недоліків
-                  споживач, в порядку та у строки, що встановлені
-                  законодавством, має право вимагати:
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextArticle8Text1")}
                 </p>
                 <ul className={styles.about__warranty_list}>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>1)</span>{" "}
-                    пропорційного зменшення ціни;
+                    <span className={styles.about__warranty_text}>1)</span>
+                    {t("warranty.warrantyTextArticle8Text2")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>2)</span>{" "}
-                    безоплатного усунення недоліків товару в розумний строк;
+                    <span className={styles.about__warranty_text}>2)</span>
+                    {t("warranty.warrantyTextArticle8Text3")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>3)</span>{" "}
-                    відшкодування витрат на усунення недоліків товару.
+                    <span className={styles.about__warranty_text}>3)</span>
+                    {t("warranty.warrantyTextArticle8Text4")}
                   </li>
                 </ul>
                 <p className={styles.about__list_numeric}>
@@ -515,67 +415,33 @@ const AboutWarranty: React.FC = () => {
                   >
                     5.
                   </span>
-                  У разі виявлення протягом встановленого гарантійного строку
-                  істотних недоліків, які виникли з вини виробника товару
-                  (продавця, виконавця), або фальсифікації товару, підтверджених
-                  за необхідності висновком експертизи , споживач, в порядку та
-                  у строки, що встановлені законодавством і на підставі
-                  обов'язкових для сторін правил чи договору, має право за своїм
-                  вибором вимагати від продавця або виробника:
+                  {t("warranty.warrantyTextArticle8Text5")}
                 </p>
                 <ul className={styles.about__warranty_list}>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>1)</span>{" "}
-                    розірвання договору та повернення сплаченої за товар
-                    грошової суми;
+                    <span className={styles.about__warranty_text}>1)</span>
+                    {t("warranty.warrantyTextArticle8Text6")}
                   </li>
                   <li className={styles.about__item_sublist}>
-                    <span className={styles.about__warranty_text}>2)</span>{" "}
-                    вимагати заміни товару на такий же товар або на аналогічний,
-                    з числа наявних у продавця (виробника), товар.
+                    <span className={styles.about__warranty_text}>2)</span>
+                    {t("warranty.warrantyTextArticle8Text7")}
                   </li>
                 </ul>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span> Вимоги
-                  Стосовно непродовольчих товарів, що перебували у використанні
-                  та були реалізовані через роздрібні комісійні торговельні
-                  підприємства, вимоги споживача, зазначені у частині першій
-                  цієї статті, задовольняються за згодою продавця. Згідно з цією
-                  частиною задовольняються вимоги споживача щодо товарів,
-                  гарантійний строк на які не закінчився.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextArticle8Text8")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>3.</span> При
-                  Вимоги споживача, встановлені частиною першою цієї статті,
-                  пред'являються на вибір споживача продавцеві за місцем купівлі
-                  товару, виробникові або підприємству, що задовольняє ці вимоги
-                  за місцезнаходженням споживача. Споживач має право пред'явити
-                  одну з вимог, передбачених частиною першою цієї статті, а в
-                  разі її невиконання заявити іншу вимогу, передбачену частиною
-                  першою цієї статті. Зазначені вимоги за місцезнаходженням
-                  споживача задовольняють також створені власником продавця
-                  торговельні підприємства та філії, що здійснюють продаж
-                  аналогічних придбаним споживачем товарів, або підприємства, на
-                  які ці функції покладено на підставі договору. Функції
-                  представників підприємств-виробників виконують їх
-                  представництва та філії, створені виробниками для цієї мети,
-                  або підприємства, які задовольняють зазначені вимоги на
-                  підставі договору з виробником.
+                  <span className={styles.about__warranty_text}>3.</span>
+                  {t("warranty.warrantyTextArticle8Text9")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>4.</span>{" "}
-                  Продавець і виробник під час продажу (реалізації) товару
-                  зобов'язані інформувати споживача про підприємства, що
-                  задовольняють вимоги, встановлені частинами першою і третьою
-                  цієї статті. За ненадання такої інформації встановлюється
-                  відповідальність згідно із статтями 15 і 23 цього Закону.
+                  <span className={styles.about__warranty_text}>4.</span>
+                  {t("warranty.warrantyTextArticle8Text10")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>5.</span>{" "}
-                  Продавець, виробник (підприємство, що задовольняє вимоги
-                  споживача, встановлені частиною першою цієї статті)
-                  зобов'язані прийняти товар неналежної якості у споживача і
-                  задовольнити його вимоги.
+                  <span className={styles.about__warranty_text}>5.</span>
+                  {t("warranty.warrantyTextArticle8Text11")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span
@@ -583,171 +449,84 @@ const AboutWarranty: React.FC = () => {
                   >
                     5.
                   </span>
-                  Доставка великогабаритних товарів і товарів вагою понад п'ять
-                  кілограмів продавцю, виробнику (підприємству, що задовольняє
-                  вимоги споживача, встановлені частиною першою цієї статті) та
-                  їх повернення споживачеві здійснюються за рахунок продавця,
-                  виробника (підприємства, що задовольняє вимоги споживача,
-                  встановлені частиною першою цієї статті).
+                  {t("warranty.warrantyTextArticle8Text12")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>6.</span> За
-                  наявності товару вимога споживача про його заміну підлягає
-                  негайному задоволенню, а в разі виникнення потреби в перевірці
-                  якості — протягом чотирнадцяти днів або за домовленістю
-                  сторін. У разі відсутності товару вимога споживача про його
-                  заміну підлягає задоволенню у двомісячний строк з моменту
-                  подання відповідної заяви. Якщо задовольнити вимогу споживача
-                  про заміну товару в установлений строк неможливо, споживач
-                  вправі на свій вибір пред'явити продавцю, виробнику
-                  (підприємству, що виконує їх функції) інші вимоги, передбачені
-                  пунктами 1, 3, 4, 5 частини першої цієї статті.
+                  <span className={styles.about__warranty_text}>6.</span>
+                  {t("warranty.warrantyTextArticle8Text13")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>7.</span> Під
-                  час заміни товару з недоліками на товар аналогічної марки
-                  (моделі, артикулу, модифікації) належної якості, ціна на який
-                  змінилася, перерахунок вартості не провадиться. Під час заміни
-                  товару з недоліками на такий же товар іншої марки (моделі,
-                  артикулу, модифікації) належної якості перерахунок вартості
-                  товару з недоліками у разі підвищення ціни провадиться
-                  виходячи з його вартості на час обміну, а в разі зниження ціни
-                  — виходячи з вартості на час купівлі. При розірванні договору
-                  розрахунки із споживачем у разі підвищення ціни на товар
-                  провадяться виходячи з його вартості на час пред'явлення
-                  відповідної вимоги, а в разі зниження ціни — виходячи з
-                  вартості товару на час купівлі. Гроші, сплачені за товар,
-                  повертаються споживачеві у день розірвання договору, а в разі
-                  неможливості повернути гроші у день розірвання договору — в
-                  інший строк за домовленістю сторін, але не пізніше ніж
-                  протягом семи днів.
+                  <span className={styles.about__warranty_text}>7.</span>
+                  {t("warranty.warrantyTextArticle8Text14")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>9.</span> При
-                  пред'явленні споживачем вимоги про безоплатне усунення
-                  недоліків товару вони повинні бути усунуті протягом
-                  чотирнадцяти днів з дати його пред'явлення або за згодою
-                  сторін в інший строк. При усуненні недоліків шляхом заміни
-                  комплектуючого виробу або складової частини товару, на які
-                  встановлено гарантійні строки, гарантійний строк на новий
-                  комплектуючий виріб і складову частину обчислюється починаючи
-                  від дня видачі споживачеві товару після ремонту.
+                  <span className={styles.about__warranty_text}>9.</span>
+                  {t("warranty.warrantyTextArticle8Text15")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>11.</span>{" "}
-                  Вимоги споживача розглядаються після пред'явлення споживачем
-                  розрахункового документа, а щодо товарів, на які встановлено
-                  гарантійний строк, — технічного паспорта чи іншого документа,
-                  що його замінює, з позначкою про дату продажу. Під час продажу
-                  товару продавець зобов'язаний видати споживачеві розрахунковий
-                  документ встановленої форми, що засвідчує факт купівлі, з
-                  позначкою про дату продажу. У разі втрати споживачем
-                  технічного паспорта чи іншого документа, що його замінює, їх
-                  відновлення здійснюється у порядку, визначеному
-                  законодавством.
+                  <span className={styles.about__warranty_text}>11.</span>
+                  {t("warranty.warrantyTextArticle8Text16")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>14.</span>{" "}
-                  Вимоги споживача, передбачені цією статтею, не підлягають
-                  задоволенню, якщо продавець, виробник (підприємство, що
-                  задовольняє вимоги споживача, встановлені частиною першою цієї
-                  статті) доведуть , що недоліки товару виникли внаслідок
-                  порушення споживачем правил користування товаром або його
-                  зберігання. Споживач має право брати участь у перевірці якості
-                  товару особисто або через свого представника.
+                  <span className={styles.about__warranty_text}>14.</span>
+                  {t("warranty.warrantyTextArticle8Text17")}
                 </p>
               </div>
               <div className={styles.about__second_main}>
                 <p className={styles.about__position_title}>
-                  Стаття 9. Права споживача при придбанні товару належної якості
+                  {t("warranty.warrantyTextArticle9")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>1.</span>{" "}
-                  Споживач має право обміняти непродовольчий товар належної
-                  якості на аналогічний у продавця, в якого він був придбаний,
-                  якщо товар не задовольнив його за формою, габаритами, фасоном,
-                  кольором, розміром або з інших причин не може бути ним
-                  використаний за призначенням. Споживач має право на обмін
-                  товару належної якості протягом чотирнадцяти днів, не рахуючи
-                  дня купівлі. Обмін товару належної якості провадиться, якщо
-                  він не використовувався і якщо збережено його товарний вигляд,
-                  споживчі властивості, пломби, ярлики, а також розрахунковий
-                  документ, виданий споживачеві разом з проданим товаром.
-                  Перелік товарів, що не підлягають обміну (поверненню) з
-                  підстав, зазначених у цій статті, затверджується Кабінетом
-                  Міністрів України.
+                  <span className={styles.about__warranty_text}>1.</span>
+                  {t("warranty.warrantyTextArticle9Text1")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>2.</span> Якщо
-                  на момент обміну аналогічного товару немає у продажу, споживач
-                  має право або придбати будь-які інші товари з наявного
-                  асортименту з відповідним перерахуванням вартості, або
-                  розірвати договір та одержати назад гроші у розмірі вартості
-                  повернутого товару, або здійснити обмін товару на аналогічний
-                  при першому ж надходженні відповідного товару в продаж.
-                  Продавець зобов'язаний у день надходження товару в продаж
-                  повідомити про це споживача, який вимагає обміну товару.
+                  <span className={styles.about__warranty_text}>2.</span>
+                  {t("warranty.warrantyTextArticle9Text2")}
                 </p>
                 <p className={styles.about__list_numeric}>
-                  <span className={styles.about__warranty_text}>3.</span> Вимоги
-                  При розірванні договору купівлі-продажу розрахунки із
-                  споживачем провадяться виходячи з вартості товару на час його
-                  купівлі. Гроші, сплачені за товар, повертаються споживачеві у
-                  день розірвання договору, а в разі неможливості повернути
-                  гроші у день розірвання договору — в інший строк за
-                  домовленістю сторін, але не пізніше ніж протягом семи днів.
+                  <span className={styles.about__warranty_text}>3.</span>
+                  {t("warranty.warrantyTextArticle9Text3")}
                 </p>
               </div>
             </div>
             <div className={styles.about__wrapper_second}>
-              <p className={styles.about__position_title}>РОЗДІЛ V</p>
+              <p className={styles.about__position_title}>
+                {t("warranty.warrantyTextChart5")}
+              </p>
               <div className={styles.about__position_five}>
                 <p className={styles.about__position_title}>
-                  Прикінцеві положення
+                  {t("warranty.warrantyTextChart5Text1")}
                 </p>
                 <div className={styles.about__second_main}>
                   <p className={styles.about__list_numeric}>
-                    <span className={styles.about__warranty_text}>1.</span> Цей
-                    Закон набирає чинності з дня його опублікування. Положення
-                    першого речення пункту 3 частини першої статті 26 у частині
-                    оплати вартості зразків і проведених досліджень (експертизи)
-                    за рахунок коштів державного бюджету набирає чинності з 1
-                    січня 2007 року. До цієї дати зазначена оплата здійснюється
-                    за рахунок суб'єктів господарювання, що перевіряються.
+                    <span className={styles.about__warranty_text}>1.</span>
+                    {t("warranty.warrantyTextChart5Text2")}
                   </p>
                   <p className={styles.about__list_numeric}>
                     <span className={styles.about__warranty_text}>2.</span>
-                    До приведення у відповідність із цим Законом інші
-                    нормативно-правові акти застосовуються в частині, що не
-                    суперечить цьому Закону.
+                    {t("warranty.warrantyTextChart5Text3")}
                   </p>
                   <p className={styles.about__list_numeric}>
-                    <span className={styles.about__warranty_text}>3.</span>{" "}
-                    Кабінету Міністрів України у шестимісячний строк з дня
-                    набрання чинності цим Законом:
+                    <span className={styles.about__warranty_text}>3.</span>
+                    {t("warranty.warrantyTextChart5Text4")}
                   </p>
                   <ul className={styles.about__warranty_list}>
                     <li className={styles.about__item_sublist}>
-                      <span className={styles.about__warranty_text}>1)</span>{" "}
-                      підготувати та подати на розгляд Верховної Ради України
-                      пропозиції щодо приведення інших законів у відповідність
-                      із цим Законом;
+                      <span className={styles.about__warranty_text}>1)</span>
+                      {t("warranty.warrantyTextChart5Text5")}
                     </li>
                     <li className={styles.about__item_sublist}>
-                      <span className={styles.about__warranty_text}>2)</span>{" "}
-                      відповідно до своєї компетенції забезпечити прийняття
-                      нормативно-правових актів, передбачених цим Законом;
+                      <span className={styles.about__warranty_text}>2)</span>
+                      {t("warranty.warrantyTextChart5Text6")}
                     </li>
                     <li className={styles.about__item_sublist}>
-                      <span className={styles.about__warranty_text}>3)</span>{" "}
-                      привести власні нормативно-правові акти у відповідність із
-                      цим Законом;
+                      <span className={styles.about__warranty_text}>3)</span>
+                      {t("warranty.warrantyTextChart5Text7")}
                     </li>
                     <li className={styles.about__item_sublist}>
-                      <span className={styles.about__warranty_text}>4)</span>{" "}
-                      забезпечити перегляд і скасування міністерствами та іншими
-                      центральними органами виконавчої влади їх
-                      нормативно-правових актів, що суперечать цьому Закону.
+                      <span className={styles.about__warranty_text}>4)</span>
+                      {t("warranty.warrantyTextChart5Text8")}
                     </li>
                   </ul>
                 </div>

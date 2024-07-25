@@ -4,6 +4,8 @@ import AdminWorkers from "../admin-workers/AdminWorkers";
 import AdminSidebar from "../admin-sidebar/AdminSidebar";
 import AdminProducts from "../admin-products/AdminProducts";
 import AdminReviews from "../admin-reviews/AdminReviews";
+import AdminIndividualInsoles from "../admin-individual-insoles/AdminIndividualInsoles";
+import AdminCertificate from "../admin-certificate/AdminCertificate";
 
 const AdminLayout: React.FC = () => {
   const [activeSection, setActiveSection] = useState("workers");
@@ -16,6 +18,10 @@ const AdminLayout: React.FC = () => {
         return <AdminProducts />;
       case "reviews":
         return <AdminReviews />;
+      case "individual":
+        return <AdminIndividualInsoles />;
+      case "certificate":
+        return <AdminCertificate />;
       default:
         return null;
     }

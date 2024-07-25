@@ -51,23 +51,27 @@ const AdminImage = styled.div`
 
   &[isdragaccept="true"] {
     /* Style for drag accept */
-    border-color: #00e676;
+    border-color: #ffed00;
   }
 
   &[isdragreject="true"] {
     /* Style for drag reject */
-    border-color: #ff1744;
+    border-color: #ff0000;
   }
 
   &[isfocused="true"] {
     /* Style for focused */
-    border-color: #2196f3;
+    border-color: none;
   }
 `;
 
 const AdminWorkerUpdate: React.FC = () => {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [sliderImages, setSliderImages] = useState<File[]>([]);
+  const [mainImagePreview, setMainImagePreview] = useState<string | null>(null);
+  const [sliderImagesPreview, setSliderImagesPreview] = useState<
+    string[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState(false);
   const [editWorker, setEditWorker] = useState<IWorker>();
   const navigate = useNavigate();
@@ -88,7 +92,9 @@ const AdminWorkerUpdate: React.FC = () => {
   };
 
   const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-    setMainImage(acceptedFiles[0]);
+    const file = acceptedFiles[0];
+    setMainImage(file);
+    setMainImagePreview(URL.createObjectURL(file));
   }, []);
 
   const {
@@ -105,9 +111,13 @@ const AdminWorkerUpdate: React.FC = () => {
   });
 
   const onDropSliderImages = useCallback((acceptedFiles: File[]) => {
-    setSliderImages((prevSliderImages) => [
-      ...prevSliderImages,
-      ...acceptedFiles,
+    const files = acceptedFiles;
+    setSliderImages((prevSliderImages) => [...prevSliderImages, ...files]);
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setSliderImagesPreview((prevPreviews) => [
+      ...(prevPreviews || []),
+      ...newPreviews,
     ]);
   }, []);
 
@@ -161,18 +171,22 @@ const AdminWorkerUpdate: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
+
     const formData = new FormData();
+
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
-    if (mainImage) {
+    if (mainImage !== null) {
       formData.append("image", mainImage);
     }
 
-    sliderImages.forEach((file) => {
-      formData.append("slider_images", file);
-    });
+    if (sliderImages.length > 0) {
+      sliderImages.forEach((file) => {
+        formData.append("slider_images", file);
+      });
+    }
 
     try {
       const token = localStorage.getItem("token");
@@ -292,7 +306,15 @@ const AdminWorkerUpdate: React.FC = () => {
                           <p>Клацніть або перетягніть файли</p>
                         )}
                       </AdminImage>
-                      {mainImage && <p>{mainImage.name}</p>}
+                      {mainImagePreview && (
+                        <div className={styles.admin__drag_preview}>
+                          <img
+                            src={mainImagePreview}
+                            alt="banner preview"
+                            className={styles.admin__drag_image}
+                          />
+                        </div>
+                      )}
                       {errors["image_url"] && (
                         <span className={styles.error_message}>
                           {errors["image_url"]?.message as string}
@@ -313,16 +335,23 @@ const AdminWorkerUpdate: React.FC = () => {
                     >
                       Зображення фото сертифікатів
                     </label>
-                    {editWorker?.slider_images.map(
-                      (slider_image: string, index: number) => (
-                        <img
-                          key={index}
-                          src={slider_image}
-                          alt="worker banner"
-                          className={styles.admin__control_image}
-                        />
-                      )
-                    )}
+                    <ul className={styles.admin__drag_slider}>
+                      {editWorker?.slider_images &&
+                        editWorker?.slider_images.map(
+                          (image_url: string, index: number) => (
+                            <li
+                              key={index}
+                              className={styles.admin__drag_preview}
+                            >
+                              <img
+                                className={styles.admin__drag_image}
+                                src={image_url}
+                                alt={`slider preview ${index}`}
+                              />
+                            </li>
+                          )
+                        )}
+                    </ul>
                   </div>
                 )}
                 <div className={styles.admin__control_item}>
@@ -352,10 +381,21 @@ const AdminWorkerUpdate: React.FC = () => {
                           <p>Перетягніть або клацніть для вибору файлів</p>
                         )}
                       </AdminImage>
-                      <ul>
-                        {sliderImages.map((file, index) => (
-                          <li key={index}>{file.name}</li>
-                        ))}
+                      <ul className={styles.admin__drag_slider}>
+                        {sliderImagesPreview &&
+                          sliderImagesPreview.map((preview, index) => (
+                            <li
+                              key={index}
+                              className={styles.admin__drag_preview}
+                            >
+                              <img
+                                className={styles.admin__drag_image}
+                                src={preview}
+                                alt={`Slider preview ${index}`}
+                                width={100}
+                              />
+                            </li>
+                          ))}
                       </ul>
                     </div>
                   )}

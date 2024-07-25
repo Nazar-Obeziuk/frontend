@@ -5,17 +5,11 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  deleteProductVariation,
-  getAllProductsVariations,
   getProductById,
   updateProduct,
 } from "../../../../../../services/products/product";
 import AdminError from "../../../../admin-error/AdminError";
-import {
-  IProduct,
-  IProductDetails,
-  IProductVariation,
-} from "../../../../../../services/products/product.interface";
+import { IProduct } from "../../../../../../services/products/product.interface";
 import { Accept, useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import AdminProductUpdateVariations from "./components/admin-product-update-variations/AdminProductUpdateVariations";
@@ -59,22 +53,25 @@ const AdminImage = styled.div`
 
   &[isdragaccept="true"] {
     /* Style for drag accept */
-    border-color: #00e676;
+    border-color: #ffed00;
   }
 
   &[isdragreject="true"] {
     /* Style for drag reject */
-    border-color: #ff1744;
+    border-color: #ff0000;
   }
 
   &[isfocused="true"] {
     /* Style for focused */
-    border-color: #2196f3;
+    border-color: none;
   }
 `;
 
 const AdminProductUpdate: React.FC = () => {
-  const [mainImage, setMainImage] = useState<File | null>(null);
+  const [productImages, setProductImages] = useState<File[]>([]);
+  const [productImagesPreview, setProductImagesPreview] = useState<
+    string[] | null
+  >(null);
   const [isEditUploadOpen, setEditUploadOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [editProduct, setEditProduct] = useState<IProduct>();
@@ -91,9 +88,13 @@ const AdminProductUpdate: React.FC = () => {
   } = useForm({
     mode: "onChange",
   });
-  const { fields } = useFieldArray({
+  const { fields: fieldsUA } = useFieldArray({
     control,
-    name: "characteristics",
+    name: "characteristics_ua",
+  });
+  const { fields: fieldsEN } = useFieldArray({
+    control,
+    name: "characteristics_en",
   });
   const navigate = useNavigate();
 
@@ -101,20 +102,27 @@ const AdminProductUpdate: React.FC = () => {
     "image/*": [".jpeg", ".jpg", ".png", ".gif"],
   };
 
-  const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-    setMainImage(acceptedFiles[0]);
+  const onDropProductImages = useCallback((acceptedFiles: File[]) => {
+    const files = acceptedFiles;
+    setProductImages((prevProductImages) => [...prevProductImages, ...files]);
+
+    const newPreviews = files.map((file) => URL.createObjectURL(file));
+    setProductImagesPreview((prevPreviews) => [
+      ...(prevPreviews || []),
+      ...newPreviews,
+    ]);
   }, []);
 
   const {
-    getRootProps: getMainRootProps,
-    getInputProps: getMainInputProps,
-    isDragActive: isMainDragActive,
-    isDragAccept: isMainDragAccept,
-    isDragReject: isMainDragReject,
-    isFocused: isMainFocused,
+    getRootProps: getProductsRootProps,
+    getInputProps: getProductsInputProps,
+    isDragActive: isProductsDragActive,
+    isDragAccept: isProductsDragAccept,
+    isDragReject: isProductsDragReject,
+    isFocused: isProductsFocused,
   } = useDropzone({
-    onDrop: onDropMainImage,
-    multiple: false,
+    onDrop: onDropProductImages,
+    multiple: true,
     accept: acceptType,
   });
 
@@ -123,30 +131,45 @@ const AdminProductUpdate: React.FC = () => {
       try {
         const editedProduct: IProduct = await getProductById(id!);
         setEditProduct(editedProduct);
-        console.log(editedProduct);
 
         if (editedProduct) {
+          const characteristicsArrayUA = editedProduct.characteristics_ua
+            ? Object.entries(editedProduct.characteristics_ua).map(
+                ([key, value]) => ({
+                  key,
+                  value,
+                })
+              )
+            : [];
+
+          const characteristicsArrayEN = editedProduct.characteristics_en
+            ? Object.entries(editedProduct.characteristics_en).map(
+                ([key, value]) => ({
+                  key,
+                  value,
+                })
+              )
+            : [];
+
           const updatedObject = {
-            image_url: editedProduct.image_url[0],
+            images: editedProduct.image_url,
             name_ua: editedProduct.name_ua,
             name_en: editedProduct.name_en,
             description_ua: editedProduct.description_ua,
             description_en: editedProduct.description_en,
             base_price: editedProduct.base_price,
             article: editedProduct.article,
+            description_details_ua: editedProduct.description_details_ua,
+            description_details_en: editedProduct.description_details_en,
+            description_characteristics_ua:
+              editedProduct.description_characteristics_ua,
+            description_characteristics_en:
+              editedProduct.description_characteristics_en,
+            characteristics_ua: characteristicsArrayUA,
+            characteristics_en: characteristicsArrayEN,
           };
 
           reset(updatedObject);
-
-          if (editedProduct.characteristics) {
-            const characteristicsArray = Object.entries(
-              editedProduct.characteristics
-            ).map(([key, value]) => ({
-              key,
-              value,
-            }));
-            reset({ characteristics: characteristicsArray });
-          }
         }
       } catch (error) {
         console.log(error);
@@ -161,36 +184,50 @@ const AdminProductUpdate: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
+
     const formData = new FormData();
+
     Object.keys(data).forEach((key) => {
-      if (key !== "characteristics") {
+      if (key !== "characteristics_ua" && key !== "characteristics_en") {
         formData.append(key, data[key]);
       }
     });
 
-    if (mainImage) {
-      formData.append("image", mainImage);
+    if (productImages.length > 0) {
+      productImages.forEach((file) => {
+        formData.append("images", file);
+      });
     }
 
-    if (data.characteristics) {
-      const characteristics = data.characteristics.reduce(
+    if (data.characteristics_ua) {
+      const characteristicsUA = data.characteristics_ua.reduce(
         (obj: any, item: any) => {
           obj[item.key] = item.value;
           return obj;
         },
         {}
       );
-      formData.append("characteristics", JSON.stringify(characteristics));
+      formData.append("characteristics_ua", JSON.stringify(characteristicsUA));
+    }
+
+    if (data.characteristics_en) {
+      const characteristicsEN = data.characteristics_en.reduce(
+        (obj: any, item: any) => {
+          obj[item.key] = item.value;
+          return obj;
+        },
+        {}
+      );
+      formData.append("characteristics_en", JSON.stringify(characteristicsEN));
     }
 
     try {
       const token = localStorage.getItem("token");
 
       if (token) {
-        // const response = await updateProduct(formData, id!, token);
-        // notify(response.message);
-        // navigate("/admin");
-        console.log(data);
+        const response = await updateProduct(formData, id!, token);
+        notify(response.message);
+        navigate("/admin");
         reset();
       } else {
         return <AdminError />;
@@ -266,11 +303,23 @@ const AdminProductUpdate: React.FC = () => {
                     >
                       Зображення товару
                     </label>
-                    <img
-                      src={editProduct?.image_url[0]}
-                      alt="product banner"
-                      className={styles.admin__control_image}
-                    />
+                    <ul className={styles.admin__drag_slider}>
+                      {editProduct?.image_url &&
+                        editProduct?.image_url.map(
+                          (image_url: string, index: number) => (
+                            <li
+                              key={index}
+                              className={styles.admin__drag_preview}
+                            >
+                              <img
+                                className={styles.admin__drag_image}
+                                src={image_url}
+                                alt={`product preview ${index}`}
+                              />
+                            </li>
+                          )
+                        )}
+                    </ul>
                   </div>
                 )}
                 <div className={styles.admin__control_item}>
@@ -284,24 +333,40 @@ const AdminProductUpdate: React.FC = () => {
                   {isEditUploadOpen && (
                     <div className={styles.admin__control_upload}>
                       <AdminImage
-                        {...getMainRootProps({
-                          isdragactive: isMainDragActive.toString(),
-                          isdragaccept: isMainDragAccept.toString(),
-                          isdragreject: isMainDragReject.toString(),
-                          isfocused: isMainFocused.toString(),
+                        {...getProductsRootProps({
+                          isdragactive: isProductsDragActive.toString(),
+                          isdragaccept: isProductsDragAccept.toString(),
+                          isdragreject: isProductsDragReject.toString(),
+                          isfocused: isProductsFocused.toString(),
                         })}
                       >
-                        <input {...getMainInputProps()} />
-                        {isMainDragActive ? (
+                        <input {...getProductsInputProps()} />
+                        {isProductsDragActive ? (
                           <p>Перетягніть сюди файли ...</p>
                         ) : (
-                          <p>Клацніть або перетягніть файли</p>
+                          <p>Перетягніть файли сюди, або клацніть</p>
                         )}
                       </AdminImage>
-                      {mainImage && <p>{mainImage.name}</p>}
-                      {errors["image_url"] && (
+                      <ul className={styles.admin__drag_slider}>
+                        {productImagesPreview &&
+                          productImagesPreview.map(
+                            (productImagesPreview: string, index: number) => (
+                              <li
+                                key={index}
+                                className={styles.admin__drag_preview}
+                              >
+                                <img
+                                  className={styles.admin__drag_image}
+                                  src={productImagesPreview}
+                                  alt={`product preview ${index}`}
+                                />
+                              </li>
+                            )
+                          )}
+                      </ul>
+                      {errors["images"] && (
                         <span className={styles.error_message}>
-                          {errors["image_url"]?.message as string}
+                          {errors["images"]?.message as string}
                         </span>
                       )}
                     </div>
@@ -448,29 +513,167 @@ const AdminProductUpdate: React.FC = () => {
                   </span>
                 )}
               </div>
-              {fields.map((item, index) => (
-                <div key={index} className={styles.admin__block_control}>
-                  <label className={styles.admin__control_label}>
-                    Характеристики {index + 1}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Назва характеристики"
-                    {...register(`characteristics.${index}.key`, {
-                      required: `Це поле обов'язкове!`,
-                    })}
-                    className={styles.admin__control_field}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Значення характеристики"
-                    {...register(`characteristics.${index}.value`, {
-                      required: `Це поле обов'язкове!`,
-                    })}
-                    className={styles.admin__control_field}
-                  />
-                </div>
-              ))}
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_details_ua"
+                  className={styles.admin__control_label}
+                >
+                  Текст опис в середині товару (Укр)
+                </label>
+                <input
+                  type="text"
+                  style={
+                    errors["description_details_ua"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  className={styles.admin__control_field}
+                  placeholder="Текст опис в середині товару (Укр)"
+                  {...register("description_details_ua", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["description_details_ua"] && (
+                  <span className={styles.error_message}>
+                    {errors["description_details_ua"]?.message as string}
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_details_en"
+                  className={styles.admin__control_label}
+                >
+                  Текст опис в середині товару (Англ)
+                </label>
+                <input
+                  type="text"
+                  style={
+                    errors["description_details_en"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  className={styles.admin__control_field}
+                  placeholder="Текст опис в середині товару (Англ)"
+                  {...register("description_details_en", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["description_details_en"] && (
+                  <span className={styles.error_message}>
+                    {errors["description_details_en"]?.message as string}
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_characteristics_ua"
+                  className={styles.admin__control_label}
+                >
+                  Текст характеристики (Укр)
+                </label>
+                <input
+                  type="text"
+                  style={
+                    errors["description_characteristics_ua"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  className={styles.admin__control_field}
+                  placeholder="Текст характеристики (Укр)"
+                  {...register("description_characteristics_ua", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["description_characteristics_ua"] && (
+                  <span className={styles.error_message}>
+                    {
+                      errors["description_characteristics_ua"]
+                        ?.message as string
+                    }
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}>
+                <label
+                  htmlFor="description_characteristics_en"
+                  className={styles.admin__control_label}
+                >
+                  Текст характеристики (Англ)
+                </label>
+                <input
+                  type="text"
+                  style={
+                    errors["description_characteristics_en"]
+                      ? { border: "1px solid #EB001B" }
+                      : {}
+                  }
+                  className={styles.admin__control_field}
+                  placeholder="Текст характеристики (Англ)"
+                  {...register("description_characteristics_en", {
+                    required: `Це поле обов'язкове!`,
+                  })}
+                />
+                {errors["description_characteristics_en"] && (
+                  <span className={styles.error_message}>
+                    {
+                      errors["description_characteristics_en"]
+                        ?.message as string
+                    }
+                  </span>
+                )}
+              </div>
+              <div className={styles.admin__block_control}></div>
+              <div className={styles.admin__block_control}>
+                {fieldsUA.map((item, index) => (
+                  <div key={index} className={styles.admin__control_char}>
+                    <label className={styles.admin__control_label}>
+                      Характеристика {index + 1} (UA)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Назва характеристики"
+                      {...register(`characteristics_ua.${index}.key`, {
+                        required: "Це поле обов'язкове!",
+                      })}
+                      className={styles.admin__control_field}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Значення характеристики"
+                      {...register(`characteristics_ua.${index}.value`, {
+                        required: "Це поле обов'язкове!",
+                      })}
+                      className={styles.admin__control_field}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className={styles.admin__block_control}>
+                {fieldsEN.map((item, index) => (
+                  <div key={index} className={styles.admin__control_char}>
+                    <label className={styles.admin__control_label}>
+                      Характеристика {index + 1} (EN)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Назва характеристики"
+                      {...register(`characteristics_en.${index}.key`, {
+                        required: "Це поле обов'язкове!",
+                      })}
+                      className={styles.admin__control_field}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Значення характеристики"
+                      {...register(`characteristics_en.${index}.value`, {
+                        required: "Це поле обов'язкове!",
+                      })}
+                      className={styles.admin__control_field}
+                    />
+                  </div>
+                ))}
+              </div>
               <div className={styles.admin__block_actions}>
                 <button
                   className={`${styles.admin__actions_button} ${styles.admin__button_full}`}

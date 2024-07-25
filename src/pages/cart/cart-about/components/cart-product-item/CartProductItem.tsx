@@ -1,75 +1,101 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CartProductItem.module.css";
+import { ICart } from "../../../../../services/cart/cart.interface";
+import { useTranslation } from "react-i18next";
 
-const CartProductItem: React.FC = () => {
-  const [countOfCertificate, setCountOfCertificate] = useState<number>(1);
+interface Props {
+  cartItem: ICart;
+  quantity: number;
+  onQuantityChange: (id: string, quantity: number) => void;
+  deleteProduct: (id: string) => void;
+}
 
-  const handleCountOfCertificate = (operation: "increment" | "decrement") => {
-    setCountOfCertificate((prevCount) => {
-      if (operation === "increment") {
-        return prevCount + 1;
-      } else if (operation === "decrement" && prevCount > 1) {
-        return prevCount - 1;
-      }
-      return prevCount;
-    });
+const CartProductItem: React.FC<Props> = ({
+  cartItem,
+  onQuantityChange,
+  deleteProduct,
+}) => {
+  const [activeLanguage, setActiveLanguage] = useState("ua");
+  const { t, i18n } = useTranslation();
+
+  const handleCountChange = (operation: "increment" | "decrement") => {
+    const newQuantity =
+      operation === "increment"
+        ? cartItem.quantity + 1
+        : cartItem.quantity > 1
+        ? cartItem.quantity - 1
+        : cartItem.quantity;
+    onQuantityChange(cartItem.id, newQuantity);
   };
+
+  useEffect(() => {
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else if (i18n.language === "en") {
+      setActiveLanguage("en");
+    }
+  }, [i18n.language]);
 
   return (
     <li className={styles.cart__list_item}>
       <div className={styles.cart__item_banners}>
-        <img
-          src="../../images/individual-product-1.jpg"
-          alt="cart product banner"
-          className={styles.cart__banners_item}
-        />
-        <img
-          src="../../images/individual-product-2.jpg"
-          alt="cart product banner"
-          className={styles.cart__banners_item}
-        />
+        {cartItem.productImages.map((productImage: string, index: number) => (
+          <img
+            key={index}
+            src={productImage}
+            alt="cart product banner"
+            className={styles.cart__banners_item}
+          />
+        ))}
       </div>
       <div className={styles.cart__item_main}>
         <div className={styles.cart__main_info}>
           <h2 className={styles.cart__info_title}>
-            Індивідуальні ортопедичні устілки
+            {activeLanguage === "ua" ? cartItem.name_ua : cartItem.name_en}
           </h2>
           <p className={styles.cart__info_description}>
-            TERMY-TEX, перфарована, бежева
+            {activeLanguage === "ua"
+              ? cartItem.sizeDescription_ua
+              : cartItem.sizeDescription_en}
           </p>
         </div>
         <div className={styles.cart__main_actions}>
           <div className={styles.cart__inner_count}>
             <span
-              onClick={() => handleCountOfCertificate("decrement")}
+              onClick={() => handleCountChange("decrement")}
               className={styles.cart__count_circle}
             >
               <img
                 src="../../images/minus-icon.svg"
-                alt="certificate action icon"
+                alt="product action icon"
                 className={styles.cart__circle_icon}
               />
             </span>
-            <p className={styles.cart__count_text}>{countOfCertificate}</p>
+            <p className={styles.cart__count_text}>{cartItem.quantity}</p>
             <span
-              onClick={() => handleCountOfCertificate("increment")}
+              onClick={() => handleCountChange("increment")}
               className={styles.cart__count_circle}
             >
               <img
                 src="../../images/plus-icon.svg"
-                alt="certificate action icon"
+                alt="product action icon"
                 className={styles.cart__circle_icon}
               />
             </span>
           </div>
           <div className={styles.cart__item_price}>
-            <span className={styles.cart__price_text}>1499 грн</span>
+            <span className={styles.cart__price_text}>
+              {cartItem.price * cartItem.quantity} {t("cart.cartCurrency")}
+            </span>
           </div>
         </div>
-        <div className={styles.cart__item_close}>
+        <div
+          onClick={() => deleteProduct(cartItem.id)}
+          className={styles.cart__item_close}
+        >
           <img
             src="../../images/cart-close-icon.svg"
-            alt="cart close icon"
+            alt="cart delete icon"
             className={styles.cart__close_icon}
           />
         </div>

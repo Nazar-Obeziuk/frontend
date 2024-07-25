@@ -1,68 +1,192 @@
-import React from "react";
-import styles from "./CatalogIndividualCharacteristics.module.css";
+// // import React from "react";
+// // import styles from "./CatalogIndividualCharacteristics.module.css";
+// // import {
+// //   IIndividualInsole,
+// //   IIndividualVariation,
+// // } from "../../../../../services/individual-insoles/individualInsoles.interface";
+// // import Loader from "../../../../../components/loader/Loader";
 
-const CatalogIndividualCharacteristics: React.FC = () => {
+// // interface Props {
+// //   individualInsoles: IIndividualInsole[];
+// //   activeCoverage: IIndividualVariation;
+// // }
+
+// // const CatalogIndividualCharacteristics: React.FC<Props> = ({
+// //   individualInsoles,
+// //   activeCoverage,
+// // }) => {
+// //   if (!individualInsoles[0]) {
+// //     return <Loader />;
+// //   }
+
+// //   return (
+// //     <div className={styles.catalog__main_characteristics}>
+// //       <div className={styles.catalog__characteristics_info}>
+// //         <p className={styles.catalog__characteristics_title}>
+// //           {individualInsoles[0].characteristics_subtitle_ua}
+// //         </p>
+// //         <p className={styles.catalog__info_text}>
+// //           {individualInsoles[0].characteristics_description_ua}
+// //         </p>
+// //       </div>
+// //       <div className={styles.catalog__characteristics_table}>
+// //         <table className={styles.catalog__table_item}>
+// //           <tbody>
+// //             {activeCoverage ? (Object.entries(individualInsoles[0].characteristics).map(
+// //               ([key, value]: any) => (
+// //                 <tr className={styles.catalog__item_line} key={key}>
+// //                   <th className={styles.catalog__line_key}>{key}</th>
+// //                   <td className={styles.catalog__line_value}>{value}</td>
+// //                 </tr>
+// //               )
+// //             )}) : Object.entries(individualInsoles[0].characteristics).map(
+// //               ([key, value]: any) => (
+// //                 <tr className={styles.catalog__item_line} key={key}>
+// //                   <th className={styles.catalog__line_key}>{key}</th>
+// //                   <td className={styles.catalog__line_value}>{value}</td>
+// //                 </tr>
+// //               )
+// //             )}
+// //           </tbody>
+// //         </table>
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // export default CatalogIndividualCharacteristics;
+
+// import React, { act, useEffect } from "react";
+// import styles from "./CatalogIndividualCharacteristics.module.css";
+// import {
+//   IIndividualInsole,
+//   IIndividualVariation,
+// } from "../../../../../services/individual-insoles/individualInsoles.interface";
+// import Loader from "../../../../../components/loader/Loader";
+
+// interface Props {
+//   individualInsoles: IIndividualInsole[];
+//   activeCoverage: IIndividualVariation;
+// }
+
+// const CatalogIndividualCharacteristics: React.FC<Props> = ({
+//   individualInsoles,
+//   activeCoverage,
+// }) => {
+//   useEffect(() => {
+//     console.log(individualInsoles);
+//     console.log(activeCoverage);
+//   }, []);
+
+//   if (!individualInsoles[0]) {
+//     return <Loader />;
+//   }
+
+//   return (
+//     <div className={styles.catalog__main_characteristics}>
+//       {/* <div className={styles.catalog__characteristics_info}>
+//         <p className={styles.catalog__characteristics_title}>
+//           {activeCoverage
+//             ? activeCoverage.characteristics_subtitle_ua
+//             : individualInsoles[0].characteristics_subtitle_ua}
+//         </p>
+//         <p className={styles.catalog__info_text}>
+//           {activeCoverage
+//             ? activeCoverage.characteristics_description_ua
+//             : individualInsoles[0].characteristics_description_ua}
+//         </p>
+//       </div>
+//       <div className={styles.catalog__characteristics_table}>
+//         <table className={styles.catalog__table_item}>
+//           <tbody>
+//             {activeCoverage
+//               ? Object.entries(activeCoverage.characteristics_ua).map(
+//                   ([key, value]: any) => (
+//                     <tr className={styles.catalog__item_line} key={key}>
+//                       <th className={styles.catalog__line_key}>{key}</th>
+//                       <td className={styles.catalog__line_value}>{value}</td>
+//                     </tr>
+//                   )
+//                 )
+//               : Object.entries(individualInsoles[0].characteristics_ua).map(
+//                   ([key, value]: any) => (
+//                     <tr className={styles.catalog__item_line} key={key}>
+//                       <th className={styles.catalog__line_key}>{key}</th>
+//                       <td className={styles.catalog__line_value}>{value}</td>
+//                     </tr>
+//                   )
+//                 )}
+//           </tbody>
+//         </table>
+//       </div> */}
+//     </div>
+//   );
+// };
+
+// export default CatalogIndividualCharacteristics;
+
+import React, { useEffect } from "react";
+import styles from "./CatalogIndividualCharacteristics.module.css";
+import {
+  IIndividualInsole,
+  IIndividualVariation,
+} from "../../../../../services/individual-insoles/individualInsoles.interface";
+import Loader from "../../../../../components/loader/Loader";
+
+interface Props {
+  individualInsoles: IIndividualInsole[];
+  activeCoverage: IIndividualVariation;
+}
+
+const CatalogIndividualCharacteristics: React.FC<Props> = ({
+  individualInsoles,
+  activeCoverage,
+}) => {
+  useEffect(() => {
+    console.log("Individual Insoles:", individualInsoles);
+    console.log("Active Coverage:", activeCoverage);
+  }, [individualInsoles, activeCoverage]);
+
+  if (!individualInsoles[0]) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.catalog__main_characteristics}>
       <div className={styles.catalog__characteristics_info}>
         <p className={styles.catalog__characteristics_title}>
-          <span className={styles.catalog__title_upper}>
-            УНІВЕРСАЛЬНЕ ПОКРИТТЯ
-          </span>{" "}
-          <span
-            className={`${styles.catalog__title_upper} ${styles.catalog__upper_primary}`}
-          >
-            THERMY-TEX
-          </span>{" "}
-          — перфороване, бежеве
+          {activeCoverage
+            ? activeCoverage.characteristics_subtitle_ua
+            : individualInsoles[0].characteristics_subtitle_ua}
         </p>
         <p className={styles.catalog__info_text}>
-          Індивідуальні ортопедичні устілки з універсальним покриттям —
-          вирішення багатьох ортопедичних проблем. Такі устілки надають:
-          правильний розподіл навантажень під час руху, підтримання склепінь
-          стопи, розвантаження больових зон, попередження багатьох захворювань.
+          {activeCoverage
+            ? activeCoverage.characteristics_description_ua
+            : individualInsoles[0].characteristics_description_ua}
         </p>
       </div>
       <div className={styles.catalog__characteristics_table}>
-        <table className={styles.catalog__table_item}>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Тип виробу</th>
-            <td className={styles.catalog__line_value}>
-              Індивідуальні ортопедичні устілки
-            </td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Бренд</th>
-            <td className={styles.catalog__line_value}>Prostopoo</td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Країна виробник</th>
-            <td className={styles.catalog__line_value}>Україна</td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Призначення</th>
-            <td className={styles.catalog__line_value}>
-              плоскостопість (поздовжня, поперечна), вальгусна і варусна стопа,
-              варикоз і набряклість, діабетична стопа, п'яткова шпора, натоптні
-              й мозолі, робота на ногах, втома ніг під час вагітності, травми й
-              пошкодження кісток стопи та інше.
-            </td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Матеріал основи</th>
-            <td className={styles.catalog__line_value}>EVA, 40-50 Shr</td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Матеріал покриття</th>
-            <td className={styles.catalog__line_value}>
-              замінник шкіри, бежевий, перфорований
-            </td>
-          </tr>
-          <tr className={styles.catalog__item_line}>
-            <th className={styles.catalog__line_key}>Розмір</th>
-            <td className={styles.catalog__line_value}>від 18 до 50</td>
-          </tr>
-        </table>
+        {/* <table className={styles.catalog__table_item}>
+          <tbody>
+            {activeCoverage
+              ? Object.entries(activeCoverage.characteristics_ua).map(
+                  ([key, value]: any) => (
+                    <tr className={styles.catalog__item_line} key={key}>
+                      <th className={styles.catalog__line_key}>{key}</th>
+                      <td className={styles.catalog__line_value}>{value}</td>
+                    </tr>
+                  )
+                )
+              : Object.entries(individualInsoles[0].characteristics_ua).map(
+                  ([key, value]: any) => (
+                    <tr className={styles.catalog__item_line} key={key}>
+                      <th className={styles.catalog__line_key}>{key}</th>
+                      <td className={styles.catalog__line_value}>{value}</td>
+                    </tr>
+                  )
+                )}
+          </tbody>
+        </table> */}
       </div>
     </div>
   );

@@ -100,11 +100,6 @@
 }
 
 @media (max-width: 600px) {
-  .catalog__info_tabs {
-    gap: 0;
-    justify-content: space-between;
-  }
-
   .catalog__product_section {
     background-image: none;
     padding: 20px 15px 200px 15px;
