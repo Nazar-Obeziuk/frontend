@@ -6,12 +6,13 @@ import { useTranslation } from "react-i18next";
 interface Props {
   cartItem: ICart;
   quantity: number;
-  onQuantityChange: (id: string, quantity: number) => void;
+  onQuantityChange: (quantity: number) => void;
   deleteProduct: (id: string) => void;
 }
 
 const CartProductItem: React.FC<Props> = ({
   cartItem,
+  quantity,
   onQuantityChange,
   deleteProduct,
 }) => {
@@ -21,25 +22,21 @@ const CartProductItem: React.FC<Props> = ({
   const handleCountChange = (operation: "increment" | "decrement") => {
     const newQuantity =
       operation === "increment"
-        ? cartItem.quantity + 1
-        : cartItem.quantity > 1
-        ? cartItem.quantity - 1
-        : cartItem.quantity;
-    onQuantityChange(cartItem.id, newQuantity);
+        ? quantity + 1
+        : quantity > 1
+        ? quantity - 1
+        : 1;
+    onQuantityChange(newQuantity);
   };
 
   useEffect(() => {
-    if (i18n.language === "ua") {
-      setActiveLanguage("ua");
-    } else if (i18n.language === "en") {
-      setActiveLanguage("en");
-    }
+    setActiveLanguage(i18n.language === "ua" ? "ua" : "en");
   }, [i18n.language]);
 
   return (
     <li className={styles.cart__list_item}>
       <div className={styles.cart__item_banners}>
-        {cartItem.productImages.map((productImage: string, index: number) => (
+        {cartItem.productImages!.map((productImage: string, index: number) => (
           <img
             key={index}
             src={productImage}
@@ -71,7 +68,7 @@ const CartProductItem: React.FC<Props> = ({
                 className={styles.cart__circle_icon}
               />
             </span>
-            <p className={styles.cart__count_text}>{cartItem.quantity}</p>
+            <p className={styles.cart__count_text}>{quantity}</p>
             <span
               onClick={() => handleCountChange("increment")}
               className={styles.cart__count_circle}
@@ -85,7 +82,7 @@ const CartProductItem: React.FC<Props> = ({
           </div>
           <div className={styles.cart__item_price}>
             <span className={styles.cart__price_text}>
-              {cartItem.price * cartItem.quantity} {t("cart.cartCurrency")}
+              {cartItem.price * quantity} {t("cart.cartCurrency")}
             </span>
           </div>
         </div>

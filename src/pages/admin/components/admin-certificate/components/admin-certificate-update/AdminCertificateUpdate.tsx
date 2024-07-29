@@ -213,12 +213,9 @@ const AdminCertificateUpdate: React.FC = () => {
 
     if (token) {
       try {
-        // const response = await updateCertificate(formData, id!, token);
-        // notify(response.message);
-        // navigate("/admin");
-        formData.forEach((value, key) => {
-          console.log(key, value);
-        });
+        const response = await updateCertificate(formData, id!, token);
+        notify(response.message);
+        navigate("/prostopoo-admin-panel");
         reset();
       } catch (error) {
         console.log(error);
@@ -259,7 +256,7 @@ const AdminCertificateUpdate: React.FC = () => {
               className={styles.admin__router_arrow}
             />
             <NavLink
-              to={"/admin"}
+              to={"/prostopoo-admin-panel"}
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
               Адмін панель

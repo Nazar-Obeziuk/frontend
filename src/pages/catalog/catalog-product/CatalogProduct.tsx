@@ -68,7 +68,7 @@ const CatalogProduct: React.FC = () => {
     } else {
       setActiveLanguage("en");
     }
-  }, [id]);
+  }, [id, i18n.language]);
 
   if (!catalogProduct) {
     return <Loader />;

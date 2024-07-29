@@ -12,7 +12,7 @@ const Admin: React.FC = () => {
   const notify = (message: string) => toast(message);
 
   useEffect(() => {
-    const func = async () => {
+    const login = async () => {
       const token = localStorage.getItem("token");
       if (token) {
         const response: any = await checkRole(token);
@@ -21,11 +21,11 @@ const Admin: React.FC = () => {
           ? notify(response.data.message)
           : notify("Щось пішло не так...");
       } else {
-        navigate("/admin/login");
+        navigate("/prostopoo-admin-panel/login");
       }
     };
 
-    func();
+    login();
   }, []);
 
   return (

@@ -64,6 +64,12 @@ const Header = () => {
     setIsSearchInputOpen((prevState) => !prevState);
   };
 
+  const handleRedirectToIndividual = () => {
+    navigate("/home/catalog/individual-orthopedic-insoles");
+    setSearchResults([]);
+    setIsSearchInputOpen((prevState) => !prevState);
+  };
+
   const activeHeaderItem = {
     color: "#FFED00",
   };
@@ -333,6 +339,14 @@ const Header = () => {
                   {searchResults.length > 0 && (
                     <div className={styles.header__search_result}>
                       <ul className={styles.header__result_list}>
+                        <li
+                          onClick={handleRedirectToIndividual}
+                          className={styles.header__result_item}
+                        >
+                          {activeLanguage === "ua"
+                            ? "Індивідуальні ортопедичні устілки"
+                            : "Individual orthopedic insoles"}
+                        </li>
                         {searchResults.map((product: IProduct) => (
                           <li
                             onClick={() => handleRedirectToProduct(product.id)}

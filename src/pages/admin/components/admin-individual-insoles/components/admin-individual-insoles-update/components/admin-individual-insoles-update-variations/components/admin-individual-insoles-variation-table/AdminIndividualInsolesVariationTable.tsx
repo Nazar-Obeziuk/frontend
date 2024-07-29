@@ -2,10 +2,7 @@ import React from "react";
 import styles from "./AdminIndividualInsolesVariationTable.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import {
-  IIndividualInsole,
-  IIndividualVariation,
-} from "../../../../../../../../../../services/individual-insoles/individualInsoles.interface";
+import { IIndividualVariation } from "../../../../../../../../../../services/individual-insoles/individualInsoles.interface";
 import { deleteIndividualVariation } from "../../../../../../../../../../services/individual-insoles/individualInsoles";
 
 interface Props {
@@ -21,16 +18,24 @@ const AdminIndividualInsolesVariationTable: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const handleEditIndividualVariation = (id: number) => {
-    navigate(`/admin/individual-insoles-variation-update/${id}`);
+    navigate(
+      `/prostopoo-admin-panel/individual-insoles-variation-update/${id}`
+    );
   };
 
   const handleDeleteIndividualVariation = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити варіацію?"
+    );
 
-    if (token) {
-      const response = await deleteIndividualVariation(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteIndividualVariation(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

@@ -187,9 +187,7 @@ const AdminIndividualInsolesVariationForm: React.FC<Props> = ({
     const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
-      if (key !== "characteristics_ua" && key !== "characteristics_en") {
-        formData.append(key, data[key]);
-      }
+      formData.append(key, data[key]);
     });
 
     if (mainImage) {
@@ -202,27 +200,34 @@ const AdminIndividualInsolesVariationForm: React.FC<Props> = ({
       });
     }
 
-    if (data.characteristics_ua) {
-      const characteristicsUA = data.characteristics_ua.reduce(
-        (obj: any, item: any) => {
+    const characteristicsObjectUA = characteristicsUA.reduce(
+      (obj: any, item) => {
+        if (item.key && item.value) {
           obj[item.key] = item.value;
-          return obj;
-        },
-        {}
-      );
-      formData.append("characteristics_ua", JSON.stringify(characteristicsUA));
-    }
+        }
+        return obj;
+      },
+      {}
+    );
 
-    if (data.characteristics_en) {
-      const characteristicsEN = data.characteristics_en.reduce(
-        (obj: any, item: any) => {
+    const characteristicsObjectEN = characteristicsEN.reduce(
+      (obj: any, item) => {
+        if (item.key && item.value) {
           obj[item.key] = item.value;
-          return obj;
-        },
-        {}
-      );
-      formData.append("characteristics_en", JSON.stringify(characteristicsEN));
-    }
+        }
+        return obj;
+      },
+      {}
+    );
+
+    formData.append(
+      "characteristics_ua",
+      JSON.stringify(characteristicsObjectUA)
+    );
+    formData.append(
+      "characteristics_en",
+      JSON.stringify(characteristicsObjectEN)
+    );
 
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
@@ -614,70 +619,6 @@ const AdminIndividualInsolesVariationForm: React.FC<Props> = ({
           className={styles.admin__control_field}
           placeholder="Четвертий опис про товар (Англ)"
           {...register("fourth_about_description_en", {
-            required: false,
-          })}
-        />
-      </div>
-      <div className={styles.admin__block_control}>
-        <label
-          htmlFor="characteristics_subtitle_ua"
-          className={styles.admin__control_label}
-        >
-          Підзаголовок характеристики (Укр)
-        </label>
-        <input
-          type="text"
-          className={styles.admin__control_field}
-          placeholder="Підзаголовок характеристики (Укр)"
-          {...register("characteristics_subtitle_ua", {
-            required: false,
-          })}
-        />
-      </div>
-      <div className={styles.admin__block_control}>
-        <label
-          htmlFor="characteristics_subtitle_en"
-          className={styles.admin__control_label}
-        >
-          Підзаголовок характеристики (Англ)
-        </label>
-        <input
-          type="text"
-          className={styles.admin__control_field}
-          placeholder="Підзаголовок характеристики (Англ)"
-          {...register("characteristics_subtitle_en", {
-            required: false,
-          })}
-        />
-      </div>
-      <div className={styles.admin__block_control}>
-        <label
-          htmlFor="characteristics_description_ua"
-          className={styles.admin__control_label}
-        >
-          Текст опис характеристики (Укр)
-        </label>
-        <input
-          type="text"
-          className={styles.admin__control_field}
-          placeholder="Текст опис характеристики (Укр)"
-          {...register("characteristics_description_ua", {
-            required: false,
-          })}
-        />
-      </div>
-      <div className={styles.admin__block_control}>
-        <label
-          htmlFor="characteristics_description_en"
-          className={styles.admin__control_label}
-        >
-          Текст опис характеристики (Англ)
-        </label>
-        <input
-          type="text"
-          className={styles.admin__control_field}
-          placeholder="Текст опис характеристики (Англ)"
-          {...register("characteristics_description_en", {
             required: false,
           })}
         />

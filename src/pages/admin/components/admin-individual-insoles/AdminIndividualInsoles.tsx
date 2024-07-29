@@ -32,16 +32,22 @@ const AdminIndividualInsoles: React.FC = () => {
   };
 
   const onEditIndividual = (individual: IIndividualInsole) => {
-    navigate(`/admin/update-individual/${individual.id}`);
+    navigate(`/prostopoo-admin-panel/update-individual/${individual.id}`);
   };
 
   const onDeleteIndividual = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити індивідуальну устілку?"
+    );
 
-    if (token) {
-      const response = await deleteIndividualInsole(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteIndividualInsole(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

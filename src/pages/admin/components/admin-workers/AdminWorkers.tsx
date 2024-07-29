@@ -32,16 +32,22 @@ const AdminWorkers: React.FC = () => {
   };
 
   const onEditWorker = (worker: IWorker) => {
-    navigate(`/admin/update-worker/${worker.id}`);
+    navigate(`/prostopoo-admin-panel/update-worker/${worker.id}`);
   };
 
   const onDeleteWorker = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити цього працівника?"
+    );
 
-    if (token) {
-      const response = await deleteWorker(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteWorker(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

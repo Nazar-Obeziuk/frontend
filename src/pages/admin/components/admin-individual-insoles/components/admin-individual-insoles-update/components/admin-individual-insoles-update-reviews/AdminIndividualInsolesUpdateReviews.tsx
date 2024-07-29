@@ -3,10 +3,7 @@ import styles from "./AdminIndividualInsolesUpdateReviews.module.css";
 import { IProductReview } from "../../../../../../../../services/products/product.interface";
 import AdminProductsReviewsForm from "./components/admin-individual-insoles-review-form/AdminIndividualInsolesReviewsForm";
 import AdminProductReviewsTable from "./components/admin-individual-insoles-reviews-table/AdminIndividualInsolesReviewsTable";
-import {
-  getAllIndividualReviews,
-  getAllProductsReviews,
-} from "../../../../../../../../services/reviews/reviews";
+import { getAllIndividualReviews } from "../../../../../../../../services/reviews/reviews";
 import { IIndividualInsole } from "../../../../../../../../services/individual-insoles/individualInsoles.interface";
 
 interface Props {

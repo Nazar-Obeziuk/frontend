@@ -34,31 +34,40 @@ const CatalogIndividualAbout: React.FC<Props> = ({
   return (
     <div className={styles.catalog__info_about}>
       <p className={styles.catalog__about_text}>
-        {/* {activeLanguage === "ua"
+        {activeLanguage === "ua"
           ? activeCoverage
             ? activeCoverage.first_about_description_ua
             : individualInsoles[0].first_about_description_ua
           : activeCoverage
           ? activeCoverage.first_about_description_en
-          : individualInsoles[0].first_about_description_en} */}
-        {activeLanguage === "ua"
-          ? individualInsoles[0].first_about_description_ua
           : individualInsoles[0].first_about_description_en}
       </p>
       <p className={styles.catalog__about_text}>
-        {activeCoverage
-          ? activeCoverage.second_about_description_ua
-          : individualInsoles[0].second_about_description_ua}
+        {activeLanguage === "ua"
+          ? activeCoverage
+            ? activeCoverage.second_about_description_ua
+            : individualInsoles[0].second_about_description_ua
+          : activeCoverage
+          ? activeCoverage.second_about_description_en
+          : individualInsoles[0].second_about_description_en}
       </p>
       <p className={styles.catalog__about_text}>
-        {activeCoverage
-          ? activeCoverage.third_about_description_ua
-          : individualInsoles[0].third_about_description_ua}
+        {activeLanguage === "ua"
+          ? activeCoverage
+            ? activeCoverage.third_about_description_ua
+            : individualInsoles[0].third_about_description_ua
+          : activeCoverage
+          ? activeCoverage.third_about_description_en
+          : individualInsoles[0].third_about_description_en}
       </p>
       <p className={styles.catalog__about_text}>
-        {activeCoverage
-          ? activeCoverage.fourth_about_description_ua
-          : individualInsoles[0].fourth_about_description_ua}
+        {activeLanguage === "ua"
+          ? activeCoverage
+            ? activeCoverage.fourth_about_description_ua
+            : individualInsoles[0].fourth_about_description_ua
+          : activeCoverage
+          ? activeCoverage.fourth_about_description_en
+          : individualInsoles[0].fourth_about_description_en}
       </p>
     </div>
   );

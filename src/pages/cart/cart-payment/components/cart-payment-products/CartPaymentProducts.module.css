@@ -8,7 +8,7 @@
 .cart__products_main {
   width: 100%;
   background: var(--dark-gray);
-  padding: 34px 25px;
+  padding: 30px 25px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }

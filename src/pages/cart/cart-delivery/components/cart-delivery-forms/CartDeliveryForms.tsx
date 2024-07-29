@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CartDeliveryForms.module.css";
 import { InputMask } from "@react-input/mask";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { sendMessage } from "../../../../../api/telegram";
+import { ICart } from "../../../../../services/cart/cart.interface";
 
 interface FormValues {
   fullName: string;
@@ -15,6 +17,8 @@ interface FormValues {
 }
 
 const CartDeliveryForms: React.FC = () => {
+  const [isError, setIsError] = useState<boolean>(false);
+  const [checkoutAmount, setCheckoutAmount] = useState<number>(0);
   const { t } = useTranslation();
   const {
     register,
@@ -26,11 +30,54 @@ const CartDeliveryForms: React.FC = () => {
   });
   const navigate = useNavigate();
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
-    navigate("/home/cart/payment");
-    reset();
+  const onSubmit = async ({
+    fullName,
+    phone,
+    email,
+    city,
+    department,
+    comment,
+  }: FormValues): Promise<void> => {
+    try {
+      const checkoutAmount = localStorage.getItem("checkoutAmount");
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      if (checkoutAmount && cart) {
+        const itemsDetails = cart
+          .map(
+            (item: ICart) =>
+              `Назва товару - ${item.name_ua}, Опис товару - ${item.sizeDescription_ua}, Ціна товару - ${item.price}, Кількість - ${item.quantity}`
+          )
+          .join("\n");
+
+        const message = `
+          Прізвище та ім'я: ${fullName}
+          Телефон: ${phone}
+          Електронна пошта: ${email}
+          Місто: ${city}
+          Відділення/поштомат: ${department}
+          Коментар до замовлення: ${comment}
+          Товари: ${itemsDetails}
+          Сума замовлення: ${checkoutAmount}
+        `;
+
+        await sendMessage(message);
+      }
+
+      navigate("/home/cart/payment");
+      reset();
+    } catch (error) {
+      setIsError(true);
+    }
   };
+
+  useEffect(() => {
+    const checkoutAmount = localStorage.getItem("checkoutAmount");
+
+    if (checkoutAmount) {
+      setCheckoutAmount(+checkoutAmount);
+    }
+  }, []);
 
   return (
     <form
@@ -149,12 +196,19 @@ const CartDeliveryForms: React.FC = () => {
               {t("cart.cartAmmount")}
             </p>
             <span className={styles.cart__continue_price}>
-              1998 {t("cart.cartCurrency")}
+              {checkoutAmount} {t("cart.cartCurrency")}
             </span>
           </div>
-          <button className={styles.cart__continue_button} type="submit">
-            {t("cart.cartButtonText")}
-          </button>
+          <div className={styles.cart__continue_actions}>
+            <button className={styles.cart__continue_button} type="submit">
+              {t("cart.cartButtonText")}
+            </button>
+            {isError && (
+              <span className={styles.cart__actions_error}>
+                {t("cart.cartErrorText")}
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </form>

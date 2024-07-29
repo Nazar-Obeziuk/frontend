@@ -20,6 +20,7 @@ import {
   IIndividualVariation,
 } from "../../../services/individual-insoles/individualInsoles.interface";
 import { useTranslation } from "react-i18next";
+import Loader from "../../../components/loader/Loader";
 
 const CatalogIndividual: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
@@ -48,8 +49,8 @@ const CatalogIndividual: React.FC = () => {
       setIndividualInsoles(response);
       if (response.length > 0) {
         setProductId(response[0].id);
-        getAllVariations(response[0].id); // Load variations when the product is set
-        getReviews(response[0].id); // Load reviews when the product is set
+        getAllVariations(response[0].id);
+        getReviews(response[0].id);
       }
     } catch (error) {
       console.log(error);
@@ -89,18 +90,18 @@ const CatalogIndividual: React.FC = () => {
 
   const handleCoverageChange = (newCoverage: IIndividualVariation) => {
     setActiveCoverage(newCoverage);
-    console.log("Coverage changed:", newCoverage);
   };
-
-  useEffect(() => {
-    getAll();
-  }, []);
 
   useEffect(() => {
     if (productId !== null) {
       getAllVariations(productId);
     }
+    getAll();
   }, [productId]);
+
+  if (!variations || !individualInsoles) {
+    return <Loader />;
+  }
 
   return (
     <>

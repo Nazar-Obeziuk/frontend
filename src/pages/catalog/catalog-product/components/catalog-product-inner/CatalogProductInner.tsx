@@ -94,113 +94,119 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
         ))}
       </div>
       <div className={styles.catalog__product_info}>
-        <div className={styles.catalog__info_header}>
-          <h3 className={styles.catalog__header_title}>
-            {activeLanguage === "ua"
-              ? catalogProduct.name_ua
-              : catalogProduct.name_en}
-          </h3>
-          <div className={styles.catalog__header_info}>
-            {avarageRatings.length > 0 ? (
-              <div className={styles.catalog__header_reviews}>
-                {avarageRatings}{" "}
-                <span className={styles.admin__reviews_count}>
-                  (
-                  {catalogProduct.reviews_count === 1
-                    ? catalogProduct.reviews_count +
-                      t("products.productsReviewSingle")
-                    : catalogProduct.reviews_count +
-                      t("products.productsReviewMulti")}
-                  )
-                </span>
-              </div>
-            ) : (
-              <p className={styles.catalog__header_left}>
-                {t("products.productsLeftReview")}
-              </p>
-            )}
-            <p className={styles.catalog__header_code}>
-              {t("products.productsCode")}
-              <span className={styles.catalog__code_item}>
-                {currentProductSize?.article}
-              </span>
-            </p>
-          </div>
-        </div>
-        <div className={styles.catalog__info_main}>
-          <h2 className={styles.catalog__main_price}>
-            {catalogProduct.base_price}{" "}
-            {activeLanguage === "ua" ? "грн" : "UAH"}
-          </h2>
-          <div className={styles.catalog__main_count}>
-            <span
-              onClick={() => handleCountOfProduct("decrement")}
-              className={styles.catalog__count_button}
-            >
-              <img
-                src="../../images/minus-icon.svg"
-                alt="certificate action icon"
-                className={styles.catalog__button_action}
-              />
-            </span>
-            <p className={styles.catalog__count_text}>{countOfProduct}</p>
-            <span
-              onClick={() => handleCountOfProduct("increment")}
-              className={styles.catalog__count_button}
-            >
-              <img
-                src="../../images/plus-icon.svg"
-                alt="certificate action icon"
-                className={styles.catalog__button_action}
-              />
-            </span>
-          </div>
-        </div>
-        <div className={styles.catalog__info_footer}>
-          {!productIsNotVariated && (
-            <div className={styles.catalog__footer_sizes}>
-              <p className={styles.catalog__sizes_title}>
-                {t("catalogProduct.catalogProductChooseSize")}
-                <span className={styles.catalog__sizes_types}>
-                  {currentProductSize?.description_ua}
-                </span>
-              </p>
-              <div className={styles.catalog__sizes_main}>
-                <div className={styles.catalog__block_items}>
-                  {catalogProduct.variations.sizes.map(
-                    (productSize: any, index: number) => (
-                      <span
-                        onClick={() => handleProductSize(productSize)}
-                        key={index}
-                        className={`${styles.catalog__block_circle} ${
-                          currentProductSize === productSize
-                            ? styles.active
-                            : ""
-                        }`}
-                      >
-                        {productSize.value}
-                      </span>
+        <div className={styles.catalog__info_inner}>
+          <div className={styles.catalog__info_header}>
+            <h3 className={styles.catalog__header_title}>
+              {activeLanguage === "ua"
+                ? catalogProduct.name_ua
+                : catalogProduct.name_en}
+            </h3>
+            <div className={styles.catalog__header_info}>
+              {avarageRatings.length > 0 ? (
+                <div className={styles.catalog__header_reviews}>
+                  {avarageRatings}{" "}
+                  <span className={styles.admin__reviews_count}>
+                    (
+                    {catalogProduct.reviews_count === 1
+                      ? catalogProduct.reviews_count +
+                        t("products.productsReviewSingle")
+                      : catalogProduct.reviews_count +
+                        t("products.productsReviewMulti")}
                     )
-                  )}
+                  </span>
+                </div>
+              ) : (
+                <p className={styles.catalog__header_left}>
+                  {t("products.productsLeftReview")}
+                </p>
+              )}
+              <p className={styles.catalog__header_code}>
+                {t("products.productsCode")}
+                <span className={styles.catalog__code_item}>
+                  {currentProductSize
+                    ? currentProductSize?.article
+                    : catalogProduct.article}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className={styles.catalog__info_main}>
+            <h2 className={styles.catalog__main_price}>
+              {catalogProduct.base_price}{" "}
+              {activeLanguage === "ua" ? "грн" : "UAH"}
+            </h2>
+            <div className={styles.catalog__main_count}>
+              <span
+                onClick={() => handleCountOfProduct("decrement")}
+                className={styles.catalog__count_button}
+              >
+                <img
+                  src="../../images/minus-icon.svg"
+                  alt="certificate action icon"
+                  className={styles.catalog__button_action}
+                />
+              </span>
+              <p className={styles.catalog__count_text}>{countOfProduct}</p>
+              <span
+                onClick={() => handleCountOfProduct("increment")}
+                className={styles.catalog__count_button}
+              >
+                <img
+                  src="../../images/plus-icon.svg"
+                  alt="certificate action icon"
+                  className={styles.catalog__button_action}
+                />
+              </span>
+            </div>
+          </div>
+          <div className={styles.catalog__info_footer}>
+            {!productIsNotVariated && (
+              <div className={styles.catalog__footer_sizes}>
+                <p className={styles.catalog__sizes_title}>
+                  {t("catalogProduct.catalogProductChooseSize")}
+                  <span className={styles.catalog__sizes_types}>
+                    {activeLanguage === "ua"
+                      ? currentProductSize?.description_ua
+                      : currentProductSize?.description_en}
+                  </span>
+                </p>
+                <div className={styles.catalog__sizes_main}>
+                  <div className={styles.catalog__block_items}>
+                    {catalogProduct.variations.sizes.map(
+                      (productSize: any, index: number) => (
+                        <span
+                          onClick={() => handleProductSize(productSize)}
+                          key={index}
+                          className={`${styles.catalog__block_circle} ${
+                            currentProductSize === productSize
+                              ? styles.active
+                              : ""
+                          }`}
+                        >
+                          {productSize.value}
+                        </span>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
+            )}
+            <div className={styles.catalog__footer_info}>
+              <p className={styles.catalog__info_text}>
+                {activeLanguage === "ua"
+                  ? catalogProduct.description_details_ua
+                  : catalogProduct.description_details_en}
+              </p>
             </div>
-          )}
-          <div className={styles.catalog__footer_info}>
-            <p className={styles.catalog__info_text}>
-              {activeLanguage === "ua"
-                ? catalogProduct.description_details_ua
-                : catalogProduct.description_details_en}
-            </p>
           </div>
-          <button
-            onClick={handleAddToCart}
-            className={styles.catalog__info_order}
-            type="button"
-          >
-            {t("catalogProduct.catalogProductButtonText")}
-          </button>
         </div>
+        <button
+          onClick={handleAddToCart}
+          className={styles.catalog__info_order}
+          type="button"
+        >
+          {t("catalogProduct.catalogProductButtonText")}
+        </button>
       </div>
     </div>
   );

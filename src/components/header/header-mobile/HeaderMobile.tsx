@@ -67,6 +67,12 @@ const HeaderMobile: React.FC<Props> = ({ cartCount }) => {
     setIsSearchInputOpen((prevState) => !prevState);
   };
 
+  const handleRedirectToIndividual = () => {
+    navigate("/home/catalog/individual-orthopedic-insoles");
+    setSearchResults([]);
+    setIsSearchInputOpen((prevState) => !prevState);
+  };
+
   const handleSearchInput = () => {
     setIsSearchInputOpen((prevState) => !prevState);
     setSearchResults([]);
@@ -125,6 +131,14 @@ const HeaderMobile: React.FC<Props> = ({ cartCount }) => {
             {searchResults.length > 0 && (
               <div className={styles.header__search_result}>
                 <ul className={styles.header__result_list}>
+                  <li
+                    onClick={handleRedirectToIndividual}
+                    className={styles.header__result_item}
+                  >
+                    {activeLanguage === "ua"
+                      ? "Індивідуальні ортопедичні устілки"
+                      : "Individual orthopedic insoles"}
+                  </li>
                   {searchResults.map((product: IProduct) => (
                     <li
                       onClick={() => handleRedirectToProduct(product.id)}

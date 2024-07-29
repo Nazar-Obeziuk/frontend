@@ -53,12 +53,6 @@ const OrderPayment: React.FC = () => {
               <div className={styles.order__block_info}>
                 <h3 className={styles.order__info_title}>
                   {t("payment.paymentBlock1TitleChild1")}
-                  <a
-                    href="https://google.com"
-                    className={styles.order__title_link}
-                  >
-                    {t("payment.paymentBlock1TitleChild2")}
-                  </a>
                 </h3>
                 <p className={styles.order__main_text}>
                   {t("payment.paymentBlock1Text1")}

@@ -191,12 +191,13 @@ const HomeSteps: React.FC = () => {
             </div>
           </div>
           <div className={styles.home__steps_actions}>
-            <button
+            <NavLink
+              to={"/home/catalog/individual-orthopedic-insoles"}
               className={`${styles.home__actions_button} ${styles.home__actions_order}`}
               type="button"
             >
               {t("home.homeSteps.homeStepsButtonOrderText")}
-            </button>
+            </NavLink>
             <NavLink
               to={"https://youtu.be/wzwtNwJ7TLQ"}
               target={"_blank"}

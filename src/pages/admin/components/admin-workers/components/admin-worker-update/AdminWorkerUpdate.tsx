@@ -194,7 +194,7 @@ const AdminWorkerUpdate: React.FC = () => {
       if (token) {
         const response = await updateWorker(formData, id!, token);
         notify(response.message);
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
         reset();
       } else {
         return <AdminError />;
@@ -239,7 +239,7 @@ const AdminWorkerUpdate: React.FC = () => {
               className={styles.admin__router_arrow}
             />
             <NavLink
-              to={"/admin"}
+              to={"/prostopoo-admin-panel"}
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
               Адмін панель

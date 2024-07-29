@@ -18,16 +18,22 @@ const AdminCertificateReviewsTable: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const handleEditProductReview = (review_id: number) => {
-    navigate(`/admin/product-review-update/${review_id}`);
+    navigate(`/prostopoo-admin-panel/product-review-update/${review_id}`);
   };
 
   const handleDeleteProductReview = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити цей відгук?"
+    );
 
-    if (token) {
-      const response = await deleteReview(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteReview(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

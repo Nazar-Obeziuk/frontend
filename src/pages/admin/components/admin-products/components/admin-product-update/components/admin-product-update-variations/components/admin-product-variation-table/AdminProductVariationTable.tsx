@@ -18,16 +18,22 @@ const AdminProductVariationTable: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const handleEditProductVariation = (id: number) => {
-    navigate(`/admin/product-variation-update/${id}`);
+    navigate(`/prostopoo-admin-panel/product-variation-update/${id}`);
   };
 
   const handleDeleteProductVariation = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити цю варіацію?"
+    );
 
-    if (token) {
-      const response = await deleteProductVariation(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteProductVariation(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 
@@ -38,9 +44,6 @@ const AdminProductVariationTable: React.FC<Props> = ({
           <table className={styles.admin__table_item}>
             <thead className={styles.admin__table_head}>
               <tr className={styles.admin__table_tr}>
-                {/* <th className={styles.admin__table_th}>
-                  Зображення варіації товарів
-                </th> */}
                 <th className={styles.admin__table_th}>Тип варіації</th>
                 <th className={styles.admin__table_th}>Значення варіації</th>
                 <th className={styles.admin__table_th}>Ціна</th>

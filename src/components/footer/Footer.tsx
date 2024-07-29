@@ -22,34 +22,54 @@ const Footer = () => {
                 </NavLink>
               </div>
               <div className={styles.footer__info_socials}>
-                <span className={styles.footer__socials_item}>
+                <NavLink
+                  to={"https://t.me/Prostopoo_ua"}
+                  target="_blank"
+                  className={styles.footer__socials_item}
+                >
                   <img
                     src="../../images/telegram.svg"
                     alt="telegram icon"
                     className={styles.footer__socials_icon}
                   />
-                </span>
-                <span className={styles.footer__socials_item}>
+                </NavLink>
+                <NavLink
+                  to={
+                    "https://invite.viber.com/?g2=AQA2L7uJaplQiFM88BlbNcvdtXVVIYiksKCypmVP66yKz%2FhkCnLr0koTARICgOxP"
+                  }
+                  target="_blank"
+                  className={styles.footer__socials_item}
+                >
                   <img
                     src="../../images/viber.svg"
                     alt="viber icon"
                     className="footer__socials_icon"
                   />
-                </span>
-                <span className={styles.footer__socials_item}>
+                </NavLink>
+                <NavLink
+                  to={"https://www.tiktok.com/@prostopoo.com.ua?_t=8oLnM81yrrh"}
+                  target="_blank"
+                  className={styles.footer__socials_item}
+                >
                   <img
                     src="../../images/tiktok.svg"
                     alt="tiktok icon"
                     className={styles.footer__socials_icon}
                   />
-                </span>
-                <span className={styles.footer__socials_item}>
+                </NavLink>
+                <NavLink
+                  to={
+                    "https://www.instagram.com/prostopoo?igsh=MWp5NW90dG9sMWZ2Nw=="
+                  }
+                  target="_blank"
+                  className={styles.footer__socials_item}
+                >
                   <img
                     src="../../images/instagram.svg"
                     alt="instagram icon"
                     className={styles.footer__socials_icon}
                   />
-                </span>
+                </NavLink>
               </div>
               <div className={styles.footer__info_work}>
                 <p className={styles.footer__work_text}>

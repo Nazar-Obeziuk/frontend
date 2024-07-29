@@ -472,3 +472,22 @@
     top: 54px;
   }
 }
+
+@media (max-width: 600px) {
+  .header__search_input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--white-gray);
+    border-radius: 0;
+    right: 0;
+    top: 100%;
+  }
+  .header__actions_search {
+    position: static;
+  }
+  .header__search_result {
+    width: 100%;
+    top: calc(100% + 40px);
+    right: 0;
+  }
+}

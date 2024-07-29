@@ -108,6 +108,9 @@
   outline: none;
   border: 1px solid transparent;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 16px 0;
   font-family: "Euclid";
   font-weight: 400;

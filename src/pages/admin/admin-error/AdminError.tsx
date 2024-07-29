@@ -6,7 +6,7 @@ const AdminError: React.FC = () => {
   const navigate = useNavigate();
 
   const handleBackToHomeAdmin = () => {
-    navigate("/admin");
+    navigate("/prostopoo-admin-panel");
   };
 
   return (

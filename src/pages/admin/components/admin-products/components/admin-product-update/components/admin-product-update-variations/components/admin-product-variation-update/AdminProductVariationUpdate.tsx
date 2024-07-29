@@ -1,75 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../../../admin-products-form/AdminProductsForm.module.css";
 import AdminError from "../../../../../../../../admin-error/AdminError";
 import {
-  getAllProductsVariations,
   getVariationById,
   updateProductVariation,
 } from "../../../../../../../../../../services/products/product";
 import { toast } from "react-toastify";
-import { Accept, useDropzone } from "react-dropzone";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
 import { IProductVariation } from "../../../../../../../../../../services/products/product.interface";
-
-// const getColor = (props: any) => {
-//   if (props.isDragAccept) {
-//     return "#00e676";
-//   }
-//   if (props.isDragReject) {
-//     return "#ff1744";
-//   }
-//   if (props.isFocused) {
-//     return "#2196f3";
-//   }
-//   return "#eeeeee";
-// };
-
-// const AdminImage = styled.div`
-//   width: 100%;
-//   padding: 16px 26px 14px 26px;
-//   border-width: 1px;
-//   border-radius: 12px;
-//   border-color: ${(props: any) => getColor(props)};
-//   border-style: solid;
-//   background-color: transparent;
-//   color: rgba(255, 255, 255, 0.5);
-//   font-family: "Fixel-Display";
-//   font-size: 18px;
-//   font-weight: 300;
-//   line-height: 20px;
-//   outline: none;
-//   transition: border 0.24s ease-in-out;
-//   display: flex;
-//   align-items: center;
-//   cursor: pointer;
-
-//   &[isdragactive="true"] {
-//     /* Style for drag active */
-//   }
-
-//   &[isdragaccept="true"] {
-//     /* Style for drag accept */
-//     border-color: #00e676;
-//   }
-
-//   &[isdragreject="true"] {
-//     /* Style for drag reject */
-//     border-color: #ff1744;
-//   }
-
-//   &[isfocused="true"] {
-//     /* Style for focused */
-//     border-color: #2196f3;
-//   }
-// `;
 
 const AdminProductVariationUpdate: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [editVariation, setEditVariation] = useState<IProductVariation>();
-  // const [mainImage, setMainImage] = useState<File | null>(null);
-  // const [isEditUploadOpen, setEditUploadOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -80,27 +23,6 @@ const AdminProductVariationUpdate: React.FC = () => {
   } = useForm({
     mode: "onChange",
   });
-
-  // const acceptType: Accept = {
-  //   "image/*": [".jpeg", ".jpg", ".png", ".gif"],
-  // };
-
-  // const onDropMainImage = useCallback((acceptedFiles: File[]) => {
-  //   setMainImage(acceptedFiles[0]);
-  // }, []);
-
-  // const {
-  //   getRootProps: getMainRootProps,
-  //   getInputProps: getMainInputProps,
-  //   isDragActive: isMainDragActive,
-  //   isDragAccept: isMainDragAccept,
-  //   isDragReject: isMainDragReject,
-  //   isFocused: isMainFocused,
-  // } = useDropzone({
-  //   onDrop: onDropMainImage,
-  //   multiple: false,
-  //   accept: acceptType,
-  // });
 
   useEffect(() => {
     const getEditedVariation = async () => {
@@ -140,17 +62,13 @@ const AdminProductVariationUpdate: React.FC = () => {
       formData.append(key, data[key]);
     });
 
-    // if (mainImage) {
-    //   formData.append("image", mainImage);
-    // }
-
     try {
       const token = localStorage.getItem("token");
 
       if (token) {
         const response = await updateProductVariation(id!, formData, token);
         notify(response.message);
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
       } else {
         return <AdminError />;
       }
@@ -158,10 +76,6 @@ const AdminProductVariationUpdate: React.FC = () => {
       console.log(error);
     }
   };
-
-  // const handleChangePhoto = () => {
-  //   setEditUploadOpen((prevState) => !prevState);
-  // };
 
   return (
     <section className={styles.admin__update_section}>
@@ -190,7 +104,7 @@ const AdminProductVariationUpdate: React.FC = () => {
               className={styles.admin__router_arrow}
             />
             <NavLink
-              to={"/admin"}
+              to={"/prostopoo-admin-panel"}
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
               Адмін панель
@@ -214,72 +128,6 @@ const AdminProductVariationUpdate: React.FC = () => {
               onSubmit={handleSubmit(onSubmit)}
               className={styles.admin__form_block}
             >
-              {/* <div
-                className={`${styles.admin__block_control} ${styles.admin__control_block}`}
-              >
-                {!isEditUploadOpen && (
-                  <div className={styles.admin__control_item}>
-                    <label
-                      htmlFor="image"
-                      className={styles.admin__control_label}
-                    >
-                      Зображення товару
-                    </label>
-                    <ul className={styles.admin__drag_slider}>
-                      {editVariation &&
-                        editVariation?.image_url.map(
-                          (image: string, index: number) => (
-                            <li
-                              key={index}
-                              className={styles.admin__drag_preview}
-                            >
-                              <img
-                                className={styles.admin__drag_image}
-                                src={image}
-                                alt={`product preview ${index}`}
-                                width={100}
-                              />
-                            </li>
-                          )
-                        )}
-                    </ul>
-                  </div>
-                )}
-                <div className={styles.admin__control_item}>
-                  <button
-                    onClick={handleChangePhoto}
-                    className={styles.admin__control_add}
-                    type="button"
-                  >
-                    {!isEditUploadOpen ? "Змінити фото" : "Скасувати"}
-                  </button>
-                  {isEditUploadOpen && (
-                    <div className={styles.admin__control_upload}>
-                      <AdminImage
-                        {...getMainRootProps({
-                          isdragactive: isMainDragActive.toString(),
-                          isdragaccept: isMainDragAccept.toString(),
-                          isdragreject: isMainDragReject.toString(),
-                          isfocused: isMainFocused.toString(),
-                        })}
-                      >
-                        <input {...getMainInputProps()} />
-                        {isMainDragActive ? (
-                          <p>Перетягніть сюди файли ...</p>
-                        ) : (
-                          <p>Клацніть або перетягніть файли</p>
-                        )}
-                      </AdminImage>
-                      {mainImage && <p>{mainImage.name}</p>}
-                      {errors["image_url"] && (
-                        <span className={styles.error_message}>
-                          {errors["image_url"]?.message as string}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div> */}
               <div className={styles.admin__block_control}>
                 <label
                   htmlFor="variation_type"

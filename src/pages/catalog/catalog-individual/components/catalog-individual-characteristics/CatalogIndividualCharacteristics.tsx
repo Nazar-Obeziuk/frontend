@@ -125,13 +125,14 @@
 
 // export default CatalogIndividualCharacteristics;
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CatalogIndividualCharacteristics.module.css";
 import {
   IIndividualInsole,
   IIndividualVariation,
 } from "../../../../../services/individual-insoles/individualInsoles.interface";
 import Loader from "../../../../../components/loader/Loader";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   individualInsoles: IIndividualInsole[];
@@ -142,10 +143,16 @@ const CatalogIndividualCharacteristics: React.FC<Props> = ({
   individualInsoles,
   activeCoverage,
 }) => {
+  const [activeLanguage, setActiveLanguage] = useState<string>("ua");
+  const { i18n } = useTranslation();
+
   useEffect(() => {
-    console.log("Individual Insoles:", individualInsoles);
-    console.log("Active Coverage:", activeCoverage);
-  }, [individualInsoles, activeCoverage]);
+    if (i18n.language === "ua") {
+      setActiveLanguage("ua");
+    } else {
+      setActiveLanguage("en");
+    }
+  }, [individualInsoles, activeCoverage, i18n.language]);
 
   if (!individualInsoles[0]) {
     return <Loader />;
@@ -155,18 +162,18 @@ const CatalogIndividualCharacteristics: React.FC<Props> = ({
     <div className={styles.catalog__main_characteristics}>
       <div className={styles.catalog__characteristics_info}>
         <p className={styles.catalog__characteristics_title}>
-          {activeCoverage
-            ? activeCoverage.characteristics_subtitle_ua
-            : individualInsoles[0].characteristics_subtitle_ua}
+          {activeLanguage === "ua"
+            ? individualInsoles[0].characteristics_subtitle_ua
+            : individualInsoles[0].characteristics_subtitle_en}
         </p>
         <p className={styles.catalog__info_text}>
-          {activeCoverage
-            ? activeCoverage.characteristics_description_ua
-            : individualInsoles[0].characteristics_description_ua}
+          {activeLanguage === "ua"
+            ? individualInsoles[0].characteristics_description_ua
+            : individualInsoles[0].characteristics_description_en}
         </p>
       </div>
       <div className={styles.catalog__characteristics_table}>
-        {/* <table className={styles.catalog__table_item}>
+        <table className={styles.catalog__table_item}>
           <tbody>
             {activeCoverage
               ? Object.entries(activeCoverage.characteristics_ua).map(
@@ -186,7 +193,7 @@ const CatalogIndividualCharacteristics: React.FC<Props> = ({
                   )
                 )}
           </tbody>
-        </table> */}
+        </table>
       </div>
     </div>
   );

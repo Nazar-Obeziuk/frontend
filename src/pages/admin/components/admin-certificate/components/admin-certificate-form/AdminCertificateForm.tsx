@@ -133,7 +133,7 @@ const AdminCertificateForm: React.FC<Props> = ({
         const response = await createCertificate(formData, token);
         notify(response.message);
         getAll();
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
         reset();
         toggleCertificateForm();
         setCertificateImagesPreview(null);

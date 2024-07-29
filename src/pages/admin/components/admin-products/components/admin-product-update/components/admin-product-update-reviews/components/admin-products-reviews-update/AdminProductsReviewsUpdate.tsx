@@ -67,7 +67,7 @@ const AdminProductsReviewsUpdate: React.FC = () => {
       if (token) {
         const response = await updateReview(formData, id!, token);
         notify(response.message);
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
       } else {
         return <AdminError />;
       }
@@ -103,7 +103,7 @@ const AdminProductsReviewsUpdate: React.FC = () => {
               className={styles.admin__router_arrow}
             />
             <NavLink
-              to={"/admin"}
+              to={"/prostopoo-admin-panel"}
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
               Адмін панель

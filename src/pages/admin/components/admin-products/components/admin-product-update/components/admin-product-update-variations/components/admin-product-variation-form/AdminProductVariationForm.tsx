@@ -1,10 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import styles from "../../../../../admin-products-form/AdminProductsForm.module.css";
 import { useForm } from "react-hook-form";
-import { Accept, useDropzone } from "react-dropzone";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import { createProductVariation } from "../../../../../../../../../../services/products/product";
 
 interface Props {
@@ -13,68 +11,12 @@ interface Props {
   toggleProductVariationForm: () => void;
 }
 
-// const getColor = (props: any) => {
-//   if (props.isDragAccept) {
-//     return "#00e676";
-//   }
-//   if (props.isDragReject) {
-//     return "#ff1744";
-//   }
-//   if (props.isFocused) {
-//     return "#2196f3";
-//   }
-//   return "#eeeeee";
-// };
-
-// const AdminImage = styled.div`
-//   width: 100%;
-//   padding: 16px 26px 14px 26px;
-//   border-width: 1px;
-//   border-radius: 12px;
-//   border-color: ${(props: any) => getColor(props)};
-//   border-style: solid;
-//   background-color: transparent;
-//   color: rgba(255, 255, 255, 0.5);
-//   font-family: "Fixel-Display";
-//   font-size: 18px;
-//   font-weight: 300;
-//   line-height: 20px;
-//   outline: none;
-//   transition: border 0.24s ease-in-out;
-//   display: flex;
-//   align-items: center;
-//   cursor: pointer;
-
-//   &[isdragactive="true"] {
-//     /* Style for drag active */
-//   }
-
-//   &[isdragaccept="true"] {
-//     /* Style for drag accept */
-//     border-color: #ffed00;
-//   }
-
-//   &[isdragreject="true"] {
-//     /* Style for drag reject */
-//     border-color: #ff0000;
-//   }
-
-//   &[isfocused="true"] {
-//     /* Style for focused */
-//     border-color: none;
-//   }
-// `;
-
 const AdminProductVariationForm: React.FC<Props> = ({
   getAll,
   productId,
   toggleProductVariationForm,
 }) => {
-  // const [productsImages, setProductsImages] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const [variationImagesPreview, setVariationImagesPreview] = useState<
-  //   string[] | null
-  // >(null);
   const { id } = useParams();
   const {
     register,
@@ -83,47 +25,12 @@ const AdminProductVariationForm: React.FC<Props> = ({
     reset,
   } = useForm({ mode: "onChange" });
 
-  // const acceptType: Accept = {
-  //   "image/*": [".jpeg", ".jpg", ".png", ".gif"],
-  // };
-
-  // const onDropProductImages = useCallback((acceptedFiles: File[]) => {
-  //   const files = acceptedFiles;
-  //   setProductsImages((prevProductImages: any) => [
-  //     ...prevProductImages,
-  //     ...files,
-  //   ]);
-
-  //   const newPreviews = files.map((file) => URL.createObjectURL(file));
-  //   setVariationImagesPreview((prevPreviews) => [
-  //     ...(prevPreviews || []),
-  //     ...newPreviews,
-  //   ]);
-  // }, []);
-
-  // const {
-  //   getRootProps: getSliderRootProps,
-  //   getInputProps: getSliderInputProps,
-  //   isDragActive: isSliderDragActive,
-  //   isDragAccept: isSliderDragAccept,
-  //   isDragReject: isSliderDragReject,
-  //   isFocused: isSliderFocused,
-  // } = useDropzone({
-  //   onDrop: onDropProductImages,
-  //   multiple: true,
-  //   accept: acceptType,
-  // });
-
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
-
-    // productsImages.forEach((file) => {
-    //   formData.append("image", file);
-    // });
 
     const token = localStorage.getItem("token");
     const notify = (message: string) => toast(message);
@@ -152,38 +59,6 @@ const AdminProductVariationForm: React.FC<Props> = ({
       onSubmit={handleSubmit(onSubmit)}
       className={styles.admin__form_block}
     >
-      {/* <div className={styles.admin__block_control}>
-        <label htmlFor="image" className={styles.admin__control_label}>
-          Зображення варіації
-        </label>
-        <AdminImage
-          {...getSliderRootProps({
-            isdragactive: isSliderDragActive.toString(),
-            isdragaccept: isSliderDragAccept.toString(),
-            isdragreject: isSliderDragReject.toString(),
-            isfocused: isSliderFocused.toString(),
-          })}
-        >
-          <input {...getSliderInputProps()} />
-          {isSliderDragActive ? (
-            <p>Перетягніть сюди файли ...</p>
-          ) : (
-            <p>Перетягніть файли сюди, або клацніть...</p>
-          )}
-        </AdminImage>
-        <ul className={styles.admin__drag_slider}>
-          {variationImagesPreview &&
-            variationImagesPreview.map((preview: string, index: number) => (
-              <li key={index} className={styles.admin__drag_preview}>
-                <img
-                  className={styles.admin__drag_image}
-                  src={preview}
-                  alt={`variation preview ${index}`}
-                />
-              </li>
-            ))}
-        </ul>
-      </div> */}
       <div className={styles.admin__block_control}>
         <label htmlFor="variation_type" className={styles.admin__control_label}>
           Тип варіації

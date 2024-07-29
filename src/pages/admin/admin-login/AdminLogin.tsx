@@ -28,7 +28,7 @@ const AdminLogin: React.FC = () => {
 
   const checkToken = () => {
     const token = localStorage.getItem("token");
-    if (token) navigate("/admin");
+    if (token) navigate("/prostopoo-admin-panel");
   };
 
   return (

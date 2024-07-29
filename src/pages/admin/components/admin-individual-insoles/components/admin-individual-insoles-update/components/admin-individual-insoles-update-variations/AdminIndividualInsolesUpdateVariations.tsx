@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AdminIndividualInsolesUpdateVariations.module.css";
-import { IProductVariation } from "../../../../../../../../services/products/product.interface";
-import { getAllProductsVariations } from "../../../../../../../../services/products/product";
 import { useParams } from "react-router-dom";
 import AdminProductVariationForm from "./components/admin-individual-insoles-variation-form/AdminIndividualInsolesVariationForm";
 import AdminProductVariationTable from "./components/admin-individual-insoles-variation-table/AdminIndividualInsolesVariationTable";

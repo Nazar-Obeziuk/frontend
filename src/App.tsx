@@ -96,41 +96,47 @@ function App() {
           element={<CartDelivery />}
         ></Route>
         <Route path="/home/cart/payment" element={<CartPayment />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
+        <Route path="/prostopoo-admin-panel" element={<Admin />}></Route>
         <Route
-          path="/admin/update-worker/:id"
+          path="/prostopoo-admin-panel/update-worker/:id"
           element={<AdminWorkerUpdate />}
         ></Route>
         <Route
-          path="/admin/update-product/:id"
+          path="/prostopoo-admin-panel/update-product/:id"
           element={<AdminProductUpdate />}
         ></Route>
         <Route
-          path="/admin/product-variation-update/:id"
+          path="/prostopoo-admin-panel/product-variation-update/:id"
           element={<AdminProductVariationUpdate />}
         ></Route>
         <Route
-          path="/admin/product-review-update/:id"
+          path="/prostopoo-admin-panel/product-review-update/:id"
           element={<AdminProductsReviewsUpdate />}
         ></Route>
         <Route
-          path="/admin/update-general-review/:id"
+          path="/prostopoo-admin-panel/update-general-review/:id"
           element={<AdminReviewsUpdate />}
         ></Route>
         <Route
-          path="/admin/update-individual/:id"
+          path="/prostopoo-admin-panel/update-individual/:id"
           element={<AdminIndividualInsolesUpdate />}
         ></Route>
         <Route
-          path="/admin/individual-insoles-variation-update/:id"
+          path="/prostopoo-admin-panel/individual-insoles-variation-update/:id"
           element={<AdminIndividualInsolesVariationUpdate />}
         ></Route>
         <Route
-          path="/admin/update-certificate/:id"
+          path="/prostopoo-admin-panel/update-certificate/:id"
           element={<AdminCertificateUpdate />}
         ></Route>
-        <Route path="/admin/login" element={<AdminLogin />}></Route>
-        <Route path="/admin/error" element={<AdminError />}></Route>
+        <Route
+          path="/prostopoo-admin-panel/login"
+          element={<AdminLogin />}
+        ></Route>
+        <Route
+          path="/prostopoo-admin-panel/error"
+          element={<AdminError />}
+        ></Route>
       </Routes>
     </Layout>
   );

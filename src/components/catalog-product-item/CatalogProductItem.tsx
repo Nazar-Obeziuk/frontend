@@ -23,7 +23,6 @@ const CatalogProductItem: React.FC<Props> = ({ product }) => {
     } else {
       setActiveLanguage("en");
     }
-    console.log(product);
   }, [i18n.language]);
 
   return (

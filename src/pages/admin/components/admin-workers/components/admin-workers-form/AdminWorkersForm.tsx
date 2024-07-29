@@ -151,7 +151,7 @@ const AdminWorkersForm: React.FC<Props> = ({ toggleWorkersForm, getAll }) => {
         const response = await createWorker(formData, token);
         getAll();
         notify(response.message);
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
         reset();
         toggleWorkersForm();
         setSliderImagesPreview([]);

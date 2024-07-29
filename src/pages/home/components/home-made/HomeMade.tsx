@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./HomeMade.module.css";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 const HomeMade: React.FC = () => {
   const [activeLanguage, setActiveLanguage] = useState("ua");
@@ -48,9 +49,13 @@ const HomeMade: React.FC = () => {
                 </span>
               </div>
             </div>
-            <button className={styles.home__info_button} type="button">
+            <NavLink
+              to={"/home/catalog/individual-orthopedic-insoles"}
+              className={styles.home__info_button}
+              type="button"
+            >
               {t("home.homeMain.homeMainButtonText")}
-            </button>
+            </NavLink>
           </div>
           <div className={styles.home__made_insoles}>
             <video
@@ -73,9 +78,13 @@ const HomeMade: React.FC = () => {
               Your browser does not support the video tag.
             </video>
           </div>
-          <button className={styles.home__mobile_button} type="button">
+          <NavLink
+            to={"/home/catalog/individual-orthopedic-insoles"}
+            className={styles.home__mobile_button}
+            type="button"
+          >
             {t("home.homeMain.homeMainButtonText")}
-          </button>
+          </NavLink>
         </div>
       </div>
     </section>

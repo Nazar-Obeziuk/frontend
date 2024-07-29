@@ -32,16 +32,22 @@ const AdminCertificate: React.FC = () => {
   };
 
   const onEditCertificate = (certificate: ICertificate) => {
-    navigate(`/admin/update-certificate/${certificate.id}`);
+    navigate(`/prostopoo-admin-panel/update-certificate/${certificate.id}`);
   };
 
   const onDeleteCertificate = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити цей сертифікат?"
+    );
 
-    if (token) {
-      const response = await deleteCertificate(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteCertificate(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

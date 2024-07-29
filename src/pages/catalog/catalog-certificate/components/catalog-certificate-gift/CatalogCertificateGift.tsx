@@ -4,6 +4,8 @@ import { IReview } from "../../../../../services/reviews/review.interface";
 import { ICertificate } from "../../../../../services/gift-certificate/gift-certificate.interface";
 import Loader from "../../../../../components/loader/Loader";
 import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
+import { useCart } from "../../../../../context/cart/CartContext";
 
 interface Props {
   certificateReviews: IReview[];
@@ -19,6 +21,7 @@ const CatalogCertificateGift: React.FC<Props> = ({
   const [countOfCertificate, setCountOfCertificate] = useState(1);
   const [activeLanguage, setActiveLanguage] = useState<string>("ua");
   const { t, i18n } = useTranslation();
+  const { addToCart } = useCart();
 
   const handleCountOfCertificate = (operation: "increment" | "decrement") => {
     setCountOfCertificate((prevCount) => {
@@ -29,6 +32,26 @@ const CatalogCertificateGift: React.FC<Props> = ({
       }
       return prevCount;
     });
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: uuidv4(),
+      productImages: [
+        certificates[0].image_url[0],
+        certificates[0].image_url[1],
+      ],
+      name_en: certificates[0].name_en,
+      name_ua: certificates[0].name_ua,
+      price: certificates[0].base_price,
+      quantity: countOfCertificate,
+    };
+
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    existingCart.push(cartItem);
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+
+    addToCart(cartItem);
   };
 
   useEffect(() => {
@@ -151,7 +174,11 @@ const CatalogCertificateGift: React.FC<Props> = ({
               ? certificates[0].description_ua
               : certificates[0].description_en}
           </p>
-          <button className={styles.catalog__info_order} type="button">
+          <button
+            onClick={handleAddToCart}
+            className={styles.catalog__info_order}
+            type="button"
+          >
             {t("certificate.certificateButtonText")}
           </button>
         </div>

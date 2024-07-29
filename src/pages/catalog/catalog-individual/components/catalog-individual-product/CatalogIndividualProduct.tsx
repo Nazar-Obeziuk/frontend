@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { act, useEffect, useState } from "react";
 import styles from "./CatalogIndividualProduct.module.css";
 import { IReview } from "../../../../../services/reviews/review.interface";
 import {
@@ -7,6 +7,8 @@ import {
 } from "../../../../../services/individual-insoles/individualInsoles.interface";
 import Loader from "../../../../../components/loader/Loader";
 import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
+import { useCart } from "../../../../../context/cart/CartContext";
 
 interface Props {
   individualReviews: IReview[];
@@ -32,14 +34,18 @@ const CatalogIndividualProduct: React.FC<Props> = ({
   const [diabeticVariations, setDiabeticVariations] = useState<
     IIndividualVariation[]
   >([]);
-  const [countOfCertificate, setCountOfCertificate] = useState<number>(1);
+  const [countOfProduct, setCountOfProduct] = useState<number>(1);
   const [activeCoverage, setActiveCoverage] = useState<IIndividualVariation>();
-  const { t } = useTranslation();
+  const [activeLanguage, setActiveLanguage] = useState<string>("ua");
+  const { t, i18n } = useTranslation();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const people: IIndividualVariation[] = [];
     const sport: IIndividualVariation[] = [];
     const diabetic: IIndividualVariation[] = [];
+
+    setActiveLanguage(i18n.language === "ua" ? "ua" : "en");
 
     variations.forEach((variation: IIndividualVariation) => {
       if (variation.category === "people") {
@@ -55,10 +61,10 @@ const CatalogIndividualProduct: React.FC<Props> = ({
     setSportVariations(sport);
     setDiabeticVariations(diabetic);
     setActiveCoverage(variations[0]);
-  }, [variations]);
+  }, [variations, i18n.language]);
 
   const handleCountOfProduct = (operation: "increment" | "decrement") => {
-    setCountOfCertificate((prevCount) => {
+    setCountOfProduct((prevCount) => {
       if (operation === "increment") {
         return prevCount + 1;
       } else if (operation === "decrement" && prevCount > 1) {
@@ -73,6 +79,34 @@ const CatalogIndividualProduct: React.FC<Props> = ({
     onCoverageChange(variation);
   };
 
+  const handleAddToCart = () => {
+    let cartItem = {
+      id: uuidv4(),
+      productImages: activeCoverage
+        ? [activeCoverage.image_url[0], activeCoverage.image_url[1]]
+        : [
+            individualInsoles[0].image_url[0],
+            individualInsoles[0].image_url[2],
+          ],
+      name_en: individualInsoles[0].name_en,
+      name_ua: individualInsoles[0].name_ua,
+      price: individualInsoles[0].base_price,
+      quantity: countOfProduct,
+      sizeDescription_ua: activeCoverage
+        ? activeCoverage.variation_description_ua
+        : individualInsoles[0].article_variation_ua,
+      sizeDescription_en: activeCoverage
+        ? activeCoverage.variation_description_en
+        : individualInsoles[0].article_variation_en,
+    };
+
+    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    existingCart.push(cartItem);
+    localStorage.setItem("cart", JSON.stringify(existingCart));
+
+    addToCart(cartItem);
+  };
+
   if (!individualInsoles[0]) {
     return <Loader />;
   }
@@ -80,37 +114,59 @@ const CatalogIndividualProduct: React.FC<Props> = ({
   return (
     <div className={styles.catalog__main_product}>
       <div className={styles.catalog__product_banners}>
-        {activeCoverage?.image_url ? (
+        {activeCoverage?.image_url && (
           <>
+            {activeCoverage.image_url.length >= 3 ? (
+              <>
+                <img
+                  src={activeCoverage.image_url[0]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+                <img
+                  src={activeCoverage.image_url[2]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+                <img
+                  src={activeCoverage.image_url[1]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+              </>
+            ) : (
+              <>
+                <img
+                  src={activeCoverage.image_url[0]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+                <img
+                  src={individualInsoles[0].image_url[1]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+                <img
+                  src={activeCoverage.image_url[1]}
+                  alt="individual gift banner"
+                  className={styles.catalog__banners_item}
+                />
+              </>
+            )}
             <img
-              src={individualInsoles[0].image_url[0]}
+              src={individualInsoles[0].image_url[3]}
               alt="individual gift banner"
               className={styles.catalog__banners_item}
             />
-            {activeCoverage.image_url.map((image: string, index: number) => (
-              <img
-                key={index}
-                src={image}
-                alt="individual gift banner"
-                className={styles.catalog__banners_item}
-              />
-            ))}
           </>
-        ) : (
-          individualInsoles[0].image_url.map((image: string, index: number) => (
-            <img
-              key={index}
-              src={image}
-              alt="individual gift banner"
-              className={styles.catalog__banners_item}
-            />
-          ))
         )}
       </div>
       <div className={styles.catalog__product_info}>
         <div className={styles.catalog__info_header}>
           <h3 className={styles.catalog__header_title}>
-            {individualInsoles[0].name_ua}
+            {activeLanguage === "ua"
+              ? individualInsoles[0].name_ua
+              : individualInsoles[0].name_en}
           </h3>
           <div className={styles.catalog__header_info}>
             {individualReviews.length > 0 ? (
@@ -169,9 +225,9 @@ const CatalogIndividualProduct: React.FC<Props> = ({
         <div className={styles.catalog__info_main}>
           <h2 className={styles.catalog__main_price}>
             {activeCoverage?.additional_price
-              ? activeCoverage?.additional_price
+              ? activeCoverage.additional_price
               : individualInsoles[0].base_price}{" "}
-            {t("products.productsCurrency")}
+            {activeLanguage === "ua" ? "грн" : "UAH"}
           </h2>
           <div className={styles.catalog__main_count}>
             <span
@@ -184,7 +240,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
                 className={styles.catalog__button_action}
               />
             </span>
-            <p className={styles.catalog__count_text}>{countOfCertificate}</p>
+            <p className={styles.catalog__count_text}>{countOfProduct}</p>
             <span
               onClick={() => handleCountOfProduct("increment")}
               className={styles.catalog__count_button}
@@ -202,9 +258,13 @@ const CatalogIndividualProduct: React.FC<Props> = ({
             <p className={styles.catalog__coverage_title}>
               {t("individualInsoles.individualInsolesChooseCoverage")}
               <span className={styles.catalog__coverage_types}>
-                {activeCoverage?.variation_description_ua
-                  ? activeCoverage?.variation_description_ua
-                  : individualInsoles[0].article_variation_ua}
+                {activeLanguage === "ua"
+                  ? activeCoverage
+                    ? activeCoverage.variation_description_ua
+                    : individualInsoles[0].article_variation_ua
+                  : activeCoverage
+                  ? activeCoverage.variation_description_en
+                  : individualInsoles[0].article_variation_en}
               </span>
             </p>
             <div className={styles.catalog__coverage_main}>
@@ -282,7 +342,11 @@ const CatalogIndividualProduct: React.FC<Props> = ({
               </div>
             </div>
           </div>
-          <button className={styles.catalog__info_order} type="button">
+          <button
+            onClick={handleAddToCart}
+            className={styles.catalog__info_order}
+            type="button"
+          >
             {t("individualInsoles.individualInsolesButtonText")}
           </button>
         </div>

@@ -13,8 +13,8 @@ interface CartItem {
   name_ua: string;
   price: number;
   quantity: number;
-  sizeDescription_ua: string;
-  sizeDescription_en: string;
+  sizeDescription_ua?: string;
+  sizeDescription_en?: string;
 }
 
 interface CartContextProps {

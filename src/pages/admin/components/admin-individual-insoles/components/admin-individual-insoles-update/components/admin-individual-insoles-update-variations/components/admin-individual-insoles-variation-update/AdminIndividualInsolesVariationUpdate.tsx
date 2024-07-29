@@ -274,7 +274,7 @@ const AdminIndividualInsolesVariationUpdate: React.FC = () => {
       if (token) {
         const response = await updateIndividualVariation(id!, formData, token);
         notify(response.message);
-        navigate("/admin");
+        navigate("/prostopoo-admin-panel");
       } else {
         return <AdminError />;
       }
@@ -318,7 +318,7 @@ const AdminIndividualInsolesVariationUpdate: React.FC = () => {
               className={styles.admin__router_arrow}
             />
             <NavLink
-              to={"/admin"}
+              to={"/prostopoo-admin-panel"}
               className={`${styles.admin__router_name} ${styles.admin__router_active}`}
             >
               Адмін панель
@@ -858,6 +858,7 @@ const AdminIndividualInsolesVariationUpdate: React.FC = () => {
                   })}
                 />
               </div>
+              <div className={styles.admin__block_control}></div>
               <div className={styles.admin__block_control}>
                 {fieldsUA.map((item, index) => (
                   <div key={index} className={styles.admin__control_char}>

@@ -16,7 +16,7 @@
 }
 .catalog__banners_item {
   width: calc(50% - 7px);
-  height: 300px;
+  max-height: 360px;
   object-fit: cover;
   border-radius: 15px;
 }
@@ -169,7 +169,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 .catalog__block_circle {
@@ -286,6 +286,10 @@
     padding: 0 !important;
   }
 
+  .catalog__banners_item {
+    max-height: 200px;
+  }
+
   .catalog__info_footer {
     gap: 30px;
   }
@@ -323,10 +327,6 @@
   .catalog__main_price {
     font-size: 32px;
     line-height: 36px;
-  }
-
-  .catalog__block_items {
-    gap: 8px;
   }
 
   .catalog__block_circle {

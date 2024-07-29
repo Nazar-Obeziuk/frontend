@@ -32,16 +32,22 @@ const AdminProducts: React.FC = () => {
   };
 
   const onEditProduct = (product: IProduct) => {
-    navigate(`/admin/update-product/${product.id}`);
+    navigate(`/prostopoo-admin-panel/update-product/${product.id}`);
   };
 
   const onDeleteProduct = async (id: number) => {
-    const token = localStorage.getItem("token");
+    const confirmation = window.confirm(
+      "Ви впевнені, що хочете видалити цей продукт?"
+    );
 
-    if (token) {
-      const response = await deleteProduct(id, token);
-      notify(response.message);
-      getAll();
+    if (confirmation) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const response = await deleteProduct(id, token);
+        notify(response.message);
+        getAll();
+      }
     }
   };
 

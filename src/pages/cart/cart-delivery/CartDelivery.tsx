@@ -1,25 +1,11 @@
-import React, { useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./CartDelivery.module.css";
 import CartDeliveryForms from "./components/cart-delivery-forms/CartDeliveryForms";
 import { useTranslation } from "react-i18next";
 
 const CartDelivery: React.FC = () => {
   const { t } = useTranslation();
-
-  // const navigate = useNavigate();
-  // // const formRef = useRef<any>(null);
-
-  // const handleCartNextStep = (data: any) => {
-  //   console.log(data);
-  //   navigate("/home/cart/payment");
-  // };
-
-  // const handleContinueClick = () => {
-  //   // if (formRef.current) {
-  //   //   formRef.current.submitForm();
-  //   // }
-  // };
 
   return (
     <section className={styles.cart__section}>
