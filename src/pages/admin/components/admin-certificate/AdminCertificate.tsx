@@ -11,7 +11,7 @@ import AdminCertificateTable from "./components/admin-certificate-table/AdminCer
 import AdminCertificateForm from "./components/admin-certificate-form/AdminCertificateForm";
 
 const AdminCertificate: React.FC = () => {
-  const [isAdminCertificateFormOpen, setAdminCertificateFormOpenn] =
+  const [isAdminCertificateFormOpen, setAdminCertificateFormOpen] =
     useState(true);
   const [adminCertificates, setAdminCertificates] = useState([]);
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const AdminCertificate: React.FC = () => {
   }, []);
 
   const handleCertificateForm = () => {
-    setAdminCertificateFormOpenn((prevState) => !prevState);
+    setAdminCertificateFormOpen((prevState) => !prevState);
   };
 
   const onEditCertificate = (certificate: ICertificate) => {

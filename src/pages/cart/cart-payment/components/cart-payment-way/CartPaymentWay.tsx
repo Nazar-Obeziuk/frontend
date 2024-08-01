@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CartPaymentWay.module.css";
 import { useTranslation } from "react-i18next";
+import { IFop } from "../../../../../services/fop/fop.interface";
+import { getAllFops } from "../../../../../services/fop/fop";
+import Loader from "../../../../../components/loader/Loader";
 
 const CartPaymentWay: React.FC = () => {
-  const { t } = useTranslation();
   const [activePaymentWay, setActivePaymentWay] = useState<
     "privat" | "apple-pay" | "mono-pay" | "iban" | ""
   >("");
+  const { t, i18n } = useTranslation();
+  const [cartFops, setCartFops] = useState<IFop[]>([]);
+
+  const getFops = async () => {
+    try {
+      const response = await getAllFops(i18n.language);
+      if (Array.isArray(response)) {
+        setCartFops(response);
+      } else {
+        console.error("Unexpected response format:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching FOPs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFops();
+  }, [i18n.language]);
+
+  if (!cartFops) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.cart__main_way}>
@@ -75,20 +100,18 @@ const CartPaymentWay: React.FC = () => {
               <span className={styles.cart__text_gray}>
                 {t("cart.cartStep3Text3Child1")}
               </span>
-              {t("cart.cartStep3Text3Child2")} <br />
+              {cartFops[0]?.first_fop_text} <br />
               <span className={styles.cart__text_gray}>
                 {t("cart.cartStep3Text4Child1")}
               </span>
-              {t("cart.cartStep3Text4Child2")} <br />
+              {cartFops[0]?.code_edr_fop} <br />
               <span className={styles.cart__text_gray}>
                 {t("cart.cartStep3Text5Child1")}
               </span>
-              {t("cart.cartStep3Text5Child2")} <br />
-              {t("cart.cartStep3Text6")} <br />
+              {cartFops[0]?.register_date_fop} <br />
+              {cartFops[0]?.number_fop} <br />
               <span className={styles.cart__text_gray}>
-                {t("cart.cartStep3Text7")} <br />
-                {t("cart.cartStep3Text8")} <br />
-                {t("cart.cartStep3Text9")}
+                {cartFops[0]?.address_fop} <br />
               </span>
             </p>
           </div>

@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AboutPublic.module.css";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Loader from "../../../components/loader/Loader";
+import { getAllFops } from "../../../services/fop/fop";
+import { IFop } from "../../../services/fop/fop.interface";
 
 const AboutPublic: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [policyFops, setPolicyFops] = useState<IFop[]>([]);
+
+  const getFops = async () => {
+    try {
+      const response = await getAllFops(i18n.language);
+      if (Array.isArray(response)) {
+        setPolicyFops(response);
+      } else {
+        console.error("Unexpected response format:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching FOPs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFops();
+  }, [i18n.language]);
+
+  if (!policyFops) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -59,7 +84,9 @@ const AboutPublic: React.FC = () => {
             <div className={styles.about__public_main}>
               <div className={styles.about__main_block}>
                 <p className={styles.about__public_text}>
-                  {t("public.publicText1")}
+                  {t("public.publicText1Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("public.publicText1Child2")}
                 </p>
                 <p className={styles.about__public_text}>
                   {t("public.publicText2")}
@@ -74,7 +101,9 @@ const AboutPublic: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.2.</span>
-                  {t("public.publicBlock1Text3")}
+                  {t("public.publicBlock1Text3Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("public.publicBlock1Text3Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.3.</span>
@@ -106,7 +135,9 @@ const AboutPublic: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>2.1.</span>
-                  {t("public.publicBlock2Text2")}
+                  {t("public.publicBlock2Text2Child1")}
+                  {policyFops[0]?.fourth_fop_text}
+                  {t("public.publicBlock2Text2Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>2.2.</span>
@@ -466,7 +497,7 @@ const AboutPublic: React.FC = () => {
                   {t("public.publicText3")}
                 </p>
                 <p className={styles.about__primary_text}>
-                  {t("public.publicText4")}
+                  {policyFops[0]?.first_fop_text}
                 </p>
               </div>
             </div>

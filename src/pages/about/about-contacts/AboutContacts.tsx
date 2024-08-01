@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AboutContacts.module.css";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getAllFops } from "../../../services/fop/fop";
+import { IFop } from "../../../services/fop/fop.interface";
+import Loader from "../../../components/loader/Loader";
 
 const AboutContacts: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [contactsFops, setContactsFops] = useState<IFop[]>([]);
+
+  const getFops = async () => {
+    try {
+      const response = await getAllFops(i18n.language);
+      if (Array.isArray(response)) {
+        setContactsFops(response);
+      } else {
+        console.error("Unexpected response format:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching FOPs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFops();
+  }, [i18n.language]);
+
+  if (!contactsFops) {
+    return <Loader />;
+  }
 
   return (
     <section className={styles.about__contacts_section}>
@@ -96,7 +121,8 @@ const AboutContacts: React.FC = () => {
                 {t("contacts.contactsDetailsTitle")}
               </span>
               <p className={styles.about__info_text}>
-                {t("contacts.contactsDetailsText1")} <br />
+                {t("contacts.contactsDetailsText1")}{" "}
+                {contactsFops[0]?.first_fop_text} <br />
                 {t("contacts.contactsDetailsText2")} <br />
                 {t("contacts.contactsDetailsText3")} <br />
                 {t("contacts.contactsDetailsText4")} <br />

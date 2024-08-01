@@ -32,6 +32,7 @@ import AdminProductsReviewsUpdate from "./pages/admin/components/admin-products/
 import AdminIndividualInsolesUpdate from "./pages/admin/components/admin-individual-insoles/components/admin-individual-insoles-update/AdminIndividualInsolesUpdate";
 import AdminIndividualInsolesVariationUpdate from "./pages/admin/components/admin-individual-insoles/components/admin-individual-insoles-update/components/admin-individual-insoles-update-variations/components/admin-individual-insoles-variation-update/AdminIndividualInsolesVariationUpdate";
 import AdminCertificateUpdate from "./pages/admin/components/admin-certificate/components/admin-certificate-update/AdminCertificateUpdate";
+import AdminFopUpdate from "./pages/admin/components/admin-fop/components/admin-fop-update/AdminFopUpdate";
 
 function App() {
   return (
@@ -128,6 +129,10 @@ function App() {
         <Route
           path="/prostopoo-admin-panel/update-certificate/:id"
           element={<AdminCertificateUpdate />}
+        ></Route>
+        <Route
+          path="/prostopoo-admin-panel/update-fop/:id"
+          element={<AdminFopUpdate />}
         ></Route>
         <Route
           path="/prostopoo-admin-panel/login"

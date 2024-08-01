@@ -99,7 +99,7 @@ const CatalogIndividual: React.FC = () => {
     getAll();
   }, [productId]);
 
-  if (!variations || !individualInsoles) {
+  if (!variations && !individualInsoles) {
     return <Loader />;
   }
 

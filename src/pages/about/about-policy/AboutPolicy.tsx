@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AboutPolicy.module.css";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { IFop } from "../../../services/fop/fop.interface";
+import { getAllFops } from "../../../services/fop/fop";
+import Loader from "../../../components/loader/Loader";
 
 const AboutPolicy: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [policyFops, setPolicyFops] = useState<IFop[]>([]);
+
+  const getFops = async () => {
+    try {
+      const response = await getAllFops(i18n.language);
+      if (Array.isArray(response)) {
+        setPolicyFops(response);
+      } else {
+        console.error("Unexpected response format:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching FOPs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFops();
+  }, [i18n.language]);
+
+  if (!policyFops) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -64,7 +89,9 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.1.</span>
-                  {t("privacy.privacyBlock1Text2")}
+                  {t("privacy.privacyBlock1Text2Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock1Text2Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.2.</span>
@@ -72,11 +99,19 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.3.</span>
-                  {t("privacy.privacyBlock1Text4")}
+                  {t("privacy.privacyBlock1Text4Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock1Text4Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.4.</span>
-                  {t("privacy.privacyBlock1Text5")}
+                  {t("privacy.privacyBlock1Text5Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock1Text5Child2")}
+                  {policyFops[0]?.first_date_fop}
+                  {t("privacy.privacyBlock1Text5Child3")}
+                  {policyFops[0]?.second_date_fop}
+                  {t("privacy.privacyBlock1Text5Child4")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.5.</span>
@@ -84,11 +119,15 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.6.</span>
-                  {t("privacy.privacyBlock1Text7")}
+                  {t("privacy.privacyBlock1Text7Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock1Text7Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>1.7.</span>
-                  {t("privacy.privacyBlock1Text8")}
+                  {t("privacy.privacyBlock1Text8Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock1Text8Child2")}
                 </p>
                 <ol className={styles.about__main_list}>
                   <li className={styles.about__list_numeric}>
@@ -97,7 +136,9 @@ const AboutPolicy: React.FC = () => {
                   </li>
                   <li className={styles.about__list_numeric}>
                     <span className={styles.about__list_count}>1.7.2.</span>
-                    {t("privacy.privacyBlock1Text10")}
+                    {t("privacy.privacyBlock1Text10Child1")}
+                    {policyFops[0]?.third_fop_text}
+                    {t("privacy.privacyBlock1Text10Child2")}
                   </li>
                 </ol>
               </div>
@@ -136,7 +177,11 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>3.3.</span>
-                  {t("privacy.privacyBlock3Text4")}
+                  {t("privacy.privacyBlock3Text4Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock3Text4Child2")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock3Text4Child3")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>3.4.</span>
@@ -150,7 +195,9 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>4.1.</span>
-                  {t("privacy.privacyBlock4Text2")}
+                  {t("privacy.privacyBlock4Text2Child1")}
+                  {policyFops[0]?.second_fop_text}
+                  {t("privacy.privacyBlock4Text2Child2")}
                 </p>
                 <ul className={styles.about__policy_list}>
                   <li className={styles.about__list_item}>
@@ -162,7 +209,9 @@ const AboutPolicy: React.FC = () => {
                 </ul>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>4.2.</span>
-                  {t("privacy.privacyBlock4Text5")}
+                  {t("privacy.privacyBlock4Text5Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock4Text5Child2")}
                 </p>
                 <ul className={styles.about__policy_list}>
                   <li className={styles.about__list_item}>
@@ -175,7 +224,9 @@ const AboutPolicy: React.FC = () => {
                     {t("privacy.privacyBlock4Text8")}
                   </li>
                   <li className={styles.about__list_item}>
-                    {t("privacy.privacyBlock4Text9")}
+                    {t("privacy.privacyBlock4Text9Child1")}
+                    {policyFops[0]?.fourth_fop_text}
+                    {t("privacy.privacyBlock4Text9Child2")}
                   </li>
                 </ul>
                 <p className={styles.about__list_numeric}>
@@ -244,7 +295,9 @@ const AboutPolicy: React.FC = () => {
                 </ul>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>6.2.</span>
-                  {t("privacy.privacyBlock6Text10")}
+                  {t("privacy.privacyBlock6Text10Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock6Text10Child2")}
                 </p>
               </div>
               <div className={styles.about__main_block}>
@@ -254,7 +307,9 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>7.1.</span>
-                  {t("privacy.privacyBlock7Text2")}
+                  {t("privacy.privacyBlock7Text2Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock7Text2Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>7.2.</span>
@@ -262,7 +317,9 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <ul className={styles.about__policy_list}>
                   <li className={styles.about__list_item}>
-                    {t("privacy.privacyBlock7Text4")}
+                    {t("privacy.privacyBlock7Text4Child1")}
+                    {policyFops[0]?.second_fop_text}
+                    {t("privacy.privacyBlock7Text4Child2")}
                   </li>
                   <li className={styles.about__list_item}>
                     {t("privacy.privacyBlock7Text5")}
@@ -335,7 +392,9 @@ const AboutPolicy: React.FC = () => {
                 </ul>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>9.2.</span>
-                  {t("privacy.privacyBlock9Text9")}
+                  {t("privacy.privacyBlock9Text9Child1")}
+                  {policyFops[0]?.fourth_fop_text}
+                  {t("privacy.privacyBlock9Text9Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>9.3.</span>
@@ -359,7 +418,9 @@ const AboutPolicy: React.FC = () => {
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>11.1.</span>
-                  {t("privacy.privacyBlock11Text2")}
+                  {t("privacy.privacyBlock11Text2Child1")}
+                  {policyFops[0]?.first_fop_text}
+                  {t("privacy.privacyBlock11Text2Child2")}
                 </p>
                 <p className={styles.about__list_numeric}>
                   <span className={styles.about__list_count}>11.2.</span>

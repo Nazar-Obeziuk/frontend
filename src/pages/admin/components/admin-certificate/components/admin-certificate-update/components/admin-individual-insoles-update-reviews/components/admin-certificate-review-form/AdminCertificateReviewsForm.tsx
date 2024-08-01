@@ -36,10 +36,6 @@ const AdminCertificateReviewsForm: React.FC<Props> = ({
 
     try {
       if (token) {
-        // console.log(certificateId);
-        // formData.forEach((value, key) => {
-        //   console.log(key, value);
-        // });
         const response = await createCertificateReview(formData, certificateId);
         notify(response.message);
         reset();
@@ -163,13 +159,8 @@ const AdminCertificateReviewsForm: React.FC<Props> = ({
           style={errors["pluses_ua"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
           placeholder="Плюси відгука (Укр)"
-          {...register("pluses_ua", { required: `Це поле обов'язкове!` })}
+          {...register("pluses_ua", { required: false })}
         />
-        {errors["pluses_ua"] && (
-          <span className={styles.error_message}>
-            {errors["pluses_ua"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="pluses_en" className={styles.admin__control_label}>
@@ -180,13 +171,8 @@ const AdminCertificateReviewsForm: React.FC<Props> = ({
           style={errors["pluses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
           placeholder="Плюси відгука (Англ)"
-          {...register("pluses_en", { required: `Це поле обов'язкове!` })}
+          {...register("pluses_en", { required: false })}
         />
-        {errors["pluses_en"] && (
-          <span className={styles.error_message}>
-            {errors["pluses_en"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="minuses_ua" className={styles.admin__control_label}>
@@ -197,13 +183,8 @@ const AdminCertificateReviewsForm: React.FC<Props> = ({
           style={errors["minuses_ua"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
           placeholder="Мінуси відгука (Укр)"
-          {...register("minuses_ua", { required: `Це поле обов'язкове!` })}
+          {...register("minuses_ua", { required: false })}
         />
-        {errors["pluses_ua"] && (
-          <span className={styles.error_message}>
-            {errors["minuses_ua"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_control}>
         <label htmlFor="minuses_en" className={styles.admin__control_label}>
@@ -214,13 +195,8 @@ const AdminCertificateReviewsForm: React.FC<Props> = ({
           style={errors["minuses_en"] ? { border: "1px solid #EB001B" } : {}}
           className={styles.admin__control_field}
           placeholder="Мінуси відгука (Англ)"
-          {...register("minuses_en", { required: `Це поле обов'язкове!` })}
+          {...register("minuses_en", { required: false })}
         />
-        {errors["pluses_en"] && (
-          <span className={styles.error_message}>
-            {errors["minuses_en"]?.message as string}
-          </span>
-        )}
       </div>
       <div className={styles.admin__block_actions}>
         <button

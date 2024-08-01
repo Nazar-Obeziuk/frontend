@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./OrderPayment.module.css";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { getAllFops } from "../../../services/fop/fop";
+import { IFop } from "../../../services/fop/fop.interface";
+import Loader from "../../../components/loader/Loader";
 
 const OrderPayment: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [paymentFops, setPaymentFops] = useState<IFop[]>([]);
+
+  const getFops = async () => {
+    try {
+      const response = await getAllFops(i18n.language);
+      if (Array.isArray(response)) {
+        setPaymentFops(response);
+      } else {
+        console.error("Unexpected response format:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching FOPs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFops();
+  }, [i18n.language]);
+
+  if (!paymentFops) {
+    return <Loader />;
+  }
 
   return (
     <section className={styles.order__payment_section}>
@@ -92,11 +117,14 @@ const OrderPayment: React.FC = () => {
                   {t("payment.paymentBlock2Title")}
                 </h3>
                 <p className={styles.order__main_text}>
-                  {t("payment.paymentBlock2Text1Child1")} <br />
-                  {t("payment.paymentBlock2Text1Child2")} <br />
-                  {t("payment.paymentBlock2Text1Child3")} <br />
-                  {t("payment.paymentBlock2Text1Child4")} <br />
-                  {t("payment.paymentBlock2Text1Child5")}
+                  {paymentFops[0]?.bank_fop} <br />
+                  {t("payment.paymentBlock2Text1Child2")}{" "}
+                  {paymentFops[0]?.first_fop_text} <br />
+                  {t("payment.paymentBlock2Text1Child3")}{" "}
+                  {paymentFops[0]?.code_edr_fop} <br />
+                  {t("payment.paymentBlock2Text1Child4")}{" "}
+                  {paymentFops[0]?.register_date_fop} <br />
+                  {paymentFops[0]?.number_fop}
                 </p>
                 <p className={styles.order__main_text}>
                   {t("payment.paymentBlock2Text2")}
