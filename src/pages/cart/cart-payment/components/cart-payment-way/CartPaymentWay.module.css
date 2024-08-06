@@ -80,6 +80,10 @@
   color: var(--primary);
 }
 
+.cart__banks_iban {
+  width: 100% !important;
+}
+
 @media (max-width: 1100px) {
   .cart__main_way {
     width: calc(50% - 15px);

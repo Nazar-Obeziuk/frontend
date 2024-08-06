@@ -107,7 +107,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
     addToCart(cartItem);
   };
 
-  if (!individualInsoles[0]) {
+  if (!individualInsoles[0] || !variations) {
     return <Loader />;
   }
 

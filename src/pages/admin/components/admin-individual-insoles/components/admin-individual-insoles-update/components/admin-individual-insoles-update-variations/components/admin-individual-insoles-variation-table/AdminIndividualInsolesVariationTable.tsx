@@ -85,18 +85,6 @@ const AdminIndividualInsolesVariationTable: React.FC<Props> = ({
                 <th className={styles.admin__table_th}>
                   Четвертий опис про товар (Англ)
                 </th>
-                <th className={styles.admin__table_th}>
-                  Підзаголовок характеристики товар (Укр)
-                </th>
-                <th className={styles.admin__table_th}>
-                  Підзаголовок характеристики (Англ)
-                </th>
-                <th className={styles.admin__table_th}>
-                  Опис характеристики (Укр)
-                </th>
-                <th className={styles.admin__table_th}>
-                  Опис характеристики (Англ)
-                </th>
                 <th className={styles.admin__table_th}>Дії</th>
               </tr>
             </thead>
@@ -174,26 +162,6 @@ const AdminIndividualInsolesVariationTable: React.FC<Props> = ({
                     <td className={styles.admin__table_td}>
                       {adminVariation.fourth_about_description_en
                         ? adminVariation.fourth_about_description_en
-                        : "Немає"}
-                    </td>
-                    <td className={styles.admin__table_td}>
-                      {adminVariation.characteristics_subtitle_ua
-                        ? adminVariation.characteristics_subtitle_ua
-                        : "Немає"}
-                    </td>
-                    <td className={styles.admin__table_td}>
-                      {adminVariation.characteristics_subtitle_en
-                        ? adminVariation.characteristics_subtitle_en
-                        : "Немає"}
-                    </td>
-                    <td className={styles.admin__table_td}>
-                      {adminVariation.characteristics_description_ua
-                        ? adminVariation.characteristics_description_ua
-                        : "Немає"}
-                    </td>
-                    <td className={styles.admin__table_td}>
-                      {adminVariation.characteristics_description_en
-                        ? adminVariation.characteristics_description_en
                         : "Немає"}
                     </td>
                     <td
