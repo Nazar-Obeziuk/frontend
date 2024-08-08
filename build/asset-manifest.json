@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.08cf30fa.css",
+    "main.js": "/static/js/main.da4ee314.js",
+    "static/media/home-worker-mobile-bg.png": "/static/media/home-worker-mobile-bg.81335450039f13bc2151.png",
+    "static/media/mask.png": "/static/media/mask.e4b4bcd680f1f94d926b.png",
+    "static/media/catalog-orthopedic-bg.png": "/static/media/catalog-orthopedic-bg.4d324c9680165f04724d.png",
+    "static/media/order-make-foots.png": "/static/media/order-make-foots.57914582502e83876b58.png",
+    "static/media/worker-bg.png": "/static/media/worker-bg.711751aa7bed08c329f9.png",
+    "static/media/Euclid Circular A Medium.ttf": "/static/media/Euclid Circular A Medium.a5befbfcb71cd093cc56.ttf",
+    "static/media/Euclid Circular A Regular.ttf": "/static/media/Euclid Circular A Regular.d54600880dc63db716f2.ttf",
+    "static/media/about-solutions-bg.png": "/static/media/about-solutions-bg.c3435c30ad091de58e41.png",
+    "static/media/FixelDisplay-Bold.woff2": "/static/media/FixelDisplay-Bold.6ae57eaa724edd583594.woff2",
+    "static/media/FixelDisplay-ExtraBold.woff2": "/static/media/FixelDisplay-ExtraBold.3dfca0dfbc468e131955.woff2",
+    "static/media/FixelDisplay-SemiBold.woff2": "/static/media/FixelDisplay-SemiBold.0d9c7922e852aba2e5e9.woff2",
+    "static/media/about-history-bg.png": "/static/media/about-history-bg.abcd39571c6e7f2cb49a.png",
+    "static/media/FixelDisplay-Medium.woff2": "/static/media/FixelDisplay-Medium.1fa711b7946b6572188e.woff2",
+    "static/media/FixelDisplay-Light.woff2": "/static/media/FixelDisplay-Light.6385d436e799550e8a4d.woff2",
+    "static/media/FixelDisplay-ExtraLight.woff2": "/static/media/FixelDisplay-ExtraLight.690bc99098bb480d17fc.woff2",
+    "static/media/FixelDisplay-Regular.woff2": "/static/media/FixelDisplay-Regular.7025834e819edbb98433.woff2",
+    "static/media/about-made-bg.png": "/static/media/about-made-bg.768b636923419ab34656.png",
+    "static/media/Vag Bold.ttf": "/static/media/Vag Bold.488f42729080b1dee76a.ttf",
+    "static/media/about-contacts-bg.png": "/static/media/about-contacts-bg.23dc0c79acf627f6342c.png",
+    "static/media/about-goal-bg.png": "/static/media/about-goal-bg.5be43af3ac18385f472e.png",
+    "static/media/home-made-bg.png": "/static/media/home-made-bg.3b1ad6507e48cc2c4cb9.png",
+    "static/media/OsnovaPro-Bold.woff2": "/static/media/OsnovaPro-Bold.13ba26a9f1f36694123d.woff2",
+    "static/media/order-video-preview.webp": "/static/media/order-video-preview.b4b1444e5b994232d2b3.webp",
+    "index.html": "/index.html",
+    "main.08cf30fa.css.map": "/static/css/main.08cf30fa.css.map",
+    "main.da4ee314.js.map": "/static/js/main.da4ee314.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08cf30fa.css",
+    "static/js/main.da4ee314.js"
+  ]
+}
