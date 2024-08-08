@@ -68,7 +68,7 @@ const AboutHistory: React.FC = () => {
           <div className={styles.about__history_banner}>
             <div className={styles.about__banner_block}>
               <img
-                src="../../images/about-history-banner.jpg"
+                src="../../images/about-history-banner.webp"
                 alt="home history banner"
                 className={styles.about__block_image}
               />

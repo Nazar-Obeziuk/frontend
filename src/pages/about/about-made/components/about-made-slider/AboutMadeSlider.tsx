@@ -39,7 +39,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-1.jpg"
+                src="../../images/about-made-1.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -54,7 +54,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-2.jpg"
+                src="../../images/about-made-2.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -69,7 +69,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-3.jpg"
+                src="../../images/about-made-3.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -84,7 +84,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-4.jpg"
+                src="../../images/about-made-4.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -99,7 +99,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-5.jpg"
+                src="../../images/about-made-5.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -114,7 +114,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-6.jpg"
+                src="../../images/about-made-6.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -129,7 +129,7 @@ const AboutMadeSlider: React.FC = () => {
           <SwiperSlide>
             <div className={styles.about__galery_slider}>
               <img
-                src="../../images/about-made-7.jpg"
+                src="../../images/about-made-7.webp"
                 alt="slider banner"
                 className={styles.about__slider_image}
               />
@@ -148,7 +148,7 @@ const AboutMadeSlider: React.FC = () => {
               className={styles.about__galery_slider}
             >
               <img
-                src="../../images/about-made-video.jpg"
+                src="../../images/about-made-video.webp"
                 className={styles.about__slider_image}
                 alt=""
               />

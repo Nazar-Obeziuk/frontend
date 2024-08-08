@@ -270,7 +270,6 @@
   }
 
   .cart__continue_button {
-    width: 100%;
     padding: 14px 0;
   }
 
@@ -295,5 +294,14 @@
   .cart__continue_price {
     font-size: 22px;
     line-height: 26px;
+  }
+}
+
+@media (max-width: 460px) {
+  .cart__continue_actions {
+    width: 100%;
+  }
+  .cart__continue_button {
+    width: 100%;
   }
 }

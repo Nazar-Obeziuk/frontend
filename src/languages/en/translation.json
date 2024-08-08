@@ -32,7 +32,8 @@
     "cartStep3Text3Title": "Payment by details:",
     "cartStep3Text3Child1": "Private entrepreneur ",
     "cartStep3Text4Child1": "EDRPOU code",
-    "cartStep3Text5Child1": "Date of registration: "
+    "cartStep3Text5Child1": "Date of registration: ",
+    "cartAddText": "Product has been added to your cart"
   },
   "popupReviews": {
     "popupReviewsTitle": "Product reviews",
@@ -262,7 +263,7 @@
       "aboutUsSolutionsText2Child1": "In addition to a high-quality product, we provide a free consultation with a physical therapist based on the scan results and further actions to improve the condition of the feet. Afterclarification of all details, within ",
       "aboutUsSolutionsText2Child2": "24 hours",
       "aboutUsSolutionsText2Child3": ", the insoles will be manufactured.",
-      "aboutUsSolutionsImageURL": "../../images/about-solutions-banner-en.jpg"
+      "aboutUsSolutionsImageURL": "../../images/about-solutions-banner-en.webp"
     },
     "aboutUsTechnologies": {
       "aboutUsTechnologiesTitle": "Materials and technologies",

@@ -6,6 +6,7 @@ import Loader from "../../../../../components/loader/Loader";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from "../../../../../context/cart/CartContext";
+import { toast } from "react-toastify";
 
 interface Props {
   certificateReviews: IReview[];
@@ -34,6 +35,12 @@ const CatalogCertificateGift: React.FC<Props> = ({
     });
   };
 
+  const notify = () => {
+    toast.success(t("cart.cartAddText"), {
+      autoClose: 1000,
+    });
+  };
+
   const handleAddToCart = () => {
     const cartItem = {
       id: uuidv4(),
@@ -52,6 +59,7 @@ const CatalogCertificateGift: React.FC<Props> = ({
     localStorage.setItem("cart", JSON.stringify(existingCart));
 
     addToCart(cartItem);
+    notify();
   };
 
   useEffect(() => {

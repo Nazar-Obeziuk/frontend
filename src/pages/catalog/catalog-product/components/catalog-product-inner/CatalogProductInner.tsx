@@ -4,6 +4,7 @@ import { IProductDetails } from "../../../../../services/products/product.interf
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../../../../../context/cart/CartContext";
+import { toast } from "react-toastify";
 
 interface Props {
   catalogProduct: IProductDetails;
@@ -49,6 +50,12 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
     setCurrentProductSize(productSize);
   };
 
+  const notify = () => {
+    toast.success(t("cart.cartAddText"), {
+      autoClose: 1000,
+    });
+  };
+
   const handleAddToCart = () => {
     const cartItem = {
       id: uuidv4(),
@@ -66,6 +73,7 @@ const CatalogProductInner: React.FC<Props> = ({ catalogProduct }) => {
     localStorage.setItem("cart", JSON.stringify(existingCart));
 
     addToCart(cartItem);
+    notify();
   };
 
   const avarageRatings = [];

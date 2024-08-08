@@ -3,11 +3,18 @@ import styles from "./AdminLogin.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../../services/auth/login/login";
+import { toast } from "react-toastify";
 
 const AdminLogin: React.FC = () => {
   const { register, handleSubmit, reset } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const notify = () => {
+    toast.error("Неправильний логін або пароль", {
+      autoClose: 1000,
+    });
+  };
 
   const onSubmit = async (data: any) => {
     try {
@@ -19,6 +26,7 @@ const AdminLogin: React.FC = () => {
       checkToken();
     } catch (error) {
       console.log("login error", error);
+      notify();
     }
   };
 

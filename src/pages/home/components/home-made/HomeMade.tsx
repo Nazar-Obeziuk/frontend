@@ -58,7 +58,7 @@ const HomeMade: React.FC = () => {
             </NavLink>
           </div>
           <div className={styles.home__made_insoles}>
-            <video
+            {/* <video
               key={activeLanguage}
               autoPlay
               muted
@@ -76,7 +76,17 @@ const HomeMade: React.FC = () => {
                 type="video/webm"
               />
               Your browser does not support the video tag.
-            </video>
+            </video> */}
+            <img
+              key={activeLanguage}
+              src={
+                activeLanguage === "ua"
+                  ? "../../images/ani-ua.gif"
+                  : "../../images/ani-en.gif"
+              }
+              alt="Home Animation"
+              className={styles.home__insoles_banner}
+            />
           </div>
           <NavLink
             to={"/home/catalog/individual-orthopedic-insoles"}

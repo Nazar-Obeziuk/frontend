@@ -32,7 +32,8 @@
     "cartStep3Text3Title": "Реквізити:",
     "cartStep3Text3Child1": "ФОП ",
     "cartStep3Text4Child1": "Код ЄДРПОУ ",
-    "cartStep3Text5Child1": "Дата реєстрації: "
+    "cartStep3Text5Child1": "Дата реєстрації: ",
+    "cartAddText": "Товар додано до кошика"
   },
   "popupReviews": {
     "popupReviewsTitle": "Відгук про товар",
@@ -262,7 +263,7 @@
       "aboutUsSolutionsText2Child1": "Окрім якісного продукту ми надаємо безкоштовну консультацію фізичного терапевта, за результатом сканування та щодо подальших дій для покращення стану стоп. Після уточнення всіх деталей, протягом ",
       "aboutUsSolutionsText2Child2": "24 годин",
       "aboutUsSolutionsText2Child3": ", устілки буде виготовлено.",
-      "aboutUsSolutionsImageURL": "../../images/about-solutions-banner-ua.jpg"
+      "aboutUsSolutionsImageURL": "../../images/about-solutions-banner-ua.webp"
     },
     "aboutUsTechnologies": {
       "aboutUsTechnologiesTitle": "Матеріали та технології",

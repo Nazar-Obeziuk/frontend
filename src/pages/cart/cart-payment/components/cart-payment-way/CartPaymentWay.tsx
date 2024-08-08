@@ -54,7 +54,7 @@ const CartPaymentWay: React.FC = () => {
 
         const response = await getPaymentLinkPrivat(formData);
 
-        window.open(response.link, "_blank");
+        window.open(response.link);
       } catch (error) {
         console.log(error);
       }
@@ -68,7 +68,7 @@ const CartPaymentWay: React.FC = () => {
       try {
         const formData = new FormData();
 
-        formData.append("amount", "100");
+        formData.append("amount", amount);
 
         if (i18n.language === "ua") {
           formData.append("ccy", "980");
@@ -81,7 +81,7 @@ const CartPaymentWay: React.FC = () => {
 
         const response = await getPaymentLinkMono(formData);
 
-        window.open(response.payment.pageUrl, "_blank");
+        window.open(response.payment.pageUrl);
       } catch (error) {
         console.log(error);
       }

@@ -23,7 +23,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-1.jpg"
+                  src="../../images/step-1.webp"
                   alt="step 1 banner"
                   className={styles.home__image_item}
                 />
@@ -34,12 +34,12 @@ const HomeSteps: React.FC = () => {
                 </h3>
                 <p className={styles.home__info_text}>
                   {t("home.homeSteps.homeStepsCard1TextChild1")}
-                  <a
-                    href="https://google.com"
+                  <NavLink
+                    to={"/home/catalog/individual-orthopedic-insoles"}
                     className={styles.home__text_primary}
                   >
                     {t("home.homeSteps.homeStepsCard1TextChild2")}
-                  </a>
+                  </NavLink>
                   {t("home.homeSteps.homeStepsCard1TextChild3")}
                 </p>
               </div>
@@ -49,7 +49,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-2.jpg"
+                  src="../../images/step-2.webp"
                   alt="step 2 banner"
                   className={styles.home__image_item}
                 />
@@ -93,7 +93,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-3.jpg"
+                  src="../../images/step-3.webp"
                   alt="step 3 banner"
                   className={styles.home__image_item}
                 />
@@ -112,7 +112,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-4.jpg"
+                  src="../../images/step-4.webp"
                   alt="step 4 banner"
                   className={styles.home__image_item}
                 />
@@ -131,7 +131,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-5.jpg"
+                  src="../../images/step-5.webp"
                   alt="step 5 banner"
                   className={styles.home__image_item}
                 />
@@ -150,7 +150,7 @@ const HomeSteps: React.FC = () => {
             >
               <div className={styles.home__item_image}>
                 <img
-                  src="./images/step-6.jpg"
+                  src="../../images/step-6.webp"
                   alt="step 6 banner"
                   className={styles.home__image_item}
                 />

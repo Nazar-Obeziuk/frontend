@@ -9,6 +9,7 @@ import Loader from "../../../../../components/loader/Loader";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import { useCart } from "../../../../../context/cart/CartContext";
+import { toast } from "react-toastify";
 
 interface Props {
   individualReviews: IReview[];
@@ -79,18 +80,24 @@ const CatalogIndividualProduct: React.FC<Props> = ({
     onCoverageChange(variation);
   };
 
+  const notify = () => {
+    toast.success(t("cart.cartAddText"), {
+      autoClose: 1000,
+    });
+  };
+
   const handleAddToCart = () => {
     let cartItem = {
       id: uuidv4(),
       productImages: activeCoverage
         ? [activeCoverage.image_url[0], activeCoverage.image_url[1]]
         : [
-            individualInsoles[0].image_url[0],
-            individualInsoles[0].image_url[2],
+            individualInsoles[0]?.image_url[0],
+            individualInsoles[0]?.image_url[2],
           ],
       name_en: individualInsoles[0].name_en,
       name_ua: individualInsoles[0].name_ua,
-      price: individualInsoles[0].base_price,
+      price: individualInsoles[0]?.base_price,
       quantity: countOfProduct,
       sizeDescription_ua: activeCoverage
         ? activeCoverage.variation_description_ua
@@ -105,9 +112,16 @@ const CatalogIndividualProduct: React.FC<Props> = ({
     localStorage.setItem("cart", JSON.stringify(existingCart));
 
     addToCart(cartItem);
+    notify();
   };
 
-  if (!individualInsoles[0] || !variations) {
+  if (
+    !individualInsoles[0] &&
+    !variations &&
+    !peopleVariations &&
+    !sportVariations &&
+    !diabeticVariations
+  ) {
     return <Loader />;
   }
 
@@ -165,8 +179,8 @@ const CatalogIndividualProduct: React.FC<Props> = ({
         <div className={styles.catalog__info_header}>
           <h3 className={styles.catalog__header_title}>
             {activeLanguage === "ua"
-              ? individualInsoles[0].name_ua
-              : individualInsoles[0].name_en}
+              ? individualInsoles[0]?.name_ua
+              : individualInsoles[0]?.name_en}
           </h3>
           <div className={styles.catalog__header_info}>
             {individualReviews.length > 0 ? (
@@ -217,7 +231,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
             <p className={styles.catalog__header_code}>
               {t("products.productsCode")}
               <span className={styles.catalog__code_item}>
-                {individualInsoles[0].article}
+                {individualInsoles[0]?.article}
               </span>
             </p>
           </div>
@@ -226,7 +240,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
           <h2 className={styles.catalog__main_price}>
             {activeCoverage?.additional_price
               ? activeCoverage.additional_price
-              : individualInsoles[0].base_price}{" "}
+              : individualInsoles[0]?.base_price}{" "}
             {activeLanguage === "ua" ? "грн" : "UAH"}
           </h2>
           <div className={styles.catalog__main_count}>
@@ -261,10 +275,10 @@ const CatalogIndividualProduct: React.FC<Props> = ({
                 {activeLanguage === "ua"
                   ? activeCoverage
                     ? activeCoverage.variation_description_ua
-                    : individualInsoles[0].article_variation_ua
+                    : individualInsoles[0]?.article_variation_ua
                   : activeCoverage
                   ? activeCoverage.variation_description_en
-                  : individualInsoles[0].article_variation_en}
+                  : individualInsoles[0]?.article_variation_en}
               </span>
             </p>
             <div className={styles.catalog__coverage_main}>
@@ -273,7 +287,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
                   {t("individualInsoles.individualInsolesPeople")}
                 </p>
                 <div className={styles.catalog__block_items}>
-                  {peopleVariations.map(
+                  {peopleVariations?.map(
                     (variation: IIndividualVariation, index: number) => (
                       <span
                         onClick={() => handleCoverageClick(variation)}
@@ -297,7 +311,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
                   {t("individualInsoles.individualInsolesSport")}
                 </p>
                 <div className={styles.catalog__block_items}>
-                  {sportVariations.map(
+                  {sportVariations?.map(
                     (variation: IIndividualVariation, index: number) => (
                       <span
                         key={index}
@@ -321,7 +335,7 @@ const CatalogIndividualProduct: React.FC<Props> = ({
                   {t("individualInsoles.individualInsolesDiabetic")}
                 </p>
                 <div className={styles.catalog__block_items}>
-                  {diabeticVariations.map(
+                  {diabeticVariations?.map(
                     (variation: IIndividualVariation, index: number) => (
                       <span
                         key={index}
